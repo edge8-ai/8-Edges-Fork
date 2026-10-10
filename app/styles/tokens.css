@@ -1,0 +1,280 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — the single source of truth for the whole product.
+
+   This is the ONLY file that may contain a raw colour value (hex / rgb / hsl).
+   Everything else — globals.css (public site), admin.css (admin / team /
+   portal), every component — reads a token by name. To change a colour,
+   a radius, a font or a spacing step anywhere in the app, change it here.
+
+   Layers, top to bottom:
+     1. Brand primitives   --color-*        the palette itself (raw values)
+     2. Public-site aliases --blue, --mint…  short names the marketing site uses
+     3. App tokens          --admin-*        semantic roles for the operating
+                                             system surfaces (admin, team,
+                                             portal). Components use THESE.
+
+   `npm run check:tokens` fails the build if a raw colour appears anywhere else.
+   Pattern library: /admin/patterns renders every token and component.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* ── 1. Brand primitives ─────────────────────────────────────────────── */
+  --color-primary-dark: #101014;
+  --color-primary-blue: #287BE8;
+  --color-primary-blue-hover: #1D6AD4;
+  --color-primary-blue-bright: #3B8CF5;
+  --color-accent-mint: #6FF2C1;
+  --color-accent-mint-bright: #2EDBBB;
+  --color-accent-mint-hover: #82F5CB;
+  --color-err-on-dark: #FF8A8A;
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #EAEEF2;
+  --color-text-body: #797c82;
+  --color-card-border: #E6E6E6;
+  --color-input-border: #A8B2BD;
+
+  /* Neutral ramp (brand greys, no navy tint) */
+  --color-grey-50: #F5F6F8;
+  --color-grey-75: #F1F3F5;
+  --color-grey-100: #F0F1F3;
+  --color-grey-150: #EEF2F7;
+  --color-grey-200: #D4DAE4;
+  --color-grey-300: #BCC1C7;
+  --color-grey-400: #9CA3AF;
+  --color-grey-500: #6B7280;
+  --color-grey-600: #5C6178;
+  --color-grey-700: #C4C7CC; /* ink on dark chrome */
+  --color-grey-800: #7C8189; /* muted ink on dark chrome */
+  --color-grey-900: #1A1A1F; /* dark card */
+
+  /* Status hues */
+  --color-ok-bg: #D8F3E8;      --color-ok-ink: #157A5A;      --color-ok-strong: #12A06B;   --color-ok-deep: #166534;
+  /* The warn ink was #8A6A0F, 4.45:1 on its own --color-warn-bg and 4.41:1 on
+     --color-amber-bg, under the 4.5:1 minimum on both grounds it sits on (ID.2.10).
+     One step darker, the same hue: 5.43:1 on warn-bg, 5.39:1 on amber-bg, 6.18:1 on white. */
+  --color-warn-bg: #FBF0CF;    --color-warn-ink: #7A5D0D;    --color-warn-strong: #D97706;
+  --color-err-bg: #FDE4E4;     --color-err-ink: #B0332F;     --color-err-strong: #DC2626;  --color-err-deep: #991B1B; --color-err-line: #F4C7C4;
+  --color-info-bg: #E2ECFD;    --color-accent-soft: #EAF2FF; --color-accent-line: #CFE0FB;
+  /* The info badge needs an ink of its OWN, not the link-hover blue it used
+     to borrow: #1D6AD4 on --color-info-bg measures 4.34:1 at 12px and fails
+     the 4.5:1 minimum (W.104.1). This is the same hue two steps darker —
+     5.14:1 on the badge, 6.12:1 on white — and it is separate from
+     --color-primary-blue-hover because that one is also link hover,
+     --admin-accent-strong and --admin-chart-3, none of which may move. */
+  --color-info-ink: #1A5FBF;
+  --color-pink-bg: #FBE6F1;    --color-pink-ink: #B03571;
+  --color-amber-bg: #FAEEDA;   --color-amber-ink: #854F0B;
+  /* Growth (K.29, recoloured K.40): the one hue for what the member is building
+     on My Coach — the ladder, the goal fill, the lit FAST checks, the heatmap,
+     the ring and the plant. Shades of the brand mint, so the page stays inside
+     the site's palette (Khoa, 2026-09-17); never reused for warn or err. */
+  --color-growth: #2EDBBB;     --color-growth-soft: #E6FBF5; --color-growth-deep: #0E7C68; --color-growth-line: #BFF1E4;
+  /* Mint laid over the dark chrome (ID.2, /team/ideas): a tinted chip and its
+     edge on the hero's dark ground, where --color-growth-soft would glare. */
+  --color-mint-on-dark-soft: rgba(111, 242, 193, 0.14); --color-mint-on-dark-line: rgba(111, 242, 193, 0.4);
+  --color-violet: #7A5CFA;
+  /* The team sky's stars on /team/ideas (W.190), one per stage, drawn on
+     --color-primary-dark: new 4.3:1, echoed 9.9:1, picked up 10.2:1, shipped is
+     --color-accent-mint (13.7:1), waiting is --color-grey-400 (7.5:1). Each
+     legend chip shows the same star on the same night, so colour and legend
+     always agree. Never used for text. */
+  --color-sky-new: var(--color-violet);
+  --color-sky-echoed: #F5A3C7;
+  --color-sky-picked: #F5B14A;     /* innovation / contractor lane on the public workflow library */
+  /* Client identity on the Workboard: twelve soft chip pairs, handed to clients
+     in turn, so a card says whose it is at a glance. The one categorical set
+     outside the brand ramp, because eleven clients cannot share the six
+     on-brand chip tones. Every pair holds at least 4.5:1 text contrast. */
+  --color-client-0-bg: #E6EFFF; --color-client-0-ink: #1D4ED8; /* blue */
+  --color-client-1-bg: #E3F5EA; --color-client-1-ink: #166534; /* green */
+  --color-client-2-bg: #FDF1DC; --color-client-2-ink: #A15C07; /* amber */
+  --color-client-3-bg: #FCE7F3; --color-client-3-ink: #BE185D; /* pink */
+  --color-client-4-bg: #F1EBFF; --color-client-4-ink: #6D28D9; /* violet */
+  --color-client-5-bg: #DFF5F2; --color-client-5-ink: #0F766E; /* teal */
+  --color-client-6-bg: #FFEDE0; --color-client-6-ink: #C2410C; /* orange */
+  --color-client-7-bg: #E8EAFF; --color-client-7-ink: #4338CA; /* indigo */
+  --color-client-8-bg: #ECF6DA; --color-client-8-ink: #3F6212; /* lime */
+  --color-client-9-bg: #DDF3FA; --color-client-9-ink: #0E7490; /* cyan */
+  --color-client-10-bg: #F3EAE2; --color-client-10-ink: #8A4B20; /* brown */
+  --color-client-11-bg: #EAEEF3; --color-client-11-ink: #475569; /* slate */
+
+  /* Translucent overlays (scrims, on-dark hover states, elevation) */
+  --color-scrim: rgba(4, 16, 45, 0.45);
+  --color-scrim-soft: rgba(4, 16, 45, 0.08);
+  --color-on-dark-soft: rgba(255, 255, 255, 0.06);
+  --color-on-dark-hover: rgba(255, 255, 255, 0.08);
+  --color-on-dark-line: rgba(255, 255, 255, 0.10);
+  --color-on-dark-active: rgba(255, 255, 255, 0.12);
+  --color-on-dark-strong: rgba(255, 255, 255, 0.25);
+  --color-on-dark-stronger: rgba(255, 255, 255, 0.5);
+  --color-blue-glow: rgba(40, 123, 232, 0.15);
+  --color-blue-glow-strong: rgba(40, 123, 232, 0.35);
+  --color-focus-ring: rgba(40, 123, 232, 0.25);
+  --color-elevation-1: 0 1px 2px rgba(4, 16, 45, 0.06), 0 1px 3px rgba(4, 16, 45, 0.08);
+  --color-elevation-2: 0 6px 24px rgba(4, 16, 45, 0.10);
+  --color-mint-glow: 0 6px 16px rgba(46, 219, 187, 0.35); /* the Spark it button on /team/ideas (W.190) */
+  --color-elevation-3: 0 10px 24px rgba(4, 16, 45, 0.18);
+  --color-elevation-drawer: -24px 0 80px rgba(4, 16, 45, 0.28);
+  --color-elevation-modal: 0 24px 80px rgba(4, 16, 45, 0.32);
+  --color-elevation-dark: 0 12px 32px rgba(0, 0, 0, 0.4);
+
+  /* Type */
+  --font-display: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  /* A typed-name signature on an agreement: a script face from the reader's own
+     system, no web font, so it matches the signed copy's offline rendering. */
+  --font-signature: 'Snell Roundhand', 'Segoe Script', 'Brush Script MT', 'Apple Chancery', cursive;
+
+  /* ── 2. Public-site aliases (marketing pages in globals.css) ─────────── */
+  --blue: var(--color-primary-blue);
+  --blue-bright: var(--color-primary-blue-bright);
+  --blue-glow: var(--color-blue-glow);
+  --mint: var(--color-accent-mint);
+  --dark: var(--color-primary-dark);
+  --dark-card: var(--color-grey-900);
+  --dark-border: rgba(234, 238, 242, 0.1);
+  --white: var(--color-bg-primary);
+  --tint: var(--color-bg-secondary);
+  --tint-deep: var(--color-grey-200);
+  --body-text: var(--color-text-body);
+  --card-border: var(--color-card-border);
+  --input-border: var(--color-input-border);
+  --grey-mid: var(--color-grey-500);
+  --grey-light: var(--color-grey-400);
+  --radius: 20px;
+  --radius-sm: 20px;
+  --radius-btn: 40px;
+  --transition: 0.2s ease;
+  --link: var(--blue);
+  --link-hover: var(--color-primary-blue-hover);
+  --link-on-dark: var(--white);
+  --link-on-dark-hover: var(--mint);
+
+  /* ── 3. App tokens — admin / team / portal ───────────────────────────── */
+  /* Type ramp (Manrope only; tabular-nums does numeric alignment) */
+  --admin-font-sans: var(--font-body);
+  --admin-font-mono: var(--font-body);
+  --admin-text-xs: 11px;    /* eyebrow labels, lock notes */
+  --admin-text-sm: 12px;    /* meta, table labels, notes */
+  --admin-text-base: 13px;  /* body */
+  --admin-text-md: 14px;    /* emphasised body, form inputs */
+  --admin-text-lg: 15px;    /* card / section titles */
+  --admin-text-xl: 18px;    /* drawer titles */
+  --admin-text-title: 22px; /* h1 inside a card */
+  --admin-text-page: 26px;  /* page title */
+  --admin-text-kpi: 28px;   /* KPI value */
+
+  /* Spacing scale — the only spacing values components should use */
+  --admin-space-1: 4px;
+  --admin-space-2: 8px;
+  --admin-space-3: 12px;
+  --admin-space-4: 16px;
+  --admin-space-5: 24px;
+  --admin-space-6: 32px;
+  --admin-cell-pad: 8px 12px;
+  --admin-row-h: 40px;
+  --admin-section-pad: 20px 24px;
+  --os-content-max: 1440px;
+
+  /* Radii */
+  --admin-radius: 12px;         /* cards / surfaces */
+  --admin-radius-sm: 8px;       /* buttons / inputs */
+  --admin-radius-xs: 6px;       /* chips / small controls */
+  --admin-radius-pill: 9999px;  /* badges / avatars */
+
+  /* Accent. Per-section themes override --admin-accent only. */
+  --admin-accent: var(--color-primary-blue);
+  --admin-accent-strong: var(--color-primary-blue-hover);
+  --admin-accent-soft: var(--color-accent-soft);
+  --admin-accent-line: var(--color-accent-line);
+  --admin-accent-on-dark: var(--color-bg-primary);
+  --admin-accent-on-dark-strong: var(--mint);
+  --admin-focus-ring: 0 0 0 3px var(--color-focus-ring);
+
+  /* Office accents (badges, section themes) — four brand steps */
+  --admin-accent-blue: var(--color-primary-blue);
+  --admin-accent-green: var(--color-primary-blue-hover);
+  --admin-accent-pink: var(--color-primary-dark);
+  --admin-accent-gold: var(--color-grey-400);
+
+  /* Dark chrome (sidebar, bulk bars, toasts) */
+  --admin-sidebar-bg: var(--color-primary-dark);
+  --admin-sidebar-strong: var(--color-bg-primary);
+  --admin-sidebar-ink: var(--color-grey-700);
+  --admin-sidebar-muted: var(--color-grey-800);
+  --admin-on-dark-soft: var(--color-on-dark-soft);
+  --admin-on-dark-hover: var(--color-on-dark-hover);
+  --admin-on-dark-line: var(--color-on-dark-line);
+  --admin-on-dark-active: var(--color-on-dark-active);
+  --admin-on-dark-strong: var(--color-on-dark-strong);
+  --admin-on-dark-stronger: var(--color-on-dark-stronger);
+
+  /* Neutrals */
+  --admin-bg: var(--color-grey-75);           /* page canvas */
+  --admin-surface: var(--color-bg-primary);   /* cards */
+  --admin-surface-2: var(--color-grey-50);    /* thead / zebra / insets */
+  --admin-surface-hover: var(--color-grey-50);
+  --admin-tint: var(--color-grey-150);        /* code / soft inset */
+  --admin-ink: var(--color-primary-dark);     /* primary text */
+  /* Named for what it maps to, not for a rank. It was --admin-ink-2 until
+     2026-09-20, which read as "the second darkest ink" and is not: measured on
+     white it is 4.18:1, LIGHTER than --admin-muted at 4.83:1, so "lift this
+     from muted to ink-2" makes text less readable, not more, and takes 12px
+     text below the 4.5:1 minimum. The contrast ramp really runs
+     ink 18.98 > muted 4.83 > text-body 4.18 > faint 1.81, which no name in a
+     numbered ink series could have said. Mapping unchanged; only the name. */
+  --admin-text-body: var(--color-text-body);  /* body copy; see the note above before "lifting" to it */
+  /* Tertiary text and labels. grey-500, not grey-400: this token paints every
+     .admin-hint and .admin-eyebrow, which on the coaching pages carry the
+     instructions ("Drag one when it moves", "Read the rows below to see who").
+     grey-400 measured 2.54:1 on white — the text that explains a page was the
+     least readable text on it. grey-500 is 4.83:1, WCAG AA for body size. */
+  --admin-muted: var(--color-grey-500);       /* tertiary / labels */
+  --admin-faint: var(--color-grey-300);       /* disabled / hints */
+  --admin-line: var(--color-card-border);
+  --admin-line-soft: var(--color-grey-100);
+  --admin-line-strong: var(--color-grey-200);
+  --admin-input-line: var(--color-input-border);
+
+  /* Elevation — overlays only; resting cards stay flat */
+  --admin-shadow: var(--color-elevation-1);
+  --admin-shadow-md: var(--color-elevation-2);
+  --admin-shadow-lg: var(--color-elevation-3);
+  --admin-shadow-drawer: var(--color-elevation-drawer);
+  --admin-shadow-modal: var(--color-elevation-modal);
+  --admin-shadow-dark: var(--color-elevation-dark);
+  --admin-scrim: var(--color-scrim);
+  --admin-scrim-soft: var(--color-scrim-soft);
+
+  /* Status */
+  --admin-ok-bg: var(--color-ok-bg);     --admin-ok-ink: var(--color-ok-ink);     --admin-ok-strong: var(--color-ok-strong);     --admin-ok-deep: var(--color-ok-deep);
+  --admin-warn-bg: var(--color-warn-bg); --admin-warn-ink: var(--color-warn-ink); --admin-warn-strong: var(--color-warn-strong);
+  --admin-err-bg: var(--color-err-bg);   --admin-err-ink: var(--color-err-ink);   --admin-err-strong: var(--color-err-strong);   --admin-err-deep: var(--color-err-deep); --admin-err-line: var(--color-err-line);
+  --admin-info-bg: var(--color-info-bg); --admin-info-ink: var(--color-info-ink);
+  --admin-pink-bg: var(--color-pink-bg); --admin-pink-ink: var(--color-pink-ink);
+  --admin-amber-bg: var(--color-amber-bg); --admin-amber-ink: var(--color-amber-ink);
+  --admin-growth: var(--color-growth); --admin-growth-soft: var(--color-growth-soft); --admin-growth-deep: var(--color-growth-deep); --admin-growth-line: var(--color-growth-line);
+  --admin-muted-bg: var(--color-grey-100); --admin-muted-ink: var(--color-grey-600);
+  /* Client chips (Badge colorIndex on the Workboard); values in --color-client-* */
+  --admin-client-0-bg: var(--color-client-0-bg); --admin-client-0-ink: var(--color-client-0-ink);
+  --admin-client-1-bg: var(--color-client-1-bg); --admin-client-1-ink: var(--color-client-1-ink);
+  --admin-client-2-bg: var(--color-client-2-bg); --admin-client-2-ink: var(--color-client-2-ink);
+  --admin-client-3-bg: var(--color-client-3-bg); --admin-client-3-ink: var(--color-client-3-ink);
+  --admin-client-4-bg: var(--color-client-4-bg); --admin-client-4-ink: var(--color-client-4-ink);
+  --admin-client-5-bg: var(--color-client-5-bg); --admin-client-5-ink: var(--color-client-5-ink);
+  --admin-client-6-bg: var(--color-client-6-bg); --admin-client-6-ink: var(--color-client-6-ink);
+  --admin-client-7-bg: var(--color-client-7-bg); --admin-client-7-ink: var(--color-client-7-ink);
+  --admin-client-8-bg: var(--color-client-8-bg); --admin-client-8-ink: var(--color-client-8-ink);
+  --admin-client-9-bg: var(--color-client-9-bg); --admin-client-9-ink: var(--color-client-9-ink);
+  --admin-client-10-bg: var(--color-client-10-bg); --admin-client-10-ink: var(--color-client-10-ink);
+  --admin-client-11-bg: var(--color-client-11-bg); --admin-client-11-ink: var(--color-client-11-ink);
+
+  /* Categorical chart ramp — brand only; legible to ~4 series */
+  --admin-chart-1: var(--color-primary-blue);
+  --admin-chart-2: var(--color-accent-mint);
+  --admin-chart-3: var(--color-primary-blue-hover);
+  --admin-chart-4: var(--color-primary-dark);
+  --admin-chart-5: var(--color-grey-400);
+  --admin-chart-6: var(--color-primary-blue-bright);
+  --admin-chart-7: var(--color-grey-500);
+  --admin-chart-8: var(--color-input-border);
+}

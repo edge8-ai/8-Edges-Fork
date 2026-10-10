@@ -1,0 +1,627 @@
+{
+  "$comment": [
+    "The nine product entities and the shared kernel of edge8-web, as decided in",
+    "docs/engineering/2026-09-03-multi-entity-design.md. Every path in the tree resolves",
+    "to exactly one owner by longest-prefix match over `current` and `target`; an entry",
+    "without a file extension also matches that stem's .ts/.tsx/.test.ts siblings.",
+    "Since ME-13 `current` equals `[target]` for every owner: all code lives under",
+    "entities/<name>/ or kernel/, and app/ is the composition root (\"app\"), a tree of",
+    "thin mounts that re-export entity routes, api handlers and crons.",
+    "scripts/gen-entity-zones.mjs turns this file into the ESLint boundary zones and",
+    "scripts/check-entity-imports.mjs fails any cross-entity import that is not a door.",
+    "`tables` lists the Supabase tables and views each owner writes (design §4, then the",
+    "reader with the most call sites for tables the design does not name). Only the owner",
+    "writes a table directly; scripts/check-table-ownership.mjs ratchets cross-entity reads",
+    "and fails cross-entity writes. A few names (private_session_blocks,",
+    "brand_contacts, requisition_loop_interviewers) are absent from the generated types",
+    "but still read by code, so they carry an owner too.",
+    "`layer` orders the entities (the kernel is 0): an entity's doors, and everything they reach inside the entity, may import another entity's doors only when that entity has a strictly lower layer, so the door graph is a DAG by construction. Route bodies, api/ and crons/ are the mounts app/ composes and are exempt. scripts/check-entity-layers.mjs enforces it (Q2).",
+    "`portability` marks what may leave this repository (ADR 0001): a `portable` entity may be ported to the fork and the product repo; an `internal` one is Edge8's own business and never leaves. `internalPaths` carries the mixed case — an otherwise portable entity's Edge8-only pockets, as paths relative to the entity's target. scripts/check-portability.mjs enforces that no portable code imports an internal door or reads an internal table, and scripts/gen-fork-excludes.mjs turns this field into .github/fork-sync-exclude.generated.txt, so adding an entity forces a portability decision instead of shipping it by default. `ownedPaths` names what an entity owns OUTSIDE entities/ — its scripts, its Supabase edge functions — because nothing else in the tree records that, and an internal entity's tooling ships by default without it."
+  ],
+  "kernel": {
+    "target": "kernel",
+    "current": [
+      "kernel"
+    ],
+    "tables": [
+      "access_codes",
+      "access_role_assignments",
+      "access_role_permissions",
+      "access_roles",
+      "admins",
+      "ai_calls",
+      "approvals",
+      "audit_log",
+      "companies",
+      "ddl_log",
+      "ddl_proof_abort",
+      "documents",
+      "interactions",
+      "people",
+      "portal_assume_sessions",
+      "portal_members",
+      "routine_runs",
+      "routine_config",
+      "event_deliveries",
+      "automation_effects",
+      "event_outbox",
+      "notification_queue",
+      "team_members"
+    ],
+    "portability": "portable"
+  },
+  "entities": {
+    "contacts": {
+      "target": "entities/contacts",
+      "portability": "portable",
+      "current": [
+        "entities/contacts"
+      ],
+      "tables": [
+        "affiliates",
+        "brand_contacts",
+        "brand_profiles",
+        "brands",
+        "people_sensitive",
+        "person_companies",
+        "staff_assignments",
+        "taggables",
+        "tags"
+      ],
+      "requires": []
+    },
+    "client-programs": {
+      "target": "entities/client-programs",
+      "portability": "portable",
+      "current": [
+        "entities/client-programs"
+      ],
+      "tables": [
+        "ai_programs",
+        "client_backlog_items",
+        "client_roadmap_groups",
+        "client_roadmap_overview",
+        "client_status_reports",
+        "program_documents"
+      ],
+      "requires": []
+    },
+    "finance": {
+      "target": "entities/finance",
+      "portability": "portable",
+      "requires": [],
+      "current": [
+        "entities/finance"
+      ],
+      "tables": [
+        "compensation_sensitive",
+        "contractor_payments",
+        "expenses",
+        "fx_rates",
+        "invoices",
+        "products",
+        "qbo_connection",
+        "vendors",
+        "payroll_runs_sensitive",
+        "payroll_lines_sensitive"
+      ]
+    },
+    "site": {
+      "target": "entities/site",
+      "portability": "portable",
+      "current": [
+        "entities/site"
+      ],
+      "tables": [
+        "gallery_photo_people",
+        "gallery_photos"
+      ],
+      "internalPaths": [
+        "api/ingest",
+        "api/stats",
+        "lib/ogRender.js",
+        "routes/8-edges-app",
+        "routes/about",
+        "routes/blog/opengraph-image.tsx",
+        "routes/caio-leadership",
+        "routes/careers/opengraph-image.tsx",
+        "routes/case-studies",
+        "routes/contact/opengraph-image.tsx",
+        "routes/global-staffing",
+        "routes/opengraph-image.tsx",
+        "routes/post/[slug]/opengraph-image.tsx",
+        "routes/the-stack",
+        "routes/training-and-certification",
+        "routes/your-first-ai-hire",
+        "ui/CoreSolutions.tsx",
+        "ui/HomeCaseStudies.tsx",
+        "ui/demo",
+        "upstream.ts"
+      ],
+      "requires": []
+    },
+    "boards": {
+      "target": "entities/boards",
+      "portability": "portable",
+      "current": [
+        "entities/boards"
+      ],
+      "tables": [
+        "board_columns",
+        "board_members",
+        "boards",
+        "epics",
+        "sprints",
+        "task_attachments",
+        "task_comments",
+        "task_stage_log",
+        "tasks"
+      ],
+      "requires": [
+        "client-programs",
+        "crm"
+      ]
+    },
+    "company-os": {
+      "target": "entities/company-os",
+      "portability": "portable",
+      "internalPaths": [
+        "routes/admin/(dashboard)/revenue/aio-pad",
+        "routes/team/(dashboard)/revenue/aio-pad"
+      ],
+      "current": [
+        "entities/company-os"
+      ],
+      "tables": [
+        "integration_sources",
+        "people_with_deals"
+      ],
+      "requires": [
+        "finance"
+      ]
+    },
+    "team": {
+      "target": "entities/team",
+      "portability": "portable",
+      "internalPaths": [
+        "crons/certifications-sync.ts",
+        "lib/certifications-sync.ts",
+        "lib/certifications.ts",
+        "lib/hub-hours-actions.ts",
+        "routes/team/(dashboard)/clients/[companyId]/programs",
+        "ui/HomeCertifications.tsx"
+      ],
+      "current": [
+        "entities/team"
+      ],
+      "tables": [
+        "kudos",
+        "performance_reviews"
+      ],
+      "requires": [
+        "assistant",
+        "boards",
+        "client-programs",
+        "coaching",
+        "crm",
+        "hiring",
+        "ideas",
+        "onboarding",
+        "org",
+        "portal",
+        "retreats",
+        "site",
+        "time-off"
+      ]
+    },
+    "time-off": {
+      "target": "entities/time-off",
+      "portability": "portable",
+      "current": [
+        "entities/time-off"
+      ],
+      "tables": [
+        "holidays",
+        "leave_adjustments",
+        "leave_policies",
+        "time_off"
+      ],
+      "requires": []
+    },
+    "portal": {
+      "target": "entities/portal",
+      "portability": "portable",
+      "internalPaths": [
+        "api/surveys",
+        "lib/hub-tokens.ts",
+        "lib/survey-identity.ts",
+        "lib/tokens.ts",
+        "routes/portal/(dashboard)/programs/[id]/BriefViewer.tsx",
+        "routes/portal/(dashboard)/programs/[id]/page.tsx",
+        "routes/portal/(dashboard)/programs/add",
+        "routes/portal/(dashboard)/tokens",
+        "routes/surveys"
+      ],
+      "current": [
+        "entities/portal"
+      ],
+      "tables": [
+        "contractor_work_events",
+        "contractor_work_requests",
+        "program_plans",
+        "survey_list"
+      ],
+      "requires": [
+        "boards",
+        "client-programs",
+        "company-os",
+        "crm",
+        "finance",
+        "htt",
+        "org"
+      ]
+    },
+    "retreats": {
+      "target": "entities/retreats",
+      "portability": "portable",
+      "internalPaths": [
+        "api/my-retreat",
+        "my-retreat",
+        "private-session-blocks.ts",
+        "private-session.test.ts",
+        "private-session.ts",
+        "routes/admin/(dashboard)/operations/retreats",
+        "routes/my-retreat",
+        "routes/reserve",
+        "routes/saigon-private",
+        "routes/the-vietnam-experience",
+        "ui/PrivateSessionReserve.tsx",
+        "ui/experience/ExperienceSlider.tsx",
+        "ui/experience/PhotoSlider.tsx",
+        "ui/experience/PlaceholderImage.tsx",
+        "upstream.ts"
+      ],
+      "current": [
+        "entities/retreats"
+      ],
+      "tables": [
+        "event_agenda_blocks",
+        "event_agenda_staff",
+        "event_pnl_lines",
+        "event_registrations",
+        "event_talks",
+        "events",
+        "private_session_blocks",
+        "talks"
+      ],
+      "requires": [
+        "crm",
+        "finance"
+      ]
+    },
+    "htt": {
+      "target": "entities/htt",
+      "portability": "internal",
+      "ownedPaths": [
+        "scripts/htt",
+        "supabase/functions/ingest-session-start",
+        "supabase/functions/ingest-session-end"
+      ],
+      "current": [
+        "entities/htt"
+      ],
+      "tables": [
+        "client_identities",
+        "company_github_orgs",
+        "delivered_additions",
+        "engineer_keys",
+        "man_hour_entries",
+        "model_prices",
+        "project_goals",
+        "project_summaries",
+        "pull_requests",
+        "repos",
+        "sync_runs",
+        "token_allocations",
+        "token_entries",
+        "work_sessions"
+      ],
+      "requires": []
+    },
+    "billing": {
+      "target": "entities/billing",
+      "portability": "portable",
+      "current": [
+        "entities/billing"
+      ],
+      "tables": [
+        "affiliate_commissions",
+        "affiliate_payouts",
+        "bookings",
+        "orders",
+        "subscriptions",
+        "token_purchases"
+      ],
+      "internalPaths": [
+        "api/checkout/saigon-private",
+        "routes/plans"
+      ],
+      "requires": []
+    },
+    "assistant": {
+      "target": "entities/assistant",
+      "portability": "portable",
+      "current": [
+        "entities/assistant"
+      ],
+      "tables": [
+        "assistant_conversations"
+      ],
+      "requires": [
+        "crm"
+      ]
+    },
+    "library": {
+      "target": "entities/library",
+      "portability": "internal",
+      "current": [
+        "entities/library"
+      ],
+      "tables": [
+        "library_documents"
+      ],
+      "requires": []
+    },
+    "hiring": {
+      "target": "entities/hiring",
+      "portability": "portable",
+      "requires": [
+        "org"
+      ],
+      "current": [
+        "entities/hiring"
+      ],
+      "tables": [
+        "application_stage_log",
+        "application_stages",
+        "applications",
+        "candidate_profile",
+        "candidate_sensitive",
+        "candidate_messages",
+        "candidates",
+        "hiring_shortlists",
+        "interview_interviewers",
+        "interview_scorecards",
+        "interviews",
+        "job_requisitions",
+        "offers",
+        "requisition_loop_interviewers",
+        "requisition_loop_steps",
+        "scorecard_scores"
+      ]
+    },
+    "ideas": {
+      "target": "entities/ideas",
+      "portability": "portable",
+      "requires": [],
+      "current": [
+        "entities/ideas"
+      ],
+      "tables": [
+        "idea_builds",
+        "idea_reactions",
+        "idea_trend_reports",
+        "ideas",
+        "issues",
+        "sync_packets"
+      ]
+    },
+    "campaigns": {
+      "internalPaths": [
+        "routes/admin/(dashboard)/revenue/marketing",
+        "routes/team/(dashboard)/revenue/marketing"
+      ],
+      "target": "entities/campaigns",
+      "portability": "portable",
+      "requires": [
+        "boards",
+        "site"
+      ],
+      "current": [
+        "entities/campaigns"
+      ],
+      "tables": [
+        "book_chapters",
+        "books",
+        "email_agent_skills",
+        "email_agents",
+        "email_audiences",
+        "email_campaign_recipients",
+        "email_campaigns",
+        "email_events",
+        "email_messages",
+        "email_series",
+        "marketing_asset_images",
+        "marketing_campaigns",
+        "marketing_content",
+        "marketing_pillars",
+        "marketing_recaps"
+      ]
+    },
+    "crm": {
+      "target": "entities/crm",
+      "portability": "portable",
+      "requires": [
+        "billing",
+        "client-programs",
+        "company-os",
+        "finance",
+        "org"
+      ],
+      "current": [
+        "entities/crm"
+      ],
+      "tables": [
+        "account_health_snapshots",
+        "call_scorecards",
+        "call_transcripts",
+        "deal_stage_current",
+        "deal_stage_log",
+        "deals",
+        "inquiries",
+        "inquiry_triage",
+        "lead",
+        "lifecycle_transitions",
+        "meeting_action_items",
+        "meeting_associations",
+        "meeting_followups",
+        "meeting_participants",
+        "meetings",
+        "pipeline_stages",
+        "pipelines",
+        "proposal_drafts",
+        "renewals",
+        "revenue_snapshots",
+        "revenue_targets"
+      ],
+      "internalPaths": [
+        "lib/delivered-addition-actions.ts",
+        "lib/hours-actions.ts",
+        "lib/token-allocation-actions.ts",
+        "routes/admin/(dashboard)/revenue/companies/CompanySurveysTable.tsx",
+        "routes/admin/(dashboard)/revenue/companies/[id]/AdminHubTokensBand.tsx",
+        "routes/admin/(dashboard)/revenue/companies/[id]/programs",
+        "routes/team/(dashboard)/revenue/companies/[id]/programs",
+        "ui/AddDeliveredTokens.tsx",
+        "ui/SetBoughtTokens.tsx"
+      ]
+    },
+    "org": {
+      "target": "entities/org",
+      "portability": "portable",
+      "requires": [
+        "ideas"
+      ],
+      "current": [
+        "entities/org"
+      ],
+      "tables": [
+        "capability_pulse_responses",
+        "capability_pulse_sessions",
+        "capacity_commitments",
+        "capacity_roles",
+        "company_information",
+        "company_profile",
+        "core_values",
+        "current_team_members",
+        "departments",
+        "equipment",
+        "equipment_assignments",
+        "equipment_requests",
+        "key_results",
+        "kr_logs",
+        "legal_entities",
+        "objectives",
+        "person_qualifications",
+        "positions",
+        "service_lines",
+        "strategies",
+        "survey_answers",
+        "survey_assignments",
+        "survey_fields",
+        "survey_responses",
+        "surveys",
+        "team_directory"
+      ],
+      "internalPaths": [
+        "crons/survey-reminders.ts",
+        "lib/session-ratings.ts",
+        "lib/survey-assignments.ts",
+        "lib/survey-scores.ts",
+        "lib/surveys.ts",
+        "routes/admin/(dashboard)/operations/surveys",
+        "ui/OpenSurveysCard.tsx"
+      ]
+    },
+    "coaching": {
+      "target": "entities/coaching",
+      "portability": "portable",
+      "requires": [
+        "boards",
+        "crm",
+        "org",
+        "time-off"
+      ],
+      "current": [
+        "entities/coaching"
+      ],
+      "tables": [
+        "coaching_checkins",
+        "coaching_commitment_history",
+        "coaching_commitments",
+        "coaching_context",
+        "coaching_goal_comments",
+        "coaching_member_notes",
+        "coaching_noticed",
+        "coaching_ocean_profiles",
+        "coaching_one_on_ones",
+        "coaching_priorities",
+        "coaching_profiles",
+        "coaching_talking_points",
+        "coaching_trends",
+        "goals",
+        "lark_user_connections"
+      ]
+    },
+    "onboarding": {
+      "target": "entities/onboarding",
+      "portability": "portable",
+      "requires": [
+        "hiring",
+        "org",
+        "retreats"
+      ],
+      "current": [
+        "entities/onboarding"
+      ],
+      "tables": [
+        "onboarding_plans",
+        "onboarding_tasks",
+        "person_git_emails"
+      ]
+    },
+    "notifications": {
+      "target": "entities/notifications",
+      "portability": "portable",
+      "requires": [],
+      "current": [
+        "entities/notifications"
+      ],
+      "tables": [
+        "notification_prefs",
+        "notification_reads",
+        "notifications"
+      ]
+    },
+    "reimbursements": {
+      "target": "entities/reimbursements",
+      "portability": "portable",
+      "requires": [
+        "org",
+        "retreats"
+      ],
+      "current": [
+        "entities/reimbursements"
+      ],
+      "tables": [
+        "reimbursement_claim_events",
+        "reimbursement_claim_items",
+        "reimbursement_claims",
+        "reimbursement_files",
+        "reimbursement_fx_rates",
+        "reimbursement_payment_runs",
+        "reimbursement_payments"
+      ]
+    }
+  }
+}

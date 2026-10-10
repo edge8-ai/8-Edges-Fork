@@ -1,0 +1,921 @@
+{
+  "why": "Client components that call a server action without the hidden-control convention (ADR 0014, AE.1). The list only shrinks: a component leaves it when it takes a MayProp, which each entity adopts when a role needing the view/manage split arrives.",
+  "entries": [
+    {
+      "file": "entities/boards/routes/admin/(dashboard)/boards/InactiveBoards.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/routes/admin/(dashboard)/boards/NewBoardForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/ArchivedCardsDrawer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/BoardSettingsDrawer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/BoardTemplatesField.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/BoardWipLimits.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/CardActivity.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/CardBlockers.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/CardDeliverables.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/CardDrawer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/CardPills.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/CardSubtasks.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/EpicPreview.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/MyWeekGiveDay.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/MyWeekStart.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/NewEpicForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/SprintPlanning.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/SprintPlanningHeading.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/SprintPlanningLateOffer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/SprintPlanningPanels.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/SprintsDrawer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/SprintView.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/undo-toast.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/useCardForm.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/useSprintPlanningAddCard.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/useWorkboardCardActions.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/useWorkboardDrag.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/useWorkboardGrouping.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/useWorkboardQuickAdd.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/WorkboardBulkBar.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/boards/ui/WorkboardList.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/audiences/[id]/AudienceEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/audiences/NewAudienceButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/brands/[slug]/AutoPublishToggle.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/brands/[slug]/BrandProfileTabs.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/broadcasts/[id]/AudienceCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/broadcasts/[id]/BroadcastBlocksEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/broadcasts/[id]/BroadcastEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/broadcasts/[id]/LetterAgentPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/broadcasts/[id]/SendTestField.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/broadcasts/[id]/SendWindowField.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/broadcasts/NewBroadcastForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/calendar/CalendarClient.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/calendar/EntryDrawer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/calendar/NewEntryForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/calendar/PillarManager.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/campaigns/[id]/assets/[assetId]/ContentDetail.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/campaigns/[id]/CampaignHub.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/campaigns/[id]/CampaignLifecycle.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/campaigns/[id]/WriterPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/campaigns/NewCampaignForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/recurring/[id]/SeriesEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/campaigns/routes/admin/(dashboard)/revenue/marketing/recurring/NewRecurringForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/routes/team/(dashboard)/goals/MyGoalsPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/AddToRoster.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/AmendablePrep.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/CadenceCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/CommitmentBoardCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/CommitmentsCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/GoalRow.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/GoalsCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/MeetingRow.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/MeetingSummaries.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/MissedPrompt.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/MoveMeeting.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/NoticedCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/OceanCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/PreMeetingBlock.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/PrioritiesCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/ScheduleForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/SessionView.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/SkipMeeting.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/TalkingPointsCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/TrendsCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/coach-profile/VoltageNote.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/CoachProfileView.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/GoalComments.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/GoalLetter.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/GoalProgress.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/HowIWork.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/MarkSessionDone.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/MyCommitments.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/MyHistory.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/MyTalkingPoints.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/NextOneOnOne.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/PreferredSlot.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/ProposalActions.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/ProposeDate.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/RosterRebookForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/RosterRecapDrawer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/RosterRowActions.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/RosterSetTimeForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/TeamGoalsEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/coaching/ui/WorthRemembering.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/operations/contractor-payments/PaymentsShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/operations/contractor-payments/RollupButtons.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/operations/contractor-requests/new/NewRequestForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/operations/contractor-requests/RequestsShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/operations/contractors/ContractorsShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/operations/vendors/new/NewVendorForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/settings/access-codes/AccessCodesManager.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/settings/access/NewRoleForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/settings/access/RoleCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/routes/admin/(dashboard)/settings/agents/RunNowButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/ui/AssignedStaffCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/ui/AssignmentsBlock.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/company-os/ui/GalleryManager.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/contacts/[id]/PersonDangerZone.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/contacts/[id]/PersonEditForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/contacts/[id]/PromoteButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/contacts/ContactsShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/affiliates/AffiliatesShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/clients/ClientRowActions.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/companies/[id]/programs/[programId]/ProgramStatusActions.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/companies/ClientTermCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/companies/CompanyDangerZone.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/companies/CompanyEditForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/companies/RenewalCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/deals/[id]/AgreementCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/deals/[id]/DealAttribution.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/deals/[id]/DealBilling.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/deals/DealCommunications.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/deals/DealFields.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/deals/DealManage.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/deals/DealsBoard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/routes/admin/(dashboard)/revenue/TargetsCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/AddDeliveredTokens.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/CompanyDocuments.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/CrmCommandBar.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/InvitePortalButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/MeetingControls.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/MeetingUploadForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/PersonTagsCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/PortalMemberControls.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/crm/ui/SetBoughtTokens.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/ApplicationsBoard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/InterviewPanelSeat.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/InterviewRoundForms.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/InterviewRounds.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/InterviewScorecard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/InterviewTranscript.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/AssessmentCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/ContactCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/FeedbackThread.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/ResumeField.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/SalaryField.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/SignalsCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/SourcingCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/manage/useApplicationHead.ts",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/applications/new/AddCandidates.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/candidate-pool/RankTable.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/jobs/[id]/AiRanking.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/jobs/[id]/InterviewLoop.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/jobs/[id]/JobPostingEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/jobs/[id]/JobReqBoard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/jobs/JobReqCreate.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/hiring/routes/admin/(dashboard)/talent/jobs/JobReqManage.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/ideas/routes/admin/(dashboard)/edges/issues/IssuesBoard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/ideas/routes/admin/(dashboard)/innovation/ideas/IdeasShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/library/routes/admin/(dashboard)/library/LibraryPublisher.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/library/routes/admin/(dashboard)/library/PublishedDocuments.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/company/goals/CompanyGoalsEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/company/goals/IndividualGoalsEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/company/strategy/StrategyEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/company/values/ValuesEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/capacity/CommitmentsPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/capacity/RolesPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/equipment/EquipmentShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/equipment/new/NewEquipmentForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/equipment/RequestsPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/surveys/[id]/SurveyAssignments.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/surveys/[id]/SurveyBuilder.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/operations/surveys/NewSurveyButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/talent/team/[id]/SendReviewButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/org/routes/admin/(dashboard)/talent/team/TeamShelf.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/agreements/[id]/SignAgreementForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/company/CompanyForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/profile/ProfileForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/programs/[id]/ProgramDocuments.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/programs/add/plan/PlanChat.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/programs/add/upload/UploadProgramForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/referrals/Redeem.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/requests/[id]/DecisionPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/requests/GeneralRequest.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/requests/hire/TeamBuilderForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/requests/new/NewRequestForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/roadmap/BacklogPortalView.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/time-off/ConfirmBalanceButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/time-off/DecisionQueue.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/tokens/TokenPurchaseCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/routes/portal/(dashboard)/users/UsersView.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/portal/ui/PortalSidebar.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/[id]/BankDetailsPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/[id]/ClaimMoves.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/[id]/ClaimTrip.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/[id]/ItemDocuments.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/[id]/ItemForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/[id]/ReceiptDrop.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/new/NewClaimForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/reimbursements/routes/team/(dashboard)/claims/TripPicker.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/[id]/AgendaTab.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/[id]/EventSettings.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/[id]/MediaSection.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/[id]/PnlTab.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/[id]/RosterTab.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/[id]/TiersSection.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/EventManage.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/retreats/routes/admin/(dashboard)/revenue/events/NewEventButton.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/clients/[companyId]/(hub)/ClientDocumentsList.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/clients/[companyId]/(hub)/roadmap/AddItemForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/clients/[companyId]/(hub)/roadmap/RoadmapItemCard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/equipment/RequestEquipmentForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/hiring/CandidateActions.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/hiring/ScorecardForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/ideas/[id]/EditablePlan.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/ideas/[id]/PickUp.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/ideas/[id]/SparkTalk.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/ideas/IdeaForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/ideas/LearningForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/ideas/SparkComposer.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/ideas/SparkDeck.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/probation/[id]/ProbationDecision.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/profile/ProfileEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/routes/team/(dashboard)/vendors/new/NewTeamVendorForm.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/team/ui/GalleryBrowser.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/time-off/routes/admin/(dashboard)/operations/time-off/policies/[id]/PolicyEditor.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/time-off/routes/admin/(dashboard)/operations/time-off/policies/PoliciesTable.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/time-off/routes/admin/(dashboard)/operations/time-off/requests/TimeOffBoard.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    },
+    {
+      "file": "entities/time-off/routes/team/(dashboard)/time-off/TimeOffPanel.tsx",
+      "reason": "Predates the hidden-control rule (AE.1); the action's own guard still refuses, and no existing page is retrofitted until its entity needs the view/manage split."
+    }
+  ]
+}

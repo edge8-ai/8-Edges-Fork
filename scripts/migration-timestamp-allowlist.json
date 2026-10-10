@@ -1,0 +1,4 @@
+{
+  "_why": "Prefixes that collide in production. Emptied on 2026-09-12 (W.10): the remote migration ledger was repaired to the folder and the 14 second-of-a-pair files were renamed to unique seconds and recorded, so no prefix collides any more. This list only shrinks: scripts/check-migrations.mjs fails if an entry stops colliding, and refuses any new collision.",
+  "grandfathered": []
+}

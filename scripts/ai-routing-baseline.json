@@ -1,0 +1,484 @@
+{
+  "_comment": "Each AI call site's route, by file, as the code alone decides it (no env overrides). Written by `npm run check:ai-routing -- --write-baseline`; check:ai-routing fails when the tree disagrees, so a site that changes model, tier, class, override key or file is a reviewed diff here.",
+  "files": {
+    "entities/assistant/lib/meeting-summary.ts": {
+      "meeting-summary": {
+        "dataClass": "C",
+        "tier": "fast",
+        "modelKey": "meeting-summary",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_MEETING_SUMMARY",
+          "MEETINGS_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/boards/lib/sprint-draft.ts": {
+      "sprint-draft": {
+        "dataClass": "B",
+        "tier": "fast",
+        "modelKey": "sprint-draft",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_SPRINT_DRAFT"
+        ]
+      }
+    },
+    "entities/campaigns/lib/ai/brand-image.ts": {
+      "brand-image": {
+        "dataClass": "A",
+        "provider": "google"
+      }
+    },
+    "entities/campaigns/lib/ai/brand-writer.ts": {
+      "brand-writer": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/campaigns/lib/ai/campaign-seo.ts": {
+      "campaign-seo": {
+        "dataClass": "A",
+        "tier": "standard",
+        "modelKey": "campaign-seo",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_CAMPAIGN_SEO",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/campaigns/lib/ai/entry-copy.ts": {
+      "entry-copy": {
+        "dataClass": "A",
+        "tier": "standard",
+        "modelKey": "entry-copy",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_ENTRY_COPY",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/campaigns/lib/ai/marketing-recap.ts": {
+      "marketing-recap": {
+        "dataClass": "B",
+        "tier": "standard",
+        "modelKey": "marketing-recap",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_MARKETING_RECAP"
+        ]
+      }
+    },
+    "entities/campaigns/lib/writer/model.ts": {
+      "writer-assemble": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_ASSEMBLE",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-channels": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_CHANNELS",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-edit": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_EDIT",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-exhibits": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_EXHIBITS",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-letter-gather": {
+        "dataClass": "C",
+        "tier": "standard",
+        "modelKey": "writer-letter-gather",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_WRITER_LETTER_GATHER"
+        ]
+      },
+      "writer-letter-write": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_LETTER_WRITE",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-links": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_LINKS",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-personal-draft": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "writer-personal-draft",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_WRITER_PERSONAL_DRAFT"
+        ]
+      },
+      "writer-plan": {
+        "dataClass": "B",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_PLAN",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-seo": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_SEO",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      },
+      "writer-series-intro": {
+        "dataClass": "A",
+        "tier": "frontier",
+        "modelKey": "brand-writer",
+        "model": "claude-fable-5-1",
+        "overrides": [
+          "AI_MODEL_WRITER_SERIES_INTRO",
+          "AI_MODEL_BRAND_WRITER",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/client-programs/lib/client-status/draft.ts": {
+      "client-status-draft": {
+        "dataClass": "C",
+        "tier": "standard",
+        "modelKey": "client-status-draft",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_CLIENT_STATUS_DRAFT"
+        ]
+      }
+    },
+    "entities/coaching/lib/ai.ts": {
+      "coaching-prep": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "coaching-prep",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_COACHING_PREP",
+          "COACHING_CLAUDE_MODEL"
+        ]
+      },
+      "coaching-summary": {
+        "dataClass": "S",
+        "tier": "deep",
+        "modelKey": "coaching-summary",
+        "model": "claude-opus-5-5",
+        "overrides": [
+          "AI_MODEL_COACHING_SUMMARY",
+          "COACHING_CLAUDE_MODEL"
+        ]
+      },
+      "coaching-text": {
+        "dataClass": "S",
+        "tier": "deep",
+        "modelKey": "coaching-text",
+        "model": "claude-opus-5-5",
+        "overrides": [
+          "AI_MODEL_COACHING_TEXT",
+          "COACHING_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/coaching/lib/group-summary.ts": {
+      "coaching-group-summary": {
+        "dataClass": "C",
+        "tier": "standard",
+        "modelKey": "coaching-group-summary",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_COACHING_GROUP_SUMMARY"
+        ]
+      }
+    },
+    "entities/company-os/api/admin/chat/route.ts": {
+      "admin-chat": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "admin-chat",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_ADMIN_CHAT",
+          "CHATBOT_MODEL"
+        ]
+      }
+    },
+    "entities/company-os/api/admin/marketing/publish-editor/route.ts": {
+      "publish-editor": {
+        "dataClass": "A",
+        "tier": "standard",
+        "modelKey": "publish-editor",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_PUBLISH_EDITOR",
+          "WRITER_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/company-os/lib/ai/broadcast-takeaway.ts": {
+      "broadcast-takeaway": {
+        "dataClass": "B",
+        "tier": "fast",
+        "modelKey": "broadcast-takeaway",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_BROADCAST_TAKEAWAY"
+        ]
+      }
+    },
+    "entities/crm/lib/inquiry-qualify.ts": {
+      "lead-qualify": {
+        "dataClass": "C",
+        "tier": "fast",
+        "modelKey": "lead-qualify",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_LEAD_QUALIFY"
+        ]
+      }
+    },
+    "entities/crm/lib/meeting-actions/ai.ts": {
+      "meeting-actions-extract": {
+        "dataClass": "C",
+        "tier": "standard",
+        "modelKey": "meeting-actions-extract",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_MEETING_ACTIONS_EXTRACT"
+        ]
+      },
+      "meeting-followup-draft": {
+        "dataClass": "C",
+        "tier": "standard",
+        "modelKey": "meeting-followup-draft",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_MEETING_FOLLOWUP_DRAFT"
+        ]
+      }
+    },
+    "entities/crm/lib/proposal-ai.ts": {
+      "proposal-draft": {
+        "dataClass": "S",
+        "tier": "deep",
+        "modelKey": "proposal-draft",
+        "model": "claude-opus-5-5",
+        "overrides": [
+          "AI_MODEL_PROPOSAL_DRAFT"
+        ]
+      },
+      "proposal-extract": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "proposal-extract",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_PROPOSAL_EXTRACT"
+        ]
+      }
+    },
+    "entities/crm/lib/sprint-extract.ts": {
+      "sprint-extract": {
+        "dataClass": "C",
+        "tier": "fast",
+        "modelKey": "sprint-extract",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_SPRINT_EXTRACT"
+        ]
+      }
+    },
+    "entities/hiring/lib/interview-panelist.ts": {
+      "interview-panelist": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "interview-panelist",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_INTERVIEW_PANELIST",
+          "INTERVIEW_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/hiring/lib/resume-extract.ts": {
+      "resume-extract": {
+        "dataClass": "S",
+        "tier": "fast",
+        "modelKey": "resume-extract",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_RESUME_EXTRACT"
+        ]
+      }
+    },
+    "entities/hiring/lib/resume-screen.ts": {
+      "resume-screen": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "resume-screen",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_RESUME_SCREEN"
+        ]
+      }
+    },
+    "entities/ideas/lib/ai/idea-plan.ts": {
+      "admin-idea-plan": {
+        "dataClass": "B",
+        "tier": "standard",
+        "modelKey": "admin-idea-plan",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_ADMIN_IDEA_PLAN",
+          "IDEAS_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/ideas/lib/ai/idea-trends.ts": {
+      "idea-trends": {
+        "dataClass": "B",
+        "tier": "fast",
+        "modelKey": "idea-trends",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_IDEA_TRENDS",
+          "IDEAS_CLAUDE_MODEL"
+        ]
+      }
+    },
+    "entities/portal/api/portal/program-plan/route.ts": {
+      "program-plan": {
+        "dataClass": "C",
+        "tier": "standard",
+        "modelKey": "program-plan",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_PROGRAM_PLAN",
+          "CHATBOT_MODEL"
+        ]
+      }
+    },
+    "entities/portal/api/portal/roadmap-assist/route.ts": {
+      "roadmap-assist": {
+        "dataClass": "C",
+        "tier": "fast",
+        "modelKey": "roadmap-assist",
+        "model": "qwen/qwen3.8-flash",
+        "overrides": [
+          "AI_MODEL_ROADMAP_ASSIST",
+          "ROADMAP_ASSIST_MODEL"
+        ],
+        "host": "alibaba",
+        "fallback": {
+          "model": "claude-sonnet-5",
+          "afterMs": 12000
+        }
+      }
+    },
+    "entities/reimbursements/lib/receipt-reading.ts": {
+      "receipt-read": {
+        "dataClass": "S",
+        "tier": "fast",
+        "modelKey": "receipt-read",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_RECEIPT_READ"
+        ]
+      }
+    },
+    "entities/team/api/team/chat/route.ts": {
+      "team-chat": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "team-chat",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_TEAM_CHAT",
+          "CHATBOT_MODEL"
+        ]
+      }
+    },
+    "entities/team/lib/family-screen.ts": {
+      "family-screen": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "family-screen",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_FAMILY_SCREEN"
+        ]
+      }
+    },
+    "entities/team/lib/review-summary.ts": {
+      "review-summary": {
+        "dataClass": "S",
+        "tier": "standard",
+        "modelKey": "review-summary",
+        "model": "claude-sonnet-5",
+        "overrides": [
+          "AI_MODEL_REVIEW_SUMMARY",
+          "REVIEW_CLAUDE_MODEL"
+        ]
+      }
+    }
+  }
+}

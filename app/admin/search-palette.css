@@ -1,0 +1,134 @@
+/* The global search palette (S.1, kernel/ui/SearchPalette.tsx), on the admin and
+   team surfaces. Its own file because admin.css is at its size cap, and imported
+   by both surface layouts, which are the two places the palette is mounted.
+   Colours come from tokens only (check:tokens). */
+
+/* The sidebar row, on the dark sidebar, styled like the other on-dark controls. */
+.admin-search-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--admin-space-2);
+  width: calc(100% - 2 * var(--admin-space-3));
+  min-height: 36px;
+  margin: 0 var(--admin-space-3) var(--admin-space-3);
+  padding: 0 var(--admin-space-3);
+  background: var(--admin-on-dark-soft);
+  border: 1px solid var(--admin-on-dark-hover);
+  border-radius: var(--admin-radius-sm);
+  color: var(--admin-sidebar-ink);
+  font: inherit;
+  font-size: var(--admin-text-base);
+  cursor: pointer;
+}
+.admin-search-trigger:hover { background: var(--admin-on-dark-hover); }
+.admin-search-trigger:focus-visible { outline: none; box-shadow: var(--admin-focus-ring); }
+.admin-search-trigger-kbd {
+  font-family: inherit;
+  font-size: var(--admin-text-xs);
+  color: var(--admin-sidebar-muted);
+  border: 1px solid var(--admin-on-dark-hover);
+  border-radius: var(--admin-radius-xs);
+  padding: 1px 6px;
+}
+
+/* The dialog: top-aligned, so the results grow downwards under the input. */
+.admin-search-backdrop {
+  position: fixed;
+  inset: 0;
+  /* Above 1000: globals.css styles every bare <nav> for the public site
+     (z-index 1000, backdrop-filter), and both surface sidebars are <nav>, so
+     anything lower opens underneath the sidebar. */
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12vh var(--admin-space-4) var(--admin-space-4);
+  background: var(--admin-scrim);
+  animation: admin-fade 0.12s ease;
+}
+.admin-search-dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(600px, 100%);
+  max-height: 70vh;
+  background: var(--admin-surface);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow-modal);
+  overflow: hidden;
+}
+.admin-search-input {
+  width: 100%;
+  padding: var(--admin-space-4);
+  border: 0;
+  border-bottom: 1px solid var(--admin-line);
+  background: transparent;
+  color: var(--admin-ink);
+  font: inherit;
+  /* 16px keeps iOS from zooming into the field when it takes focus. */
+  font-size: 16px;
+}
+.admin-search-input:focus { outline: none; }
+.admin-search-results {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.admin-search-group { padding: var(--admin-space-2) 0; }
+.admin-search-group + .admin-search-group { border-top: 1px solid var(--admin-line-soft); }
+.admin-search-group-label {
+  padding: var(--admin-space-1) var(--admin-space-4);
+  font-size: var(--admin-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--admin-muted);
+}
+.admin-search-group-failed {
+  padding: var(--admin-space-2) var(--admin-space-4);
+  font-size: var(--admin-text-sm);
+  color: var(--admin-err-ink);
+}
+.admin-search-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 44px;
+  justify-content: center;
+  padding: var(--admin-space-2) var(--admin-space-4);
+  border-left: 3px solid transparent;
+  color: var(--admin-ink);
+  text-decoration: none;
+}
+/* The highlighted hit is the keyboard's focus while the input keeps real focus
+   (aria-activedescendant), so it carries the visible indicator. */
+.admin-search-option.is-active {
+  background: var(--admin-accent-soft);
+  border-left-color: var(--admin-accent);
+}
+.admin-search-option-title {
+  font-size: var(--admin-text-md);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.admin-search-option-detail {
+  font-size: var(--admin-text-sm);
+  color: var(--admin-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.admin-search-status {
+  padding: var(--admin-space-2) var(--admin-space-4);
+  border-top: 1px solid var(--admin-line-soft);
+  font-size: var(--admin-text-sm);
+  color: var(--admin-muted);
+}
+
+@media (max-width: 640px) {
+  .admin-search-backdrop { padding-top: var(--admin-space-4); }
+  .admin-search-dialog { max-height: calc(100vh - 2 * var(--admin-space-4)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-search-backdrop { animation: none; }
+}

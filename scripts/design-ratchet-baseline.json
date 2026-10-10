@@ -1,0 +1,33 @@
+{
+  "inlineStyles": {
+    "app/error.tsx": 2,
+    "app/not-found.tsx": 2,
+    "entities/boards/routes/admin/(dashboard)/boards/BoardsIndex.tsx": 2,
+    "entities/boards/ui/EpicsView.tsx": 1,
+    "entities/boards/ui/SprintView.tsx": 1,
+    "entities/boards/ui/SprintsTab.tsx": 1,
+    "entities/boards/ui/WorkboardToolbar.tsx": 1,
+    "entities/coaching/routes/team/(dashboard)/goals/MyGoalsPanel.tsx": 1,
+    "entities/company-os/routes/admin/(dashboard)/patterns/PatternParts.tsx": 2,
+    "entities/company-os/ui/GalleryManager.tsx": 1,
+    "entities/crm/routes/admin/(dashboard)/revenue/sales-intelligence/[id]/page.tsx": 1,
+    "entities/hiring/routes/admin/(dashboard)/talent/applications/ApplicationsBoard.tsx": 1,
+    "entities/hiring/routes/admin/(dashboard)/talent/applications/InterviewPanelSeat.tsx": 1,
+    "entities/onboarding/ui/OnboardingCycleBoard.tsx": 2,
+    "entities/org/routes/admin/(dashboard)/company/goals/CompanyGoalsEditor.tsx": 1,
+    "entities/org/routes/admin/(dashboard)/company/goals/IndividualGoalsEditor.tsx": 1,
+    "entities/org/ui/company/CompanyGoalsObjectives.tsx": 1,
+    "entities/portal/routes/portal/(dashboard)/team/page.tsx": 2,
+    "entities/retreats/routes/admin/(dashboard)/revenue/events/[id]/AgendaTab.tsx": 1,
+    "entities/site/routes/page.tsx": 8,
+    "entities/team/routes/team/(dashboard)/clients/[companyId]/(hub)/board/page.tsx": 1,
+    "entities/team/routes/team/(dashboard)/ideas/PlanGenerating.tsx": 1,
+    "entities/team/routes/team/(dashboard)/profile/ProfileEditor.tsx": 5,
+    "entities/team/ui/AvatarUpload.tsx": 1,
+    "entities/team/ui/HubProgramsBand.tsx": 1,
+    "kernel/ui/Expandable.tsx": 1,
+    "kernel/ui/PasswordInput.tsx": 3,
+    "kernel/ui/charts/DonutChart.tsx": 1
+  },
+  "pagePrefixedSelectors": 5
+}

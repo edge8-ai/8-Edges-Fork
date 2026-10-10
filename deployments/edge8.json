@@ -1,0 +1,33 @@
+{
+  "$comment": [
+    "Edge8 own deployment: every entity in the catalogue, internal ones included.",
+    "A deployment file is the list of entities a build installs. It must be closed under",
+    "`requires` (check:deployment), and `contacts` is implicit because every deployment has it."
+  ],
+  "name": "edge8",
+  "entities": [
+    "assistant",
+    "billing",
+    "boards",
+    "campaigns",
+    "client-programs",
+    "coaching",
+    "company-os",
+    "contacts",
+    "crm",
+    "finance",
+    "hiring",
+    "htt",
+    "ideas",
+    "library",
+    "notifications",
+    "onboarding",
+    "org",
+    "portal",
+    "reimbursements",
+    "retreats",
+    "site",
+    "team",
+    "time-off"
+  ]
+}

@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYOUT UTILITIES (.u-*) — shared by every surface: public site, admin, team,
+   portal. The sanctioned replacement for inline style={{ display:"flex", gap… }}.
+   Layout only: flow, gap, spacing steps, a few type helpers. Anything with a
+   colour, radius or font belongs in a component class, never inline.
+   Spacing steps map to --admin-space-1…6 (4 / 8 / 12 / 16 / 24 / 32); every
+   token used here is defined on :root in app/styles/tokens.css.
+
+   Load order matters: each surface layout imports this file AFTER its own
+   stylesheet so a utility on an element wins over the component default it
+   is there to override (e.g. .admin-page-sub + .u-m-0).
+   ═══════════════════════════════════════════════════════════════════════════ */
+.u-row { display: flex; align-items: center; gap: var(--admin-space-2); }
+.u-row-top { display: flex; align-items: flex-start; gap: var(--admin-space-2); }
+.u-stack { display: flex; flex-direction: column; gap: var(--admin-space-2); }
+.u-wrap { flex-wrap: wrap; }
+.u-between { justify-content: space-between; }
+.u-end { justify-content: flex-end; }
+.u-center { justify-content: center; }
+.u-grow { flex: 1 1 auto; min-width: 0; }
+.u-shrink-0 { flex-shrink: 0; }
+.u-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--admin-space-4); }
+.u-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--admin-space-4); }
+.u-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--admin-space-4); }
+@media (max-width: 900px) { .u-grid-3, .u-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .u-grid-2, .u-grid-3, .u-grid-4 { grid-template-columns: 1fr; } }
+.u-gap-1 { gap: var(--admin-space-1); } .u-gap-2 { gap: var(--admin-space-2); } .u-gap-3 { gap: var(--admin-space-3); }
+.u-gap-4 { gap: var(--admin-space-4); } .u-gap-5 { gap: var(--admin-space-5); } .u-gap-6 { gap: var(--admin-space-6); }
+.u-mt-1 { margin-top: var(--admin-space-1); } .u-mt-2 { margin-top: var(--admin-space-2); } .u-mt-3 { margin-top: var(--admin-space-3); }
+.u-mt-4 { margin-top: var(--admin-space-4); } .u-mt-5 { margin-top: var(--admin-space-5); } .u-mt-6 { margin-top: var(--admin-space-6); }
+.u-mb-1 { margin-bottom: var(--admin-space-1); } .u-mb-0 { margin-bottom: 0; } .u-mb-2 { margin-bottom: var(--admin-space-2); }
+.u-mb-3 { margin-bottom: var(--admin-space-3); } .u-mb-4 { margin-bottom: var(--admin-space-4); } .u-mb-5 { margin-bottom: var(--admin-space-5); } .u-mb-6 { margin-bottom: var(--admin-space-6); }
+.u-ml-auto { margin-left: auto; }
+.u-w-full { width: 100%; }
+.u-max-narrow { max-width: 880px; }
+.u-max-form { max-width: 640px; }
+.u-max-prose { max-width: 68ch; }
+.u-xs { font-size: var(--admin-text-xs); }
+.u-sm { font-size: var(--admin-text-sm); }
+.u-lg { font-size: var(--admin-text-lg); }
+.u-muted { color: var(--admin-muted); }
+.u-ink-2 { color: var(--admin-text-body); }
+.u-strong { font-weight: 600; }
+.u-nowrap { white-space: nowrap; }
+.u-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.u-right { text-align: right; }
+.u-center-text { text-align: center; }
+.u-tabular { font-variant-numeric: tabular-nums; }
+.u-label { font-size: var(--admin-text-sm); color: var(--admin-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+.u-m-0 { margin: 0; }
+.u-ink { color: var(--admin-ink); }
+.u-ok { color: var(--admin-ok-ink); font-weight: 600; }
+.u-warn { color: var(--admin-warn-ink); font-weight: 600; }
+.u-prewrap { white-space: pre-wrap; }
+.u-list { margin: 0; padding-left: 16px; }
+.u-link-plain { color: inherit; text-decoration: none; }
+.u-ml-2 { margin-left: var(--admin-space-2); }
+.u-err { color: var(--admin-err-ink); }
+.u-items-end { align-items: flex-end; }
+.u-items-baseline { align-items: baseline; }
+.u-items-start { align-items: flex-start; }
+.u-clamp-4 { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.u-items-center { align-items: center; }
+.u-mt-0 { margin-top: 0; }
+.u-contents { display: contents; }
+.u-inline-stack { display: inline-flex; flex-direction: column; gap: var(--admin-space-1); }
+.u-w-auto { width: auto; }
+.u-min-0 { min-width: 0; }
+.u-self-start { align-self: flex-start; }
+.u-self-end { align-self: flex-end; }
+.u-flex-1 { flex: 1 1 160px; min-width: 0; }
+.u-flex-2 { flex: 2 1 220px; min-width: 0; }
+.u-flex-fixed { flex: 0 1 200px; min-width: 0; }
+.u-max-sm { max-width: 420px; }
+.u-disabled { opacity: 0.4; cursor: not-allowed; }
+.u-no-events { pointer-events: none; }
+.u-pointer { cursor: pointer; }
+.u-break-all { overflow-wrap: anywhere; word-break: break-word; }
+.u-dim { opacity: 0.5; }
+.u-p-0 { padding: 0; }
+.u-p-2 { padding: 8px 10px; }
+.u-p-3 { padding: 12px 14px; }
+.u-p-4 { padding: var(--admin-space-4); }
+.u-p-5 { padding: var(--admin-space-5); }
+.u-pt-1 { padding-top: var(--admin-space-1); } .u-pt-2 { padding-top: var(--admin-space-2); } .u-pt-3 { padding-top: var(--admin-space-3); } .u-pt-4 { padding-top: var(--admin-space-4); }
+.u-m-4 { margin: var(--admin-space-4); }
+.u-w-90 { width: 90px; }
+.u-w-160 { width: 160px; }
+.u-block { display: block; }
+.u-inline-block { display: inline-block; }
+.u-clip { overflow: hidden; }
+.u-dim-2 { opacity: 0.7; }
+.u-pt-0 { padding-top: 0; }
+.u-min-1 { min-width: 120px; }
+.u-min-2 { min-width: 160px; }
+.u-max-1 { max-width: 120px; } .u-max-2 { max-width: 160px; } .u-max-3 { max-width: 220px; } .u-max-4 { max-width: 280px; } .u-max-5 { max-width: 340px; } .u-max-6 { max-width: 480px; }
+.u-grid-auto-sm { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--admin-space-3); }
+.u-grid-auto-200 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--admin-space-3); }
+.u-grid-auto-md { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--admin-space-4); }
+.u-grid-auto-340 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--admin-space-3); }
+.u-grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: var(--admin-space-3); }
+/* On a phone the side column would be a third of the screen, so it goes beneath. After the rule above, which it must override. */
+@media (max-width: 600px) { .u-grid-2-1 { grid-template-columns: 1fr; } }
+.u-faint { color: var(--admin-faint); }
+.u-inline { display: inline; }
+.u-caps { text-transform: capitalize; }
+.u-hidden-input { display: none; }
+.u-list-plain { list-style: none; margin: 0; padding: 0; }
+.u-pl-3 { padding-left: var(--admin-space-3); }
+.u-pl-4 { padding-left: 18px; }
+.u-mr-2 { margin-right: var(--admin-space-2); }
+.u-mr-auto { margin-right: auto; }
+.u-p-1 { padding: 4px 8px; }
+.u-py-1 { padding-top: 2px; padding-bottom: 2px; }
+.u-py-3 { padding-top: var(--admin-space-3); padding-bottom: var(--admin-space-3); }
+.u-pb-3 { padding-bottom: var(--admin-space-3); }
+.u-w-120 { width: 120px; }
+.u-w-200 { width: 200px; }
+.u-max-0 { max-width: 90px; }
+.u-max-7 { max-width: 720px; }
+.u-accent { color: var(--admin-accent); }
+.u-py-4 { padding-top: var(--admin-space-4); padding-bottom: var(--admin-space-4); }
+.u-my-5 { margin-top: var(--admin-space-5); margin-bottom: var(--admin-space-5); }
+.u-grid-2-fixed { display: grid; grid-template-columns: 1fr 1fr 90px; gap: var(--admin-space-3); }
+.u-items-stretch { align-items: stretch; }
+.u-mt-auto { margin-top: auto; }
+.u-minh-0 { min-height: 0; }
+.u-minh-40 { min-height: 40px; }
+.u-minh-56 { min-height: 56px; }
+.u-span-all { grid-column: 1 / -1; }
+.u-rows-equal { grid-auto-rows: 1fr; }
+.u-xl { font-size: var(--admin-text-xl); }
+.u-flex-fixed-sm { flex: 0 0 140px; }
+.u-amber { color: var(--admin-amber-ink); }
+
+/* Public-site steps (40 / 48 / 64 / 72 on the spacing scale) and the two public content widths. */
+.u-mt-7 { margin-top: 40px; } .u-mt-8 { margin-top: 48px; }
+.u-mb-7 { margin-bottom: 40px; } .u-mb-8 { margin-bottom: 48px; }
+.u-pt-5 { padding-top: var(--admin-space-5); } .u-pt-7 { padding-top: 40px; } .u-pt-8 { padding-top: 48px; } .u-pt-9 { padding-top: 64px; }
+.u-pb-0 { padding-bottom: 0; } .u-pb-8 { padding-bottom: 48px; } .u-pb-9 { padding-bottom: 64px; }
+.u-max-8 { max-width: 900px; }
+.u-mx-auto { margin-left: auto; margin-right: auto; }
+.u-x-scroll { overflow-x: auto; }
+.u-ok-strong { color: var(--color-ok-strong); }
+.u-err-strong { color: var(--color-err-strong); }
+
+/* Additions for the inline-literal cleanup (#1025). */
+.u-img { width: 100%; height: auto; }
+.u-obj-cover { object-fit: cover; }
+.u-hidden { display: none; }
+.u-mt-9 { margin-top: 56px; } .u-mb-9 { margin-bottom: 56px; }
+.u-mt-n1 { margin-top: -4px; }
+.u-flex-320 { flex: 1 1 320px; min-width: 0; }
+.u-flex-220 { flex: 1 1 220px; min-width: 0; }
+.u-flex-200 { flex: 1 1 200px; min-width: 0; }
+.u-shrink-none { flex: none; }
+.u-resize-y { resize: vertical; }
+.u-list-revert { cursor: pointer; list-style: revert; }
+.u-scroll-180 { max-height: 180px; overflow-y: auto; }
+.u-cursor-default { cursor: default; }
+.u-overflow-visible { overflow: visible; }
+.u-w-52 { width: 52px; }
+.u-pt-10 { padding-top: 80px; }
+.u-h-20 { font-size: 20px; font-weight: 700; }
+.u-h-22 { font-size: 22px; font-weight: 700; }
+.u-h-28 { font-size: 28px; }
+.u-h-clamp { font-size: clamp(24px, 3vw, 34px); }
+.u-lead-sm { font-size: 14px; line-height: 1.65; }
+.u-list-inset { margin: 0; padding-left: 18px; line-height: 1.7; }
+/* Text only a screen reader gets: kept in the accessibility tree and out of the
+   layout, for the cases where the visible signal is a colour or a shape. */
+.u-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}

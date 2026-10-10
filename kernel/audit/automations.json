@@ -1,0 +1,854 @@
+[
+  {
+    "path": "/api/cron/account-health/",
+    "entity": "crm",
+    "file": "entities/crm/crons/account-health.ts",
+    "schedule": "30 19 * * *",
+    "name": "Account health",
+    "description": "Nightly at 02:30 Vietnam time. Scores every current client from four signals (days since the last meeting, overdue invoices, roadmap moves in 30 days, days since the last portal sign-in) into one account health row each, which Revenue's Accounts needing attention reads.",
+    "content": [
+      "Companies",
+      "Meetings",
+      "Invoices",
+      "Client roadmaps",
+      "Portal sign-ins"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/agent-driver/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/agent-driver.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Agent driver",
+    "description": "Every five minutes. Advances every writer and letter agent run that is at a step by one step, each recorded on its agent's row here. A step that keeps failing is backed off and, after three attempts, the run is stopped with the reason on its campaign.",
+    "content": [
+      "Marketing campaigns",
+      "Email campaigns",
+      "Routine runs (this page)"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/automation-watchdog/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/automation-watchdog.ts",
+    "schedule": "30 23 * * *",
+    "name": "Automation watchdog",
+    "description": "Daily at 06:30 Vietnam time. Checks what the routines actually did: every error run names its error, every scheduled routine ran in its last slot, every AI call carries a cost and called the model it should, and the weekly letter reached ready. Anything broken goes to Operations in one message.",
+    "content": [
+      "Routine runs (this page)",
+      "AI calls",
+      "Email campaigns"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/blog-publish/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/blog-publish.ts",
+    "schedule": "0 4 * * *",
+    "name": "Blog auto-publish",
+    "description": "Daily. Auto-publishes blog assets that were scheduled and are now due, and tells the Revenue chat, holding a weekend notice to Monday 08:30.",
+    "content": [
+      "Blog assets"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/board-digest/",
+    "entity": "boards",
+    "file": "entities/boards/crons/board-digest.ts",
+    "schedule": "15 1 * * 1-5",
+    "name": "Board digest",
+    "description": "Weekdays. Emails each active team member their open board cards, sectioned by column and ordered by priority, overdue flagged. A card on a board they can no longer open is named without a link.",
+    "content": [
+      "Board cards"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend"
+    ]
+  },
+  {
+    "path": "/api/cron/broadcast-summary/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/broadcast-summary.ts",
+    "schedule": "20 3 * * *",
+    "name": "Broadcast summary",
+    "description": "Daily. Posts one Lark summary to the Marketing channel for each broadcast whose numbers have settled (72h after send), with a one-line Claude takeaway. Latches per broadcast so each is summarised once.",
+    "content": [
+      "Email campaigns",
+      "Email events"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/check-in-reminder/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/check-in-reminder.ts",
+    "schedule": "0 2 * * 1-5",
+    "name": "Check-in reminder",
+    "description": "Tells every team chat it is time to update their cards, thirty minutes before the check-in reads the board.",
+    "content": [
+      "None — it only posts"
+    ],
+    "apps": [
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/client-status/",
+    "entity": "client-programs",
+    "file": "entities/client-programs/crons/client-status.ts",
+    "schedule": "0 3 * * 5",
+    "name": "Weekly client status",
+    "description": "Fridays at 10:00 Vietnam time. Opens one weekly status report per active client; the client status driver gathers, drafts and checks each into a draft on the client's Weekly status page in the team hub. The account owner reads it, edits it and shares it with the client themselves: nothing is asked for approval and nothing is published. Last week's runs that never produced a draft are superseded.",
+    "content": [
+      "AI programs",
+      "Client boards",
+      "Client roadmaps",
+      "Client status reports"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/client-status-check/",
+    "entity": "client-programs",
+    "file": "entities/client-programs/crons/client-status-check.ts",
+    "schedule": "0 5 * * 5",
+    "name": "Client status check",
+    "description": "Fridays, two hours after the weekly client status opens. Checks every active client got this week's report and that each reached a draft on its Weekly status page, and tells Operations about any that did not.",
+    "content": [
+      "Client status reports"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/client-status-driver/",
+    "entity": "client-programs",
+    "file": "entities/client-programs/crons/client-status-driver.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Client status driver",
+    "description": "Every five minutes. Advances every weekly client status report that is at a step by one step: gather, draft and check. A page that passes the check is the account owner's draft on the client's Weekly status page; nothing is asked for approval or released. Each step is recorded on the Weekly client status row here. A step that keeps failing is backed off and, after three attempts, the report stops with the reason on its Weekly status page.",
+    "content": [
+      "Client status reports",
+      "Client boards",
+      "Client roadmaps",
+      "Routine runs (this page)"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/coaching-backstops/",
+    "entity": "coaching",
+    "file": "entities/coaching/crons/coaching-backstops.ts",
+    "schedule": "0 21 * * *",
+    "name": "Coaching backstops",
+    "description": "Nightly at 04:00 Vietnam time. Repeats what coaching does when a commitment's card is done or a holiday is approved, for any event the in-process bus did not deliver: stamps the card-done suggestion and moves 1-1s off approved leave. Both are no-ops when the event already landed.",
+    "content": [
+      "Workboard cards",
+      "Coaching commitments",
+      "Time off",
+      "1-1 bookings"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/coaching-cycle/",
+    "entity": "coaching",
+    "file": "entities/coaching/crons/coaching-cycle.ts",
+    "schedule": "45 0 * * *",
+    "name": "Coaching cycle",
+    "description": "Daily pass over active coaching profiles: 1-1 prep, lapsed-cadence nudges, mid-cycle check-ins, monthly trend reports. Lands before 09:00 +07.",
+    "content": [
+      "Coaching profiles",
+      "1-1 cadences"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/coaching-lark-pickup/",
+    "entity": "coaching",
+    "file": "entities/coaching/crons/coaching-lark-pickup.ts",
+    "schedule": "0 15 * * *",
+    "name": "1-1 Lark pickup",
+    "description": "Nightly at 22:00 +07. Files each connected coach's own 1-1 recordings with transcript and recap, then reads every pasted 1-1 link whose transcript is not loaded, as the coach when connected and as the Edge8 app otherwise.",
+    "content": [
+      "Coaches' Lark Minutes",
+      "Linked 1-1 recordings",
+      "1-1 transcripts"
+    ],
+    "apps": [
+      "Lark",
+      "Supabase",
+      "Claude"
+    ]
+  },
+  {
+    "path": "/api/cron/coaching-recaps/",
+    "entity": "coaching",
+    "file": "entities/coaching/crons/coaching-recaps.ts",
+    "schedule": "0 9 * * 3",
+    "name": "Coaching recaps",
+    "description": "Hourly. Drafts the recap for one held 1-1 that has a transcript and no summary. Summarising is an Opus job, kept off the daily cycle on purpose.",
+    "content": [
+      "1-1 transcripts"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark",
+      "Claude"
+    ]
+  },
+  {
+    "path": "/api/cron/contractor-payments/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/contractor-payments.ts",
+    "schedule": "0 6 1 * *",
+    "name": "Contractor payments",
+    "description": "Rolls the previous month's accepted contractor work into payment requests, on the 1st.",
+    "content": [
+      "Contractor work",
+      "Payment requests"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/crm-driver/",
+    "entity": "crm",
+    "file": "entities/crm/crons/crm-driver.ts",
+    "schedule": "*/5 * * * *",
+    "name": "CRM driver",
+    "description": "Every five minutes. Opens a meeting follow-up run for up to five client meetings whose summary is ready, advances every run that is at a step by one step (each recorded on the Meeting follow-up row), expires a draft nobody decided within seven days, unsent, and sets aside the waiting actions of an archived meeting.",
+    "content": [
+      "Meetings",
+      "Meeting follow-ups",
+      "Meeting action items",
+      "Approvals",
+      "Routine runs (this page)"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Resend",
+      "Lark"
+    ],
+    "shadow": true
+  },
+  {
+    "path": "/api/cron/daily-check-in/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/daily-check-in.ts",
+    "schedule": "30 2 * * 1-5",
+    "name": "Daily check-in",
+    "description": "Reads every person's Workboard cards and posts one check-in per roster to its Lark chat. Run now on this page starts the same run by hand.",
+    "content": [
+      "Workboard cards",
+      "Card comments",
+      "Time off",
+      "Team directory"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/deliverable-sweep/",
+    "entity": "boards",
+    "file": "entities/boards/crons/deliverable-sweep.ts",
+    "schedule": "40 19 * * *",
+    "name": "Deliverable sweep",
+    "description": "Daily at 02:40. Keeps the card-attachments bucket to what cards hold: uploads never confirmed after a day, deliverables archived over 30 days ago, and the files of cards deleted outright. A failed read deletes nothing.",
+    "content": [
+      "Board cards",
+      "Deliverables"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/email-campaign-send/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/email-campaign-send.ts",
+    "schedule": "*/15 * * * *",
+    "name": "Email campaign send",
+    "description": "Every 15 minutes. Sends the next batch of a scheduled email campaign sequentially, one Resend call per recipient.",
+    "content": [
+      "Email campaigns",
+      "Recipients"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend"
+    ]
+  },
+  {
+    "path": "/api/cron/email-series-draft/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/email-series-draft.ts",
+    "schedule": "0 0 * * *",
+    "name": "Series drafter",
+    "description": "Daily at 07:00 Vietnam time. Opens each active series' issue for the week as a draft broadcast for its saved audience, scheduled for the series' send moment. Nothing sends until a person approves the issue.",
+    "content": [
+      "Email series",
+      "Audiences",
+      "Email campaigns"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/fx-rates/",
+    "entity": "finance",
+    "file": "entities/finance/crons/fx-rates.ts",
+    "schedule": "15 0 * * *",
+    "name": "FX rates",
+    "description": "Nightly, before the revenue snapshot. Refreshes every cached currency's rate to USD, so any deal or order converts at a rate no older than a day. A currency the source cannot price is reported, not a failure.",
+    "content": [
+      "FX rates"
+    ],
+    "apps": [
+      "Supabase",
+      "Exchange-rate API"
+    ]
+  },
+  {
+    "path": "/api/cron/hiring-chain/",
+    "entity": "hiring",
+    "file": "entities/hiring/crons/hiring-chain.ts",
+    "schedule": null,
+    "name": "Hiring chain",
+    "description": "One step of the hiring chain per row: screen an application, ask to open a requisition, propose a shortlist, draft a candidate message, send an approved one, record an approved hire or rejection. Every decision and every message waits on a holder of Hiring approver. In shadow it screens and proposes and drafts, and asks, sends and moves nothing. Driven by the Hiring driver every five minutes and by the requisition and application pages' buttons.",
+    "content": [
+      "Applications",
+      "Job requisitions",
+      "Candidate messages",
+      "Hiring shortlists",
+      "Approvals"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Resend"
+    ],
+    "shadow": true
+  },
+  {
+    "path": "/api/cron/hiring-driver/",
+    "entity": "hiring",
+    "file": "entities/hiring/crons/hiring-driver.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Hiring driver",
+    "description": "Every five minutes. Advances every requisition and application in the hiring chain that is at a step by one step, each recorded on the Hiring chain row, and delivers any hire the decision recorded but did not announce. A step that keeps failing is backed off and, after three attempts, stopped with the reason on its requisition or application.",
+    "content": [
+      "Job requisitions",
+      "Applications",
+      "Candidate messages",
+      "Hiring shortlists",
+      "Approvals",
+      "Event outbox"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/idea-themes/",
+    "entity": "ideas",
+    "file": "entities/ideas/crons/idea-themes.ts",
+    "schedule": "0 23 * * *",
+    "name": "Idea themes",
+    "description": "Each morning. Claude groups the team's sparks into themes (We should build, We should learn) for /team/ideas and the Innovation cockpit; a theme needs sparks from two people.",
+    "content": [
+      "Ideas and learnings"
+    ],
+    "apps": [
+      "Supabase",
+      "Claude"
+    ]
+  },
+  {
+    "path": "/api/cron/ideas-digest/",
+    "entity": "ideas",
+    "file": "entities/ideas/crons/ideas-digest.ts",
+    "schedule": "0 0 * * 2",
+    "name": "Ideas digest",
+    "description": "Weekly, Tuesday morning. Emails the founder and posts to Lark ops a warm round-up of what the team shared in Spark this week and which sparks were picked up or shipped, ending with an open invitation to share one.",
+    "content": [
+      "Idea submissions",
+      "Cards picked up from ideas"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark",
+      "Resend"
+    ]
+  },
+  {
+    "path": "/api/cron/individual-summary/",
+    "entity": "team",
+    "file": "entities/team/crons/individual-summary.ts",
+    "schedule": "0 9 * * 2",
+    "name": "Individual summary",
+    "description": "Tuesdays at 16:00 Vietnam time. Sends each active Product, Operations and EO member a Lark message with their own week on the board: their latest 1-1, ideas, and backlog, doing and completed counts. Honours each person's DM opt-out.",
+    "content": [
+      "Workboard cards",
+      "1-1s",
+      "Ideas",
+      "Team directory"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/inquiry-to-lead/",
+    "entity": "crm",
+    "file": "entities/crm/crons/inquiry-to-lead.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Inquiry to lead",
+    "description": "Every five minutes. Advances each contact-form inquiry's run by one step: qualify (one model read of the message against the contact page's fit), file (a sales inquiry to the Leads queue with its company linked, spam held on the Inquiries board, a job seeker or vendor kept there, a current client named to the deal owner), notify (one line to the Operations chat). Until this switch is set to Live by a person, every inquiry takes the path it always took and the chain only records what it would have done. Off stops new inquiries reaching the chain; the ones it already took Live still finish.",
+    "content": [
+      "Inquiries",
+      "People",
+      "Companies",
+      "Deals",
+      "Leads",
+      "Inquiry triage",
+      "Routine runs (this page)"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Lark"
+    ],
+    "shadow": true
+  },
+  {
+    "path": "/api/cron/kr-agent-sync/",
+    "entity": "org",
+    "file": "entities/org/crons/kr-agent-sync.ts",
+    "schedule": "0 23 * * *",
+    "name": "Key result sync",
+    "description": "Nightly. Refreshes the key results whose number the company's own systems can read off (today: workflows built, counted from this page's routines) and logs each value to kr_logs.",
+    "content": [
+      "Key results",
+      "Managed routines (this page)"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/letter-weekly/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/letter-weekly.ts",
+    "schedule": "0 0 * * 1,4",
+    "name": "Letter agent: weekly",
+    "description": "Monday and Thursday 07:00 Ho Chi Minh City. Opens the next letter as a draft broadcast and starts the letter agent; the run builds the list, sends the approver a test and parks at ready on a send approval. Nothing sends until a person approves it; then it goes at the Tuesday or Friday 08:00 window unless cancelled first.",
+    "content": [
+      "Email campaigns",
+      "Events",
+      "Meetings",
+      "Journal (Notion)",
+      "Blog assets"
+    ],
+    "apps": [
+      "Supabase",
+      "Notion",
+      "Anthropic",
+      "Resend",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/marketing-digest/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/marketing-digest.ts",
+    "schedule": "0 2 * * 1-5",
+    "name": "Marketing digest",
+    "description": "Weekdays at 09:00 Vietnam time. Reminds the founder and the Revenue chat of manual-post content (blog, LinkedIn, Facebook) due today or overdue and not yet posted. Monday's reminder covers anything that fell due over the weekend.",
+    "content": [
+      "Marketing calendar"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/marketing-recap/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/marketing-recap.ts",
+    "schedule": "30 0 4 * *",
+    "name": "Marketing recap",
+    "description": "Monthly, on the 4th. Recaps the prior month's email marketing and asks Claude for content suggestions, then stores it, posts to the Marketing Lark channel, and emails the founder. Runs on the 4th so every send is past its 72h settle window.",
+    "content": [
+      "Email campaigns",
+      "Email events",
+      "Marketing recaps"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Resend",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/marketing-weekly-pulse/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/marketing-weekly-pulse.ts",
+    "schedule": "0 23 * * 2",
+    "name": "Marketing weekly pulse",
+    "description": "Weekly, Monday. Posts a facts-only 'Marketing this week' to the Marketing Lark channel: public-site traffic with a week-over-week line, posts published, and the broadcasts that went out. No AI; the monthly recap owns content suggestions.",
+    "content": [
+      "Vercel Analytics",
+      "Marketing content",
+      "Email campaigns"
+    ],
+    "apps": [
+      "Vercel Analytics",
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/meeting-cards/",
+    "entity": "boards",
+    "file": "entities/boards/crons/meeting-cards.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Meeting cards",
+    "description": "Every five minutes. Files each action Edge8 agreed in a client meeting as a Workboard card on that client's board, assigned to the board member the meeting named and announced to them once. When the client has several boards and the meeting names no AI Program, the actions wait for a person to pick the board on the meeting page. Only a live meeting follow-up run's actions are filed; in shadow nothing is.",
+    "content": [
+      "Meeting action items",
+      "Board cards"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ],
+    "shadow": true
+  },
+  {
+    "path": "/api/cron/monday-nudge/",
+    "entity": "reimbursements",
+    "file": "entities/reimbursements/crons/monday-nudge.ts",
+    "schedule": "0 1 * * 1",
+    "name": "Reimbursements Monday nudge",
+    "description": "Mondays at 08:00. Emails each checker how many submitted claims wait to be checked, and each approver how many checked claims wait for approval, with a link to their queue. A person's own claim is not counted for them, and nobody hears about an empty queue.",
+    "content": [
+      "Reimbursement claims"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend"
+    ]
+  },
+  {
+    "path": "/api/cron/notification-flush/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/notification-flush.ts",
+    "schedule": "30 1-10 * * 1-5",
+    "name": "Notification flush",
+    "description": "Working mornings at 08:30 Saigon time, then hourly until 17:30. Sends the Lark notices the notification router held through quiet hours, and each recipient's morning digest as one message, each claimed once in the effect ledger so a retry never sends twice. In shadow it records what it would have sent and leaves the queue as it is.",
+    "content": [
+      "Notification queue",
+      "Automation effects"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ],
+    "shadow": true
+  },
+  {
+    "path": "/api/cron/onboarding-cycle/",
+    "entity": "onboarding",
+    "file": "entities/onboarding/crons/onboarding-cycle.ts",
+    "schedule": "30 0 * * *",
+    "name": "Onboarding cycle",
+    "description": "One daily pass over every onboarding journey: backfill, nag for plans, Day 8 survey, probation trigger, promotions, 180-day stay interview.",
+    "content": [
+      "Onboarding journeys"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend"
+    ]
+  },
+  {
+    "path": "/api/cron/payment-run/",
+    "entity": "reimbursements",
+    "file": "entities/reimbursements/crons/payment-run.ts",
+    "schedule": "0 1 1,15 * *",
+    "name": "Payment run",
+    "description": "08:00 on the 1st and the 15th. Puts every claim approved before midnight into one payment run, one payment per person, and tells accounting@ and the Operations chat once, with the people and the total and never a bank detail. Nothing approved, no run. Building again the same day changes nothing.",
+    "content": [
+      "Reimbursement claims",
+      "Payment runs"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/performance-reviews/",
+    "entity": "team",
+    "file": "entities/team/crons/performance-reviews.ts",
+    "schedule": "0 1 * * *",
+    "name": "Performance reviews",
+    "description": "Opens review cycles whose moment date has arrived (probation +6w, mid-year +5m, renewal +11m) and chases open cycles weekly.",
+    "content": [
+      "Review cycles",
+      "Employee anchors"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend"
+    ]
+  },
+  {
+    "path": "/api/cron/proposal-chain/",
+    "entity": "crm",
+    "file": "entities/crm/crons/proposal-chain.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Proposal chain",
+    "description": "Every five minutes. Opens a run for each new sales call with a summary, then advances every proposal run by one step: gather the call, extract what it said, draft the proposal, ask the Revenue approver, publish the approved version to the client's portal, record it. Each step is a row here. Until this switch is set to Live by a person, every run is a shadow draft: nothing is asked for, sent or published.",
+    "content": [
+      "Meetings",
+      "Call transcripts",
+      "Companies",
+      "Deals",
+      "Proposal drafts",
+      "Approvals",
+      "Routine runs (this page)"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Lark"
+    ],
+    "shadow": true
+  },
+  {
+    "path": "/api/cron/qbo-invoice-sync/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/qbo-invoice-sync.ts",
+    "schedule": "30 5 * * 1",
+    "name": "QuickBooks invoice sync",
+    "description": "Weekly read-from-QBO, upsert-into-Supabase invoice mirror for Edge8 (AIO is entered by hand). Never deletes. Runs after the token keepalive.",
+    "content": [
+      "QBO invoices"
+    ],
+    "apps": [
+      "QuickBooks",
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/qbo-refresh/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/qbo-refresh.ts",
+    "schedule": "0 5 * * 1",
+    "name": "QuickBooks token refresh",
+    "description": "Weekly QuickBooks token keepalive per connected company, so a connection never idles out. Lark-warns on failure or near-expiry.",
+    "content": [
+      "QBO connections"
+    ],
+    "apps": [
+      "QuickBooks",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/receipt-sweep/",
+    "entity": "reimbursements",
+    "file": "entities/reimbursements/crons/receipt-sweep.ts",
+    "schedule": "50 19 * * *",
+    "name": "Receipt sweep",
+    "description": "Daily at 02:50. Clears receipt and red-invoice uploads that were never confirmed after a day, one at a time. A document on a submitted claim is kept: the database refuses its delete, and the sweep counts it as kept. A failed read deletes nothing.",
+    "content": [
+      "Reimbursement claims",
+      "Receipts"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/revenue-closed-cards/",
+    "entity": "boards",
+    "file": "entities/boards/crons/revenue-closed-cards.ts",
+    "schedule": "0 11 * * *",
+    "name": "Revenue closed cards",
+    "description": "Daily at 18:00. Lists every card closed in the last day on the boards that report to the Revenue chat, each linking to its card, and the notification router holds the post to 08:30 the next working morning. A quiet day posts nothing.",
+    "content": [
+      "Boards",
+      "Board cards"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/revenue-content-sync/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/revenue-content-sync.ts",
+    "schedule": "20 * * * *",
+    "name": "Revenue content sync",
+    "description": "Hourly. Keeps the Revenue board in step with the content calendar: a card per day of posts for the board's owner with a subtask per post, and a card per campaign the writer agent runs, moved as the writer moves. A post the agent publishes ticks itself.",
+    "content": [
+      "Boards",
+      "Board cards",
+      "Marketing content",
+      "Marketing campaigns"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/revenue-snapshot/",
+    "entity": "crm",
+    "file": "entities/crm/crons/revenue-snapshot.ts",
+    "schedule": "30 0 * * *",
+    "name": "Revenue snapshot",
+    "description": "Nightly at 00:30 UTC. Writes one row of the figures the Revenue hub showed, which the Pipeline tab charts. On the 1st it also posts the month-end digest to the Revenue chat and says whether it went out.",
+    "content": [
+      "Deals",
+      "Invoices",
+      "Revenue snapshots"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/routine-reaper/",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/routine-reaper.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Routine reaper",
+    "description": "Every five minutes. Marks a run still 'running' a minute past its step deadline as died (killed, timed out or crashed before it could close its row) and tells Operations. Runs waiting on an approval or a delayed send are never reaped.",
+    "content": [
+      "Routine runs (this page)"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/vnd-rates/",
+    "entity": "reimbursements",
+    "file": "entities/reimbursements/crons/vnd-rates.ts",
+    "schedule": "30 0 * * *",
+    "name": "VND rates",
+    "description": "Daily at 07:30. Keeps today's Techcombank selling rate in VND (Vietcombank's where Techcombank has none) for every currency on an open claim, and values the receipts abroad that were saved with their rate pending. A receipt that has a value keeps the rate it used.",
+    "content": [
+      "Reimbursement claims",
+      "VND rates"
+    ],
+    "apps": [
+      "Supabase",
+      "Techcombank",
+      "Vietcombank"
+    ]
+  },
+  {
+    "path": "/api/cron/weekly-sprints/",
+    "entity": "boards",
+    "file": "entities/boards/crons/weekly-sprints.ts",
+    "schedule": "0 1 * * 1",
+    "name": "Weekly sprints",
+    "description": "Mondays. Opens next week's sprint (Wednesday to Tuesday) on every board with weekly sprints switched on, drafts its name and goal from the open cards, and sends each board's team chat the sprint planning board with a link to every new sprint.",
+    "content": [
+      "Boards",
+      "Sprints",
+      "Board cards"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/writer-schedule/",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/writer-schedule.ts",
+    "schedule": "0 0 * * *",
+    "name": "Writer schedule",
+    "description": "Hourly. Starts the writer on a campaign the day before its date, and re-arms a run that lost its hand-off between steps. Quiet unless it did something.",
+    "content": [
+      "Marketing campaigns",
+      "Blog assets"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/zoom-transcripts/",
+    "entity": "coaching",
+    "file": "entities/coaching/crons/zoom-transcripts.ts",
+    "schedule": "40 * * * *",
+    "name": "Group coaching transcripts",
+    "description": "Hourly. Pulls new Zoom cloud-recording transcripts of the group coaching sessions into meetings, writes an actionable summary with action items, and posts a card to the coaching Lark group.",
+    "content": [
+      "Zoom cloud recordings",
+      "Group coaching sessions"
+    ],
+    "apps": [
+      "Zoom",
+      "Supabase",
+      "Claude",
+      "Lark"
+    ]
+  }
+]

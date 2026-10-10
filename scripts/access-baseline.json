@@ -1,0 +1,5 @@
+{
+  "why": "Signed-in pages and server-action files that predate the access declarations (ADR 0013, AC.3). Both lists only shrink: each migrate batch (AC.6 to AC.14) declares its pages and actions and removes them here.",
+  "routes": [],
+  "actions": []
+}

@@ -1,0 +1,579 @@
+/* /team/ideas and /team/ideas/[id] — "Ideas that Spark Solutions" (ID.2).
+   A deliberate departure from the admin skin for one page: a hero that asks for
+   one line, the team sky, short tiles instead of a long board. Light since
+   W.190 (Dave, weak eyes, 8 Oct): every word is ink on white or a soft tint,
+   colour lives in tints, dots, borders and icons, and only the star map is a
+   night. One meaning per colour: blue is "We should build", mint is "I
+   learned" (and the one button), the office badges are amber, and each stage
+   is a star colour that the sky legend repeats. Every colour is a token;
+   nothing here ranks a person (no counts per person, no leaderboard, no streak). */
+
+.sparks-page { display: flex; flex-direction: column; gap: 32px; color: var(--admin-ink); }
+.sparks-page :focus-visible { outline: 3px solid var(--color-primary-blue-bright); outline-offset: 2px; }
+
+/* ---------- Hero: one line is a whole spark ---------- */
+.sparks-hero {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(520px 260px at 0% 0%, var(--color-growth-soft), transparent 70%),
+    radial-gradient(420px 260px at 45% 0%, var(--color-info-bg), transparent 70%),
+    radial-gradient(360px 240px at 100% 100%, var(--color-pink-bg), transparent 70%),
+    var(--color-bg-primary);
+  border: 1px solid var(--color-card-border);
+  color: var(--admin-ink);
+  border-radius: 24px;
+  padding: clamp(20px, 3vw, 36px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: stretch;
+}
+.sparks-hero-main { flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.sparks-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+  padding: 5px 12px; border-radius: 9999px;
+  background: var(--color-bg-primary); border: 1px solid var(--color-growth-line); color: var(--admin-ink);
+  font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+}
+.sparks-eyebrow .admin-icon { color: var(--color-growth-deep); }
+.sparks-title {
+  margin: 0; color: var(--admin-ink); text-wrap: balance;
+  font-size: clamp(30px, 3.8vw, 42px); line-height: 1.08; font-weight: 800; letter-spacing: -.02em;
+}
+.sparks-sub { margin: 0; max-width: 600px; font-size: 17px; line-height: 1.55; color: var(--admin-ink); }
+
+.sparks-compose {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-card-border); box-shadow: var(--color-elevation-2);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.sparks-kinds { display: flex; gap: 8px; flex-wrap: wrap; }
+.sparks-kind {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 46px; padding: 0 18px; border-radius: 40px;
+  font: 800 15px var(--font-body);
+  background: var(--color-bg-primary); color: var(--admin-ink);
+  border: 1px solid var(--color-grey-500);
+  cursor: pointer;
+}
+/* The icon sits in a disc of the kind's colour; pressed, the whole pill takes the tint and a 2px edge. */
+.sparks-kind .admin-icon { box-sizing: content-box; width: 14px; height: 14px; padding: 4px; border-radius: 50%; }
+.sparks-kind--build .admin-icon { background: var(--color-info-bg); color: var(--color-client-0-ink); }
+.sparks-kind--learning .admin-icon { background: var(--color-growth-soft); color: var(--color-growth-deep); }
+.sparks-kind:hover { border-color: var(--admin-ink); }
+.sparks-kind--build[aria-pressed="true"] { background: var(--color-info-bg); border: 2px solid var(--color-client-0-ink); }
+.sparks-kind--learning[aria-pressed="true"] { background: var(--color-growth-soft); border: 2px solid var(--color-growth-deep); }
+.sparks-label { font-size: 14px; font-weight: 800; color: var(--admin-ink); }
+.sparks-input {
+  width: 100%; box-sizing: border-box; resize: none;
+  border: 1px solid var(--color-grey-500);
+  background: var(--color-bg-primary); color: var(--admin-ink);
+  border-radius: 12px; padding: 12px 14px;
+  font: 500 17px/1.5 var(--font-body);
+}
+.sparks-input::placeholder { color: var(--color-grey-600); }
+.sparks-compose-foot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.sparks-hint { margin: 0; font-size: 14px; line-height: 1.5; color: var(--color-grey-600); }
+.sparks-page .sparks-hint a { color: var(--admin-ink); font-weight: 800; text-decoration: underline; text-decoration-color: var(--color-accent-mint); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.sparks-page .sparks-hint a:hover { text-decoration-color: var(--admin-ink); }
+.sparks-error { font-size: 14px; color: var(--color-err-ink); }
+.sparks-go {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 46px; padding: 0 22px; border: 0; border-radius: 40px;
+  background: var(--color-accent-mint); color: var(--color-primary-dark);
+  font: 800 15px var(--font-body); box-shadow: var(--color-mint-glow);
+  cursor: pointer;
+  transition: background-color .15s ease, transform .15s ease;
+}
+.sparks-go:hover { background: var(--color-accent-mint-hover); transform: translateY(-1px); }
+.sparks-go:disabled { opacity: .6; cursor: progress; transform: none; }
+
+/* The toast after a spark is posted, with a one-off burst. */
+.sparks-toast {
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--color-growth-soft); color: var(--color-primary-dark);
+  border-radius: 16px; padding: 16px 18px;
+  animation: sparks-rise .35s ease;
+}
+.sparks-toast-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.sparks-toast-icon { position: relative; width: 44px; height: 44px; flex: 0 0 44px; }
+.sparks-toast-core {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: var(--color-primary-dark); color: var(--color-accent-mint);
+  display: flex; align-items: center; justify-content: center;
+}
+.sparks-burst span {
+  position: absolute; left: 19px; top: 19px; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--color-growth);
+  animation: sparks-burst .75s cubic-bezier(.2, .8, .2, 1) forwards;
+}
+.sparks-burst span:nth-child(even) { background: var(--color-primary-blue); }
+.sparks-burst span:nth-child(1) { --dx: 44px; --dy: 0px; }
+.sparks-burst span:nth-child(2) { --dx: 39px; --dy: 28px; }
+.sparks-burst span:nth-child(3) { --dx: 17px; --dy: 53px; }
+.sparks-burst span:nth-child(4) { --dx: -14px; --dy: 42px; }
+.sparks-burst span:nth-child(5) { --dx: -45px; --dy: 33px; }
+.sparks-burst span:nth-child(6) { --dx: -48px; --dy: 0px; }
+.sparks-burst span:nth-child(7) { --dx: -36px; --dy: -26px; }
+.sparks-burst span:nth-child(8) { --dx: -17px; --dy: -53px; }
+.sparks-burst span:nth-child(9) { --dx: 14px; --dy: -42px; }
+.sparks-burst span:nth-child(10) { --dx: 45px; --dy: -33px; }
+@keyframes sparks-burst {
+  from { transform: translate(0, 0) scale(1); opacity: 1; }
+  to { transform: translate(var(--dx), var(--dy)) scale(.4); opacity: 0; }
+}
+@keyframes sparks-rise { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+.sparks-toast-text { flex: 1 1 200px; min-width: 0; }
+.sparks-toast-text strong { display: block; font-size: 15px; font-weight: 800; }
+.sparks-toast-text span { font-size: 14px; line-height: 1.5; color: var(--color-growth-deep); }
+.sparks-toast-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+/* Link classes carry .sparks-page (W.188): .admin-shell a (one class and an element)
+   outranked a single-class rule, so every link styled here, chips, tiles, Your
+   sparks, Show all, the Picked up card, was painted the admin blue at 4.1:1. Two
+   classes win back the colours these rules set. */
+.sparks-page .sparks-btn-dark {
+  min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px;
+  border: 0; border-radius: 40px; text-decoration: none; cursor: pointer;
+  background: var(--color-primary-dark); color: var(--color-bg-primary);
+  font: 700 13px var(--font-body);
+}
+.sparks-page .sparks-btn-dark:hover { background: var(--color-grey-900); color: var(--color-accent-mint); }
+.sparks-btn-ghost {
+  min-height: 44px; padding: 0 16px; border-radius: 40px; cursor: pointer;
+  border: 1px solid var(--color-growth-deep); background: transparent; color: var(--color-growth-deep);
+  font: 700 13px var(--font-body);
+}
+.sparks-btn-ghost:hover { background: var(--color-growth-line); }
+.sparks-story { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--color-growth-line); padding-top: 12px; }
+.sparks-story label { font-size: 13px; font-weight: 700; }
+.sparks-story-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.sparks-story input {
+  flex: 1 1 260px; min-width: 0; min-height: 44px; box-sizing: border-box;
+  border: 1px solid var(--color-growth-line); border-radius: 10px; padding: 0 12px;
+  background: var(--color-bg-primary); color: var(--color-primary-dark);
+  font: 500 14px var(--font-body);
+}
+.sparks-story input::placeholder { color: var(--color-grey-500); }
+.sparks-story-error { font-size: 13px; color: var(--color-err-ink); }
+.sparks-story-done { font-size: 13px; font-weight: 600; color: var(--color-growth-deep); }
+
+/* ---------- The team sky ---------- */
+.sparks-sky {
+  flex: 1 1 300px; min-width: 0;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-card-border);
+  border-radius: 20px; padding: 18px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.sparks-sky-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.sparks-sky-head h2 { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--admin-ink); }
+.sparks-sky-map {
+  display: block; width: 100%; height: auto;
+  border-radius: 14px; border: 1px solid var(--color-grey-900);
+  background:
+    radial-gradient(70% 80% at 78% 18%, var(--color-blue-glow-strong), transparent 62%),
+    var(--color-primary-dark);
+}
+/* The sky's parts (ID.2.12): dust, month marks, your constellation, and one
+   star per spark whose look is its stage. Sizes are SVG user units. */
+.sparks-dust { fill: var(--color-on-dark-stronger); opacity: .35; }
+.sparks-tick line { stroke: var(--color-on-dark-strong); stroke-width: .6; }
+/* 14.5 SVG units is 12px on screen at the sky's usual 262px width (W.191). */
+.sparks-tick text { fill: var(--color-grey-700); font: 700 14.5px var(--font-body); letter-spacing: .04em; }
+.sparks-mine-line { fill: none; stroke: var(--color-accent-mint); stroke-width: .8; stroke-dasharray: 2 2; opacity: .75; }
+.sparks-star-g { cursor: pointer; transition: opacity .35s ease; }
+.sparks-star-g.is-dim { opacity: .12; }
+.sparks-star { transform-box: fill-box; transform-origin: center; transition: transform .2s ease; }
+.sparks-star-g:hover .sparks-star, .sparks-star-g:focus-visible .sparks-star { transform: scale(1.6); }
+.sparks-star-g:focus-visible { outline: none; }
+.sparks-star-g:focus-visible .sparks-star-hit { fill: none; stroke: var(--color-bg-primary); stroke-width: 1.2; }
+.sparks-star-hit { fill: transparent; }
+/* One colour per stage (W.190), the same five the legend chips show: waiting
+   grey with no glow, new violet, echoed pink, picked up gold, shipped mint. */
+.is-spark .sparks-star { fill: var(--color-grey-400); }
+/* A new star is violet only while it is still just a spark: a stage reached
+   this week shows as that stage (W.191; four shipped stars read as new). */
+.is-new.is-spark .sparks-star { fill: var(--color-sky-new); filter: drop-shadow(0 0 2.5px var(--color-sky-new)); }
+.is-echoed .sparks-star { fill: var(--color-sky-echoed); filter: drop-shadow(0 0 2.5px var(--color-sky-echoed)); }
+.is-picked_up .sparks-star { fill: var(--color-sky-picked); filter: drop-shadow(0 0 2.5px var(--color-sky-picked)); }
+.sparks-star-ring { fill: none; stroke: var(--color-sky-picked); stroke-width: .8; opacity: .7; }
+.sparks-star--sparkle { fill: var(--color-accent-mint); filter: drop-shadow(0 0 3px var(--color-accent-mint)); }
+/* This week's sparks twinkle a few times as the page opens; a spark you just
+   posted arrives as a shooting star. Reduced motion stills both (below). */
+.is-new .sparks-star { animation: sparks-twinkle 1.6s ease-in-out 3; }
+.is-fresh .sparks-star { animation: sparks-arrive 1.1s cubic-bezier(.2, .8, .2, 1) both; }
+.sparks-comet { stroke: var(--color-accent-mint); stroke-width: 1; stroke-linecap: round; stroke-dasharray: 60; stroke-dashoffset: 60; animation: sparks-comet 1.1s ease-out both; }
+@keyframes sparks-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+@keyframes sparks-arrive { from { transform: translate(-46px, -26px) scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes sparks-comet { 0% { stroke-dashoffset: 60; opacity: 1; } 60% { stroke-dashoffset: 0; opacity: .9; } 100% { stroke-dashoffset: -60; opacity: 0; } }
+.sparks-sky-card { min-height: 64px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.sparks-page .sparks-sky-card-title { font-size: 15px; font-weight: 800; line-height: 1.35; color: var(--admin-ink); text-decoration: none; }
+.sparks-page .sparks-sky-card-title:hover { text-decoration: underline; }
+.sparks-sky-stage { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 9999px; font-size: 13px; font-weight: 800; background: var(--color-grey-50); color: var(--admin-ink); }
+.sparks-sky-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sparks-chip-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 14px; border-radius: 9999px; cursor: pointer;
+  font: 800 14px var(--font-body);
+  background: var(--color-bg-primary); color: var(--admin-ink); border: 1px solid var(--color-grey-500);
+}
+.sparks-chip-dark:hover { border-color: var(--admin-ink); }
+.sparks-chip-dark[aria-pressed="true"] { background: var(--color-primary-dark); color: var(--color-bg-primary); border-color: var(--color-primary-dark); }
+/* The legend's swatch is a disc of night with the stage's star in it (W.190). */
+.sparks-chip-sky { width: 26px; height: 26px; margin-left: -6px; border-radius: 50%; background: var(--color-primary-dark); display: inline-grid; place-items: center; flex: 0 0 26px; }
+.sparks-chip-star { width: 9px; height: 9px; border-radius: 50%; background: var(--color-grey-400); }
+.sparks-chip-star.is-new { background: var(--color-sky-new); box-shadow: 0 0 6px var(--color-sky-new); }
+.sparks-chip-star.is-echoed { background: var(--color-sky-echoed); box-shadow: 0 0 6px var(--color-sky-echoed); }
+.sparks-chip-star.is-picked_up { background: var(--color-sky-picked); box-shadow: 0 0 6px var(--color-sky-picked); }
+.sparks-chip-star.is-shipped { background: var(--color-accent-mint); box-shadow: 0 0 6px var(--color-accent-mint); }
+.sparks-sky-caption { margin: 0; font-size: 15px; line-height: 1.5; color: var(--color-grey-600); }
+
+/* ---------- Below the hero ---------- */
+.sparks-body { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.sparks-field { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.sparks-field-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.sparks-h2 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -.01em; color: var(--admin-ink); }
+.sparks-lede { margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: var(--color-grey-600); }
+.sparks-count { font-size: 14px; color: var(--color-grey-600); }
+.sparks-filters { display: flex; flex-direction: column; gap: 8px; }
+.sparks-filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sparks-filter-label { min-width: 56px; font-size: 13px; font-weight: 700; color: var(--color-grey-600); }
+.sparks-page .sparks-chip {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 9999px;
+  font: 700 13px var(--font-body); text-decoration: none;
+  background: var(--color-bg-primary); color: var(--color-grey-600); border: 1px solid var(--color-grey-200);
+}
+.sparks-page .sparks-chip:hover { color: var(--admin-ink); border-color: var(--color-grey-400); }
+.sparks-page .sparks-chip[aria-current="true"] { background: var(--color-primary-dark); color: var(--color-bg-primary); border-color: var(--color-primary-dark); }
+.sparks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.sparks-page .sparks-tile {
+  display: flex; flex-direction: column; gap: 10px; min-height: 168px; padding: 18px;
+  border-radius: 16px; text-decoration: none; color: inherit;
+  background: var(--color-bg-primary); border: 1px solid var(--color-card-border);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.sparks-page .sparks-tile:hover { transform: translateY(-2px); box-shadow: var(--color-elevation-2); }
+.sparks-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.sparks-tile-title {
+  font-size: 16px; line-height: 1.35; font-weight: 800; color: var(--admin-ink);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.sparks-tile-hook {
+  margin: 0; font-size: 14px; line-height: 1.5; color: var(--color-grey-600);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.sparks-by { margin-top: auto; display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 13px; color: var(--color-grey-600); }
+.sparks-by > span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sparks-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 28px; width: 28px; height: 28px; border-radius: 50%;
+  font-size: 11px; font-weight: 800;
+}
+.sparks-avatar--lg { flex-basis: 36px; width: 36px; height: 36px; font-size: 14px; }
+.sparks-avatar--0 { background: var(--color-client-0-bg); color: var(--color-client-0-ink); }
+.sparks-avatar--1 { background: var(--color-client-1-bg); color: var(--color-client-1-ink); }
+.sparks-avatar--2 { background: var(--color-client-2-bg); color: var(--color-client-2-ink); }
+.sparks-avatar--3 { background: var(--color-client-3-bg); color: var(--color-client-3-ink); }
+.sparks-avatar--4 { background: var(--color-client-4-bg); color: var(--color-client-4-ink); }
+.sparks-avatar--5 { background: var(--color-client-5-bg); color: var(--color-client-5-ink); }
+.sparks-avatar--6 { background: var(--color-client-6-bg); color: var(--color-client-6-ink); }
+.sparks-avatar--7 { background: var(--color-client-7-bg); color: var(--color-client-7-ink); }
+.sparks-avatar--8 { background: var(--color-client-8-bg); color: var(--color-client-8-ink); }
+.sparks-page .sparks-more {
+  align-self: center; display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px;
+  border-radius: 40px; border: 1px solid var(--color-grey-200); background: var(--color-bg-primary);
+  color: var(--admin-ink); font: 700 14px var(--font-body); text-decoration: none;
+}
+.sparks-page .sparks-more:hover { border-color: var(--color-grey-400); }
+.sparks-empty {
+  background: var(--color-bg-primary); border: 1px dashed var(--color-grey-300); border-radius: 16px;
+  padding: 28px; text-align: center; color: var(--color-grey-600); font-size: 15px;
+}
+
+/* ---------- Your sparks: private, against your own past only ---------- */
+.sparks-mine {
+  flex: 1 1 300px; min-width: 0;
+  background: var(--color-bg-primary); color: var(--admin-ink); border: 1px solid var(--color-card-border);
+  border-radius: 20px; padding: 22px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.sparks-mine-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.sparks-mine-head h2 { margin: 0; font-size: 21px; font-weight: 800; color: var(--admin-ink); }
+.sparks-private { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-grey-600); }
+.sparks-mine-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.sparks-page .sparks-mine-item {
+  display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 14px;
+  background: var(--color-grey-50); border: 1px solid transparent;
+  color: var(--admin-ink); text-decoration: none;
+}
+.sparks-page .sparks-mine-item--build { background: var(--color-info-bg); }
+.sparks-page .sparks-mine-item--learning { background: var(--color-growth-soft); }
+.sparks-page .sparks-mine-item:hover { border-color: var(--admin-ink); }
+.sparks-mine-item strong { font-size: 15px; line-height: 1.4; }
+.sparks-mine-item span { font-size: 14px; color: var(--color-grey-600); }
+.sparks-mine-note { margin: 0; font-size: 15px; line-height: 1.5; color: var(--color-grey-600); }
+.sparks-mine-note strong { color: var(--admin-ink); }
+.sparks-mine-tag {
+  align-self: flex-start; padding: 4px 10px; border-radius: 9999px;
+  background: var(--color-growth-soft); color: var(--color-growth-deep);
+  font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+}
+
+/* ---------- One spark's page ---------- */
+.sparks-page .sparks-back {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; align-self: flex-start;
+  font-size: 14px; font-weight: 700; color: var(--color-primary-blue-hover); text-decoration: none;
+}
+.sparks-page .sparks-back:hover { color: var(--admin-ink); }
+.sparks-card {
+  background: var(--color-bg-primary); border: 1px solid var(--color-card-border); border-radius: 20px;
+  padding: clamp(20px, 3vw, 32px);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.sparks-detail-title { margin: 0; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; font-weight: 800; letter-spacing: -.02em; color: var(--admin-ink); }
+.sparks-detail-by { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--color-grey-600); }
+.sparks-detail-by strong { color: var(--admin-ink); }
+.sparks-detail-hook { margin: 0; font-size: 18px; line-height: 1.55; color: var(--color-grey-600); }
+.sparks-grow {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+  background: var(--color-accent-soft); border: 1px solid var(--color-accent-line); border-radius: 14px; padding: 14px 16px;
+}
+.sparks-grow p { margin: 0; flex: 1 1 260px; font-size: 14px; line-height: 1.5; color: var(--color-info-ink); }
+.sparks-page .sparks-btn-blue {
+  min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 40px;
+  background: var(--color-primary-blue-hover); color: var(--color-bg-primary);
+  font: 700 14px var(--font-body); text-decoration: none;
+}
+.sparks-page .sparks-btn-blue:hover { background: var(--color-info-ink); color: var(--color-bg-primary); }
+
+/* ---------- Your deck (ID.2.6): one spark at a time ---------- */
+.sparks-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sparks-deck-section { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.sparks-deck { display: flex; flex-direction: column; gap: 14px; }
+.sparks-deck-progress { display: flex; gap: 6px; }
+.sparks-deck-progress span { width: 10px; height: 10px; border-radius: 9999px; background: var(--color-grey-200); transition: width .25s ease; }
+.sparks-deck-progress span.is-done { background: var(--color-growth); }
+.sparks-deck-progress span.is-now { width: 22px; background: var(--color-primary-dark); }
+/* The two cards behind are drawn as shadows in the page's own colours, so
+   the stack needs no extra markup and moves with nothing. */
+.sparks-deck-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: 14px;
+  margin-bottom: 22px;
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: 20px; border: 1px solid var(--color-card-border);
+  background: var(--color-bg-primary);
+  box-shadow:
+    var(--color-elevation-2),
+    0 11px 0 -6px var(--color-bg-primary), 0 11px 0 -5px var(--color-card-border),
+    0 22px 0 -12px var(--color-bg-primary), 0 22px 0 -11px var(--color-card-border);
+  transition: transform .32s cubic-bezier(.4, 0, .2, 1), opacity .32s ease;
+}
+.sparks-deck-card.is-leaving { transform: translateX(115%) rotate(9deg); opacity: 0; }
+.sparks-deck-card--done { align-items: center; text-align: center; animation: sparks-rise .35s ease; }
+.sparks-deck-card--done strong { font-size: 22px; font-weight: 800; }
+.sparks-deck-card--done p { margin: 0; max-width: 440px; font-size: 15px; line-height: 1.55; color: var(--color-grey-600); }
+.sparks-deck-check {
+  display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--color-growth-soft); color: var(--color-growth-deep); font-size: 26px;
+}
+.sparks-kind-chip { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 9999px; font-size: 13px; font-weight: 700; }
+.sparks-kind-chip--build { background: var(--color-accent-soft); color: var(--color-info-ink); }
+.sparks-kind-chip--learning { background: var(--color-growth-soft); color: var(--color-growth-deep); }
+.sparks-deck-date { margin-left: auto; font-size: 13px; color: var(--color-grey-600); }
+.sparks-deck-title { margin: 0; font-size: clamp(21px, 2.4vw, 26px); line-height: 1.2; font-weight: 800; letter-spacing: -.01em; color: var(--admin-ink); }
+.sparks-deck-hook { margin: 0; font-size: 17px; line-height: 1.55; color: var(--color-grey-600); }
+.sparks-page .sparks-deck-open { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 700; color: var(--color-primary-blue-hover); }
+.sparks-page .sparks-deck-open:hover { color: var(--admin-ink); }
+.sparks-faces-line { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-grey-600); }
+.sparks-faces { display: inline-flex; }
+.sparks-faces > .sparks-avatar + .sparks-avatar { margin-left: -6px; }
+.sparks-avatar--sm { flex-basis: 24px; width: 24px; height: 24px; font-size: 10px; box-shadow: 0 0 0 2px var(--color-bg-primary); }
+.sparks-build-box { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: var(--color-grey-50); }
+.sparks-build-box label { font-size: 13px; font-weight: 700; color: var(--admin-ink); }
+.sparks-build-box input, .sparks-build-box textarea {
+  flex: 1 1 240px; min-width: 0; min-height: 44px; box-sizing: border-box;
+  border: 1px solid var(--color-input-border); border-radius: 10px; padding: 10px 12px;
+  background: var(--color-bg-primary); color: var(--admin-ink);
+  font: 500 15px/1.5 var(--font-body); resize: vertical;
+}
+/* The 240px basis above is a width beside a button in the deck's row. The
+   spark page's textarea is a direct child of this column box, where the same
+   basis became a 240px height (W.184): it keeps its two rows and grows only
+   when the person drags it. */
+.sparks-build-box > textarea { flex: 0 0 auto; }
+.sparks-build-box input::placeholder, .sparks-build-box textarea::placeholder { color: var(--color-grey-500); }
+.sparks-build-box > .sparks-btn-dark { align-self: flex-end; }
+.sparks-deck-foot {
+  margin-top: auto; padding-top: 16px; border-top: 1px solid var(--color-grey-100);
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+}
+.sparks-deck-foot > .sparks-by { margin-top: 0; font-weight: 700; color: var(--admin-ink); }
+.sparks-deck-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sparks-answer {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 40px; cursor: pointer;
+  font: 700 14px var(--font-body);
+  background: var(--color-bg-primary); color: var(--admin-ink); border: 1px solid var(--color-grey-200);
+  transition: background-color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.sparks-answer:hover { border-color: var(--color-grey-400); transform: translateY(-1px); }
+.sparks-answer:disabled { opacity: .6; cursor: progress; transform: none; }
+.sparks-answer--admire { background: var(--color-primary-dark); color: var(--color-bg-primary); border-color: var(--color-primary-dark); }
+.sparks-answer--admire .admin-icon { color: var(--color-accent-mint); }
+.sparks-answer--admire:hover { background: var(--color-grey-900); border-color: var(--color-grey-900); }
+/* On the spark page Admire is a toggle (W.185): outlined while off, filled once
+   you admire it, the on/off pattern of "I've hit this too" beside it. Solid
+   black when off read as already pressed. The deck's Admire carries no
+   aria-pressed: there it is a one-tap answer and keeps the solid primary look. */
+.sparks-answer--admire[aria-pressed="false"] { background: var(--color-bg-primary); color: var(--admin-ink); border-color: var(--admin-ink); }
+.sparks-answer--admire[aria-pressed="false"] .admin-icon { color: var(--color-growth-deep); }
+.sparks-answer--admire[aria-pressed="false"]:hover { background: var(--color-grey-50); border-color: var(--admin-ink); }
+.sparks-answer--admire[aria-pressed="true"] { background: var(--color-primary-dark); color: var(--color-bg-primary); border-color: var(--color-primary-dark); }
+/* The me-too answers are ink on a grey ground (W.190): blue and mint mean the
+   two kinds everywhere else on the page, so an answer must not borrow them. */
+.sparks-answer--build, .sparks-answer--learning { background: var(--color-grey-50); color: var(--admin-ink); border-color: var(--color-grey-500); }
+.sparks-answer--build[aria-pressed="true"], .sparks-answer--learning[aria-pressed="true"] { background: var(--color-primary-dark); color: var(--color-bg-primary); border-color: var(--color-primary-dark); }
+.sparks-answer-text {
+  min-height: 44px; padding: 0 8px; border: 0; background: transparent; cursor: pointer;
+  font: 700 14px var(--font-body); color: var(--color-grey-600);
+}
+.sparks-answer-text:hover { color: var(--admin-ink); text-decoration: underline; }
+.sparks-deck-error { font-size: 14px; font-weight: 600; color: var(--color-err-ink); }
+.sparks-deck-last { display: flex; align-items: center; gap: 8px; min-height: 24px; font-size: 14px; font-weight: 600; color: var(--color-growth-deep); }
+.sparks-deck-empty {
+  padding: 24px; border-radius: 16px; border: 1px dashed var(--color-grey-300); background: var(--color-bg-primary);
+  font-size: 15px; line-height: 1.55; color: var(--color-grey-600);
+}
+.sparks-deck-empty strong { color: var(--admin-ink); }
+
+/* Faces and builds on a tile, and what came back on your sparks. */
+.sparks-tile-social { margin-left: auto; display: inline-flex; align-items: center; gap: 10px; }
+.sparks-tile-builds { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--color-grey-600); }
+.sparks-came-back { display: flex; flex-direction: column; gap: 8px; }
+.sparks-came-back h3 { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--admin-ink); }
+.sparks-mine-item .sparks-came-line { font-size: 15px; line-height: 1.45; color: var(--admin-ink); }
+.sparks-came-line strong { color: var(--admin-ink); }
+.sparks-mine-item .sparks-came-quote { font-size: 14px; font-style: italic; color: var(--color-grey-600); }
+
+/* The talk on one spark (ID.2.7). */
+.sparks-talk-answers { gap: 12px; }
+.sparks-talk-line { margin: 0; font-size: 14px; color: var(--color-grey-600); }
+.sparks-builds { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.sparks-build { display: flex; gap: 12px; align-items: flex-start; animation: sparks-rise .35s ease; }
+.sparks-build-body { flex: 1 1 auto; min-width: 0; padding: 12px 14px; border-radius: 14px; background: var(--color-grey-50); }
+.sparks-build-meta { font-size: 13px; color: var(--color-grey-600); }
+.sparks-build-meta strong { color: var(--admin-ink); }
+.sparks-build-body p { margin: 4px 0 0; font-size: 15px; line-height: 1.55; white-space: pre-wrap; color: var(--admin-ink); }
+
+/* Where a spark has got to (ID.2.8): the track on its own page, and on a tile
+   only the two stages worth a glance across the field. */
+.sparks-track { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.sparks-track li {
+  display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 9999px;
+  font-size: 13px; font-weight: 700; background: var(--color-grey-50); color: var(--color-grey-600);
+}
+.sparks-track li.is-past { gap: 6px; background: var(--color-growth-soft); color: var(--color-growth-deep); }
+.sparks-track li.is-past .admin-icon { width: 12px; height: 12px; }
+.sparks-track li.is-now { background: var(--color-primary-dark); color: var(--color-accent-mint); }
+.sparks-stage-mark { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 9999px; font-size: 13px; font-weight: 700; }
+.sparks-stage-mark--picked_up { background: var(--color-amber-bg); color: var(--admin-ink); }
+.sparks-stage-mark--shipped { background: var(--color-growth-soft); color: var(--admin-ink); }
+
+/* "Did it hold?" (ID.2.9). */
+.sparks-checkin-chip { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: var(--color-accent-soft); color: var(--color-info-ink); }
+.sparks-checkin-q { margin: 0; font-size: 15px; font-weight: 700; color: var(--color-info-ink); }
+
+/* Pick it up (ID.2.8). */
+.sparks-pickup { gap: 12px; }
+.sparks-pickup-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+/* Sized to a board name, not the row (W.184): a native select's menu is drawn
+   as wide as the select, so a stretched one opened a page-wide list. */
+.sparks-select {
+  flex: 0 1 280px; min-width: 0; min-height: 44px; padding: 0 12px; border-radius: 10px;
+  border: 1px solid var(--color-input-border); background: var(--color-bg-primary); color: var(--admin-ink);
+  font: 600 14px var(--font-body);
+}
+.sparks-btn-blue:disabled { opacity: .6; cursor: progress; }
+/* Who has the card and where it sits (W.186): the avatar, then the person, the
+   title, and the column on its board. */
+.sparks-page .sparks-pickup-card {
+  display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 14px; text-decoration: none;
+  background: var(--color-accent-soft); border: 1px solid var(--color-accent-line); color: var(--admin-ink);
+}
+.sparks-page .sparks-pickup-card.is-shipped { background: var(--color-growth-soft); border-color: var(--color-growth-line); }
+.sparks-pickup-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.sparks-pickup-who { font-size: 13px; color: var(--color-grey-600); }
+.sparks-pickup-who strong { color: var(--admin-ink); }
+.sparks-pickup-title { font-size: 16px; line-height: 1.35; }
+.sparks-pickup-where { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 2px; font-size: 13px; color: var(--color-grey-600); }
+.sparks-pickup-col {
+  display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 9999px; font-size: 12px; font-weight: 700;
+  background: var(--color-bg-primary); color: var(--color-info-ink); border: 1px solid var(--color-accent-line);
+}
+.sparks-pickup-card.is-shipped .sparks-pickup-col { color: var(--color-growth-deep); border-color: var(--color-growth-line); }
+.sparks-pickup-card.is-shipped .sparks-pickup-open { color: var(--color-growth-deep); }
+.sparks-pickup-open { font-size: 13px; font-weight: 700; color: var(--color-primary-blue-hover); }
+
+/* Phone: each filter group is one row that swipes sideways instead of four
+   wrapped rows, and a tile keeps one line of its hook, so the field stays
+   a list you can scan rather than a wall. */
+@media (max-width: 600px) {
+  .sparks-filter-row { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .sparks-filter-row::-webkit-scrollbar { display: none; }
+  .sparks-chip, .sparks-filter-label { flex: 0 0 auto; white-space: nowrap; }
+  .sparks-filter-label { min-width: 0; }
+  .sparks-tile { min-height: 0; }
+  .sparks-tile-hook { -webkit-line-clamp: 1; }
+  .sparks-deck-hook { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparks-page *, .sparks-page *::before, .sparks-page *::after { animation: none !important; transition: none !important; }
+  .sparks-burst { display: none; }
+}
+
+/* ---------- What the team keeps raising (W.189) ---------- */
+.sparks-themes { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+/* The kernel tabs are an underlined row elsewhere; here they are the two pills
+   of the approved prototype, so the section reads like the filters below it. */
+.sparks-page .sparks-themes .admin-tabs { gap: 8px; border-bottom: 0; margin-bottom: 4px; }
+.sparks-page .sparks-themes .admin-tab {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; margin: 0; border-radius: 9999px;
+  border: 1px solid var(--color-grey-200); background: var(--color-bg-primary); color: var(--color-grey-600);
+  font: 700 14px var(--font-body);
+}
+.sparks-page .sparks-themes .admin-tab:hover { color: var(--admin-ink); border-color: var(--color-grey-400); }
+.sparks-page .sparks-themes .admin-tab.is-active { background: var(--color-primary-dark); color: var(--color-bg-primary); border-color: var(--color-primary-dark); }
+.sparks-themes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; }
+.sparks-theme {
+  display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 18px; border-radius: 16px;
+  background: var(--color-bg-primary); border: 1px solid var(--color-card-border);
+}
+.sparks-theme-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.sparks-theme-top h3 { margin: 0; font-size: 17px; line-height: 1.3; font-weight: 800; color: var(--admin-ink); text-wrap: balance; }
+.sparks-theme-top .sparks-faces { flex: 0 0 auto; }
+.sparks-theme-gist { margin: 0; font-size: 14px; line-height: 1.5; color: var(--color-grey-600); }
+.sparks-theme-facts { display: flex; flex-wrap: wrap; gap: 6px; }
+.sparks-theme-chip {
+  display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 9999px;
+  font-size: 12px; font-weight: 700; background: var(--color-grey-50); color: var(--color-grey-600);
+}
+.sparks-theme-chip.is-picked { background: var(--color-growth-soft); color: var(--color-growth-deep); }
+.sparks-theme-chip.is-again { background: var(--color-warn-bg); color: var(--color-warn-ink); }
+.sparks-theme-chip.is-cross { background: var(--color-accent-soft); color: var(--color-info-ink); }
+.sparks-theme-list { margin: 0; padding: 10px 0 0; list-style: none; display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--color-card-border); }
+.sparks-page .sparks-theme-spark {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 44px; padding: 4px 0; font-size: 14px; line-height: 1.4;
+  color: var(--admin-ink); text-decoration: none;
+}
+.sparks-page .sparks-theme-spark:hover span:first-child { text-decoration: underline; }
+.sparks-theme-spark span:first-child { min-width: 0; }
+.sparks-theme-who { flex: 0 0 auto; font-size: 13px; color: var(--color-grey-600); }
+.sparks-page .sparks-theme-more { font-size: 13px; color: var(--color-grey-600); }
+.sparks-avatar--more { background: var(--color-grey-50); color: var(--color-grey-600); }
+.sparks-themes-foot {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; padding-top: 4px;
+  font-size: 13px; color: var(--color-grey-600);
+}

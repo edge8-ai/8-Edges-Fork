@@ -1,0 +1,67 @@
+[
+  {
+    "file": "entities/company-os/routes/admin/(auth)/login/actions.ts",
+    "export": "requestSignInLink",
+    "reason": "Unauthenticated by design: this is the admin login flow, and the helper it calls reveals nothing about whether an account exists."
+  },
+  {
+    "file": "entities/company-os/routes/admin/(auth)/login/actions.ts",
+    "export": "requestPasswordReset",
+    "reason": "Unauthenticated by design: a password reset must be reachable by someone who cannot sign in; the helper gates on the admin allowlist server-side."
+  },
+  {
+    "file": "entities/team/routes/team/(auth)/login/actions.ts",
+    "export": "requestSignInLink",
+    "reason": "Unauthenticated by design: this is the team login flow, and lib/team/signin-link gates on portal-eligible membership server-side."
+  },
+  {
+    "file": "entities/team/routes/team/(auth)/login/actions.ts",
+    "export": "requestPasswordReset",
+    "reason": "Unauthenticated by design: a password reset must be reachable by someone who cannot sign in."
+  },
+  {
+    "file": "entities/portal/routes/portal/(auth)/login/actions.ts",
+    "export": "requestSignInLink",
+    "reason": "Unauthenticated by design: this is the portal login flow, and the helper it calls reveals nothing about whether an account exists."
+  },
+  {
+    "file": "entities/portal/routes/portal/(auth)/login/actions.ts",
+    "export": "requestPasswordReset",
+    "reason": "Unauthenticated by design: a password reset must be reachable by someone who cannot sign in."
+  },
+  {
+    "file": "entities/company-os/lib/actions.ts",
+    "export": "signOut",
+    "reason": "Ends the caller's own cookie session and redirects; there is nothing to authorize and no data is read or written."
+  },
+  {
+    "file": "entities/team/lib/actions.ts",
+    "export": "signOut",
+    "reason": "Ends the caller's own cookie session and redirects; there is nothing to authorize and no data is read or written."
+  },
+  {
+    "file": "entities/portal/lib/actions.ts",
+    "export": "signOut",
+    "reason": "Ends the caller's own cookie session and redirects; there is nothing to authorize and no data is read or written."
+  },
+  {
+    "file": "entities/portal/routes/work/[token]/actions.ts",
+    "export": "submitEstimate",
+    "reason": "Bearer-token model: the contractor is identified by the unguessable work-request token in the URL, which the action verifies against the row, not by a session."
+  },
+  {
+    "file": "entities/portal/routes/work/[token]/actions.ts",
+    "export": "submitWork",
+    "reason": "Bearer-token model: the contractor is identified by the unguessable work-request token in the URL, which the action verifies against the row, not by a session."
+  },
+  {
+    "file": "entities/retreats/routes/events/[slug]/actions.ts",
+    "export": "registerForEventPublic",
+    "reason": "Public event registration from the marketing site; anyone may register, and the action only inserts the caller's own registration."
+  },
+  {
+    "file": "entities/team/routes/team/(dashboard)/probation/[id]/actions.ts",
+    "export": "canDecideProbation",
+    "reason": "A pure predicate over an actor the caller already authenticated; it decides authorization for recordProbationDecisionAction rather than needing one itself."
+  }
+]

@@ -1,0 +1,242 @@
+/* My Clients (X.3), in My Week's language: a sentence for a head, a strip of
+   statuses, a card per client with three lanes in the Workboard's colours.
+   Colours and sizes come from the tokens only. Link styles sit under a parent
+   class or carry two classes: `.admin-shell a` outranks a lone class and would
+   paint every link here the accent blue. */
+
+/* ── The head ─────────────────────────────────────────────────────────── */
+.pageHead { display: flex; flex-direction: column; gap: var(--admin-space-1); margin-bottom: var(--admin-space-4); }
+.headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--admin-text-title);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--admin-ink);
+  text-wrap: balance;
+}
+.headSub { margin: 0; max-width: 72ch; font-size: var(--admin-text-md); color: var(--admin-muted-ink); }
+
+/* ── The strip: one cell per status, each a link that filters the list ── */
+.strip { display: flex; flex-wrap: wrap; gap: var(--admin-space-2); margin-bottom: var(--admin-space-4); }
+.strip a.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 132px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--admin-line);
+  border-radius: 10px;
+  background: var(--admin-surface);
+  color: var(--admin-ink);
+  text-decoration: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.strip a.cell:hover { border-color: var(--admin-line-strong); color: var(--admin-ink); }
+.strip a.cell:focus-visible { outline: 2px solid var(--admin-accent); outline-offset: 2px; }
+.cellLabel { font-size: var(--admin-text-sm); font-weight: 600; white-space: nowrap; }
+.cellFigure { display: flex; align-items: baseline; gap: 5px; }
+.cellN { font-size: var(--admin-text-xl); font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.cellUnit { font-size: var(--admin-text-sm); color: var(--admin-muted); }
+/* Each status in its lane's ink; waiting, while there is some, in its tint. */
+.cell_waiting .cellLabel, .cell_waiting .cellN { color: var(--admin-warn-ink); }
+.strip a.cell_waiting.cellAny { background: var(--admin-warn-bg); border-color: color-mix(in srgb, var(--admin-warn-strong) 30%, var(--admin-warn-bg)); }
+.cell_now .cellLabel, .cell_now .cellN { color: var(--admin-info-ink); }
+.cell_shipped .cellLabel, .cell_shipped .cellN { color: var(--admin-ok-ink); }
+.strip a.cell_quiet { background: var(--admin-surface-2); }
+.cell_quiet .cellLabel, .cell_quiet .cellN { color: var(--admin-muted-ink); }
+/* A status with no clients is settled, not missing: grey, like My Week's past day. */
+.strip a.cell:not(.cellAny):not(.cell_all) { background: var(--admin-surface-2); border-color: transparent; }
+.cell:not(.cellAny):not(.cell_all) .cellLabel,
+.cell:not(.cellAny):not(.cell_all) .cellN { color: var(--admin-muted); }
+/* Pressed: the accent as an outline, My Week's Today. */
+.strip a.cellOn { border-color: var(--admin-accent); box-shadow: inset 0 0 0 1px var(--admin-accent); }
+
+/* ── A client ─────────────────────────────────────────────────────────── */
+.list { display: flex; flex-direction: column; gap: 14px; }
+.card {
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  padding: 18px 20px 20px;
+  box-shadow: var(--color-elevation-1);
+}
+.head { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 16px; margin-bottom: 14px; }
+
+/* The client's monogram, in its colour from the client palette (my-clients-view.ts). */
+.mono {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--admin-text-md);
+  font-weight: 700;
+}
+.monoSmall { width: 28px; height: 28px; border-radius: 8px; font-size: var(--admin-text-xs); }
+.tone0 { background: var(--color-client-0-bg); color: var(--color-client-0-ink); }
+.tone1 { background: var(--color-client-1-bg); color: var(--color-client-1-ink); }
+.tone3 { background: var(--color-client-3-bg); color: var(--color-client-3-ink); }
+.tone4 { background: var(--color-client-4-bg); color: var(--color-client-4-ink); }
+.tone5 { background: var(--color-client-5-bg); color: var(--color-client-5-ink); }
+.tone6 { background: var(--color-client-6-bg); color: var(--color-client-6-ink); }
+.tone7 { background: var(--color-client-7-bg); color: var(--color-client-7-ink); }
+.tone8 { background: var(--color-client-8-bg); color: var(--color-client-8-ink); }
+.tone9 { background: var(--color-client-9-bg); color: var(--color-client-9-ink); }
+.tone10 { background: var(--color-client-10-bg); color: var(--color-client-10-ink); }
+.tone11 { background: var(--color-client-11-bg); color: var(--color-client-11-ink); }
+
+.who { flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.nameRow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.nameRow a.name { font-size: var(--admin-text-xl); font-weight: 700; color: var(--admin-ink); text-decoration: none; }
+.nameRow a.name:hover { color: var(--admin-accent); }
+.role {
+  padding: 2px 9px;
+  border-radius: var(--admin-radius-pill);
+  background: var(--admin-accent-soft);
+  color: var(--admin-accent-strong);
+  font-size: var(--admin-text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.programs { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.programs a.program { font-size: var(--admin-text-sm); font-weight: 600; color: var(--admin-muted-ink); text-decoration: none; }
+.programs a.program:hover { color: var(--admin-accent); text-decoration: underline; }
+.noProgram { font-size: var(--admin-text-sm); color: var(--admin-muted); }
+
+.side { flex: 0 1 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px 14px; margin-left: auto; }
+.met { display: inline-flex; align-items: center; gap: 6px; font-size: var(--admin-text-base); font-weight: 500; color: var(--admin-muted-ink); white-space: nowrap; }
+.met :global(.admin-icon) { width: 14px; height: 14px; }
+/* Past two weeks without a meeting: amber words, nothing louder. */
+.metStale { color: var(--admin-warn-ink); }
+.side a.sideLink { font-size: var(--admin-text-base); font-weight: 600; color: var(--admin-accent); text-decoration: none; }
+.side a.sideLink:hover { text-decoration: underline; }
+.side a.open {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface);
+  color: var(--admin-ink);
+  font-size: var(--admin-text-base);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.side a.open:hover { border-color: var(--admin-accent); color: var(--admin-accent-strong); }
+
+/* ── The lanes: the Workboard's tint (its accent at 8% over surface-2) ── */
+.lanes { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+.lane {
+  --lane-accent: var(--admin-line-strong);
+  --lane-ink: var(--admin-muted);
+  flex: 1 1 250px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--lane-accent) 8%, var(--admin-surface-2));
+}
+.lane_waiting { --lane-accent: var(--admin-warn-strong); --lane-ink: var(--admin-warn-ink); }
+.lane_now { --lane-accent: var(--admin-accent); --lane-ink: var(--admin-info-ink); }
+.lane_shipped { --lane-accent: var(--admin-ok-strong); --lane-ink: var(--admin-ok-ink); }
+/* An empty lane keeps its place, so the lanes line up card to card, but it
+   narrows and goes grey: the colour is for where there is something to read. */
+.laneEmpty { --lane-accent: var(--admin-line-strong); --lane-ink: var(--admin-muted); flex: 0 1 168px; background: var(--admin-surface-2); }
+
+.laneHead {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--admin-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lane-ink);
+}
+.laneDot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--lane-accent); }
+.laneCount { margin-left: auto; font-size: var(--admin-text-sm); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.laneNone { margin: 0; padding: 2px; font-size: var(--admin-text-sm); color: var(--admin-muted); }
+
+/* A title opens its card or roadmap item; two lines, then an ellipsis. */
+.lane a.item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 11px;
+  border: 1px solid transparent;
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface);
+  box-shadow: var(--color-elevation-1);
+  color: var(--admin-ink);
+  text-decoration: none;
+}
+.lane a.item:hover { border-color: var(--admin-accent-line); color: var(--admin-ink); }
+.lane a.item:focus-visible { outline: 2px solid var(--admin-accent); outline-offset: 2px; }
+.itemTitle {
+  font-size: var(--admin-text-base);
+  font-weight: 600;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.itemMeta { font-size: var(--admin-text-sm); color: var(--admin-muted); }
+.lane a.more { padding: 2px 4px; font-size: var(--admin-text-sm); font-weight: 600; color: var(--lane-ink); text-decoration: none; }
+.lane a.more:hover { text-decoration: underline; }
+
+/* ── Quiet lately: one row each, never folded away ───────────────────── */
+.quietBlock { display: flex; flex-direction: column; gap: var(--admin-space-2); margin-top: var(--admin-space-6); }
+.quietHead { margin: 0; font-size: var(--admin-text-lg); font-weight: 700; color: var(--admin-ink); }
+.quietSub { margin: 2px 0 0; font-size: var(--admin-text-base); color: var(--admin-muted); }
+.quiet { background: var(--admin-surface); border: 1px solid var(--admin-line); border-radius: var(--admin-radius); overflow: hidden; }
+.quiet a.quietRow {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 20px;
+  border-top: 1px solid var(--admin-line-soft);
+  color: var(--admin-ink);
+  font-size: var(--admin-text-base);
+  text-decoration: none;
+}
+.quiet a.quietRow:first-child { border-top: 0; }
+.quiet a.quietRow:hover { background: var(--admin-surface-hover); color: var(--admin-ink); }
+.quietName { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.quietWhat { color: var(--admin-muted-ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.quietMet { color: var(--admin-muted-ink); text-align: right; white-space: nowrap; }
+.quietMet.metStale { color: var(--admin-warn-ink); }
+
+/* ── A phone: the head stacks, the lanes stack, an empty lane is one line ── */
+@media (max-width: 760px) {
+  .strip { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--admin-space-4)); padding-right: var(--admin-space-4); }
+  .strip a.cell { flex: none; min-width: 0; }
+  .card { padding: 14px; }
+  /* The monogram keeps its place beside the name rather than taking a row. */
+  .head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
+  .mono { width: 36px; height: 36px; }
+  .who { flex: none; }
+  /* The meeting line on its own row, its two links under it. */
+  .side { grid-column: 1 / -1; width: 100%; justify-content: flex-start; margin-left: 0; }
+  .met { flex-basis: 100%; }
+  .side a.open { margin-left: auto; min-height: 44px; }
+  /* Links that are words on a laptop are thumb targets here. */
+  .side a.sideLink, .lane a.more { display: inline-flex; align-items: center; min-height: 44px; }
+  .programs a.program { display: inline-flex; align-items: center; min-height: 32px; }
+  .lanes { flex-direction: column; }
+  .lane { flex: none; }
+  .laneEmpty { flex-direction: row; align-items: center; justify-content: space-between; padding: 8px 10px; }
+  .lane a.item { min-height: 44px; justify-content: center; }
+  .quiet a.quietRow { grid-template-columns: 28px minmax(0, 1fr) auto; padding: 10px 14px; }
+  .quietWhat { grid-column: 2 / -1; grid-row: 2; }
+}

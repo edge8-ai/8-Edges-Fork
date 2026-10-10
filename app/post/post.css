@@ -1,0 +1,127 @@
+/* post: route stylesheet, loaded by app/post/layout.tsx. Moved out of
+   app/globals.css so the global sheet carries only shared site styles. Reads
+   tokens by name; no raw colour. */
+
+.post-hero { padding-top: 64px; background: var(--dark); }
+
+.post-cover-wrap { width: 100%; max-height: 520px; overflow: hidden; }
+
+.post-cover { width: 100%; max-height: 520px; object-fit: cover; display: block; }
+
+.post-section { padding: 56px 0 96px; }
+
+.post-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+
+.post-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+
+.post-category-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); padding: 4px 12px; border-radius: 100px; text-decoration: none; transition: var(--transition); }
+
+.post-category-tag:hover { background: color-mix(in srgb, var(--blue) 15%, transparent); }
+
+.post-date { font-size: 13px; color: var(--grey-mid); }
+
+.post-read-time { font-size: 13px; color: var(--grey-mid); }
+
+.post-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); font-weight: 500; color: var(--dark); line-height: 1.15; margin-bottom: 32px; }
+
+.post-body { font-size: 16px; line-height: 1.8; color: var(--body-text); }
+
+.post-body h1, .post-body h2, .post-body h3 { font-family: var(--font-display); font-weight: 500; color: var(--dark); margin: 40px 0 16px; line-height: 1.2; }
+
+.post-body h2 { font-size: clamp(20px, 2.5vw, 26px); }
+
+.post-body h3 { font-size: 18px; }
+
+.post-body p { margin-bottom: 20px; }
+
+.post-body strong { font-weight: 500; color: var(--dark); }
+
+.post-body em { font-style: italic; }
+
+.post-body a { color: var(--blue); text-decoration: none; }
+
+.post-body a:hover { color: var(--link-hover); }
+
+.post-body blockquote { border-left: 3px solid var(--blue); padding: 16px 24px; margin: 32px 0; background: color-mix(in srgb, var(--blue) 5%, transparent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+.post-body blockquote p { margin: 0; font-style: italic; }
+
+.post-body ul, .post-body ol { padding-left: 28px; margin-bottom: 20px; }
+
+.post-body li { margin-bottom: 10px; }
+
+.post-body hr { border: none; border-top: 1px solid var(--tint-deep); margin: 40px 0; }
+
+.post-body code { font-family: monospace; background: var(--tint); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+
+.post-body img { max-width: 100%; height: auto; display: block; margin: 28px auto; border-radius: var(--radius-sm); }
+
+.post-body .idea-in-brief { margin: 32px 0 40px; padding: 28px 32px; border: 1px solid var(--tint-deep); border-top: 3px solid var(--blue); border-radius: var(--radius-sm); background: linear-gradient(180deg, color-mix(in srgb, var(--blue) 5%, transparent), color-mix(in srgb, var(--blue) 2%, transparent)); }
+
+.post-body .iib-label { display: block; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; color: var(--blue); margin-bottom: 18px; }
+
+.post-body .iib-item { display: block; padding: 14px 0; border-top: 1px solid var(--tint-deep); }
+
+.post-body .iib-item:first-of-type { border-top: none; padding-top: 0; }
+
+.post-body .iib-head { display: block; font-family: var(--font-display); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+
+.post-body .iib-body { display: block; font-size: 16px; line-height: 1.5; color: var(--body-text); }
+
+.post-body .post-figure { margin: 32px 0; }
+
+.post-body .post-figure p { margin: 0; }
+
+.post-body .post-figure img { margin: 0 auto 14px; }
+
+.post-body .post-figure figcaption { max-width: 600px; margin: 0 auto; text-align: center; font-size: 13px; line-height: 1.5; color: var(--grey-mid); }
+
+.post-body .post-figure figcaption strong { color: var(--dark); font-weight: 600; }
+
+.post-body .post-figure .fig-note { color: var(--blue); font-style: italic; }
+
+.post-body .post-figure .fig-source { display: block; margin-top: 6px; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey-light); }
+
+.post-body details.faq-item { border: 1px solid var(--tint-deep); border-radius: var(--radius-sm); margin: 14px 0; background: var(--white); overflow: hidden; transition: border-color var(--transition); }
+
+.post-body details.faq-item[open] { border-color: var(--blue); }
+
+.post-body details.faq-item summary { list-style: none; cursor: pointer; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--dark); }
+
+.post-body details.faq-item summary::-webkit-details-marker { display: none; }
+
+.post-body details.faq-item summary:hover { color: var(--blue); }
+
+.post-body details.faq-item summary::after { content: '+'; flex: 0 0 auto; font-size: 26px; line-height: 1; font-weight: 400; color: var(--blue); }
+
+.post-body details.faq-item[open] summary::after { content: '\2212'; }
+
+.post-body details.faq-item > :not(summary) { margin-left: 24px; margin-right: 24px; }
+
+.post-body details.faq-item > :last-child { margin-bottom: 20px; }
+
+.post-body details.faq-item summary + * { margin-top: 0; }
+
+.post-sidebar { position: sticky; top: 88px; }
+
+/* The link from a post's series list to its pillar hub. Same recipe as
+   .blog-category-link, which lives in blog.css and is not loaded on /post. */
+.sidebar-all { display: inline-block; margin-top: 20px; font-size: 13px; font-weight: 500; color: var(--blue); text-decoration: none; transition: var(--transition); }
+.sidebar-all:hover { color: var(--blue-bright); }
+
+.post-all-posts { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--tint-deep); }
+
+@media (max-width: 900px) {
+.post-layout { grid-template-columns: 1fr; gap: 40px; }
+.post-sidebar { position: static; }
+}
+
+@media (max-width: 1024px) {
+.post-layout { grid-template-columns: 1fr; }
+}
+
+/* Shared hero/section rules that were declared once in globals.css for several pages. */
+.post-hero {
+  --link: var(--link-on-dark);
+  --link-hover: var(--link-on-dark-hover);
+}

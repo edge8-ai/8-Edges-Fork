@@ -1,0 +1,390 @@
+{
+  "_comment": "The evaluated version of every versioned prompt (kernel/ai/prompts.ts), by the file that declares it. check:prompt-evals fails when a prompt's current version is not the one recorded here, so a prompt edit lands with its eval. Written by `npm run eval:prompt` (scripts/prompt-evals/eval.mjs); never edit a version by hand.",
+  "sitesWithoutCalls": {
+    "writer-personal-draft": "Declared in entities/campaigns/lib/writer/model.ts, but nothing has called it since the personal email agent was removed (3c046f8e4); the declaration stays because the writer eval's configs and routing tests name it."
+  },
+  "files": {
+    "entities/assistant/lib/admin-chat/system-prompt.prompt.ts": {
+      "admin-chat": {
+        "version": "c2b533a2623b",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/assistant/lib/meeting-summary.prompt.ts": {
+      "meeting-summary": {
+        "version": "e6f32f9d1fcc",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, the site has exportable cases but none were run when the record was seeded",
+        "noCasesOk": true
+      }
+    },
+    "entities/assistant/lib/team-chat/system-prompt.prompt.ts": {
+      "team-chat": {
+        "version": "731c163937c1",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-10",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/boards/lib/sprint-draft.prompt.ts": {
+      "sprint-draft": {
+        "version": "17ba81a125ce",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, the site has exportable cases but none were run when the record was seeded",
+        "noCasesOk": true
+      }
+    },
+    "entities/campaigns/lib/ai/brand-image.prompt.ts": {
+      "brand-image": {
+        "version": "df9befa7f9be",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/ai/brand-writer.prompt.ts": {
+      "brand-writer": {
+        "version": "c6ec12de4d49",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      },
+      "entry-copy": {
+        "version": "2781af58f2be",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/ai/campaign-plan.prompt.ts": {
+      "writer-plan": {
+        "version": "92065ad21869",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/ai/campaign-seo.prompt.ts": {
+      "campaign-seo": {
+        "version": "db987d8ac147",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/ai/marketing-recap.prompt.ts": {
+      "marketing-recap": {
+        "version": "a9cf8ed16e06",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/letter/step-gather.prompt.ts": {
+      "writer-letter-gather": {
+        "version": "cc1c1920bc24",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/letter/step-write.prompt.ts": {
+      "writer-letter-write": {
+        "version": "395ad19ef471",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/publish-editor/publish-editor.prompt.ts": {
+      "publish-editor": {
+        "version": "716864427dff",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/series-template.prompt.ts": {
+      "writer-series-intro": {
+        "version": "14e80b5c190f",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/writer/step-assemble.prompt.ts": {
+      "writer-assemble": {
+        "version": "dbb4380fe0c0",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/writer/step-channels.prompt.ts": {
+      "writer-channels": {
+        "version": "e6d96bb3b873",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/writer/step-edit.prompt.ts": {
+      "writer-edit": {
+        "version": "2cbdc1b92c00",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/writer/step-exhibits.prompt.ts": {
+      "writer-exhibits": {
+        "version": "8511d5d8b71e",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/writer/step-links.prompt.ts": {
+      "writer-links": {
+        "version": "f405a354a0cc",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/campaigns/lib/writer/step-seo.prompt.ts": {
+      "writer-seo": {
+        "version": "49c34be64137",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/client-programs/lib/client-status/draft.prompt.ts": {
+      "client-status-draft": {
+        "version": "4a193b32c0f3",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/coaching/lib/ai.prompt.ts": {
+      "coaching-prep": {
+        "version": "6e79e04b875d",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      },
+      "coaching-summary": {
+        "version": "e6d8e7cc1320",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      },
+      "coaching-text": {
+        "version": "5d31e5908ed1",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/coaching/lib/group-summary.prompt.ts": {
+      "coaching-group-summary": {
+        "version": "e548552e08a4",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/company-os/lib/ai/broadcast-takeaway.prompt.ts": {
+      "broadcast-takeaway": {
+        "version": "0a8f35a04aae",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, the site has exportable cases but none were run when the record was seeded",
+        "noCasesOk": true
+      }
+    },
+    "entities/crm/lib/inquiry-qualify.prompt.ts": {
+      "lead-qualify": {
+        "version": "fa61838a3fb8",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, the site has exportable cases but none were run when the record was seeded",
+        "noCasesOk": true
+      }
+    },
+    "entities/crm/lib/meeting-actions/ai.prompt.ts": {
+      "meeting-actions-extract": {
+        "version": "ab65bd62c8df",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      },
+      "meeting-followup-draft": {
+        "version": "0fecf3bf1c89",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/crm/lib/proposal-ai.prompt.ts": {
+      "proposal-draft": {
+        "version": "ee9cbce49aeb",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      },
+      "proposal-extract": {
+        "version": "b3fec93fa6a0",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/crm/lib/sprint-extract.prompt.ts": {
+      "sprint-extract": {
+        "version": "86e0ab10b9fb",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, the site has exportable cases but none were run when the record was seeded",
+        "noCasesOk": true
+      }
+    },
+    "entities/hiring/lib/interview-panelist.prompt.ts": {
+      "interview-panelist": {
+        "version": "079f9508b170",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/hiring/lib/resume-extract.prompt.ts": {
+      "resume-extract": {
+        "version": "d1cabe5a3cdb",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/hiring/lib/resume-screen.prompt.ts": {
+      "resume-screen": {
+        "version": "7760de385a9b",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/ideas/lib/ai/idea-plan.prompt.ts": {
+      "admin-idea-plan/learning": {
+        "version": "5b17dc443ad9",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      },
+      "admin-idea-plan/plan": {
+        "version": "24517285e65e",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/ideas/lib/ai/idea-trends.prompt.ts": {
+      "idea-trends": {
+        "version": "b7e1249f0126",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, the site has exportable cases but none were run when the record was seeded",
+        "noCasesOk": true
+      }
+    },
+    "entities/portal/lib/program-plan.prompt.ts": {
+      "program-plan": {
+        "version": "7ae4ae43a19a",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/portal/lib/roadmap-assist.prompt.ts": {
+      "roadmap-assist": {
+        "version": "811377bb503b",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, the site has exportable cases but none were run when the record was seeded",
+        "noCasesOk": true
+      }
+    },
+    "entities/reimbursements/lib/receipt-reading.prompt.ts": {
+      "receipt-read": {
+        "version": "8fc784fcb6a0",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/team/lib/family-screen.prompt.ts": {
+      "family-screen": {
+        "version": "2d00957981b1",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    },
+    "entities/team/lib/review-summary.prompt.ts": {
+      "review-summary": {
+        "version": "2ee13ac41d8a",
+        "status": "baseline",
+        "evaluatedAt": "2026-10-09",
+        "cases": null,
+        "result": "baseline, no cases"
+      }
+    }
+  }
+}

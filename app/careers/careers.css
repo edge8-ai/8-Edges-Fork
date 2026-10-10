@@ -1,0 +1,295 @@
+/* careers: route stylesheet, loaded by app/careers/layout.tsx. Moved out of
+   app/globals.css so the global sheet carries only shared site styles. Reads
+   tokens by name; no raw colour. */
+
+.careers-hero {
+  background: var(--dark);
+  padding: 120px 0 96px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.careers-hero-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% -10%, color-mix(in srgb, var(--blue) 22%, transparent) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.careers-hero-inner {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.careers-hero h1 {
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 76px);
+  font-weight: 600;
+  line-height: 1.08;
+  margin: 16px 0 24px;
+}
+
+.careers-hero-sub {
+  color: color-mix(in srgb, var(--white) 62%, transparent);
+  font-size: 18px;
+  line-height: 1.75;
+  max-width: 580px;
+  margin: 0 auto 40px;
+}
+
+.careers-hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.careers-why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.careers-why-card {
+  background: var(--white);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.careers-why-card:hover {
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--dark) 7%, transparent);
+  transform: translateY(-3px);
+}
+
+.careers-why-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--blue-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.careers-why-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--blue);
+}
+
+.careers-why-card h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.careers-why-card p {
+  font-size: 14px;
+  color: var(--body-text);
+  line-height: 1.7;
+}
+
+.careers-mindset { max-width: 720px; }
+
+.careers-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.careers-trait {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+  background: var(--tint);
+  border: 1px solid var(--card-border);
+  padding: 8px 20px;
+  border-radius: 40px;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.careers-trait:hover {
+  background: var(--blue-glow);
+  border-color: color-mix(in srgb, var(--blue) 25%, transparent);
+  color: var(--blue);
+}
+
+.careers-roles-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.careers-empty {
+  text-align: center;
+  padding: 80px 40px;
+  background: var(--white);
+  border: 2px dashed var(--tint-deep);
+  border-radius: var(--radius);
+}
+
+.careers-empty-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--grey-light);
+}
+
+.careers-empty-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.careers-empty-sub {
+  font-size: 15px;
+  color: var(--body-text);
+  max-width: 440px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.careers-process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.careers-process-steps::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: calc(33.33% - 12px);
+  right: calc(33.33% - 12px);
+  height: 1px;
+  background: var(--card-border);
+  pointer-events: none;
+}
+
+.careers-process-step { text-align: center; }
+
+.careers-step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.careers-step-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.careers-step-desc {
+  font-size: 14px;
+  color: var(--body-text);
+  line-height: 1.7;
+}
+
+.careers-cta-section {
+  background: var(--dark);
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.careers-cta-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 50% 120%, color-mix(in srgb, var(--blue) 18%, transparent) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.careers-cta-inner {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.careers-cta-inner h2 {
+  font-family: var(--font-display);
+  color: var(--white);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 16px 0 20px;
+}
+
+.careers-cta-inner p {
+  color: color-mix(in srgb, var(--white) 58%, transparent);
+  font-size: 16px;
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+.careers-cta-btn { font-size: 16px; padding: 14px 32px; }
+
+@media (max-width: 1024px) {
+.careers-why-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+.careers-hero { padding: 96px 0 64px; }
+.careers-why-grid { grid-template-columns: 1fr; }
+.careers-process-steps { grid-template-columns: 1fr; gap: 32px; max-width: 400px; }
+.careers-process-steps::before { display: none; }
+.careers-empty { padding: 48px 24px; }
+.careers-roles-header { flex-direction: column; align-items: flex-start; }
+}
+
+.jobs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.apply-back { display: inline-block; color: var(--mint); text-decoration: none; font-size: 14px; margin-bottom: 24px; opacity: 0.85; }
+
+.apply-back:hover { opacity: 1; }
+
+.apply-meta-sep { opacity: 0.4; }
+
+.apply-file-name { margin: 8px 0 0; color: color-mix(in srgb, var(--white) 60%, transparent); font-size: 13px; }
+
+/* Shared hero/section rules that were declared once in globals.css for several pages. */
+.careers-hero {
+  --link: var(--link-on-dark);
+  --link-hover: var(--link-on-dark-hover);
+}
+.careers-cta-section {
+  --link: var(--link-on-dark);
+  --link-hover: var(--link-on-dark-hover);
+}
+
