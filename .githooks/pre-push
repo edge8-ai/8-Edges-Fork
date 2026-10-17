@@ -1,0 +1,48 @@
+#!/bin/sh
+# Before anything leaves this machine, the whole local gate runs. Since
+# 2026-09-21 CI runs only what a laptop cannot prove — the fork tree compiles
+# and leaks nothing, and the generated types match production — so this hook
+# is where the type check, lint, knip, the ratchets, the entity gates and the
+# test suite are enforced. A push that fails here never reaches GitHub, which
+# is the point: the same work used to be paid for twice, once here and once by
+# the minute on a runner that ran out of heap doing it.
+set -e
+# Khoa's security rail: nothing but main may ever be pushed to the public fork
+# by hand. git hands pre-push the remote url as $2 and the refs on stdin.
+bash scripts/check-personal-state.sh push "${2:-}"
+echo "pre-push: npm run check (typecheck, lint, knip, gates, ratchets, tests)"
+out="$(mktemp)"
+# git exports GIT_DIR (and friends) into its hooks, and three test files spawn
+# git into temp repositories of their own. An inherited GIT_DIR captures those
+# commands, and on 2026-09-22 a push from a worktree proved what that costs:
+# the tests' `git init --bare` initialised the directory GIT_DIR named, writing
+# `core.bare = true` into the config SHARED by the main checkout and every
+# worktree. Every `git status` in every tree then failed with "this operation
+# must be run in a work tree" until the flag was put back. Nothing was lost,
+# but nothing could be committed or pushed either.
+#
+# The louder half of the same leak: `git -C <tmp> commit` under an inherited
+# GIT_DIR writes into the repository GIT_DIR names rather than the temp one.
+#
+# The gate has no business inheriting the hook's git context, so it runs
+# without it. The three test files are non-hermetic in their own right and are
+# fixed separately; this line stops the hook from being the thing that arms
+# them. The personal-state rail above keeps its git context, because that one
+# is about this push.
+#
+# One gate at a time per machine (scripts/with-check-lock.sh). On 2026-10-07
+# three worktrees pushed together, three gates ran at once on 8 cores and
+# 16 GB, the machine swapped, and two pushes were refused on tests that pass
+# alone (S.20). The lock queues them; its wait is bounded and it never refuses
+# a push. Its own lines go to the terminal, not the log, so a wait is visible.
+if ! sh scripts/with-check-lock.sh \
+     env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX -u GIT_COMMON_DIR \
+     sh -c 'npm run -s check > "$1" 2>&1' -- "$out"; then
+  tail -40 "$out"
+  echo "pre-push: npm run check failed; the push stays local. Full output: $out"
+  exit 1
+fi
+rm -f "$out"
+local_hook="$(git rev-parse --git-common-dir)/hooks/pre-push"
+[ -x "$local_hook" ] && exec "$local_hook" "$@"
+exit 0

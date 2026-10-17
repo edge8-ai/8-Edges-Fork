@@ -1,0 +1,40 @@
+<svg width="680" height="380" viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Where to start: audit, organize, focus</title>
+<desc>Three moves in order. First read where you really are through the four-office lens. Then organize your data into one central database. Then point AI agents at specific outcomes you have named. Re-org is optional, not required.</desc>
+<style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}</style>
+<rect width="680" height="380" rx="20" fill="#04102D"/>
+<text class="ff eb" x="340" y="54" text-anchor="middle" fill="#6FF2C1" font-size="12" font-weight="500">WHERE TO START</text>
+<text class="ff" x="340" y="92" text-anchor="middle" fill="#FFFFFF" font-size="27" font-weight="600">Three moves, in order</text>
+<text class="ff" x="340" y="118" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="14">Each one earns the next.</text>
+<g class="ff">
+ <rect x="40" y="150" width="180" height="180" rx="14" fill="#0A1A38" stroke="#287BE8" stroke-width="2"/>
+ <text x="60" y="192" fill="#5AA0F5" font-size="22" font-weight="700">01</text>
+ <text x="60" y="222" fill="#FFFFFF" font-size="17" font-weight="600">Audit</text>
+ <text x="60" y="252" fill="rgba(255,255,255,0.6)" font-size="12.5">Read where you</text>
+ <text x="60" y="270" fill="rgba(255,255,255,0.6)" font-size="12.5">really are, via the</text>
+ <text x="60" y="288" fill="rgba(255,255,255,0.6)" font-size="12.5">four-office lens.</text>
+ <text x="60" y="318" fill="#5AA0F5" font-size="12.5" font-weight="600">Before any move</text>
+
+ <rect x="250" y="150" width="180" height="180" rx="14" fill="#0A1A38" stroke="#6FF2C1" stroke-width="2"/>
+ <text x="270" y="192" fill="#6FF2C1" font-size="22" font-weight="700">02</text>
+ <text x="270" y="222" fill="#FFFFFF" font-size="17" font-weight="600">Organize</text>
+ <text x="270" y="252" fill="rgba(255,255,255,0.6)" font-size="12.5">Your data into</text>
+ <text x="270" y="270" fill="rgba(255,255,255,0.6)" font-size="12.5">one central</text>
+ <text x="270" y="288" fill="rgba(255,255,255,0.6)" font-size="12.5">database.</text>
+ <text x="270" y="318" fill="#6FF2C1" font-size="12.5" font-weight="600">Out of people's heads</text>
+
+ <rect x="460" y="150" width="180" height="180" rx="14" fill="#0A1A38" stroke="#D1458B" stroke-width="2"/>
+ <text x="480" y="192" fill="#E06AA6" font-size="22" font-weight="700">03</text>
+ <text x="480" y="222" fill="#FFFFFF" font-size="17" font-weight="600">Focus</text>
+ <text x="480" y="252" fill="rgba(255,255,255,0.6)" font-size="12.5">Point AI agents at</text>
+ <text x="480" y="270" fill="rgba(255,255,255,0.6)" font-size="12.5">specific outcomes</text>
+ <text x="480" y="288" fill="rgba(255,255,255,0.6)" font-size="12.5">you have named.</text>
+ <text x="480" y="318" fill="#E06AA6" font-size="12.5" font-weight="600">Re-org optional</text>
+
+ <path d="M228 240 H242" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+ <path d="M236 234 L244 240 L236 246 Z" fill="rgba(255,255,255,0.4)"/>
+ <path d="M438 240 H452" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+ <path d="M446 234 L454 240 L446 246 Z" fill="rgba(255,255,255,0.4)"/>
+</g>
+<text class="ff" x="340" y="362" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="13.5">Re-org if it helps, but do not wait for it. Point your agents at named outcomes.</text>
+</svg>
