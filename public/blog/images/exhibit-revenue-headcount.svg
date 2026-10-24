@@ -1,0 +1,47 @@
+<svg width="680" height="440" viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Fewer people, more revenue. Edge8 indexed to January 2026 = 100</title>
+<desc>A line chart indexed to January 2026 at 100. From January to June the revenue line climbs to about 160 while the headcount line falls to about 80. The two lines start together and fan apart, and the widening gap between them represents leverage: revenue per person roughly doubles.</desc>
+<style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}</style>
+<rect width="680" height="440" rx="20" fill="#04102D"/>
+<text class="ff eb" x="40" y="46" fill="#6FF2C1" font-size="12" font-weight="500">THE PROOF · EDGE8 · 2026</text>
+<text class="ff" x="40" y="82" fill="#FFFFFF" font-size="26" font-weight="600">Fewer people, more revenue</text>
+<text class="ff" x="40" y="106" fill="rgba(255,255,255,0.55)" font-size="13">Indexed to January 2026 = 100</text>
+<g class="ff">
+ <!-- gridlines -->
+ <line x1="70" y1="170" x2="560" y2="170" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+ <line x1="70" y1="210" x2="560" y2="210" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+ <line x1="70" y1="250" x2="560" y2="250" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+ <line x1="70" y1="290" x2="560" y2="290" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 4"/>
+ <line x1="70" y1="330" x2="560" y2="330" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+ <!-- y axis labels -->
+ <text x="58" y="174" text-anchor="end" fill="rgba(255,255,255,0.4)" font-size="11">160</text>
+ <text x="58" y="214" text-anchor="end" fill="rgba(255,255,255,0.4)" font-size="11">140</text>
+ <text x="58" y="254" text-anchor="end" fill="rgba(255,255,255,0.4)" font-size="11">120</text>
+ <text x="58" y="294" text-anchor="end" fill="rgba(255,255,255,0.55)" font-size="11">100</text>
+ <text x="58" y="334" text-anchor="end" fill="rgba(255,255,255,0.4)" font-size="11">80</text>
+ <!-- axes -->
+ <line x1="70" y1="150" x2="70" y2="370" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+ <line x1="70" y1="370" x2="560" y2="370" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+ <!-- x axis labels -->
+ <text x="70" y="392" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Jan</text>
+ <text x="168" y="392" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Feb</text>
+ <text x="266" y="392" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Mar</text>
+ <text x="364" y="392" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Apr</text>
+ <text x="462" y="392" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">May</text>
+ <text x="560" y="392" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11">Jun</text>
+ <!-- leverage gap -->
+ <path d="M70 290 L168 274 L266 254 L364 226 L462 198 L560 170 L560 330 L462 318 L364 306 L266 298 L168 292 L70 290 Z" fill="rgba(111,242,193,0.07)"/>
+ <!-- headcount line -->
+ <path d="M70 290 L168 292 L266 298 L364 306 L462 318 L560 330" fill="none" stroke="#5AA0F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+ <circle cx="70" cy="290" r="3" fill="#5AA0F5"/><circle cx="168" cy="292" r="3" fill="#5AA0F5"/><circle cx="266" cy="298" r="3" fill="#5AA0F5"/><circle cx="364" cy="306" r="3" fill="#5AA0F5"/><circle cx="462" cy="318" r="3" fill="#5AA0F5"/><circle cx="560" cy="330" r="5" fill="#5AA0F5" stroke="#04102D" stroke-width="2"/>
+ <!-- revenue line -->
+ <path d="M70 290 L168 274 L266 254 L364 226 L462 198 L560 170" fill="none" stroke="#6FF2C1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+ <circle cx="70" cy="290" r="3" fill="#6FF2C1"/><circle cx="168" cy="274" r="3" fill="#6FF2C1"/><circle cx="266" cy="254" r="3" fill="#6FF2C1"/><circle cx="364" cy="226" r="3" fill="#6FF2C1"/><circle cx="462" cy="198" r="3" fill="#6FF2C1"/><circle cx="560" cy="170" r="5" fill="#6FF2C1" stroke="#04102D" stroke-width="2"/>
+ <!-- end labels -->
+ <text x="574" y="166" fill="#6FF2C1" font-size="13" font-weight="600">Revenue</text>
+ <text x="574" y="186" fill="#6FF2C1" font-size="16" font-weight="700">+60%</text>
+ <text x="574" y="326" fill="#5AA0F5" font-size="13" font-weight="600">Headcount</text>
+ <text x="574" y="346" fill="#5AA0F5" font-size="16" font-weight="700">−20%</text>
+</g>
+<text class="ff" x="40" y="424" fill="rgba(255,255,255,0.6)" font-size="13.5">The lines start together in January and fan apart. That widening gap is the leverage.</text>
+</svg>

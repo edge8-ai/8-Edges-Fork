@@ -1,0 +1,74 @@
+/* Your next move, the top of /team/quests (QS.13; prototype version 10,
+   section 1, v10.css "1 · your next move"). The reader's block (helm, tier,
+   points of the next division's start, the bar, "only you see this") beside
+   the heading, and one card per act open now: four across on a laptop, two on
+   a tablet, one stacked column on a phone with the points on the right. Kept
+   in its own file beside quests.css so the Quests sections building in
+   parallel do not share these lines. Colours and sizes are the product's
+   tokens; every motion stills under prefers-reduced-motion (quests.css). */
+.qn-next { background: var(--admin-surface); border: 1px solid var(--admin-line); box-shadow: var(--admin-shadow); border-radius: 16px; padding: 20px 24px 22px; display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 16px; min-width: 0; }
+.qn-next-h { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; }
+.qn-next-h h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -.01em; color: var(--admin-ink); }
+.qn-next-h p { margin: 2px 0 0; font-size: 13px; color: var(--color-grey-600); }
+
+/* the reader's own block */
+.qn-me { position: relative; display: flex; align-items: center; gap: 12px; background: var(--admin-surface-2); border: 1px solid var(--admin-line); border-radius: var(--admin-radius); padding: 8px 16px 8px 10px; min-width: 0; }
+.qn-helm { display: block; flex: none; width: 46px; }
+.qn-helm img { display: block; width: 46px; height: auto; }
+.qn-me-body { min-width: 0; }
+.qn-me-top { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--color-grey-600); }
+.qn-me-lbl { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-grey-600); }
+.qn-me-top b { font-size: 15px; font-weight: 800; color: var(--admin-ink); }
+.qn-me-top .qn-num { font-variant-numeric: tabular-nums; color: var(--admin-ink); font-weight: 600; }
+/* The bar is a <progress>, so its fill needs no inline width; each engine's fill is painted here. */
+.qn-bar { display: block; appearance: none; -webkit-appearance: none; width: 220px; max-width: 100%; height: 8px; margin: 6px 0 5px; border-radius: 999px; background: var(--admin-line-soft); border: 1px solid var(--admin-line); overflow: hidden; color: var(--color-accent-mint-bright); }
+.qn-bar::-webkit-progress-bar { background: var(--admin-line-soft); border-radius: 999px; }
+.qn-bar::-webkit-progress-value { background: var(--color-accent-mint-bright); border-radius: 999px; transition: width .7s cubic-bezier(.2, .8, .2, 1); }
+.qn-bar::-moz-progress-bar { background: var(--color-accent-mint-bright); border-radius: 999px; }
+.qn-priv { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--color-grey-600); }
+
+/* the act cards */
+.qn-acts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.qn-act { font: inherit; color: var(--admin-ink); text-align: left; cursor: pointer; background: var(--admin-surface); border: 1px solid var(--admin-line-strong); border-radius: var(--admin-radius); padding: 14px 14px 14px 16px; min-height: 44px; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr; gap: 10px 12px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+.qn-act:hover { transform: translateY(-2px); box-shadow: var(--admin-shadow-md); border-color: var(--admin-muted); }
+.qn-act .qs-glyph { grid-column: 1; grid-row: 1; }
+.qn-act-txt { grid-column: 1 / -1; grid-row: 2; min-width: 0; }
+.qn-act-name { display: block; font-size: 14px; font-weight: 700; line-height: 1.3; text-wrap: balance; overflow-wrap: anywhere; }
+.qn-act-hint { display: block; margin-top: 3px; font-size: 12px; line-height: 1.4; color: var(--color-grey-600); overflow-wrap: anywhere; }
+.qn-pts { grid-column: 2; grid-row: 1; display: flex; align-items: baseline; gap: 4px; line-height: 1; }
+.qn-pts b { font-size: 30px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.qn-pts small { font-size: 11px; font-weight: 600; color: var(--color-grey-600); }
+.qn-act--bounty .qn-pts b { color: var(--color-amber-ink); }
+.qn-act--learn .qn-pts b { color: var(--color-growth-deep); }
+.qn-act--fire { background: linear-gradient(165deg, var(--color-quest-sky-violet) 0%, var(--admin-surface) 70%); border-color: color-mix(in srgb, var(--color-violet) 30%, var(--color-bg-primary)); }
+.qn-act--fire .qn-pts b { color: var(--color-violet-ink); }
+.qn-act--beacon { background: linear-gradient(165deg, var(--color-info-bg) 0%, var(--admin-surface) 70%); border-color: color-mix(in srgb, var(--color-info-ink) 25%, var(--color-bg-primary)); }
+.qn-act--beacon .qn-pts b { color: var(--color-info-ink); }
+.qn-act--done { background: var(--admin-surface-2); border-style: dashed; border-color: var(--admin-line-strong); }
+.qn-act--done .qn-pts b { color: var(--color-grey-600); }
+.qn-act--done .qn-act-hint { color: var(--color-growth-deep); font-weight: 600; }
+/* the reward in short: the place the act reaches, and "new tier" when it crosses one */
+.qn-act-lands { display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 11px; color: var(--color-grey-600); flex-wrap: wrap; }
+.qn-act-lands b { color: var(--admin-ink); font-weight: 700; }
+.qn-act-lands i { font-style: normal; font-weight: 700; color: var(--color-violet-ink); }
+/* the fire the reader hosts, once a card has brought it into view */
+.qn-fire--mine:focus { outline: none; box-shadow: 0 0 0 3px var(--color-accent-mint-bright); }
+
+@media (max-width: 1100px) {
+  .qn-acts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .qn-next { padding: 16px; border-radius: 14px; gap: 14px; }
+  .qn-next-h > div:first-child { width: 100%; }
+  .qn-me { width: 100%; }
+  .qn-me-body { flex: 1; }
+  .qn-bar { width: 100%; }
+  .qn-acts { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .qn-act { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto; align-items: center; padding: 12px 12px 12px 14px; }
+  .qn-act .qs-glyph { grid-column: 1; grid-row: 1; }
+  .qn-act-txt { grid-column: 2; grid-row: 1; }
+  .qn-act--nopts .qn-act-txt { grid-column: 2 / -1; }
+  .qn-pts { grid-column: 3; grid-row: 1; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .qn-pts b { font-size: 26px; }
+  .qn-act:hover { transform: none; }
+}

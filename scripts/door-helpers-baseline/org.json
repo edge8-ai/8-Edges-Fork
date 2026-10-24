@@ -1,0 +1,19 @@
+{
+  "deleteSurveyResponses": 1,
+  "insertEquipmentRequests": 1,
+  "insertSurveyAnswers": 1,
+  "insertSurveyResponses": 1,
+  "selectCompanyInformation": 2,
+  "selectCoreValues": 3,
+  "selectEquipment": 1,
+  "selectKeyResults": 8,
+  "selectLegalEntities": 2,
+  "selectObjectives": 3,
+  "selectStrategies": 1,
+  "selectSurveyAnswers": 1,
+  "selectSurveyFields": 4,
+  "selectSurveyResponses": 3,
+  "selectSurveys": 8,
+  "selectTeamDirectory": 11,
+  "upsertPersonQualifications": 1
+}

@@ -1,0 +1,49 @@
+"use client";
+
+// Team portal assistant: the shared assistant ChatWidget with the team surface's
+// copy. Mounted in entities/team/routes/team/(dashboard)/layout.tsx so it is
+// available on every /team page. Answer-only — no `approvals` prop, so there
+// are no approval cards, no write actions and the composer is never gated.
+//
+// The suggestions are questions an employee asks about their own work and the
+// company, the kind the my_work, time_off and staff_directory tools answer. A
+// revenue question stood here once and pointed every employee at finance
+// (TH.7.2).
+
+import { ChatWidget } from "@/entities/assistant/client";
+
+export function TeamChatWidget() {
+  return (
+    <ChatWidget
+      endpoint="/api/team/chat"
+      storageKey="edge8-team-chat"
+      surface="team"
+      fabLabel="Open team assistant"
+      // On a phone the top bar opens the assistant; a floating button there
+      // covered the page's own controls (TH.25).
+      fabOnPhone={false}
+      panelLabel="Team assistant"
+      eyebrow="Edge8 Team"
+      inputLabel="Message the team assistant"
+      placeholder="Ask about Edge8…"
+      historyEmptyHint="No saved conversations yet. Start chatting and they'll show up here."
+      toolChipLabel={() => "Looked it up"}
+      emptyState={
+        <>
+          <p>Ask me anything about Edge8:</p>
+          <ul>
+            <li>What&apos;s our time-off policy?</li>
+            <li>Who&apos;s out on vacation next week?</li>
+            <li>Who&apos;s in the design team, and who do they report to?</li>
+            <li>What&apos;s on my plate this week?</li>
+            <li>Which clients do we work with?</li>
+          </ul>
+          <p className="admin-chat-empty-note">
+            Read-only. I look things up but never change anything, and I can&apos;t see payroll or
+            private personal data.
+          </p>
+        </>
+      }
+    />
+  );
+}

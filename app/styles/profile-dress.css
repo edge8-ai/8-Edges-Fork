@@ -1,0 +1,174 @@
+/* The dressed profile (LD.6; the approved v5 prototype's .wp-*, Wild Rift
+   style): the banner, the plaque, the display case and the stats strip on a
+   dark hero, the tabs under it, and the panel. Drawn by
+   entities/ladders/ui/profile/ for /team/profile and /team/directory/[id].
+   Every colour is a token; translucent ones are mixed from tokens. The page
+   is a container and reflows by its own width: at a phone's width the plaque
+   stacks under a shorter banner. The team surface's living language, never
+   corporate. */
+
+.pf { container-type: inline-size; display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; border: 1px solid var(--admin-line); background: var(--admin-bg); color: var(--admin-ink); }
+
+/* ── The hero ─────────────────────────────────────────────────────────── */
+.pf-hero { position: relative; min-height: 548px; padding: 22px 26px 0; display: grid; grid-template-columns: 330px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; column-gap: 26px; overflow: hidden; isolation: isolate; background: var(--color-primary-dark); }
+.pf-scene { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.pf-scene-art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.pf-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pf-scene::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--color-primary-dark) 55%, transparent) 0, transparent 46%), linear-gradient(0deg, color-mix(in srgb, var(--color-primary-dark) 70%, transparent) 0, transparent 34%); }
+.pf-top { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.pf-crumb { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--color-bg-primary); text-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary-dark) 60%, transparent); }
+.pf-top-sp { flex: 1; }
+.pf-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--color-on-dark-strong); background: color-mix(in srgb, var(--color-primary-dark) 55%, transparent); color: var(--color-bg-primary); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; backdrop-filter: blur(6px); }
+.pf-btn svg { stroke: currentColor; flex: none; }
+.pf-btn:focus-visible { outline: 2px solid var(--color-accent-mint); outline-offset: 2px; }
+.pf-btn--on { background: var(--color-accent-mint); border-color: var(--color-accent-mint); color: var(--color-primary-dark); }
+/* The game style switch is Quests' own component (GameStyleSwitch, QS.11);
+   these rules draw it as a pill on the dark banner. Its note stays visible,
+   because a failed save says so there. */
+.pf-top .qs-style { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pf-top .qs-style-note { font-size: 11px; font-weight: 700; color: var(--color-bg-primary); text-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary-dark) 60%, transparent); }
+.pf-top .qs-style-switch { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px 0 12px; border-radius: 999px; border: 1px solid var(--color-on-dark-strong); background: color-mix(in srgb, var(--color-primary-dark) 55%, transparent); color: var(--color-bg-primary); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; backdrop-filter: blur(6px); }
+.pf-top .qs-style-switch:focus-visible { outline: 2px solid var(--color-accent-mint); outline-offset: 2px; }
+.pf-top .qs-style-track { position: relative; width: 36px; height: 22px; border-radius: 999px; background: var(--color-grey-600); flex: none; transition: background 160ms ease; }
+.pf-top .qs-style-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); transition: transform 160ms ease; }
+.pf-top .qs-style-switch[aria-checked="true"] .qs-style-track { background: var(--color-accent-mint-bright); }
+.pf-top .qs-style-switch[aria-checked="true"] .qs-style-track::after { transform: translateX(14px); }
+.pf-top .qs-style-state { font-weight: 800; }
+@media (prefers-reduced-motion: reduce) { .pf-top .qs-style-track, .pf-top .qs-style-track::after { transition: none; } }
+.pf-hero--editing .pf-error { max-width: calc(100% - 140px); }
+.pf-error { flex-basis: 100%; margin: 0; padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 700; color: var(--color-bg-primary); background: color-mix(in srgb, var(--color-err-strong) 80%, var(--color-primary-dark)); }
+
+/* The banner picker, over the hero's top right */
+.pf-banner-edit { position: absolute; z-index: 3; right: 26px; top: 74px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.pf-picker { width: 330px; padding: 14px; border-radius: 14px; background: var(--admin-surface); color: var(--admin-ink); box-shadow: var(--color-elevation-3); display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pf-picker-h { grid-column: 1 / -1; margin: 0; font-size: 13px; font-weight: 800; }
+.pf-picker-note { grid-column: 1 / -1; margin: 0; font-size: 12px; color: var(--color-grey-600); }
+.pf-pick { display: flex; flex-direction: column; gap: 6px; min-height: 44px; padding: 0; border: 2px solid var(--admin-line); border-radius: 10px; overflow: hidden; background: var(--admin-surface); font: inherit; font-size: 12px; font-weight: 700; text-align: left; cursor: pointer; color: var(--admin-ink); }
+.pf-pick:disabled { cursor: not-allowed; opacity: .55; }
+.pf-pick-th { position: relative; height: 64px; overflow: hidden; background: var(--color-grey-100); }
+.pf-pick-l { padding: 0 8px 8px; }
+.pf-pick:not(:has(.pf-pick-th)) .pf-pick-l { padding: 12px 8px; }
+.pf-pick[aria-pressed="true"] { border-color: var(--color-primary-blue); box-shadow: var(--admin-focus-ring); }
+.pf-pick:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; }
+
+/* ── The plaque ───────────────────────────────────────────────────────── */
+.pf-plaque { grid-row: 2 / 4; align-self: stretch; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; padding: 26px 22px 22px; border-radius: 16px 16px 0 0; color: var(--color-bg-primary);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary-dark) 88%, transparent), color-mix(in srgb, var(--color-primary-dark) 96%, transparent)); border: 1px solid var(--color-on-dark-line); border-bottom: 0; box-shadow: var(--color-elevation-3); }
+.pf-av { margin: 16px 0 14px; display: grid; place-items: center; }
+.pf-name { margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -.01em; line-height: 1.15; overflow-wrap: anywhere; }
+.pf-handle { margin: 0; font-size: 13px; color: var(--color-grey-700); }
+.pf-title { margin: 8px 0 0; display: inline-flex; align-items: center; min-height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--color-primary-dark); background: var(--color-accent-mint); }
+.pf-title-edit { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 8px; }
+.pf-title-sel { min-height: 40px; min-width: 140px; max-width: 100%; padding: 0 10px; border-radius: 10px; border: 1.5px dashed var(--color-accent-mint); background: color-mix(in srgb, var(--color-bg-primary) 8%, transparent); color: var(--color-bg-primary); font: inherit; font-size: 16px; font-weight: 700; }
+.pf-title-sel:disabled { opacity: .7; cursor: not-allowed; }
+.pf-title-sel option { color: var(--color-primary-dark); }
+.pf-hint { margin: 0; font-size: 12px; font-weight: 600; color: var(--color-grey-700); }
+.pf-ems { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: auto; padding-top: 18px; border-top: 1px solid var(--color-on-dark-line); }
+.pf-em { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+.pf-em-art { height: 128px; display: grid; place-items: end center; }
+.pf-em-dash { width: 84px; height: 84px; margin-bottom: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 28px; font-weight: 800; color: var(--color-grey-800); border: 1.5px solid var(--color-on-dark-line); background: color-mix(in srgb, var(--color-bg-primary) 4%, transparent); }
+.pf-em b { font-size: 15px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.pf-em small { font-size: 11px; font-weight: 600; color: var(--color-grey-700); }
+.pf-hero--plain .pf-em-art { display: none; }
+/* Plainly there is no scene to look at, so the hero is only as tall as what it holds. */
+.pf-hero--plain { min-height: 0; }
+.pf-hero--plain .pf-ems { margin-top: 18px; }
+.pf-hero--plain .pf-em b { font-size: 18px; letter-spacing: .02em; text-transform: none; }
+
+/* ── The display case, like preferred champions ───────────────────────── */
+.pf-right { grid-column: 2; grid-row: 2; align-self: end; display: flex; flex-direction: column; gap: 10px; padding-bottom: 18px; }
+.pf-h { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--color-bg-primary); text-shadow: 0 1px 3px color-mix(in srgb, var(--color-primary-dark) 70%, transparent); }
+.pf-case { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px; }
+.pf-tok { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 92px; text-align: center; }
+.pf-tok-c { width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; font-size: 28px; font-weight: 800; background: var(--color-accent-mint); color: var(--color-primary-dark); border: 3px solid var(--color-bg-primary); box-shadow: 0 0 0 3px var(--color-primary-dark), var(--color-elevation-3); }
+.pf-tok b { font-size: 12px; font-weight: 800; line-height: 1.25; color: var(--color-bg-primary); text-shadow: 0 1px 3px color-mix(in srgb, var(--color-primary-dark) 80%, transparent); }
+.pf-tok--empty .pf-tok-c { background: color-mix(in srgb, var(--color-primary-dark) 45%, transparent); border: 2px dashed var(--color-on-dark-strong); box-shadow: none; color: var(--color-bg-primary); }
+.pf-tok--empty select { width: 92px; min-height: 36px; padding: 0 4px; border-radius: 8px; border: 1px solid var(--color-on-dark-strong); background: var(--color-primary-dark); color: var(--color-bg-primary); font: inherit; font-size: 16px; }
+.pf-tok--empty select:disabled { opacity: .7; cursor: not-allowed; }
+/* A badge in the case by its name alone: its art is LD.7b's. */
+.pf-tok--named { justify-content: center; gap: 4px; min-height: 78px; padding: 10px 8px; border-radius: 14px; border: 1px solid var(--color-on-dark-strong); background: color-mix(in srgb, var(--color-primary-dark) 70%, transparent); }
+.pf-none { margin: 0; font-size: 13px; color: var(--color-bg-primary); opacity: .85; }
+.pf-right .pf-hint { color: var(--color-bg-primary); opacity: .85; }
+
+/* ── The stats strip ──────────────────────────────────────────────────── */
+.pf-stats { grid-column: 2; grid-row: 3; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 1px; border-radius: 14px 14px 0 0; overflow: hidden; background: var(--color-on-dark-line); }
+.pf-stat { position: relative; display: flex; flex-direction: column; gap: 2px; padding: 14px 16px 16px; background: color-mix(in srgb, var(--color-primary-dark) 86%, transparent); color: var(--color-bg-primary); }
+.pf-stat b { font-size: 26px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.pf-stat span { font-size: 12px; font-weight: 600; color: var(--color-grey-700); }
+.pf-stat--off { background: color-mix(in srgb, var(--color-primary-dark) 70%, transparent); }
+.pf-stat--off b, .pf-stat--off > span { opacity: .4; }
+.pf-stat-sw { position: absolute; right: 6px; top: 6px; }
+
+/* ── The tabs and their panel ─────────────────────────────────────────── */
+.pf-tabs .admin-tabs { margin: 0; padding: 0 22px; gap: 2px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; border-bottom: 0; background: var(--color-primary-dark); }
+.pf-tabs .admin-tab { flex: none; min-height: 48px; padding: 0 16px; margin: 0; border-bottom: 3px solid transparent; color: var(--color-grey-700); font-weight: 700; }
+.pf-tabs .admin-tab:hover { color: var(--color-bg-primary); border-bottom-color: var(--color-on-dark-strong); }
+.pf-tabs .admin-tab.is-active { color: var(--color-bg-primary); border-bottom-color: var(--color-accent-mint); font-weight: 700; }
+.pf-tabs .admin-tab:focus-visible { outline: 2px solid var(--color-accent-mint); outline-offset: -4px; }
+.pf-tabs [role="tabpanel"] { padding: 22px 26px 28px; display: flex; flex-direction: column; gap: 18px; }
+.pf-ph { margin: 0; padding: 26px; border: 1.5px dashed var(--admin-line-strong); border-radius: 12px; text-align: center; font-size: 14px; line-height: 1.5; color: var(--color-grey-600); background: var(--admin-surface); }
+/* The postcard keeps its own page under its tab; the panel already pads it. */
+.pf-tabs .pe-page { padding-bottom: 96px; }
+
+/* ── A phone: the plaque stacks under a shorter banner ────────────────── */
+@container (max-width: 640px) {
+  .pf { border-radius: 0; border-left: 0; border-right: 0; }
+  .pf-hero { min-height: 0; padding: 14px 14px 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; background: var(--admin-bg); }
+  .pf-scene { bottom: auto; height: 230px; background: var(--color-primary-dark); }
+  .pf-scene::after { background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary-dark) 45%, transparent) 0, transparent 30%), linear-gradient(0deg, color-mix(in srgb, var(--color-primary-dark) 80%, transparent) 0, transparent 60%); }
+  .pf-top { margin-bottom: 96px; }
+  .pf-hero--editing .pf-top { margin-bottom: 12px; }
+  .pf-banner-edit { position: relative; z-index: 3; top: auto; left: auto; right: auto; margin-bottom: 84px; align-items: stretch; }
+  .pf-banner-edit .pf-pencil { align-self: flex-end; }
+  .pf-picker { width: auto; }
+  .pf-plaque { grid-row: auto; border-radius: 16px; border-bottom: 1px solid var(--color-on-dark-line); padding: 0 16px 18px; }
+  .pf-av { margin: -52px 0 10px; }
+  .pf-name { font-size: 24px; }
+  .pf-em-art { height: 108px; }
+  .pf-em-art .ladder-emblem img { width: auto; height: 108px; }
+  .pf-right { grid-column: 1; grid-row: auto; padding: 18px 0 0; }
+  .pf-right .pf-h, .pf-tok b, .pf-none, .pf-right .pf-hint { color: var(--admin-ink); text-shadow: none; }
+  .pf-case { flex-wrap: nowrap; overflow-x: auto; padding: 4px 4px 8px; }
+  .pf-tok { width: 80px; flex: none; }
+  .pf-tok-c { width: 66px; height: 66px; }
+  .pf-tok--empty .pf-tok-c { background: var(--admin-surface-2); border-color: var(--admin-line-strong); color: var(--admin-muted); }
+  .pf-tok--empty select { width: 80px; }
+  .pf-stats { grid-column: 1; grid-row: auto; grid-template-columns: 1fr 1fr; margin: 16px 0 0; border-radius: 14px; }
+  .pf-tabs .admin-tabs { margin-top: 18px; padding: 0 8px; }
+  .pf-tabs [role="tabpanel"] { padding: 16px 12px 20px; }
+}
+@media (pointer: coarse) { .pf-stat-sw { min-height: 44px; min-width: 44px; justify-content: center; right: 0; top: 0; } }
+
+/* ── The banner scenes' paint (./scenes.tsx): one class per token ─────── */
+.pf-f-primary-dark { fill: var(--color-primary-dark); }
+.pf-f-bg-primary { fill: var(--color-bg-primary); }
+.pf-f-accent-mint { fill: var(--color-accent-mint); }
+.pf-f-accent-mint-bright { fill: var(--color-accent-mint-bright); }
+.pf-f-sky-picked { fill: var(--color-sky-picked); }
+.pf-f-growth-line { fill: var(--color-growth-line); }
+.pf-f-growth { fill: var(--color-growth); }
+.pf-f-violet { fill: var(--color-violet); }
+.pf-f-violet-soft { fill: var(--color-violet-soft); }
+.pf-f-violet-ink { fill: var(--color-violet-ink); }
+.pf-f-client-7-ink { fill: var(--color-client-7-ink); }
+.pf-f-client-5-ink { fill: var(--color-client-5-ink); }
+.pf-f-grey-900 { fill: var(--color-grey-900); }
+.pf-f-warn-bg { fill: var(--color-warn-bg); }
+.pf-f-primary-blue { fill: var(--color-primary-blue); }
+.pf-f-err-strong { fill: var(--color-err-strong); }
+.pf-s-bg-primary { stroke: var(--color-bg-primary); }
+.pf-s-primary-dark { stroke: var(--color-primary-dark); }
+.pf-s-client-5-ink { stroke: var(--color-client-5-ink); }
+.pf-s-primary-blue-bright { stroke: var(--color-primary-blue-bright); }
+.pf-stop-info-bg { stop-color: var(--color-info-bg); }
+.pf-stop-growth-soft { stop-color: var(--color-growth-soft); }
+.pf-stop-violet-ink { stop-color: var(--color-violet-ink); }
+.pf-stop-violet { stop-color: var(--color-violet); }
+.pf-stop-quest-sky-violet { stop-color: var(--color-quest-sky-violet); }
+.pf-stop-grey-900 { stop-color: var(--color-grey-900); }
+.pf-stop-primary-dark { stop-color: var(--color-primary-dark); }
+.pf-stop-sky-picked { stop-color: var(--color-sky-picked); }
+.pf-stop-sky-echoed { stop-color: var(--color-sky-echoed); }
+.pf-stop-pink-bg { stop-color: var(--color-pink-bg); }
+
+@media (prefers-reduced-motion: reduce) { .pf-btn, .pf-pick { transition: none; } }

@@ -1,0 +1,25 @@
+{
+  "$comment": [
+    "The smallest deployment the gates check, so exclusion is exercised rather than assumed:",
+    "Built for the first time on 2026-09-12 (PR #1245): 140 mounts, 130 routes, clean. The hand-written shells still import three excluded entities; scripts/deployment-shell-imports.test.mjs holds that list and lets it only shrink.",
+    "still import every entity, so only the generated registry and navigation differ. Closed under",
+    "`requires`, which is why company-os, client-programs, crm, portal, org and htt are here:",
+    "boards reaches company-os and crm, crm's contact 360 reads org's survey responses, and the",
+    "portal's document store sits under client-programs. Everything absent is proof the catalogue",
+    "can leave something out."
+  ],
+  "name": "minimal",
+  "entities": [
+    "billing",
+    "boards",
+    "client-programs",
+    "company-os",
+    "contacts",
+    "crm",
+    "finance",
+    "htt",
+    "ideas",
+    "org",
+    "portal"
+  ]
+}

@@ -1,0 +1,125 @@
+/* Kudos as a page (TH.20, approved on the design canvas on 19 Oct 2026). The
+   page used to be the Home card stretched to 760px: a small title, a small
+   composer and one narrow column of notes beside an empty half of the screen.
+   Now a hero in the kudos pink, the month's notes as a wall, and the composer
+   in its own card beside them (above them on a phone). The faces and the note
+   tones come from team-home.css, which this page also loads. Every colour is
+   a token; the pink edge is mixed from the pink ink. The page reflows by its
+   own width (container queries), because the team sidebar makes the content
+   far narrower than the window. */
+
+.kd-page { container-type: inline-size; color: var(--color-primary-dark); --kd-bg: var(--color-client-3-bg); --kd-ink: var(--color-client-3-ink);
+  --kd-line: color-mix(in srgb, var(--color-client-3-ink) 22%, var(--color-bg-primary)); }
+.kd { display: flex; flex-direction: column; gap: 18px; }
+
+/* ── The hero ────────────────────────────────────────────────────────── */
+.kd-hero { position: relative; overflow: hidden; padding: 24px 26px 20px; border-radius: 16px; border: 1px solid var(--kd-line); background: var(--kd-bg); box-shadow: var(--color-elevation-1); }
+.kd-hero .th-kd-hand { right: 34px; top: 18px; width: 96px; height: 104px; }
+.kd-k { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--kd-ink); }
+.kd-head { margin: 6px 0 0; padding-right: 120px; font-size: 30px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; }
+.kd-sub { margin: 8px 0 0; max-width: 560px; font-size: 15px; line-height: 1.5; color: var(--color-grey-600); }
+.kd-months { margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+/* The admin stylesheet colours every link; the month links name their own. */
+.kd-page a.kd-month { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--kd-line);
+  background: var(--color-bg-primary); color: var(--kd-ink); font-size: 13px; font-weight: 800; text-decoration: none; }
+.kd-page a.kd-month-solid { margin-top: 10px; background: var(--kd-ink); border-color: var(--kd-ink); color: var(--color-bg-primary); }
+.kd-page a.kd-month:focus-visible, .kd-to-b:focus-visible, .kd-send:focus-visible { outline: 2px solid var(--kd-ink); outline-offset: 2px; }
+
+/* ── The wall ────────────────────────────────────────────────────────── */
+.kd-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 18px; align-items: start; }
+/* The month's notes, then the starters, flow down the same two columns. */
+.kd-flow { columns: 2 260px; column-gap: 14px; }
+.kd-notes { list-style: none; margin: 0; padding: 0; }
+.kd-note { break-inside: avoid; margin: 0 0 14px; padding: 16px 16px 14px; border-radius: 16px; background: var(--tone-bg); box-shadow: var(--color-elevation-1); animation: th-land .5s cubic-bezier(.3, 1.6, .5, 1); }
+.kd-body { margin: 0; font-size: 16px; line-height: 1.45; font-weight: 700; overflow-wrap: anywhere; }
+.kd-who { margin-top: 12px; display: flex; align-items: center; gap: 10px; }
+.kd-pair { flex: none; display: flex; }
+.kd-pair .th-face { width: 32px; height: 32px; font-size: 11px; border: 2px solid var(--color-bg-primary); }
+.kd-pair .th-face + .th-face { margin-left: -10px; }
+.kd-meta { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; font-size: 13px; color: var(--color-grey-600); }
+.kd-meta b { color: var(--color-primary-dark); font-weight: 800; }
+.kd-meta .th-kd-x { font-size: 13px; }
+.kd-empty { margin: 0; padding: 22px; border: 1px dashed var(--color-grey-200); border-radius: 16px; text-align: center; font-size: 14px; color: var(--color-grey-600); }
+/* Above the starters the empty month is one plain line, not a second dashed box. */
+.kd-empty.is-soft { padding: 2px 2px 14px; border: 0; text-align: left; font-size: 15px; line-height: 1.5; }
+
+/* ── The starters (TH.21) ────────────────────────────────────────────── */
+/* Dashed notes waiting to be written, in the note tints; picking one starts
+   the line in the composer and the card turns solid while the draft opens with it. */
+.kd-sparks { list-style: none; margin: 0; padding: 0; }
+.kd-spark { break-inside: avoid; margin: 0 0 14px; }
+.kd-spark-b { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: 100%; box-sizing: border-box; padding: 14px 16px 15px; border-radius: 16px;
+  border: 2px dashed color-mix(in srgb, var(--tone-ink) 38%, transparent); background: color-mix(in srgb, var(--tone-bg) 45%, var(--color-bg-primary));
+  font: inherit; color: var(--color-primary-dark); text-align: left; cursor: pointer; transition: transform .18s ease, border-color .18s ease, background-color .18s ease; }
+.kd-spark-b:hover { transform: translateY(-2px) rotate(-.6deg); border-color: color-mix(in srgb, var(--tone-ink) 65%, transparent); }
+.kd-spark-b[aria-pressed="true"] { border-style: solid; border-color: var(--tone-ink); background: var(--tone-bg); }
+.kd-spark-b:focus-visible { outline: 2px solid var(--tone-ink); outline-offset: 2px; }
+.kd-spark-k { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--tone-ink); }
+.kd-spark-k svg { width: 14px; height: 14px; flex: none; }
+.kd-spark-q { font-size: 16px; line-height: 1.35; font-weight: 800; }
+.kd-spark-line { font-size: 14px; line-height: 1.4; color: var(--color-grey-600); }
+
+/* ── From the archive (TH.21) ────────────────────────────────────────── */
+/* A keepsake taped under the wall: an earlier month's note, tilted a little. */
+.kd-arch { position: relative; margin-top: 8px; padding: 20px; border-radius: 16px; border: 1px solid var(--kd-line); background: var(--color-bg-primary); box-shadow: var(--color-elevation-1); }
+.kd-tape { position: absolute; top: -10px; left: 50%; width: 88px; height: 20px; margin-left: -44px; border-radius: 3px; transform: rotate(-3deg);
+  background: color-mix(in srgb, var(--kd-ink) 20%, var(--color-bg-primary)); box-shadow: var(--color-elevation-1); }
+.kd-arch-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.kd-arch-k { margin: 0; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--kd-ink); }
+.kd-arch-k svg { width: 16px; height: 16px; flex: none; }
+.kd-arch-more { min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--kd-line); background: var(--color-bg-primary); color: var(--kd-ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.kd-arch-more:focus-visible { outline: 2px solid var(--kd-ink); outline-offset: 2px; }
+.kd-arch-grid { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px; align-items: center; }
+.kd-arch .kd-note { margin: 0; transform: rotate(-1.2deg); animation: none; }
+.kd-arch-h { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
+.kd-arch-side .kd-hint { margin-top: 6px; }
+.kd-page .kd-arch-side a.kd-month { margin-top: 12px; }
+
+/* ── The composer ────────────────────────────────────────────────────── */
+.kd-side { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 16px; }
+.kd-card { background: var(--color-bg-primary); border: 1px solid var(--color-card-border); border-radius: 14px; box-shadow: var(--color-elevation-1); padding: 18px; }
+.kd-h { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
+.kd-lbl { display: block; margin: 14px 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--color-grey-500); }
+.kd-to { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.kd-to-b { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 64px; padding: 6px 2px; border: 1px solid transparent; border-radius: 12px; background: none; font: inherit; cursor: pointer; }
+.kd-to-b .th-face { width: 40px; height: 40px; font-size: 13px; }
+.kd-to-b[aria-pressed="true"] { border-color: var(--kd-line); background: var(--kd-bg); }
+.kd-to-b[aria-pressed="true"] .th-face { box-shadow: 0 0 0 2px var(--kd-ink); }
+.kd-to-n { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 700; color: var(--color-grey-600); }
+.kd-to-b[aria-pressed="true"] .kd-to-n { color: var(--kd-ink); }
+.kd-select, .kd-input { width: 100%; box-sizing: border-box; border: 1px solid var(--color-input-border); border-radius: 10px; background: var(--color-bg-primary); font: inherit; font-size: 16px; color: var(--color-primary-dark); }
+.kd-select { min-height: 44px; padding: 0 12px; }
+.kd-input { padding: 10px 12px; resize: vertical; line-height: 1.4; }
+.kd-input:focus, .kd-select:focus { outline: none; border-color: var(--kd-ink); box-shadow: 0 0 0 3px color-mix(in srgb, var(--kd-ink) 18%, transparent); }
+.kd-send { margin-top: 12px; width: 100%; min-height: 44px; border: 0; border-radius: 999px; background: var(--kd-ink); color: var(--color-bg-primary); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.kd-send:disabled { opacity: .6; cursor: progress; }
+.kd-compose .th-kd-count, .kd-compose .th-kd-err, .kd-compose .th-kd-sent { margin-top: 8px; }
+.kd-hint { margin: 12px 0 0; font-size: 13px; line-height: 1.45; color: var(--color-grey-600); }
+.kd-keep .kd-hint { margin-top: 8px; }
+
+/* The rail goes above the wall when the content is narrower than both. */
+@container (max-width: 860px) {
+  .kd-grid { grid-template-columns: minmax(0, 1fr); }
+  .kd-side { order: -1; position: static; }
+}
+
+/* A phone. */
+@container (max-width: 560px) {
+  .kd { gap: 14px; }
+  .kd-hero { padding: 18px 16px 16px; border-radius: 14px; }
+  .kd-hero .th-kd-hand { width: 56px; height: 62px; right: 14px; top: 12px; }
+  .kd-head { font-size: 24px; padding-right: 56px; }
+  .kd-sub { font-size: 14px; }
+  .kd-page a.kd-month { min-height: 44px; }
+  .kd-flow { columns: 1; }
+  .kd-spark-q { font-size: 15px; }
+  .kd-arch { padding: 18px 16px; }
+  .kd-arch-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .kd-arch-more { min-height: 44px; }
+  .kd-body { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kd-spark-b { transition: none; }
+  .kd-spark-b:hover { transform: none; }
+}

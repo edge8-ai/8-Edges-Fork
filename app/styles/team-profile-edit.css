@@ -1,0 +1,103 @@
+/* My Profile (TH.9, approved on the design canvas on 19 Oct 2026): the
+   postcard teammates see is the editor, with the person's details and their
+   payroll, ID and address below it as plain grouped fields. The postcard's own
+   look is team-profile.css; this sheet adds the in-place editors on it and the
+   page around it. Every colour is a token; translucent ones are mixed from
+   tokens. The page reflows by its own width (container queries). */
+
+.pe-page { container-type: inline-size; display: flex; flex-direction: column; gap: 18px; padding-bottom: 96px; color: var(--color-primary-dark); }
+/* The save bar sits over the page's foot; a focused field never hides under it. */
+html:has(.pe-page) { scroll-padding-bottom: 110px; }
+.pe { display: flex; flex-direction: column; gap: 18px; }
+.pe-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pe-title { margin: 4px 0 0; font-size: 28px; font-weight: 800; letter-spacing: -.02em; }
+.pe-lede { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--color-grey-600); }
+.pe-page a.pe-link { font-size: 13px; font-weight: 800; color: var(--color-info-ink); text-decoration: none; }
+.pe-page a.pe-link:hover { text-decoration: underline; }
+.pe-under { margin: -6px 0 0; padding: 0 4px; font-size: 13px; color: var(--color-grey-500); }
+
+/* ── In place on the postcard ────────────────────────────────────────── */
+/* A dashed underline and, on hover or focus, a pencil: the fields look like
+   the card's own words and still read as editable. */
+.pe-edit { position: relative; display: inline-flex; align-items: center; gap: 6px; min-width: 0; flex: 1; }
+.pe-inl { box-sizing: border-box; min-width: 0; width: 100%; padding: 2px 6px; margin: -2px -6px; border: 0;
+  border-bottom: 1.5px dashed color-mix(in srgb, var(--color-primary-blue) 45%, var(--color-bg-primary));
+  border-radius: 6px 6px 0 0; background: transparent; font: inherit; color: inherit; letter-spacing: inherit; }
+.pe-inl:hover { background: color-mix(in srgb, var(--color-accent-soft) 50%, transparent); }
+.pe-inl:focus { outline: 2px solid var(--color-primary-blue); outline-offset: 1px; background: var(--color-bg-primary); color: var(--color-primary-dark); border-bottom-color: transparent; }
+.pe-inl::placeholder { color: var(--color-grey-400); }
+/* A long value wraps onto a second line, as the card's text does. */
+.pe-inl-area { resize: none; overflow: hidden; line-height: 1.35; field-sizing: content; min-height: 0; }
+.tp-greet-v .pe-inl { width: 200px; border-bottom-color: color-mix(in srgb, var(--color-bg-primary) 50%, transparent); }
+.tp-greet-v .pe-inl:hover { background: color-mix(in srgb, var(--color-bg-primary) 14%, transparent); }
+.tp-greet-v .pe-inl::placeholder { color: color-mix(in srgb, var(--color-bg-primary) 70%, transparent); }
+.pe-pen { flex: none; width: 14px; height: 14px; color: var(--color-info-ink); opacity: 0; transition: opacity .15s ease; }
+.tp-greet-v .pe-pen { color: var(--color-bg-primary); }
+.pe-edit:hover .pe-pen, .pe-edit:focus-within .pe-pen { opacity: 1; }
+
+.pe-photo-btn { position: absolute; z-index: 3; left: 50%; bottom: 58px; transform: translateX(-50%); min-height: 36px; padding: 0 14px; border: 0;
+  border-radius: 999px; background: color-mix(in srgb, var(--color-primary-dark) 80%, transparent); color: var(--color-bg-primary);
+  font: inherit; font-size: 13px; font-weight: 800; white-space: nowrap; cursor: pointer;
+  opacity: 0; pointer-events: none; transition: opacity .15s ease; }
+.pe-photo-btn:hover { background: var(--color-primary-dark); }
+/* On hover, and on keyboard focus so it is reachable without a mouse. */
+.tp-photo:hover .pe-photo-btn, .tp-photo:focus-within .pe-photo-btn, .pe-photo-btn:disabled { opacity: 1; pointer-events: auto; }
+
+.pe-x { width: 22px; height: 22px; margin: 0 -4px 0 2px; border: 0; border-radius: 50%; background: transparent; color: inherit;
+  font: inherit; font-size: 15px; line-height: 1; cursor: pointer; opacity: .6; }
+.pe-x:hover, .pe-x:focus-visible { opacity: 1; background: color-mix(in srgb, var(--color-bg-primary) 60%, transparent); }
+.pe-add { background: var(--color-bg-primary); border: 1.5px dashed color-mix(in srgb, var(--color-primary-blue) 45%, var(--color-bg-primary)); color: var(--color-info-ink); }
+.pe-add-in { width: 110px; border: 0; background: transparent; font: inherit; color: var(--color-primary-dark); outline: none; }
+.pe-add-in::placeholder { color: var(--color-info-ink); }
+.pe-add:focus-within { outline: 2px solid var(--color-primary-blue); outline-offset: 1px; }
+
+/* ── The two cards ───────────────────────────────────────────────────── */
+.pe-card { padding: 18px 20px 20px; background: var(--color-bg-primary); border: 1px solid var(--color-card-border); border-radius: 14px; box-shadow: var(--color-elevation-1); }
+.pe-h { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
+.pe-sub { margin: 4px 0 16px; font-size: 13px; color: var(--color-grey-500); }
+.pe-set { min-width: 0; margin: 0 0 18px; padding: 0; border: 0; }
+.pe-set:last-child { margin-bottom: 0; }
+.pe-set legend { margin: 0 0 10px; padding: 0; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-grey-500); }
+.pe-grid { display: grid; gap: 14px 16px; }
+.pe-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pe-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pe-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.pe-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pe-wide { grid-column: 1 / -1; }
+.pe-label { font-size: 12px; font-weight: 700; color: var(--color-grey-600); }
+.pe-input { box-sizing: border-box; width: 100%; min-height: 42px; padding: 0 12px; border: 1px solid var(--color-grey-200); border-radius: 10px;
+  background: var(--color-bg-primary); font: inherit; font-size: 16px; color: var(--color-primary-dark); }
+.pe-input:focus { outline: 2px solid var(--color-primary-blue); outline-offset: 1px; border-color: var(--color-primary-blue); }
+.pe-ro { display: flex; align-items: center; min-height: 42px; padding: 0 12px; border-radius: 10px; background: var(--color-grey-50); font-size: 14px; color: var(--color-grey-600); overflow-wrap: anywhere; }
+.pe-hint { margin: 0; font-size: 12px; line-height: 1.4; color: var(--color-grey-500); }
+
+/* ── Saving ──────────────────────────────────────────────────────────── */
+.pe-save { position: sticky; bottom: 12px; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px;
+  border: 1px solid var(--color-card-border); border-radius: 14px; background: color-mix(in srgb, var(--color-bg-primary) 95%, transparent); box-shadow: var(--color-elevation-2); }
+.pe-save-t { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--color-grey-600); }
+.pe-save-t i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-sky-picked); }
+.pe-save-acts { display: flex; gap: 8px; }
+.pe-toast { position: fixed; z-index: 60; left: 50%; bottom: 24px; transform: translateX(-50%); padding: 10px 18px; border-radius: 12px;
+  background: var(--color-primary-dark); color: var(--color-bg-primary); font-size: 14px; font-weight: 800; box-shadow: var(--color-elevation-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pe-photo-btn, .pe-pen { transition: none; }
+}
+
+/* A phone: one column; the photo button and pencils always show, since a
+   phone has no hover; every control is a 44px target. */
+@container (max-width: 640px) {
+  .pe-title { font-size: 24px; }
+  .pe-grid-2, .pe-grid-3, .pe-grid-4 { grid-template-columns: minmax(0, 1fr); }
+  .pe-card { padding: 16px 14px; }
+  .pe-input { min-height: 44px; }
+  .pe-inl, .pe-add-in { font-size: 16px; }
+  .pe-add-in { width: 130px; }
+  .pe-photo-btn { opacity: 1; pointer-events: auto; min-height: 44px; }
+  .pe-pen { opacity: 1; }
+  .pe-x { position: relative; width: 32px; height: 32px; }
+  .pe-x::after { content: ""; position: absolute; inset: -6px; }
+  .pe-save { flex-direction: column; align-items: stretch; bottom: 8px; padding: 10px 12px; }
+  .pe-save-acts > * { flex: 1; min-height: 44px; }
+  .pe-toast { bottom: 16px; }
+}

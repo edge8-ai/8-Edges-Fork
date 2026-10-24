@@ -1,0 +1,249 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Avatar } from "@/kernel/ui/Avatar";
+import { Icon } from "@/kernel/ui/Icon";
+import { thumbSrc } from "@/kernel/ui/image-thumb";
+import { answerCheckIn, buildOnSpark, reactToSpark } from "./actions";
+import { DeckAnswers, type DeckAnswer } from "./DeckAnswers";
+import { DeckPause } from "./DeckPause";
+import { KIND_LABEL, deckRound, type SparkKind } from "./sparks-model";
+
+// Your deck (ID.2.6): the sparks you haven't answered, one at a time, and at
+// most one "did it hold?" at the end (ID.2.9). The cards are taken once, when
+// the page first renders: an answer revalidates the page, and a deck that
+// re-sorted itself under you would be a different deck. A card moves on only
+// after the server has saved the answer, so a failure leaves it where it was
+// and says so, instead of an answer that silently vanished.
+
+export type DeckCard = {
+  id: string;
+  kind: SparkKind;
+  title: string;
+  hook: string | null;
+  who: string;
+  initials: string;
+  tone: number;
+  /** The author's photo. Home sets it so the card matches the list beside it; the Spark page draws initials. */
+  avatarUrl?: string | null;
+  /** The author's worn Learn & Share tier (LD.8), read once by the Spark page; null or absent draws a plain face. */
+  border?: string | null;
+  date: string;
+  faces: { initials: string; tone: number }[];
+  admireLine: string | null;
+  builds: number;
+  checkIn: boolean;
+};
+
+const LEAVE_MS = 320;
+
+function save(card: DeckCard, answer: DeckAnswer): Promise<{ ok: boolean; error?: string }> {
+  if (answer === "held" || answer === "trying" || answer === "unstuck") return answerCheckIn(card.id, answer);
+  return reactToSpark(card.id, answer);
+}
+
+function said(card: DeckCard, answer: DeckAnswer): string {
+  switch (answer) {
+    case "admire":
+      return `${card.who} will see you admire it.`;
+    case "me_too":
+      return card.kind === "build" ? `${card.who} will see you've hit this too.` : `${card.who} will see you'll try it.`;
+    case "skip":
+      return "Skipped. It stays in All sparks.";
+    case "held":
+      return `${card.who} will see it held for you.`;
+    case "trying":
+      return "Noted. We'll ask again in two weeks.";
+    case "unstuck":
+      return `${card.who} will see it didn't stick. That helps too.`;
+  }
+}
+
+// `firstRound` turns on rounds (TH.4.3): the Spark page passes the whole deck
+// and the first round's length, and the deck pauses after each round with
+// "Three answered, N more are waiting". Home passes one card and no rounds.
+export function SparkDeck({ initial, firstRound }: { initial: DeckCard[]; firstRound?: number }) {
+  const [cards] = useState(initial);
+  const [i, setI] = useState(0);
+  const [pause, setPause] = useState<"none" | "round" | "rest">("none");
+  const [leaving, setLeaving] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [last, setLast] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [buildOpen, setBuildOpen] = useState(false);
+  const [text, setText] = useState("");
+
+  const rounds = firstRound !== undefined;
+  const card = cards[i];
+  const done = i >= cards.length;
+  // Without rounds the whole deck is one round, which never pauses. Between
+  // rounds the dots still show the round just finished.
+  const round = deckRound(pause === "none" ? i : i - 1, cards.length, firstRound ?? Number.POSITIVE_INFINITY);
+  const roundCards = cards.slice(round.start, round.end);
+  const waiting = cards.slice(i).filter((c) => !c.checkIn).length;
+  const showCard = !done && pause === "none";
+
+  function advance() {
+    const next = i + 1;
+    setI(next);
+    if (next < cards.length && next === round.end) setPause("round");
+  }
+
+  async function settle(run: () => Promise<{ ok: boolean; error?: string }>, message: string) {
+    if (busy || !card) return;
+    setBusy(true);
+    setError(null);
+    const r = await run();
+    setBusy(false);
+    if (!r.ok) {
+      setError(r.error ?? "Could not save that. Try again in a moment.");
+      return;
+    }
+    setLast(message);
+    setBuildOpen(false);
+    setText("");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      advance();
+      return;
+    }
+    setLeaving(true);
+    window.setTimeout(() => {
+      setLeaving(false);
+      advance();
+    }, LEAVE_MS);
+  }
+
+  function keepGoing() {
+    setPause("none");
+    setLast(null);
+  }
+
+  if (cards.length === 0) {
+    return (
+      <div className="sparks-deck-empty">
+        <strong>Nothing waiting for you.</strong> You&apos;ve answered every spark. Share one of your own above, and it lands in your
+        teammates&apos; decks.
+      </div>
+    );
+  }
+
+  return (
+    <div className="sparks-deck">
+      <div className="sparks-deck-top">
+        <div className="sparks-deck-progress" aria-hidden="true">
+          {roundCards.map((c, k) => (
+            <span key={c.id} className={round.start + k < i ? "is-done" : round.start + k === i && showCard ? "is-now" : ""} />
+          ))}
+        </div>
+        {rounds && !done && (
+          <span className="sparks-deck-waiting">
+            <strong>{waiting}</strong> {waiting === 1 ? "spark" : "sparks"} waiting for you
+          </span>
+        )}
+      </div>
+      <p className="sparks-sr" aria-live="polite">
+        {done ? "Deck done." : pause !== "none" ? "Round done." : `Spark ${i + 1} of ${cards.length}.`}
+      </p>
+
+      {done || pause !== "none" ? (
+        <DeckPause
+          kind={done ? "done" : pause === "round" ? "round" : "rest"}
+          answered={roundCards.filter((c) => !c.checkIn).length}
+          waiting={waiting}
+          onKeepGoing={keepGoing}
+          onRest={() => setPause("rest")}
+        />
+      ) : (
+        <article className={`sparks-deck-card${leaving ? " is-leaving" : ""}`} aria-labelledby={`deck-${card.id}`}>
+          <div className="sparks-chips">
+            {card.checkIn && <span className="sparks-checkin-chip">Check-in · only you and {card.who} see your answer</span>}
+            <span className={`sparks-kind-chip sparks-kind-chip--${card.kind}`}>{KIND_LABEL[card.kind]}</span>
+            <span className="sparks-deck-date">{card.date}</span>
+          </div>
+          {card.checkIn && <p className="sparks-checkin-q">You said you&apos;d try this. Did it hold?</p>}
+          <h3 id={`deck-${card.id}`} className="sparks-deck-title">
+            {card.title}
+          </h3>
+          {card.hook && card.hook !== card.title && <p className="sparks-deck-hook">{card.hook}</p>}
+          <Link className="sparks-deck-open" href={`/team/ideas/${card.id}`}>
+            Open the spark{card.builds > 0 ? ` and its ${card.builds === 1 ? "build" : `${card.builds} builds`}` : ""}
+          </Link>
+          {card.admireLine && !card.checkIn && (
+            <div className="sparks-faces-line">
+              <span className="sparks-faces" aria-hidden="true">
+                {card.faces.map((f, k) => (
+                  <span key={k} className={`sparks-avatar sparks-avatar--sm sparks-avatar--${f.tone}`}>
+                    {f.initials}
+                  </span>
+                ))}
+              </span>
+              {card.admireLine}
+            </div>
+          )}
+
+          {buildOpen && !card.checkIn && (
+            <div className="sparks-build-box">
+              <label htmlFor={`build-${card.id}`}>Build on {card.who}&apos;s spark</label>
+              <div className="sparks-story-row">
+                <input
+                  id={`build-${card.id}`}
+                  value={text}
+                  maxLength={500}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder="Your case, a twist, or what you would try"
+                />
+                <button
+                  type="button"
+                  className="sparks-btn-dark"
+                  disabled={busy}
+                  onClick={() => void settle(() => buildOnSpark(card.id, text), `Your build is on ${card.who}'s spark. They'll see it in their inbox.`)}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="sparks-deck-foot">
+            <div className="sparks-by">
+              {card.avatarUrl ? (
+                <span className={`sparks-avatar sparks-avatar--${card.tone}`} aria-hidden="true">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- uploaded avatars of unknown size; next/image needs fixed dimensions */}
+                  <img src={thumbSrc(card.avatarUrl, 56)} alt="" loading="lazy" decoding="async" />
+                </span>
+              ) : (
+                // The kernel's Avatar under Spark's classes (LD.8): with no border, the element Spark always
+                // drew. Home draws photos and no borders, so the photo keeps its own element.
+                <Avatar className={`sparks-avatar sparks-avatar--${card.tone}`} name={card.who} initials={card.initials} border={card.border ?? null} decorative />
+              )}
+              <span>{card.who}</span>
+            </div>
+            <DeckAnswers
+              kind={card.kind}
+              checkIn={card.checkIn}
+              busy={busy}
+              buildOpen={buildOpen}
+              onAnswer={(a) => void settle(() => save(card, a), said(card, a))}
+              onToggleBuild={() => setBuildOpen((o) => !o)}
+            />
+          </div>
+          {error && (
+            <div role="alert" className="sparks-deck-error">
+              {error}
+            </div>
+          )}
+        </article>
+      )}
+
+      <div className="sparks-deck-last" aria-live="polite">
+        {last && (
+          <>
+            <Icon name="check" />
+            {last}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

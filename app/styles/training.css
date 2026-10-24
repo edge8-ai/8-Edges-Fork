@@ -1,0 +1,212 @@
+/* My Training (TR.1, the Training Block canvas approved 2026-10-11). Every
+   colour is a token. TR.1 draws the certification tracks; the training block,
+   the Cool-down tray, outcomes and the log arrive with the later tickets. */
+.tr-page { display: flex; flex-direction: column; gap: var(--admin-space-4); max-width: 938px; }
+.tr-card { padding: 24px; border-radius: 16px; border-color: var(--admin-line); box-shadow: none; }
+.tr-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.tr-card-head a { font-size: 12px; font-weight: 700; }
+.tr-card-title { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+.tr-hint { font-size: 13px; line-height: 1.5; color: var(--admin-muted); margin: 4px 0 0; }
+.tr-tracks { display: flex; flex-direction: column; gap: 22px; margin-top: 18px; }
+.tr-track-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.tr-track-name { font-size: 15px; font-weight: 800; }
+.tr-track-togo { font-size: 12px; font-weight: 700; color: var(--color-grey-600); }
+.tr-track-togo.is-near { color: var(--color-amber-ink); }
+.tr-track-togo.is-won { color: var(--color-growth-deep); }
+
+/* One bar per track: a stage per requirement, a segment per unit, sized by
+   how many units the stage has, and the certificate's flag at the end. */
+.tr-bar { display: flex; align-items: center; gap: 2px; margin-top: 10px; }
+.tr-seg { flex: 1 1 0; height: 12px; background: var(--color-grey-100); }
+.tr-seg.is-first { border-radius: 6px 2px 2px 6px; margin-left: 4px; }
+.tr-seg.is-first:first-child { margin-left: 0; }
+.tr-seg.is-last { border-radius: 2px 6px 6px 2px; }
+.tr-seg.is-first.is-last { border-radius: 6px; }
+.tr-seg.is-modules.is-on { background: var(--color-primary-dark); }
+.tr-seg.is-micro.is-on { background: var(--color-primary-blue); }
+.tr-seg.is-coaching.is-on { background: var(--color-growth); }
+.tr-flag { width: 24px; height: 24px; flex: 0 0 24px; margin-left: 6px; fill: none; stroke: var(--color-grey-300); stroke-width: 2; stroke-linejoin: round; }
+.tr-flag.is-won { fill: var(--color-amber-bg); stroke: var(--color-amber-ink); }
+.tr-bar-labels { margin: 6px 0 0; font-size: 11px; color: var(--admin-muted); }
+
+/* Each training type wears one colour on its row's edge, by its place in the
+   type list (lib/training-format.ts typeTone), as on the canvas. */
+.tr-type-0 { --tr-tone: var(--color-client-9-ink); }
+.tr-type-1 { --tr-tone: var(--color-growth); }
+.tr-type-2 { --tr-tone: var(--color-client-4-ink); }
+.tr-type-3 { --tr-tone: var(--color-primary-blue); }
+.tr-type-4 { --tr-tone: var(--color-client-6-ink); }
+.tr-type-5 { --tr-tone: var(--color-client-3-ink); }
+
+/* Cool-down (TR.2): the trainings waiting for the member's word. */
+.tr-cool { background: var(--color-grey-50); border: 1px solid var(--color-grey-100); border-radius: 16px; padding: 24px; }
+.tr-count { font-size: 12px; font-weight: 800; background: var(--color-bg-primary); border-radius: 999px; padding: 4px 10px; }
+.tr-cool-empty { margin: 14px 0 0; padding: 14px 16px; border-radius: 14px; background: var(--color-bg-primary); font-size: 13px; color: var(--admin-muted); }
+.tr-cool-list { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.tr-cool-main { flex: 1 1 260px; min-width: 0; }
+.tr-row-title { font-size: 14px; font-weight: 800; }
+.tr-row-meta { font-size: 12px; color: var(--admin-muted); }
+.tr-cool-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.tr-btn-ink { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: var(--color-bg-primary); }
+.tr-skip { flex: 1 1 100%; display: flex; flex-direction: column; gap: 8px; padding-top: 10px; border-top: 1px solid var(--color-grey-100); }
+.tr-skip-ask { font-size: 12px; font-weight: 700; color: var(--admin-muted); }
+.tr-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.tr-chip { font: 600 12px var(--font-body); padding: 7px 12px; min-height: 34px; border-radius: 999px; border: 1px solid var(--color-grey-200); background: var(--color-bg-primary); color: var(--color-primary-dark); cursor: pointer; }
+.tr-chip.is-on { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: var(--color-bg-primary); }
+.tr-note { margin: 10px 0 0; font-size: 13px; font-weight: 600; }
+.tr-note.is-ok { color: var(--color-growth-deep); }
+.tr-note.is-err { color: var(--color-err-ink); }
+
+/* One training's row (TR.3, ui/TrainingWord.tsx): in the tray a white card
+   with its type's edge, in the log a ruled line; the review opens beneath it,
+   and on a phone it is a bottom sheet. */
+.tr-word { display: flex; flex-direction: column; background: var(--color-bg-primary); border-radius: 14px; padding: 14px 16px; border-left: 6px solid var(--tr-tone, var(--color-grey-300)); }
+.tr-word.is-log { border-radius: 0; border-left: 0; border-top: 1px solid var(--color-grey-100); padding: 12px 0 12px 14px; box-shadow: inset 5px 0 0 var(--tr-tone, var(--color-grey-300)); }
+.tr-word.is-skipped .tr-row-title { color: var(--admin-muted); }
+.tr-word-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.tr-closes { font-size: 12px; color: var(--admin-muted); margin-right: 4px; }
+.tr-label { display: block; font-size: 11px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-grey-500); }
+.tr-label-aside { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.tr-word-panel { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--color-grey-100); }
+.tr-sheet-title, .tr-word-scrim { display: none; }
+.tr-review { display: grid; grid-template-columns: auto 1fr; gap: 16px 36px; align-items: start; }
+.tr-review-wide { grid-column: 1 / -1; }
+.tr-review .tr-chips { margin-top: 8px; }
+.tr-stars { display: flex; gap: 2px; margin-top: 4px; }
+.tr-star { width: 44px; height: 44px; border: 0; background: transparent; padding: 6px; cursor: pointer; border-radius: 10px; }
+.tr-star:hover { background: var(--color-grey-50); }
+.tr-star path { fill: var(--color-bg-primary); stroke: var(--color-grey-300); stroke-width: 1.4; stroke-linejoin: round; }
+.tr-star.is-on path { fill: var(--color-star); stroke: var(--color-star-edge); }
+.tr-saved { font-size: 12px; font-weight: 700; color: var(--color-growth-deep); min-height: 18px; }
+.tr-band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; margin-top: 8px; max-width: 330px; }
+.tr-band-seg { height: 40px; border: 0; cursor: pointer; font: 700 12px var(--font-body); color: var(--color-grey-600); background: var(--color-grey-100); }
+.tr-band-seg:first-child { border-radius: 10px 4px 4px 10px; }
+.tr-band-seg:last-child { border-radius: 4px 10px 10px 4px; }
+.tr-band-seg.is-too_little.is-on { background: var(--color-growth-line); color: var(--color-growth-deep); }
+.tr-band-seg.is-about_right.is-on { background: var(--color-primary-dark); color: var(--color-bg-primary); }
+.tr-band-seg.is-too_much.is-on { background: var(--color-err-ink); color: var(--color-bg-primary); }
+/* Two lines, as on the canvas: globals.css gives every textarea 120px. */
+.tr-textarea { display: block; margin-top: 6px; width: 100%; min-height: 64px; box-sizing: border-box; font: 400 13px var(--font-body); border: 1px solid var(--color-grey-200); border-radius: 8px; padding: 10px; resize: vertical; }
+.tr-review-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.tr-sign { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-grey-600); cursor: pointer; }
+/* The native box, whatever the shell's global input rules do to checkboxes. */
+.tr-sign input[type="checkbox"] { appearance: auto; width: 18px; height: 18px; margin: 0; padding: 0; accent-color: var(--color-primary-dark); }
+.tr-btn-quiet { background: transparent; border-color: transparent; color: var(--color-grey-600); }
+.tr-skip-warn { font-size: 12px; font-weight: 700; color: var(--color-err-ink); }
+
+/* The log and the organiser's lists. */
+.tr-log { list-style: none; margin: 12px 0 0; padding: 0; }
+.tr-log-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0 12px 14px; border-top: 1px solid var(--color-grey-100); box-shadow: inset 5px 0 0 var(--tr-tone, var(--color-grey-300)); }
+.tr-log-row.is-skipped .tr-row-title { color: var(--admin-muted); }
+.tr-outcome { font-size: 12px; font-weight: 700; color: var(--color-grey-600); white-space: nowrap; }
+.tr-row-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.tr-organise-head { display: flex; justify-content: flex-end; }
+/* An empty list (TH.17): an icon, what will show there, on a quiet panel. */
+.tr-empty { display: flex; gap: 14px; align-items: flex-start; margin-top: 16px; padding: 16px; border-radius: 12px; background: var(--color-grey-50); }
+.tr-empty-ico { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--color-accent-soft); color: var(--color-info-ink); display: flex; align-items: center; justify-content: center; }
+.tr-empty-t { margin: 2px 0 0; font-size: 14px; font-weight: 800; color: var(--color-primary-dark); }
+.tr-empty .tr-hint { margin-top: 2px; }
+.tr-who { margin-top: 12px; }
+.tr-drawer-lede { margin: 0 0 14px; }
+
+/* Settings, Training types (TR.2). */
+/* A row, not the global bare-form column (app/globals.css). */
+.tr-type-add { display: flex; flex-direction: row; align-items: flex-end; gap: 8px; margin-bottom: 12px; }
+.tr-type-add-field { flex: 1 1 auto; max-width: 360px; margin: 0; }
+.tr-people { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.tr-people-list { list-style: none; margin: 0; padding: 4px 0; max-height: 280px; overflow-y: auto; border: 1px solid var(--color-grey-100); border-radius: 10px; }
+.tr-person { display: flex; align-items: center; gap: 10px; padding: 8px 12px; min-height: 40px; font-size: 13px; cursor: pointer; }
+.tr-person:hover { background: var(--color-grey-50); }
+
+@media (max-width: 640px) {
+  /* The review as a bottom sheet over the page, above the fixed nav (z 1000). */
+  .tr-word-scrim { display: block; position: fixed; inset: 0; z-index: 1099; border: 0; padding: 0; background: var(--color-scrim); }
+  .tr-word-panel { position: fixed; left: 0; right: 0; bottom: 0; z-index: 1100; margin: 0; max-height: 85vh; overflow-y: auto; background: var(--color-bg-primary); border-top: 0; border-radius: 20px 20px 0 0; padding: 18px 16px 20px; box-shadow: var(--admin-shadow-lg); }
+  .tr-sheet-title { display: block; font-size: 15px; font-weight: 800; margin-bottom: 14px; }
+  .tr-review { grid-template-columns: 1fr; gap: 16px; }
+  .tr-star { width: 52px; height: 52px; }
+  .tr-band { max-width: none; }
+  .tr-band-seg { height: 48px; font-size: 13px; }
+  /* The window line on its own line, the buttons side by side under it. */
+  .tr-word-head .tr-cool-actions { flex: 1 1 100%; }
+  .tr-word-head .tr-closes { flex: 1 1 100%; }
+  .tr-review-foot { flex-direction: column; align-items: stretch; }
+  .tr-review-foot .tr-closes { flex: 1 1 100%; }
+  .tr-review-foot .admin-btn { white-space: nowrap; }
+  .tr-word.is-log .tr-outcome { flex: 1 1 auto; }
+  .tr-word.is-log .tr-cool-actions .admin-btn { flex: 0 0 auto; }
+  .tr-cool { padding: 16px; }
+  .tr-cool-actions .admin-btn { flex: 1 1 0; min-height: 44px; }
+  .tr-card { padding: 16px; }
+  /* A card's own action spans the card on a phone, a full-size target. */
+  .tr-card-head > .admin-btn { width: 100%; min-height: 44px; justify-content: center; }
+  .tr-empty { gap: 12px; padding: 14px; }
+}
+
+/* Plans (TR.5): the roster, publishing, and the philosophy on both the organiser's page and My Training. */
+.tr-crumb { color: inherit; text-decoration: none; }
+.tr-crumb:hover { text-decoration: underline; }
+.tr-chip.is-on { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: var(--color-bg-primary); }
+.tr-roster { margin-top: 12px; }
+.tr-publish { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.tr-publish-field { margin: 0; max-width: 220px; }
+.tr-phil { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
+.tr-phil-halves { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.tr-phil-block { display: flex; flex-direction: column; gap: 4px; }
+.tr-phil-text { margin: 0; font-size: 14px; line-height: 1.55; white-space: pre-wrap; }
+.tr-phil-lines { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; }
+.tr-phil-side { font-size: 11px; font-weight: 700; color: var(--admin-muted); margin-left: 6px; }
+.tr-phil-form { margin-top: 12px; }
+.tr-phil-edit-lines { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.tr-phil-edit-line { display: grid; grid-template-columns: minmax(0, 1fr) 140px auto; gap: 8px; align-items: center; }
+@media (max-width: 640px) {
+  .tr-phil-halves { grid-template-columns: 1fr; }
+  .tr-phil-edit-line { grid-template-columns: 1fr; }
+}
+
+/* Exercise library (English Program PR 2). */
+.tr-library-head { gap: 8px; }
+.tr-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+.tr-filters .admin-select, .tr-filters .admin-input { width: auto; min-width: 140px; }
+.tr-drafts { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.tr-draft { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; padding: 10px 0; border-top: 1px solid var(--color-grey-100); }
+.tr-draft.is-skipped .tr-draft-fields { opacity: 0.5; }
+.tr-draft-keep { display: flex; align-items: flex-start; padding-top: 10px; }
+.tr-draft-fields { display: flex; flex-direction: column; gap: 6px; }
+.tr-draft-row { display: grid; grid-template-columns: 130px minmax(0, 1fr) 120px 70px 70px; gap: 6px; }
+.tr-min { min-width: 0; }
+@media (max-width: 640px) {
+  .tr-draft-row { grid-template-columns: 1fr 1fr; }
+}
+
+/* Session plan editor (English Program PR 3). */
+.tr-reasoning { margin: 12px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--color-grey-50); font-size: 13px; line-height: 1.5; white-space: pre-wrap; }
+.tr-reasoning .tr-label { margin-bottom: 4px; }
+.tr-blocks { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.tr-block { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--color-bg-primary); border: 1px solid var(--color-grey-100); border-left: 6px solid var(--tr-tone, var(--color-grey-300)); }
+.tr-block-order { display: flex; flex-direction: column; gap: 2px; }
+.tr-block-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tr-block-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tr-block-row .admin-select { width: auto; }
+.tr-block-row .tr-min { width: 72px; }
+.tr-material { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 8px; align-items: center; }
+@media (max-width: 640px) {
+  .tr-material { grid-template-columns: 1fr; }
+}
+
+/* Homework and notes (English Program PR 4). */
+.tr-submit { display: flex; flex-direction: column; gap: 10px; }
+.tr-recorder { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.tr-audio { max-width: 100%; }
+.tr-linklike { background: none; border: 0; padding: 0; font: inherit; color: var(--color-primary-dark); text-decoration: underline; cursor: pointer; }
+.tr-homework-list { margin-top: 12px; }
+a.tr-chip { text-decoration: none; }
+
+/* Transcript (English Program PR 6). */
+.tr-fallback { background: var(--color-warn-bg, var(--color-grey-50)); }
+.tr-transcript { margin: 12px 0 0; max-height: 320px; overflow: auto; white-space: pre-wrap; font: 400 13px/1.5 var(--font-body); color: var(--color-grey-600); background: var(--color-grey-50); border-radius: 12px; padding: 12px 14px; }
+
+/* The learner's programme (English Program PR 8). */
+.tr-next { border-left: 6px solid var(--color-primary-dark); }
+
+/* Weekly recap (English Program PR 9): nothing new; the philosophy form styles carry it. */

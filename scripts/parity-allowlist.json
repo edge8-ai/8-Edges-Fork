@@ -1,0 +1,49 @@
+{
+  "_why": "Differences scripts/audit-parity.mjs finds between a door read and the query it replaced that were checked by hand and are not behaviour changes. Each entry names the file, the table, and the exact pair of normalised chains — `base` as it read at the baseline, `head` as it reads now — and says why the two ask the database the same thing. An entry excuses only that pair: a later change to another read of the same table in the same file is still reported. The audit fails on any difference not listed here, so this file only ever shrinks.",
+  "reads": [
+    {
+      "file": "entities/billing/api/stripe/webhook/fulfilment.ts",
+      "table": "inquiries",
+      "why": "`inquiry` is re-cast as `inq` on the line after the lookup, because the door helper returns an open record rather than an inferred row. `inq.id` and `inquiry.id` are the same value.",
+      "base": [
+        ".update({status: \"won\", metadata: mergedMeta}) .eq(\"id\", inquiry.id) .neq(\"status\", \"won\")"
+      ],
+      "head": [
+        ".update({status: \"won\", metadata: mergedMeta}) .eq(\"id\", inq.id) .neq(\"status\", \"won\")"
+      ]
+    },
+    {
+      "file": "entities/team/lib/own-service-writes.ts",
+      "table": "onboarding_tasks",
+      "why": "`patch as never` became `patch as Parameters<typeof updateOnboardingTasks>[0]`. A cast, narrower than the one it replaces; the column values written are unchanged.",
+      "base": [
+        ".update(patch as never).eq(\"id\", id)"
+      ],
+      "head": [
+        ".update(patch as Parameters<typeof updateOnboardingTasks>[0]).eq(\"id\", id)"
+      ]
+    },
+    {
+      "file": "entities/crm/lib/revenue-metrics/billing.ts",
+      "table": "deals",
+      "why": "Columns added, nothing removed and no filter touched: the Billing tab's 90-day cash forecast (RF-1) needs stage_id, probability and expected_close_date to weight open deals with the same open-deal test the Pipeline tab uses. The row SET is identical — a widened select returns the same rows with more fields.",
+      "base": [
+        ".select(\"id, title, status, amount_usd_cents, amount_cents, currency, closed_at, archived_at\").limit(5000)"
+      ],
+      "head": [
+        ".select(\"id, title, status, stage_id, amount_usd_cents, amount_cents, currency, probability, closed_at, expected_close_date, archived_at\").limit(5000)"
+      ]
+    },
+    {
+      "file": "entities/crm/lib/revenue-metrics/pipeline.ts",
+      "table": "deals",
+      "why": "One column added, nothing removed and no filter touched: the lost-deals-by-reason card (RF-7) reads deals.lost_reason, which was already on the row and never selected. The row SET is identical.",
+      "base": [
+        ".select(\"id, stage_id, status, amount_usd_cents, amount_cents, currency, probability, source, created_at, closed_at, expected_close_date, archived_at\").limit(5000)"
+      ],
+      "head": [
+        ".select(\"id, stage_id, status, amount_usd_cents, amount_cents, currency, probability, source, created_at, closed_at, expected_close_date, lost_reason, archived_at\").limit(5000)"
+      ]
+    }
+  ]
+}

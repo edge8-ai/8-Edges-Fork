@@ -1,0 +1,12 @@
+{
+  "deleteOrders": 1,
+  "insertOrders": 3,
+  "insertTokenPurchases": 1,
+  "selectAffiliateCommissions": 4,
+  "selectBookings": 1,
+  "selectOrders": 4,
+  "selectSubscriptions": 1,
+  "updateAffiliateCommissions": 2,
+  "updateOrders": 5,
+  "updateTokenPurchases": 4
+}

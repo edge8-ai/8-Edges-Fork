@@ -1,0 +1,7 @@
+{
+  "insertEmailEvents": 1,
+  "selectEmailCampaignRecipients": 1,
+  "selectEmailCampaigns": 1,
+  "selectEmailMessages": 1,
+  "updateEmailCampaigns": 1
+}

@@ -1,0 +1,58 @@
+/* Your ladders (LD.2): the reader's own two ladders on My Profile, marked Only
+   you, on the profile's Overview tab since LD.6, each tier drawn as its emblem
+   in the game style. It sits on the profile page's card (.pe-card in
+   team-profile-edit.css) and reflows by the page's width (the dressed profile
+   is a container, .pf). Every colour is a token. */
+
+.yl-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.yl-private { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; white-space: nowrap; color: var(--color-grey-600); }
+.yl-private svg { flex: none; width: 14px; height: 14px; }
+.yl-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.yl-ladder { display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 16px; border-radius: 12px; background: var(--color-grey-50); }
+.yl-ladder p { margin: 0; }
+.yl-name { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-grey-500); }
+.yl-tier { font-size: 22px; font-weight: 800; letter-spacing: -.01em; color: var(--color-primary-dark); }
+/* The held tier's emblem (LD.6), with the division or the stars beneath it. */
+.yl-place { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.yl-beneath { font-size: 16px; font-weight: 800; letter-spacing: .06em; color: var(--color-primary-dark); }
+.yl-points { font-size: 14px; color: var(--color-grey-600); }
+.yl-points strong { font-size: 16px; color: var(--color-primary-dark); }
+/* The bar is a native progress element, drawn the same in every engine. */
+.yl-bar { appearance: none; display: block; width: 100%; height: 8px; margin: 4px 0 2px; border: 0; border-radius: 999px; background: var(--color-grey-200); overflow: hidden; }
+.yl-bar::-webkit-progress-bar { border-radius: 999px; background: var(--color-grey-200); }
+.yl-bar::-webkit-progress-value { border-radius: 999px; background: var(--color-primary-blue); }
+.yl-bar::-moz-progress-bar { border-radius: 999px; background: var(--color-primary-blue); }
+.yl-next { font-size: 13px; line-height: 1.4; color: var(--color-grey-600); }
+.yl-counts { font-size: 12px; line-height: 1.4; color: var(--color-grey-500); }
+
+.yl-tables { margin-top: 16px; }
+.yl-tables summary { min-height: 32px; display: flex; align-items: center; font-size: 13px; font-weight: 800; color: var(--color-info-ink); cursor: pointer; }
+.yl-tables-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
+.yl-tables-h { margin: 0 0 6px; font-size: 13px; font-weight: 800; color: var(--color-primary-dark); }
+.yl-tables ul { margin: 0 0 8px; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--color-grey-600); }
+.yl-starts { margin: 0 0 4px; font-size: 12px; line-height: 1.5; color: var(--color-grey-600); }
+.yl-hint { margin: 0; font-size: 12px; line-height: 1.4; color: var(--color-grey-500); }
+
+/* A phone: one ladder under the other. */
+@container (max-width: 560px) {
+  .yl-pair, .yl-tables-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The Show switch on each ladder (LD.4), the approved prototype's .wp-sw: a
+   36 by 22 track, mint when the tier is worn. The button is the whole label,
+   so "Show" is part of the target, and a phone gets the 44px hit height. */
+.yl-name-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.yl-wear { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.yl-wear-sw { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 2px; border: 0; background: none; font: inherit; font-size: 12px; font-weight: 700; color: var(--color-grey-600); cursor: pointer; }
+.yl-wear-track { position: relative; width: 36px; height: 22px; border-radius: 999px; background: var(--color-grey-400); flex: none; transition: background 160ms ease; }
+.yl-wear-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); box-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary-dark) 25%, transparent); transition: transform 160ms ease; }
+.yl-wear-sw[aria-checked="true"] .yl-wear-track { background: var(--color-accent-mint-bright); }
+.yl-wear-sw[aria-checked="true"] .yl-wear-track::after { transform: translateX(14px); }
+.yl-wear-sw:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; border-radius: 6px; }
+.yl-wear-err { font-size: 12px; font-weight: 600; color: var(--color-warn-ink); }
+@media (pointer: coarse) { .yl-wear-sw { min-height: 44px; } }
+/* The same switches on the profile's dark hero (LD.6): the emblems' on the
+   plaque and the display case's on each badge, owner's page only. */
+.pf-em .yl-wear-sw, .pf-tok .yl-wear-sw { color: var(--color-grey-700); }
+.pf-em .yl-wear-err { color: var(--color-warn-bg); }
+@media (prefers-reduced-motion: reduce) { .yl-wear-track, .yl-wear-track::after { transition: none; } }
