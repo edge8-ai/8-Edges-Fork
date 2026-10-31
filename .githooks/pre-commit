@@ -1,0 +1,25 @@
+#!/bin/sh
+# Lint what is about to be committed. The private-route rule in eslint.config.mjs
+# is what stops a hardcoded /workflows/private path at the keyboard instead of
+# at the fork mirror. Only staged .ts/.tsx/.mjs files, so it takes seconds.
+set -e
+# Khoa's security rail first: refuse one person's local or agent state before
+# lint even runs, because a leak is worse than a lint error and cheaper to check.
+bash scripts/check-personal-state.sh commit
+# .github/ is left to the fork build that compiles its overlay stubs.
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx|mjs)$' | grep -v '^\.github/' || true)
+if [ -n "$files" ]; then
+  echo "pre-commit: eslint on $(echo "$files" | wc -l | tr -d ' ') staged file(s)"
+  # Errors only (--quiet). Warnings belong to the lint-warning ratchet, which
+  # the pre-push gate runs over the whole tree against its baseline (AR-37).
+  # Refusing any warning here would block every commit touching a file that
+  # carries a baselined one, which the React Compiler rules Next 16 brings will
+  # do in B.18.3. This lands first because worktrees on this machine run the
+  # main checkout's copy of this hook, whatever branch they are on.
+  # shellcheck disable=SC2086
+  npx eslint --quiet $files
+fi
+# Chain to a locally installed hook of the same name, if any.
+local_hook="$(git rev-parse --git-common-dir)/hooks/pre-commit"
+[ -x "$local_hook" ] && exec "$local_hook" "$@"
+exit 0

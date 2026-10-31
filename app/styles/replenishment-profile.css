@@ -1,0 +1,72 @@
+/* The replenishment profile editor (RP.6, ProfileEditor.tsx): the approved
+   Profile board, ported with the product's tokens. The form is the admin's own
+   cards, fields and tables; these rules add only what the board has and the
+   admin does not: the save bar, the preview kept in view beside a long form,
+   a rule card that greys when turned off, the inline sentences ("Suggest 3
+   BINs, furthest first") and the preview's lists. Colours are tokens only. */
+
+.rp-profile-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end;
+  gap: var(--admin-space-3);
+  margin-bottom: var(--admin-space-3);
+}
+
+/* The preview stays beside the section being edited; on a narrow screen the
+   two columns stack and the preview follows the form. */
+.rp-profile-aside { position: sticky; top: var(--admin-space-4); min-width: 0; }
+@media (max-width: 960px) { .rp-profile-aside { position: static; } }
+
+/* A sentence with fields in it: the cut-off warning, the destinations. */
+.rp-profile-sentence { display: flex; flex-wrap: wrap; align-items: center; gap: var(--admin-space-2); }
+.rp-profile-sentence .admin-input,
+.rp-profile-sentence .admin-select { width: auto; }
+.rp-profile-num { width: 96px; max-width: 100%; }
+.rp-profile-code { width: 160px; max-width: 100%; }
+
+.rp-profile-zones { min-width: 760px; }
+.rp-profile-zones td { vertical-align: top; }
+.rp-profile-pattern { width: 40%; }
+/* A table cell sizes to its content, and an input fills its cell, so each
+   field is given the width its value needs. */
+.rp-profile-zones .admin-input,
+.rp-profile-bands .admin-input { min-width: 96px; }
+.rp-profile-zones td:first-child .admin-input,
+.rp-profile-bands td:first-child .admin-input { min-width: 140px; }
+.rp-profile-zones .admin-select,
+.rp-profile-bands .admin-select { min-width: 120px; }
+
+.rp-profile-try {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--admin-space-2) var(--admin-space-3);
+  margin-top: var(--admin-space-3);
+  padding: 10px 12px;
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface-2);
+}
+
+/* A list of text tests: what is left out, what a rule applies to, what it requires. */
+.rp-profile-tests {
+  display: flex; flex-direction: column; gap: var(--admin-space-2);
+  margin: var(--admin-space-3) 0 0; padding: 0; border: 0; min-width: 0;
+}
+.rp-profile-test { padding-bottom: var(--admin-space-2); border-bottom: 1px solid var(--admin-line-soft); }
+
+.rp-profile-rule {
+  padding: 14px 16px;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface);
+}
+.rp-profile-rule + .rp-profile-rule { margin-top: var(--admin-space-3); }
+.rp-profile-rule.is-off { background: var(--admin-surface-2); }
+.rp-profile-bands { min-width: 720px; }
+.rp-profile-bands td { vertical-align: top; }
+
+/* The preview's lists: a label and its count on one line. */
+.rp-profile-counts { display: flex; flex-direction: column; gap: var(--admin-space-1); margin: 0; }
+.rp-profile-counts li { display: flex; justify-content: space-between; gap: var(--admin-space-2); }
+.rp-profile-jobs { display: flex; flex-direction: column; gap: 6px; margin: 0; }
+.rp-profile-jobs li {
+  padding: 8px 10px;
+  border: 1px solid var(--admin-line-soft);
+  border-radius: var(--admin-radius-sm);
+}

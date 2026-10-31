@@ -1,0 +1,22 @@
+{
+  "$comment": [
+    "The smallest deployment the gates check, so exclusion is exercised rather than assumed: a client who bought the Workboard, with the client portal. ADR 0032 is measured by it.",
+    "Measured on 2026-10-30 with closureOf (scripts/check-deployment.mjs) and generateMounts (scripts/gen-app-mounts.mjs), after ADR 0032's edges changed kind: 10 entities and 180 mounts. Before, 11 entities, internal htt among them, and 188 mounts.",
+    "The Workboard alone now closes over 3 entities (boards, client-programs, contacts); before, 9. boards stopped requiring crm (crm files meeting actions through boards), and htt left with the portal's Human Tokens band, now htt's humanTokens slot (null here).",
+    "The other six entities here (billing, company-os, crm, finance, ideas, org) come from portal, the second root: its agreements and published meeting notes are crm's, its invoices finance's, its hours raise invoices through company-os, and its team panel reads org. crm brings billing; org brings ideas.",
+    "Everything absent is proof the catalogue can leave something out."
+  ],
+  "name": "minimal",
+  "entities": [
+    "billing",
+    "boards",
+    "client-programs",
+    "company-os",
+    "contacts",
+    "crm",
+    "finance",
+    "ideas",
+    "org",
+    "portal"
+  ]
+}

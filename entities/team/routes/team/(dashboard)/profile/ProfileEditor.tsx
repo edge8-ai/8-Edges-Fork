@@ -1,0 +1,248 @@
+"use client";
+
+// Everything the employee can edit about themselves (TH.9, approved on the
+// design canvas on 19 Oct 2026; split by LD.10 on 28 Oct 2026). The postcard
+// teammates see is the editor: the hometown, education, hobbies and photo
+// change in place on it, so what someone edits is exactly what is shown. Their
+// contact, payroll, ID and address are a second editor, DetailsEditor, which
+// the page puts under its own My details tab. On 28 Oct Khoa found his bank,
+// tax and ID numbers under the tab called Postcard: the two never share a tab
+// again.
+//
+// Text fields save together. The save bar appears only once something has
+// changed, with Discard beside Save, and a "Saved" note confirms it; a bar
+// that always says "Everything is saved" is noise. The photo and the two ID
+// images upload on pick, as before.
+//
+// Both editors save the whole record through saveOwnProfile, each starting
+// from the record as the server last drew it. That is safe because the page's
+// tabs mount one panel at a time (kernel/ui/Tabs): when one editor saves, the
+// other is not on the page, and it opens again from the refreshed record.
+import { useEffect, useState, useTransition, type ChangeEvent, type KeyboardEvent, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import type { MemberProfile } from "@/entities/team/lib/data";
+import { PersonPostcard, PostcardSticker } from "@/entities/team/ui/PersonPostcard";
+import { useAvatarUpload, type AvatarUploadResult } from "@/entities/team/ui/use-avatar-upload";
+import { ProfileFields } from "./ProfileFields";
+import { saveOwnProfile, type ProfileInput } from "./actions";
+
+type UploadResult = { ok: true } | { ok: false; error: string };
+
+const same = (a: ProfileInput, b: ProfileInput) => JSON.stringify(a) === JSON.stringify(b);
+
+/** The record being edited, what was last saved, and the save itself. */
+function useProfileDraft(initial: ProfileInput) {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+  const [saved, setSaved] = useState<ProfileInput>(initial);
+  const [v, setV] = useState<ProfileInput>(initial);
+  const [toast, setToast] = useState(false);
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(false), 2500);
+    return () => clearTimeout(t);
+  }, [toast]);
+
+  function set<K extends keyof ProfileInput>(key: K) {
+    return (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setV((s) => ({ ...s, [key]: e.target.value }));
+  }
+
+  function save() {
+    setError(null);
+    startTransition(async () => {
+      const res = await saveOwnProfile(v);
+      if (res.ok) {
+        setSaved(v);
+        setToast(true);
+        router.refresh();
+      } else {
+        setError(res.error);
+      }
+    });
+  }
+
+  return { v, setV, set, dirty: !same(v, saved), discard: () => setV(saved), save, pending, error, toast };
+}
+
+type Draft = ReturnType<typeof useProfileDraft>;
+
+function SaveBar({ draft }: { draft: Draft }) {
+  return (
+    <>
+      {draft.error && <div className="admin-alert admin-alert--err">{draft.error}</div>}
+      {draft.dirty && (
+        <div className="pe-save" role="region" aria-label="Unsaved changes">
+          <span className="pe-save-t">
+            <i aria-hidden="true" />
+            You have changes that are not saved yet
+          </span>
+          <div className="pe-save-acts">
+            <button type="button" className="admin-btn" disabled={draft.pending} onClick={draft.discard}>
+              Discard
+            </button>
+            <button type="button" className="admin-btn admin-btn--primary" disabled={draft.pending} onClick={draft.save}>
+              {draft.pending ? "Saving…" : "Save changes"}
+            </button>
+          </div>
+        </div>
+      )}
+      {draft.toast && (
+        <div className="pe-toast" role="status">
+          Saved
+        </div>
+      )}
+    </>
+  );
+}
+
+function Pen() {
+  return (
+    <svg className="pe-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 20h4L19 9l-4-4L4 16z M14 6l4 4" />
+    </svg>
+  );
+}
+
+/** The postcard, edited in place: the photo, hometown, education and hobbies, and nothing private. */
+export function ProfileEditor({
+  initial,
+  card,
+  orgName,
+  avatarAction,
+  nameLevel = 1,
+  badges,
+}: {
+  initial: ProfileInput;
+  /** The postcard as teammates see it; the editor draws its own fields over it. */
+  card: MemberProfile;
+  orgName: string | null;
+  avatarAction: (formData: FormData) => Promise<AvatarUploadResult>;
+  /** 2 when the page's h1 is elsewhere: the player card's name, or the Your profile heading. */
+  nameLevel?: 1 | 2;
+  /** The badge stickers the owner wears on the postcard (LD.7b), drawn on the server by the ladders. */
+  badges?: ReactNode;
+}) {
+  const draft = useProfileDraft(initial);
+  const { v, setV, set } = draft;
+  const [hobby, setHobby] = useState("");
+  const { inputRef: photoInput, pending: photoPending, url: photoUrl, error: photoError, onPick: onPhotoPick, pick: pickPhoto } = useAvatarUpload(card.avatarUrl, avatarAction);
+
+  // Add-on-Enter or comma; an empty entry is dropped and a duplicate ignored.
+  function addHobby() {
+    const t = hobby.trim().replace(/,$/, "").trim();
+    if (t && !v.hobbies.includes(t)) setV((s) => ({ ...s, hobbies: [...s.hobbies, t] }));
+    setHobby("");
+  }
+  function onHobbyKey(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+      addHobby();
+    } else if (e.key === "Backspace" && !hobby && v.hobbies.length) {
+      setV((s) => ({ ...s, hobbies: s.hobbies.slice(0, -1) }));
+    }
+  }
+
+  const shown: MemberProfile = { ...card, avatarUrl: photoUrl, hometown: v.hometown || null, education: v.education || null, hobbies: v.hobbies };
+
+  return (
+    <div className="pe">
+      <div className="tp-page">
+        <PersonPostcard
+          profile={shown}
+          orgName={orgName}
+          nameLevel={nameLevel}
+          badges={badges}
+          edit={{
+            photo: (
+              <>
+                <button type="button" className="pe-photo-btn" onClick={pickPhoto} disabled={photoPending}>
+                  {photoPending ? "Uploading…" : "Change photo"}
+                </button>
+                <input ref={photoInput} type="file" accept="image/jpeg,image/png,image/webp" hidden onChange={onPhotoPick} />
+              </>
+            ),
+            hometown: (
+              <span className="pe-edit">
+                <input className="pe-inl pe-inl-greet" aria-label="Hometown" value={v.hometown} onChange={set("hometown")} placeholder="Your hometown" />
+                <Pen />
+              </span>
+            ),
+            education: (
+              <span className="pe-edit">
+                <textarea className="pe-inl pe-inl-area" rows={1} aria-label="Education" value={v.education} onChange={set("education")} placeholder="Where you studied" />
+                <Pen />
+              </span>
+            ),
+            hobbies: (
+              <ul className="tp-stickers" aria-labelledby="tp-hobbies-label">
+                {v.hobbies.map((h, i) => (
+                  <PostcardSticker key={h} hobby={h} index={i}>
+                    <button type="button" className="pe-x" aria-label={`Remove ${h}`} onClick={() => setV((s) => ({ ...s, hobbies: s.hobbies.filter((x) => x !== h) }))}>
+                      ×
+                    </button>
+                  </PostcardSticker>
+                ))}
+                <li className="tp-sticker pe-add">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+                    <path d="M12 5v14 M5 12h14" />
+                  </svg>
+                  <input className="pe-add-in" aria-label="Add a hobby" value={hobby} onChange={(e) => setHobby(e.target.value)} onKeyDown={onHobbyKey} onBlur={addHobby} placeholder="Add a hobby" />
+                </li>
+              </ul>
+            ),
+          }}
+        />
+      </div>
+      {photoError && <p className="admin-alert admin-alert--err">{photoError}</p>}
+      <p className="pe-under">Your name, role, team and manager come from the company. Your private details are under My details.</p>
+      <SaveBar draft={draft} />
+    </div>
+  );
+}
+
+/** The private record: contact, emergency contact, about you, payroll, tax, ID and address. Never on the postcard. */
+export function DetailsEditor({
+  initial,
+  workEmail,
+  hasIdFront,
+  hasIdBack,
+  idFrontAction,
+  idBackAction,
+}: {
+  initial: ProfileInput;
+  workEmail: string | null;
+  hasIdFront: boolean;
+  hasIdBack: boolean;
+  idFrontAction: (formData: FormData) => Promise<UploadResult>;
+  idBackAction: (formData: FormData) => Promise<UploadResult>;
+}) {
+  const draft = useProfileDraft(initial);
+  return (
+    <div className="pe pe-details">
+      <div className="pe-private" role="note">
+        <span className="pe-private-ico" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="5" y="11" width="14" height="10" rx="2" />
+            <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+          </svg>
+        </span>
+        <div>
+          <p className="pe-private-h">Teammates never see this</p>
+          <p className="pe-private-p">It is kept on file to pay you and to reach someone in an emergency. None of it is on your postcard or your profile. We email you whenever your bank details change.</p>
+        </div>
+      </div>
+      <ProfileFields
+        v={draft.v}
+        set={draft.set}
+        workEmail={workEmail}
+        hasIdFront={hasIdFront}
+        hasIdBack={hasIdBack}
+        idFrontAction={idFrontAction}
+        idBackAction={idBackAction}
+      />
+      <SaveBar draft={draft} />
+    </div>
+  );
+}

@@ -1,0 +1,25 @@
+{
+  "$comment": "See the header of scripts/check-portability.mjs. This file may only shrink.",
+  "known": [
+    {
+      "edge": "entities/portal/lib/program-hub.ts -> table pull_requests",
+      "reason": "Predates the table half (ADR 0033). The program hub's PR highlights read the Human Token Tracker; ADR 0031 makes every Human Tokens surface a slot htt provides, which is ADR 0032's card."
+    },
+    {
+      "edge": "entities/portal/lib/program-hub.ts -> table repos",
+      "reason": "Predates the table half (ADR 0033). The program hub finds the program's repos in the Human Token Tracker; ADR 0031 makes every Human Tokens surface a slot htt provides, which is ADR 0032's card."
+    },
+    {
+      "edge": "entities/team/lib/hub-program-prs.ts -> table pull_requests",
+      "reason": "Predates the table half (ADR 0033). The Team hub's PR story reads the Human Token Tracker (backlog M28); ADR 0031 makes every Human Tokens surface a slot htt provides, which is ADR 0032's card."
+    },
+    {
+      "edge": "entities/team/lib/hub-program.ts -> table man_hour_entries",
+      "reason": "Predates the table half (ADR 0033), and was missing from ADR 0031's list. The Team hub's program page reads hours from the Human Token Tracker; it becomes a slot htt provides, which is ADR 0032's card."
+    },
+    {
+      "edge": "entities/team/lib/hub-program.ts -> table pull_requests",
+      "reason": "Predates the table half (ADR 0033), and was missing from ADR 0031's list. The Team hub's program page counts merged PRs from the Human Token Tracker; it becomes a slot htt provides, which is ADR 0032's card."
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+/* The team Inbox (TH.8, approved on the design canvas on 18 Oct 2026): the one
+   place work communication lands. A greeting that says whether anyone is
+   waiting, asks from teammates first with their faces, the routine's reminders
+   below them in a box of bounded height grouped by date and card, what happened,
+   and a rail with the count rule and the settings. The concept is paper planes:
+   messages land here. Every colour is a token; translucent ones are mixed from
+   tokens. The page reflows by its own width (container queries), because the
+   team sidebar makes the content far narrower than the window. */
+
+.ti-page { container-type: inline-size; color: var(--color-primary-dark); }
+.ti { display: flex; flex-direction: column; gap: 18px; }
+.ti-card { background: var(--color-bg-primary); border: 1px solid var(--color-card-border); border-radius: 14px; box-shadow: var(--color-elevation-1); }
+
+/* ── The greeting ────────────────────────────────────────────────────── */
+.ti-hero { position: relative; overflow: hidden; padding: 24px 26px 20px; border-radius: 16px; border: 1px solid var(--color-accent-line);
+  background: linear-gradient(115deg, var(--color-info-bg) 0, var(--color-accent-soft) 45%, var(--color-bg-primary) 100%); box-shadow: var(--color-elevation-1); }
+.ti-hero-art { position: absolute; right: 18px; top: 10px; width: 300px; height: 150px; pointer-events: none; }
+.ti-trail { stroke: color-mix(in srgb, var(--color-primary-blue) 45%, var(--color-bg-primary)); }
+.ti-plane { fill: var(--color-bg-primary); stroke: var(--color-primary-blue); }
+.ti-plane-fold { fill: var(--color-accent-line); stroke: var(--color-primary-blue); }
+.ti-spark { fill: var(--color-sky-picked); }
+.ti-spark-blue { fill: color-mix(in srgb, var(--color-primary-blue) 45%, var(--color-bg-primary)); }
+.ti-hello { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--color-info-ink); }
+.ti-head { position: relative; margin: 6px 0 0; max-width: 640px; font-size: 30px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; }
+.ti-sub { position: relative; margin: 8px 0 0; max-width: 600px; font-size: 15px; line-height: 1.5; color: var(--color-grey-600); }
+.ti-chips { position: relative; margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.ti-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px; white-space: nowrap; border: 1px solid var(--color-accent-line); border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg-primary) 85%, transparent); font: inherit; font-size: 13px; font-weight: 700; color: var(--color-grey-600); cursor: pointer; }
+.ti-chip b { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 6px; box-sizing: border-box; border-radius: 999px; background: var(--color-grey-150); color: var(--color-primary-dark); font-size: 11px; font-weight: 800; }
+.ti-chip[aria-pressed="true"] { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: var(--color-bg-primary); }
+.ti-chip[aria-pressed="true"] b { background: color-mix(in srgb, var(--color-bg-primary) 20%, transparent); color: var(--color-bg-primary); }
+
+/* ── The two columns ─────────────────────────────────────────────────── */
+.ti-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; align-items: start; }
+.ti-col, .ti-rail { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.ti-sec { padding: 18px 18px 10px; }
+.ti-sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.ti-sec-head > :first-child { min-width: 0; }
+.ti-sec-head .ti-pill { flex: none; white-space: nowrap; }
+.ti-k { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-grey-500); }
+.ti-h { margin: 3px 0 0; font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
+.ti-acts { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ti-pill { display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; background: var(--color-err-bg); color: var(--color-err-ink); font-size: 12px; font-weight: 800; }
+.ti-pill-calm { background: var(--color-grey-150); color: var(--color-grey-600); }
+.ti-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 14px; white-space: nowrap; border: 0; border-radius: 10px; background: var(--color-primary-blue);
+  color: var(--color-bg-primary); font: inherit; font-size: 13px; font-weight: 800; text-decoration: none; cursor: pointer; }
+.ti-btn:hover, .ti-page a.ti-btn:hover { background: var(--color-primary-blue-hover); color: var(--color-bg-primary); }
+.ti-page a.ti-btn { color: var(--color-bg-primary); text-decoration: none; }
+.ti-page a.ti-btn-ghost { color: var(--color-primary-dark); }
+.ti-page a.ti-btn-ghost:hover { background: var(--color-grey-50); color: var(--color-primary-dark); }
+.ti-btn-ghost { background: var(--color-bg-primary); color: var(--color-primary-dark); border: 1px solid var(--color-card-border); }
+.ti-btn-ghost:hover { background: var(--color-grey-50); color: var(--color-primary-dark); }
+.ti-icbtn { position: relative; z-index: 2; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-card-border); border-radius: 10px;
+  background: var(--color-bg-primary); color: var(--color-grey-600); cursor: pointer; }
+.ti-icbtn:hover { border-color: var(--color-ok-strong); color: var(--color-ok-strong); }
+.ti-icbtn .admin-icon { width: 18px; height: 18px; }
+.ti button:disabled { opacity: .6; cursor: default; }
+.ti-chip:focus-visible, .ti-link:focus-visible, .ti-btn:focus-visible, .ti-icbtn:focus-visible, .ti-box:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; }
+.ti-keys { margin: 8px 0 6px; font-size: 12px; color: var(--color-grey-500); }
+
+/* A row's title is the whole row's link: its ::after covers the row, and the
+   buttons sit above it, so the row opens wherever it is clicked. */
+.ti-page a.ti-link, .ti-page a.ti-link:hover { color: inherit; text-decoration: none; }
+.ti-link::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
+
+/* ── From teammates ──────────────────────────────────────────────────── */
+.ti-ask { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 4px; border-top: 1px solid var(--color-grey-150); border-radius: 10px; }
+.ti-ask:first-child { border-top: 0; }
+.ti-ask:hover { background: color-mix(in srgb, var(--color-accent-soft) 60%, var(--color-bg-primary)); }
+.ti-av { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--color-info-bg); color: var(--color-info-ink); font-size: 14px; font-weight: 800; }
+.ti-av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ti-av .admin-icon { width: 20px; height: 20px; }
+.ti-ask-t { margin: 0; font-size: 15px; line-height: 1.4; font-weight: 700; }
+.ti-ask.is-unread .ti-ask-t::before { content: ""; display: inline-block; width: 8px; height: 8px; margin: 0 8px 2px 0; border-radius: 50%; background: var(--color-primary-blue); }
+.ti-quote { margin: 8px 0 0; padding: 10px 12px; border-radius: 4px 12px 12px 12px; background: var(--color-grey-75); font-size: 14px; line-height: 1.45; color: var(--color-primary-dark); overflow-wrap: anywhere; }
+.ti-quote.is-handover { background: var(--color-accent-soft); }
+.ti-meta { margin: 6px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; color: var(--color-grey-500); }
+.ti-ask-acts { position: relative; z-index: 2; display: flex; align-items: center; gap: 6px; }
+.ti-empty { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 18px; align-items: center; padding: 14px 4px 18px; }
+.ti-empty-h { margin: 0; font-size: 16px; font-weight: 800; }
+.ti-empty-p { margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: var(--color-grey-600); }
+.ti-ground { stroke: var(--color-card-border); }
+
+/* ── Decisions (TH.11): drawn by time-off's InboxDecisionsList ────────── */
+.ti-dec { padding: 14px 4px; border-top: 1px solid var(--color-grey-150); }
+.ti-dec:first-of-type { border-top: 0; }
+.ti-dec-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.ti-dec-main { min-width: 0; flex: 1 1 200px; }
+.ti-dec-eyebrow { margin: 0 0 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ti-dec-subject { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--color-grey-600); }
+.ti-reach { display: inline-flex; align-items: center; min-height: 20px; padding: 0 8px; border-radius: 999px; background: var(--color-grey-150); color: var(--color-grey-600); font-size: 11px; font-weight: 800; }
+.ti-reach-warn { background: var(--color-amber-bg); color: var(--color-amber-ink); }
+.ti-dec-title { margin: 0; font-size: 15px; line-height: 1.4; font-weight: 800; overflow-wrap: anywhere; }
+.ti-whose { color: var(--color-primary-dark); font-weight: 800; }
+.ti-dec-acts { flex: none; }
+.ti-facts { margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--color-grey-50); display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px 14px; }
+.ti-facts dt { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-grey-500); }
+.ti-facts dd { margin: 2px 0 0; font-size: 14px; font-weight: 700; overflow-wrap: anywhere; }
+.ti-dec-empty { padding: 6px 4px 12px; }
+
+/* ── Past their date ─────────────────────────────────────────────────── */
+.ti-intro { margin: 0 0 12px; font-size: 14px; line-height: 1.5; color: var(--color-grey-600); }
+.ti-tallies { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 6px; padding: 0; list-style: none; }
+.ti-tally { display: flex; align-items: center; gap: 10px; padding: 6px 12px 6px 6px; border: 1px solid var(--color-grey-150); border-radius: 12px; }
+.ti-leaf { flex: none; width: 42px; overflow: hidden; border: 1px solid var(--color-card-border); border-radius: 8px; text-align: center; background: var(--color-bg-primary); }
+.ti-leaf-dow { display: block; padding: 2px 0; background: var(--color-grey-600); color: var(--color-bg-primary); font-size: 9px; font-weight: 800; letter-spacing: .08em; }
+.ti-leaf-dd { display: block; padding: 2px 0 3px; font-size: 17px; font-weight: 800; line-height: 1.1; }
+.ti-tally-n { display: block; font-size: 14px; font-weight: 800; }
+.ti-tally-l { display: block; font-size: 12px; color: var(--color-grey-500); }
+.ti-cleared { margin: 4px 0 0; display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.45; color: var(--color-grey-600); }
+.ti-cleared .admin-icon { flex: none; width: 16px; height: 16px; margin-top: 1px; color: var(--color-ok-strong); }
+/* The list never grows the page (Khoa, 18 Oct): every reminder stays in it,
+   and past this height it scrolls inside its own box. The soft shadows at the
+   top and bottom appear only while there is more to scroll to. */
+.ti-box { margin-top: 12px; max-height: 440px; overflow-y: auto; overscroll-behavior: contain; padding: 0 10px 8px; border: 1px solid var(--color-grey-150); border-radius: 12px;
+  background:
+    linear-gradient(var(--color-bg-primary) 30%, transparent) top / 100% 24px no-repeat local,
+    linear-gradient(color-mix(in srgb, var(--color-primary-dark) 10%, transparent), transparent) top / 100% 8px no-repeat scroll,
+    linear-gradient(transparent, var(--color-bg-primary) 70%) bottom / 100% 24px no-repeat local,
+    linear-gradient(transparent, color-mix(in srgb, var(--color-primary-dark) 10%, transparent)) bottom / 100% 8px no-repeat scroll; }
+.ti-date { padding-top: 12px; }
+.ti-date + .ti-date { margin-top: 12px; border-top: 1px solid var(--color-grey-150); }
+.ti-date-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+.ti-date-h { display: flex; align-items: baseline; gap: 10px; margin: 0; font-size: 15px; font-weight: 800; }
+.ti-date-n { font-size: 13px; font-weight: 600; color: var(--color-grey-500); }
+.ti-due { position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 44px; padding: 4px; border-radius: 10px; }
+.ti-due:hover { background: var(--color-grey-50); }
+.ti-due-ico { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: var(--color-grey-400); }
+.ti-due-ico .admin-icon { width: 17px; height: 17px; }
+.ti-due-t { font-size: 14px; font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+.ti-kids .ti-due-t { font-weight: 500; color: var(--color-grey-600); }
+.ti-due.is-unread .ti-due-t::after { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 0 2px 8px; border-radius: 50%; background: var(--color-primary-blue); }
+.ti-parent { display: flex; align-items: center; gap: 8px; min-height: 32px; margin: 0; padding: 0 4px; font-size: 12px; font-weight: 800; color: var(--color-grey-500); }
+.ti-parent .admin-icon { width: 14px; height: 14px; }
+.ti-kids { margin-left: 15px; padding-left: 14px; border-left: 2px solid var(--color-grey-150); }
+.ti-clear { border-color: transparent; background: transparent; color: var(--color-grey-400); }
+.ti-clear:hover { border-color: var(--color-card-border); background: var(--color-bg-primary); color: var(--color-ok-strong); }
+
+/* ── What happened, drawn by the admin Inbox's rows ──────────────────── */
+.ti-updates .inbox-day-label { margin: 12px 0 4px; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-grey-500); }
+.ti-updates .inbox-row { border-radius: 10px; }
+.ti-updates .inbox-row:hover { background: var(--color-grey-50); }
+.ti-updates .inbox-quote { border-radius: 4px 12px 12px 12px; background: var(--color-grey-75); }
+
+/* ── The rail ────────────────────────────────────────────────────────── */
+.ti-panel { padding: 18px; }
+.ti-rule { margin: 12px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.ti-rule-row { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 13px; line-height: 1.45; color: var(--color-grey-600); }
+.ti-rule-row b { color: var(--color-primary-dark); }
+.ti-rule-mark { display: flex; align-items: center; justify-content: center; width: 30px; height: 22px; }
+.ti-rule-mark .admin-nav-count { margin: 0; }
+.ti-rule-quiet { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--color-grey-400); }
+.ti-rail .admin-card { border-radius: 14px; box-shadow: var(--color-elevation-1); }
+
+.ti-toast { position: fixed; z-index: 60; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; padding: 10px 12px 10px 16px; border-radius: 12px;
+  background: var(--color-primary-dark); color: var(--color-bg-primary); font-size: 14px; font-weight: 700; box-shadow: var(--color-elevation-2); }
+.ti-toast button { min-height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: color-mix(in srgb, var(--color-bg-primary) 15%, transparent); color: var(--color-bg-primary); font: inherit; font-weight: 800; cursor: pointer; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ti-chip, .ti-ask, .ti-due, .ti-icbtn, .ti-btn { transition: background-color .15s ease, border-color .15s ease, color .15s ease; }
+}
+
+/* The rail goes under the lists when the content is narrower than both. */
+@container (max-width: 860px) {
+  .ti-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* A phone. */
+@container (max-width: 560px) {
+  .ti { gap: 14px; }
+  .ti-hero { padding: 18px 16px 16px; border-radius: 14px; }
+  .ti-hero-art { width: 170px; height: 85px; right: -28px; top: -6px; opacity: .55; }
+  .ti-head { font-size: 24px; padding-right: 24px; }
+  .ti-sub { font-size: 14px; }
+  .ti-chips { flex-wrap: nowrap; overflow-x: auto; margin-right: -16px; padding-right: 16px; scrollbar-width: none; }
+  .ti-chip { flex: none; min-height: 44px; }
+  .ti-sec { padding: 16px 14px 8px; }
+  .ti-sec-head .ti-k { letter-spacing: .06em; }
+  .ti-ask { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; }
+  .ti-dec-acts { width: 100%; }
+  .ti-dec-acts .ti-btn { flex: 1; }
+  .ti-av { width: 40px; height: 40px; }
+  .ti-ask-acts { grid-column: 2; gap: 8px; }
+  .ti-btn { min-height: 44px; padding: 0 16px; }
+  .ti-icbtn { width: 44px; height: 44px; }
+  .ti-empty { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .ti-empty svg { width: 96px; height: 68px; }
+  .ti-date-head .ti-acts { width: 100%; }
+  .ti-date-head .ti-btn { flex: 1; }
+  .ti-due { grid-template-columns: 20px minmax(0, 1fr) 44px; gap: 8px; }
+  .ti-kids { margin-left: 9px; padding-left: 10px; }
+  .ti-box { max-height: 420px; padding: 0 6px 6px; }
+  .ti-keys { display: none; }
+  .ti-toast { left: 16px; right: 16px; bottom: 16px; transform: none; justify-content: space-between; }
+}

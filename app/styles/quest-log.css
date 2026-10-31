@@ -1,0 +1,20 @@
+/* The quest log (LD.6; QS.3's self audience), drawn by
+   entities/quests/ui/QuestLog.tsx on the profile's Quest log tab: the reader's
+   own quests, newest first, each with their Standing on each head. Seen by its
+   owner alone. Every colour is a token. */
+
+.ql { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ql-row { padding: 14px 16px; border-radius: 12px; border: 1px solid var(--admin-line); background: var(--admin-surface); }
+.ql-top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.ql-kind { flex: none; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; background: var(--color-grey-100); color: var(--color-primary-dark); }
+.ql-kind--bounty { background: var(--color-violet-soft); }
+.ql-kind--raid { background: var(--color-warn-bg); }
+.ql-kind--beacon { background: var(--color-info-bg); }
+.ql-title { flex: 1; min-width: 0; margin: 0; font-size: 15px; font-weight: 700; color: var(--color-primary-dark); overflow-wrap: anywhere; }
+.ql-when { font-size: 12px; color: var(--color-grey-600); }
+.ql-heads { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.ql-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--color-grey-600); }
+.ql-ask { min-width: 0; overflow-wrap: anywhere; }
+.ql-standing { flex: none; margin-left: auto; font-weight: 700; color: var(--color-primary-dark); }
+.ql-head--missed .ql-standing { color: var(--color-grey-600); }
+.ql-empty { margin: 0; padding: 26px; border: 1.5px dashed var(--admin-line-strong); border-radius: 12px; text-align: center; font-size: 14px; color: var(--color-grey-600); background: var(--admin-surface); }

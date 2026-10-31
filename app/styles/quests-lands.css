@@ -1,0 +1,60 @@
+/* Lands for you on /team/quests (QS.15; prototype version 10, "the rail
+   beside a section's heading" and "a small drop when an act lands"). The rail
+   sits beside the heading of Campfires, the Lore and Lighthouses: the points
+   large on the left, the tier before and after, the next badges with their
+   rarity word and the reader's own count, and the Title to wear under a rule.
+   It takes the whole row under 1100 pixels and tightens on a phone. The drop
+   is placed where the act landed: under the Lore composer (quests.css), by
+   the fire just lit, and on the horizon. Kept in its own file beside
+   quests.css so the Quests sections building in parallel do not share these
+   lines. Colours are the product's tokens; a rarity takes the catalogue's
+   tokens (ladders-badges.md section 4), never the growth greens, so a badge
+   never looks like a rank; every motion stills under prefers-reduced-motion
+   (quests.css). */
+.qn-loot { flex: 0 1 470px; min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 14px; align-items: center; padding: 12px 14px; border-radius: var(--admin-radius); background: var(--admin-surface); border: 1px solid var(--admin-line); box-shadow: var(--admin-shadow); }
+.qn-loot--fire { background: linear-gradient(160deg, var(--color-quest-sky-violet-haze), var(--admin-surface) 60%); border-color: color-mix(in srgb, var(--color-violet) 22%, var(--color-bg-primary)); }
+.qn-loot--beacon { background: linear-gradient(160deg, color-mix(in srgb, var(--color-info-bg) 60%, var(--color-bg-primary)), var(--admin-surface) 60%); border-color: color-mix(in srgb, var(--color-info-ink) 20%, var(--color-bg-primary)); }
+.qn-loot--learn { background: linear-gradient(160deg, var(--color-growth-soft), var(--admin-surface) 60%); border-color: var(--color-growth-line); }
+.qn-loot-lbl { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 5px; flex-wrap: wrap; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-grey-600); }
+.qn-loot-only { font-weight: 500; letter-spacing: 0; text-transform: none; }
+.qn-loot-pts { grid-row: 2 / span 3; align-self: start; display: flex; flex-direction: column; line-height: 1; font-size: 34px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--admin-ink); }
+.qn-loot-pts small { font-size: 11px; font-weight: 600; color: var(--color-grey-600); letter-spacing: 0; margin-top: 4px; }
+.qn-loot--fire .qn-loot-pts { color: var(--color-violet-ink); }
+.qn-loot--beacon .qn-loot-pts { color: var(--color-info-ink); }
+.qn-loot--learn .qn-loot-pts { color: var(--color-growth-deep); }
+.qn-loot-tier { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--color-grey-600); min-width: 0; }
+.qn-loot-tier b { color: var(--admin-ink); font-weight: 800; }
+.qn-loot-tier em { font-style: normal; color: var(--color-grey-600); font-weight: 600; }
+.qn-loot-tier em.qn-loot-new { color: var(--color-violet-ink); }
+.qn-loot-helm { display: inline-flex; flex: none; width: 24px; }
+.qn-loot-helm img, .qn-loot-helm svg { display: block; width: 24px; height: auto; }
+.qn-loot-badges { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.qn-bd { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px 5px 6px; border-radius: 999px; border: 1px dashed var(--admin-line-strong); background: var(--admin-surface); font-size: 12px; color: var(--color-grey-600); max-width: 100%; }
+.qn-bd-ic { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--admin-surface-2); color: var(--color-grey-600); flex: none; }
+.qn-bd-t { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0; }
+.qn-bd-t b { color: var(--admin-ink); font-weight: 700; }
+.qn-bd-t small { font-size: 11px; color: var(--color-grey-600); font-variant-numeric: tabular-nums; }
+.qn-rar { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border-radius: 999px; background: var(--color-grey-100); color: var(--color-grey-800); }
+.qn-rar--uncommon { background: var(--color-quest-sky-mint); color: var(--color-primary-dark); }
+.qn-rar--rare { background: var(--color-info-bg); color: var(--color-info-ink); }
+.qn-rar--epic { background: var(--color-violet-soft); color: var(--color-violet-ink); }
+.qn-rar--legendary { background: var(--color-amber-bg); color: var(--color-amber-ink); }
+.qn-loot-title { grid-column: 2; display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--color-grey-600); padding-top: 6px; border-top: 1px solid var(--admin-line-soft); }
+.qn-loot-title b { color: var(--admin-ink); }
+
+/* the drop where the act landed: its points first in mint, the new tier before them */
+.qn-drop em { font-style: normal; color: var(--mint); font-variant-numeric: tabular-nums; }
+.qn-fire .qn-drop { right: 12px; top: -12px; }
+.qn-horizon .qn-drop { left: 0; right: 0; top: 12px; width: max-content; margin-inline: auto; }
+.qn-shared.qn-drop--line { position: static; display: inline-block; margin: 0 0 8px; }
+.qn-none .qn-shared.qn-drop--line { margin: 8px 0 0 8px; }
+/* The plain empty row is a flex row (QS.14): its drop sits on the line, centred with it. */
+.qn-out-empty .qn-shared.qn-drop--line { margin: 0; }
+
+@media (max-width: 1100px) {
+  .qn-loot { flex-basis: 100%; }
+}
+@media (max-width: 600px) {
+  .qn-loot { padding: 12px; gap: 8px 12px; }
+  .qn-loot-pts { font-size: 28px; }
+}

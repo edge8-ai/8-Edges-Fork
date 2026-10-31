@@ -1,0 +1,40 @@
+<svg width="680" height="610" viewBox="0 0 680 610" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>The central database: one identity core, four offices</title>
+<desc>A shared identity core feeds four offices, Talent, Operations, Innovation and Revenue, each with its own tables.</desc>
+<style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}.en{font-size:12px}</style>
+<rect width="680" height="610" rx="20" fill="#04102D"/>
+<rect x="40" y="40" width="600" height="96" rx="14" fill="#0B2247" stroke="rgba(111,242,193,0.4)" stroke-width="1"/>
+<rect x="54" y="40" width="572" height="3" rx="1.5" fill="#6FF2C1"/>
+<text class="ff eb" x="64" y="68" fill="#6FF2C1" font-size="11" font-weight="500">SHARED IDENTITY CORE · THE CENTRAL DATABASE</text>
+<text class="ff" x="64" y="96" fill="#FFFFFF" font-size="13.5" font-weight="500">people · companies · brands · legal_entities · interactions · integrations</text>
+<text class="ff" x="64" y="118" fill="rgba(255,255,255,0.5)" font-size="12">one identity spine every office reads from, a person relates to many brands</text>
+<rect x="40" y="156" width="290" height="196" rx="14" fill="#0A1A38" stroke="#D1458B" stroke-width="1.5"/>
+<text class="ff" x="60" y="190" fill="#E06AA6" font-size="18" font-weight="600">Talent</text>
+<text class="ff" x="60" y="210" fill="rgba(255,255,255,0.5)" font-size="12.5">who powers the company</text>
+<text class="ff en" x="60" y="244" fill="rgba(255,255,255,0.72)">team_members · departments · roles</text>
+<text class="ff en" x="60" y="266" fill="rgba(255,255,255,0.72)">candidates · applications · interviews</text>
+<text class="ff en" x="60" y="288" fill="rgba(255,255,255,0.72)">one_on_ones · performance · goals</text>
+<text class="ff en" x="60" y="310" fill="rgba(255,255,255,0.72)">skills · coaching · compensation</text>
+<rect x="350" y="156" width="290" height="196" rx="14" fill="#0A1A38" stroke="#6FF2C1" stroke-width="1.5"/>
+<text class="ff" x="370" y="190" fill="#6FF2C1" font-size="18" font-weight="600">Operations</text>
+<text class="ff" x="370" y="210" fill="rgba(255,255,255,0.5)" font-size="12.5">how the company runs</text>
+<text class="ff en" x="370" y="244" fill="rgba(255,255,255,0.72)">projects · tasks · milestones</text>
+<text class="ff en" x="370" y="266" fill="rgba(255,255,255,0.72)">meetings · action items (Thoughtflow)</text>
+<text class="ff en" x="370" y="288" fill="rgba(255,255,255,0.72)">processes · playbooks · vendors</text>
+<text class="ff en" x="370" y="310" fill="rgba(255,255,255,0.72)">tools · expenses · ledger</text>
+<rect x="40" y="372" width="290" height="196" rx="14" fill="#0A1A38" stroke="#FF6B35" stroke-width="1.5"/>
+<text class="ff" x="60" y="406" fill="#FF8B5E" font-size="18" font-weight="600">Innovation</text>
+<text class="ff" x="60" y="426" fill="rgba(255,255,255,0.5)" font-size="12.5">what the company creates</text>
+<text class="ff en" x="60" y="460" fill="rgba(255,255,255,0.72)">products · apps · experiments</text>
+<text class="ff en" x="60" y="482" fill="rgba(255,255,255,0.72)">content · courses · curriculum</text>
+<text class="ff en" x="60" y="504" fill="rgba(255,255,255,0.72)">ip · frameworks · knowledge base</text>
+<text class="ff en" x="60" y="526" fill="rgba(255,255,255,0.72)">prompt &amp; agent library · roadmap</text>
+<rect x="350" y="372" width="290" height="196" rx="14" fill="#0A1A38" stroke="#287BE8" stroke-width="1.5"/>
+<text class="ff" x="370" y="406" fill="#5AA0F5" font-size="18" font-weight="600">Revenue</text>
+<text class="ff" x="370" y="426" fill="rgba(255,255,255,0.5)" font-size="12.5">how the company earns</text>
+<text class="ff en" x="370" y="460" fill="rgba(255,255,255,0.72)">pipelines · deals · inquiries</text>
+<text class="ff en" x="370" y="482" fill="rgba(255,255,255,0.72)">products · orders · subscriptions</text>
+<text class="ff en" x="370" y="504" fill="rgba(255,255,255,0.72)">events · bookings · memberships</text>
+<text class="ff en" x="370" y="526" fill="rgba(255,255,255,0.72)">affiliates · partners · campaigns</text>
+<text class="ff" x="340" y="592" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="11.5">Four offices · one identity spine · every table reads from the core</text>
+</svg>

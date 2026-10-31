@@ -1,0 +1,31 @@
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Speed exposes bad process</title>
+<desc>Three weaknesses that were tolerable at human speed, knowledge in one person's head, a team leaning on one superstar, and workflows nobody wrote down, are revealed under the speed of AI as poor business practice.</desc>
+<style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}</style>
+<rect width="680" height="420" rx="20" fill="#04102D"/>
+<text class="ff eb" x="340" y="56" text-anchor="middle" fill="#6FF2C1" font-size="12" font-weight="500">WHY NOW</text>
+<text class="ff" x="340" y="96" text-anchor="middle" fill="#FFFFFF" font-size="28" font-weight="600">Speed exposes bad process</text>
+<text class="ff" x="340" y="124" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="14">AI didn't lower the standard. It made the gap impossible to ignore.</text>
+<g class="ff">
+ <text class="eb" x="45" y="172" fill="rgba(255,255,255,0.45)" font-size="11" font-weight="500">TOLERABLE AT HUMAN SPEED</text>
+ <rect x="45" y="184" width="300" height="52" rx="12" fill="#0A1A38" stroke="rgba(90,160,245,0.4)" stroke-width="1.5"/>
+ <text x="67" y="215" fill="rgba(255,255,255,0.78)" font-size="14">Knowledge in one person's head</text>
+ <rect x="45" y="246" width="300" height="52" rx="12" fill="#0A1A38" stroke="rgba(90,160,245,0.4)" stroke-width="1.5"/>
+ <text x="67" y="277" fill="rgba(255,255,255,0.78)" font-size="14">A team leaning on one superstar</text>
+ <rect x="45" y="308" width="300" height="52" rx="12" fill="#0A1A38" stroke="rgba(90,160,245,0.4)" stroke-width="1.5"/>
+ <text x="67" y="339" fill="rgba(255,255,255,0.78)" font-size="14">Workflows nobody wrote down</text>
+
+ <text class="eb" x="387" y="256" text-anchor="middle" fill="#6FF2C1" font-size="10" font-weight="500">AI SPEED</text>
+ <path d="M357 272 H420" stroke="#6FF2C1" stroke-width="2"/>
+ <path d="M414 266 L422 272 L414 278 Z" fill="#6FF2C1"/>
+
+ <rect x="430" y="184" width="205" height="176" rx="14" fill="#0A1A38" stroke="#D1458B" stroke-width="2"/>
+ <text class="eb" x="452" y="216" fill="#E06AA6" font-size="11" font-weight="500">EXPOSED</text>
+ <text x="452" y="246" fill="#FFFFFF" font-size="18" font-weight="600">Poor business</text>
+ <text x="452" y="268" fill="#FFFFFF" font-size="18" font-weight="600">practice</text>
+ <text x="452" y="302" fill="rgba(255,255,255,0.55)" font-size="12.5">It always was. The</text>
+ <text x="452" y="320" fill="rgba(255,255,255,0.55)" font-size="12.5">speed of AI just</text>
+ <text x="452" y="338" fill="rgba(255,255,255,0.55)" font-size="12.5">turned up the volume.</text>
+</g>
+<text class="ff" x="340" y="398" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="13.5">The starfighter is unflyable without AI in the loop. So is your company now.</text>
+</svg>

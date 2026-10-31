@@ -1,0 +1,45 @@
+/* The manager report (QS.3; ADR 0020), drawn by entities/quests/ui/QuestReport.tsx
+   at /admin/talent/quests, as Khoa approved its prototype on 2026-10-27: the
+   Bounty picker with the quest's facts beside it, the table in its box, and a
+   footnote. The table and the pills are the admin ones; this sheet only lays
+   out what they sit in. Every colour is a token. */
+
+.qr { display: flex; flex-direction: column; gap: var(--admin-space-4); }
+.qr-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.qr-pick { display: flex; flex-direction: column; gap: 6px; margin: 0; min-width: 0; }
+.qr-pick-label { font-size: 12px; color: var(--admin-muted); }
+.qr-pick .qr-pick-select { width: auto; min-width: 360px; max-width: 100%; height: 40px; }
+.qr-meta { margin: 0; padding-bottom: 10px; font-size: 12px; color: var(--admin-muted); }
+
+/* A head's ask is a sentence, so the header row says it as written. */
+.admin-table.qr-table thead th { text-transform: none; letter-spacing: 0; }
+
+.qr-empty { margin: 0; padding: 40px; font-size: 13px; color: var(--admin-muted); }
+.qr-foot { margin: 0; font-size: 12px; color: var(--admin-muted); }
+
+/* On a phone the picker takes the full width and a thumb-sized height; the
+   facts go under it, and the table scrolls inside its box (.admin-table-wrap). */
+@media (max-width: 640px) {
+  .qr-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+  .qr-pick .qr-pick-select { width: 100%; min-width: 0; height: 44px; }
+  .qr-meta { padding-bottom: 0; }
+  .qr-empty { padding: 24px 16px; }
+}
+
+/* The same report on the Team view (QS.3b), at /team/quests/report, as Khoa
+   approved its prototype on 2026-10-28. It is drawn as the Quests page draws
+   its cards: a 16px card, a face beside each name, and the page's own Standing
+   pills (.qs-standing in quests.css, which this route loads first), so a Missed
+   is a quiet dashed grey, not the Admin view's red. */
+.qr-card { background: var(--admin-surface); border: 1px solid var(--admin-line); border-radius: 16px; box-shadow: var(--admin-shadow); overflow: hidden; }
+.qr-scroll { overflow-x: auto; }
+.qr-table--team { width: 100%; border-collapse: collapse; font-size: 13px; }
+.qr-table--team thead th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--admin-muted); background: var(--admin-surface-2); white-space: nowrap; }
+.qr-table--team tbody td { padding: 12px 20px; border-top: 1px solid var(--admin-line-soft); color: var(--admin-ink); white-space: nowrap; }
+.qr-table--team .qs-standing { margin-left: 0; }
+.qr-who { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
+.qr-none { color: var(--admin-muted); }
+
+@media (max-width: 640px) {
+  .qr-table--team thead th, .qr-table--team tbody td { padding-inline: 14px; }
+}

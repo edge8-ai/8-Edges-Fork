@@ -1,0 +1,111 @@
+/* /team/quests, Lighthouses (QS.6): the night horizon, its lighthouses and the
+   Beacon form, from the approved prototype (version 10, section 5). Its own
+   file so the sections built beside it keep theirs; it loads after quests.css,
+   whose last rule stills every animation on the page under
+   prefers-reduced-motion. Every colour is a token (check:tokens); the form's
+   fields are quests.css's .qs-field, 16px on a phone (check:mobile-inputs).
+   The prototype placed each lighthouse with an inline left and scale; here the
+   track spaces them evenly with auto margins (the i-th of n stands at
+   (i + 1) / (n + 1) of the width, as drawn) and the scale is a class, because
+   a new file carries no inline style (check:design-ratchet). More lighthouses
+   than fit make the horizon scroll inside itself, never the page. */
+
+.qn-horizon { position: relative; height: 236px; border-radius: var(--admin-radius); overflow: hidden; border: 1px solid var(--color-violet-soft); background: linear-gradient(180deg, var(--color-quest-sky-violet) 0%, var(--color-quest-sky-violet-haze) 72%); }
+.qn-horizon::before { content: ""; position: absolute; inset: 0 0 64px 0; background-image: radial-gradient(1.5px 1.5px at 12% 22%, color-mix(in srgb, var(--color-violet) 45%, transparent), transparent), radial-gradient(1px 1px at 33% 12%, color-mix(in srgb, var(--color-violet) 45%, transparent), transparent), radial-gradient(1.5px 1.5px at 58% 30%, var(--color-accent-mint-bright), transparent), radial-gradient(1px 1px at 76% 16%, color-mix(in srgb, var(--color-violet) 40%, transparent), transparent), radial-gradient(1.5px 1.5px at 91% 34%, color-mix(in srgb, var(--color-violet) 35%, transparent), transparent); animation: qs-twinkle 4s ease-in-out infinite alternate; pointer-events: none; }
+.qn-moon { position: absolute; right: 9%; top: 22px; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 38% 38%, var(--color-bg-primary), color-mix(in srgb, var(--color-violet-soft) 70%, var(--color-bg-primary)) 70%); box-shadow: 0 0 28px 10px color-mix(in srgb, var(--color-violet) 14%, transparent); }
+
+/* the sea */
+.qn-sea { position: absolute; left: 0; right: 0; bottom: 0; height: 64px; background: linear-gradient(180deg, var(--color-quest-sky-mint) 0%, var(--color-growth-soft) 100%); }
+.qn-sea svg { position: absolute; left: 0; top: -7px; width: 100%; height: 14px; display: block; }
+.qn-wave { fill: var(--color-quest-sky-mint); }
+.qn-wave-line { fill: none; stroke: var(--color-growth-line); stroke-width: 1.5; }
+.qn-glint { position: absolute; height: 2px; border-radius: 2px; background: var(--color-growth-line); }
+.qn-glint--1 { left: 8%; top: 22px; width: 34px; }
+.qn-glint--2 { left: 44%; top: 40px; width: 22px; }
+.qn-glint--3 { left: 78%; top: 28px; width: 40px; }
+
+/* the lighthouses, evenly spaced */
+.qn-lh-track { position: absolute; inset: 0; z-index: 1; display: flex; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+.qn-lh-track::after { content: ""; flex: 0 0 0; margin-left: auto; }
+.qn-lh { position: relative; flex: 0 0 64px; margin-left: auto; height: 100%; }
+.qn-lh:hover, .qn-lh:focus-within, .qn-lh.is-open { z-index: 2; }
+.qn-lh-btn { position: absolute; inset: 0; padding: 0; border: 0; background: none; cursor: pointer; border-radius: var(--admin-radius-sm); }
+.qn-lh-art { position: absolute; left: 50%; bottom: 60px; width: 44px; height: 110px; margin-left: -22px; overflow: visible; transform-origin: 50% 100%; transform: scale(var(--k, 1)); }
+.qn-lh:nth-child(7n + 1) { --k: 1.12; }
+.qn-lh:nth-child(7n + 3) { --k: 1.08; }
+.qn-lh:nth-child(7n + 4) { --k: .98; }
+.qn-lh:nth-child(7n + 5) { --k: 1.16; }
+.qn-lh:nth-child(7n + 6) { --k: 1.02; }
+.qn-lh:nth-child(7n + 7) { --k: 1.1; }
+/* the author's face at the foot; a worn border overflows it, as everywhere on the page */
+.qn-lh-btn .qs-av, .qn-lh-btn .qs-av.admin-face--framed, .qn-lh-ghost .qs-av { position: absolute; left: 50%; bottom: 18px; margin: 0; transform: translateX(-50%); }
+.qn-lh--fresh .qn-lh-art { animation: qn-rise-lh .9s cubic-bezier(.2, .8, .2, 1); }
+@keyframes qn-rise-lh { from { transform: translateY(40px) scale(var(--k, 1)); opacity: 0; } }
+.qn-beam { animation: qn-beam 3s ease-in-out infinite alternate; }
+.qn-beam path { opacity: .6; }
+.qn-beam-a { stop-color: var(--color-sky-picked); stop-opacity: .55; }
+.qn-beam-z { stop-color: var(--color-sky-picked); stop-opacity: 0; }
+@keyframes qn-beam { to { opacity: 1; } }
+.qn-lh-rock { fill: var(--color-grey-300); }
+.qn-lh-tower { fill: var(--color-bg-primary); stroke: var(--color-grey-200); stroke-width: 1; }
+.qn-lh-band { fill: var(--color-violet); }
+.qn-lh-gallery, .qn-lh-roof { fill: var(--color-primary-dark); }
+.qn-lh-lamp { fill: var(--color-star); }
+.qn-lh-art--dark .qn-lh-tower { fill: var(--color-grey-400); stroke: none; }
+.qn-lh-art--dark .qn-lh-band { fill: var(--color-grey-600); }
+.qn-lh-art--dark .qn-lh-lamp { fill: var(--color-grey-600); }
+
+/* the card a tap opens: who, what, and the link outside */
+.qn-lh-tip { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: max-content; max-width: 220px; text-align: left; background: var(--admin-surface); color: var(--admin-ink); border: 1px solid var(--admin-line); box-shadow: var(--admin-shadow); border-radius: var(--admin-radius-sm); padding: 6px 10px; font-size: 12px; font-weight: 600; line-height: 1.35; opacity: 0; visibility: hidden; transition: opacity .15s; z-index: 2; display: flex; flex-direction: column; gap: 2px; }
+.qn-lh-tip small { display: block; font-size: 11px; font-weight: 600; color: var(--admin-muted); }
+.qn-lh[data-side="l"] .qn-lh-tip { left: 4px; transform: none; }
+.qn-lh[data-side="r"] .qn-lh-tip { left: auto; right: 4px; transform: none; }
+.qn-lh:hover .qn-lh-tip, .qn-lh:focus-within .qn-lh-tip, .qn-lh.is-open .qn-lh-tip { opacity: 1; visibility: visible; }
+.qn-lh-open { align-self: flex-start; margin-top: 2px; font-size: 12px; font-weight: 700; color: var(--admin-accent); text-decoration: none; }
+.qn-lh-open:hover { text-decoration: underline; }
+
+/* the dark horizon: the ghost lighthouse with the reader's face, bare */
+.qn-lh-ghost { position: absolute; z-index: 1; top: 0; bottom: 0; left: 50%; width: 64px; margin-left: -32px; }
+.qn-lh-ghost .qn-lh-art { opacity: .55; }
+.qn-lh-ghost .qs-av { opacity: .5; filter: grayscale(1); }
+.qn-horizon-note { position: absolute; z-index: 1; left: 0; right: 0; top: 20px; margin: 0; padding: 0 64px; text-align: center; font-size: 12px; font-weight: 600; color: var(--color-grey-600); }
+.qn-horizon-note b { color: var(--admin-ink); }
+
+/* a held fire's offer, one line above the button */
+.qn-held { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.qn-held li { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; padding: 10px 12px; border-radius: var(--admin-radius); background: var(--admin-surface); border: 1px solid var(--color-violet-soft); font-size: 13px; color: var(--color-grey-600); }
+.qn-held b { color: var(--admin-ink); font-weight: 600; }
+.qn-held .admin-btn b { font-weight: 800; }
+.qn-held small { font-size: 12px; }
+
+/* Light a Beacon, and the form it opens */
+.qn-beacon-cta { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; }
+.qn-beacon-cta .admin-btn { min-height: 40px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.qn-beacon-cta .admin-btn b { font-weight: 800; }
+.qn-beacon-cta p { margin: 0; font-size: 13px; color: var(--color-grey-600); }
+.qn-beacon-form { margin-top: 0; }
+.qn-beacon-form .qn-pair { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 10px; }
+.qn-beacon-form .qn-pair > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.qn-beacon-form .admin-btn b { font-weight: 800; }
+
+/* the plain view: the same Beacons as a list, with no horizon */
+.qn-out { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.qn-out-i { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--admin-radius); background: var(--admin-surface); border: 1px solid var(--admin-line); }
+.qn-out-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.qn-out-body b { font-size: 12px; font-weight: 600; color: var(--admin-muted); }
+/* nothing taken outside yet: the reader's own face, bare and faint, the ghost lighthouse's plain twin (QS.14) */
+.qn-out-empty { display: flex; align-items: center; gap: 12px; }
+.qn-out-empty b { color: var(--admin-ink); font-weight: 600; }
+.qn-ghost { display: inline-flex; border-radius: 999px; opacity: .55; outline: 1.5px dashed var(--admin-line-strong); outline-offset: 2px; }
+
+@media (max-width: 600px) {
+  .qn-horizon { height: 212px; }
+  .qn-horizon-note { padding: 0 16px; }
+  /* the note runs the full width on a phone, so the moon sits under it */
+  .qn-moon { top: 52px; right: 7%; width: 38px; height: 38px; }
+  .qn-beacon-cta .admin-btn { flex: 1; justify-content: center; min-height: 44px; }
+  .qn-beacon-form .qn-pair { grid-template-columns: minmax(0, 1fr); }
+  .qn-beacon-form .admin-btn { min-height: 44px; flex: 1; justify-content: center; }
+  .qn-held .admin-btn { min-height: 44px; }
+  .qn-out-i { flex-wrap: wrap; }
+}
