@@ -1,0 +1,23 @@
+{
+  "$comment": [
+    "The smallest deployment the gates check, so exclusion is exercised rather than assumed: a client who bought the Workboard, with the client portal. ADR 0032 is measured by it.",
+    "Measured on 2026-10-31 with closureOf (scripts/check-deployment.mjs) and generateMounts (scripts/gen-app-mounts.mjs), after ADR 0032's htt work: 10 entities and 181 mounts. Before ADR 0032, 11 entities, internal htt among them, and 188 mounts; 180 on 2026-10-30, and the Company dashboard (company-os) added the 181st. On 2026-11-01 the kernel's two event routines (A.86, ADR 0027), which every deployment carries, made it 183. ADR 0025 (2026-11-01): org's performance reviews brought /admin/talent/reviews and the performance-reviews cron (185); the contractor work-request flow left with the new work-requests entity, which nothing here installs (177). Still 10 entities.",
+    "The Workboard alone now closes over 3 entities (boards, client-programs, contacts); before, 9. boards stopped requiring crm (crm files meeting actions through boards), and htt left with the portal's Human Tokens band. Every page here that showed htt's figures takes its humanTokens or ProgramRepoHours slot instead, and is handed null: no tokens, hours, pull requests or ledger.",
+    "The other six entities here (billing, company-os, crm, finance, ideas, org) come from portal, the second root: its agreements and published meeting notes are crm's, its invoices finance's, and its team panel reads org. crm brings billing, and company-os for granting a client portal role; org brings ideas. Since ADR 0025 portal no longer reaches company-os itself: a signed agreement invoices through finance, and the work-request billing that used company-os is the work-requests entity's.",
+    "Khoa decided on 2026-10-31 that portal stays here (\"Keep portal in it\"): this is a client who bought the Workboard with the client portal, not the Workboard alone.",
+    "Everything absent is proof the catalogue can leave something out."
+  ],
+  "name": "minimal",
+  "entities": [
+    "billing",
+    "boards",
+    "client-programs",
+    "company-os",
+    "contacts",
+    "crm",
+    "finance",
+    "ideas",
+    "org",
+    "portal"
+  ]
+}

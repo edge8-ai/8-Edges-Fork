@@ -1,0 +1,19 @@
+<svg width="680" height="470" viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>The proof: 20% smaller team, 60% more revenue</title>
+<desc>People down twenty percent, mostly attrition. Revenue up sixty percent over the same window. The gain is the proof; the loss is carried with humility.</desc>
+<style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}</style>
+<rect width="680" height="470" rx="20" fill="#04102D"/>
+<text class="ff eb" x="56" y="54" fill="#6FF2C1" font-size="12" font-weight="500">A REAL COMPANY · CARRIED WITH HUMILITY</text>
+<text class="ff" x="56" y="92" fill="#FFFFFF" font-size="26" font-weight="600">The gap is the leverage</text>
+<line x1="150" y1="372" x2="540" y2="372" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+<rect x="190" y="250" width="120" height="122" rx="6" fill="#37496E"/>
+<text class="ff" x="250" y="232" text-anchor="middle" fill="#FFFFFF" font-size="20" font-weight="600">20% smaller</text>
+<text class="ff" x="250" y="394" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="13" font-weight="500">People</text>
+<text class="ff" x="250" y="414" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="12">mostly people who chose to leave</text>
+<rect x="390" y="148" width="120" height="224" rx="6" fill="#6FF2C1"/>
+<rect x="390" y="148" width="120" height="4" rx="2" fill="#FF6B35"/>
+<text class="ff" x="450" y="130" text-anchor="middle" fill="#6FF2C1" font-size="22" font-weight="600">60% larger</text>
+<text class="ff" x="450" y="394" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="13" font-weight="500">Revenue</text>
+<text class="ff" x="450" y="414" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="12">over the same window</text>
+<text class="ff" x="340" y="450" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="14">The 60% is the proof. The 20% is carried with humility</text>
+</svg>

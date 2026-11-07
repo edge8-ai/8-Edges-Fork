@@ -1,0 +1,91 @@
+{
+  "$comment": [
+    "What the surface entity (ADR 0025: team) still exported from lib/ and imported from other doors when it was",
+    "flagged kind: surface (Khoa, 2026-11-01: the rules ratchet). scripts/surface-entity.mjs, run by check:requires,",
+    "fails a new entry and a stale one, so the lists only shrink as each cluster moves to its owner (follow-up cards:",
+    "chat tools, client hub, hiring, company goals, gallery, own-service writes). `funnels` is not part of the",
+    "ratchet: it names the privacy funnel rule 4 excepts, with its reason, until its rows retire one at a time."
+  ],
+  "funnels": {
+    "team": {
+      "lib/data.ts": "teamRead and assertInScope: the scope rule for the team hub reads (SCOPE_ALLOWLIST), kept in one place because a single unscoped query would leak the whole company (PR #2120). The one named exception to rule 4 (ADR 0025 decision 4); it shrinks as each allow-list row retires behind an owner question that takes the actor (decision 5)."
+    }
+  },
+  "exports": {
+    "team": [
+      "lib/access-contributions",
+      "lib/boards",
+      "lib/company-goals",
+      "lib/data",
+      "lib/equipment",
+      "lib/family-screen",
+      "lib/hiring",
+      "lib/hub",
+      "lib/hub-clients",
+      "lib/interview-kit",
+      "lib/role-families",
+      "lib/signin-link",
+      "lib/writes"
+    ]
+  },
+  "imports": {
+    "team": [
+      "lib/boards.ts -> boards",
+      "lib/chat/access.ts -> contacts",
+      "lib/chat/access.ts -> crm",
+      "lib/chat/company-tools.ts -> billing",
+      "lib/chat/company-tools.ts -> contacts",
+      "lib/chat/company-tools.ts -> crm",
+      "lib/chat/company-tools.ts -> finance",
+      "lib/chat/my-records-tools.ts -> contacts",
+      "lib/chat/my-records-tools.ts -> finance",
+      "lib/chat/my-records-tools.ts -> reimbursements",
+      "lib/chat/my-records-tools.ts -> time-off",
+      "lib/chat/my-work-tools.ts -> boards",
+      "lib/chat/my-work-tools.ts -> coaching",
+      "lib/chat/my-work-tools.ts -> org",
+      "lib/chat/quest-tools.ts -> quests",
+      "lib/chat/workspace-tools.ts -> ideas",
+      "lib/chat/workspace-tools.ts -> org",
+      "lib/chat/workspace-tools.ts -> retreats",
+      "lib/chat/workspace-tools.ts -> time-off",
+      "lib/client-delivery.ts -> client-programs",
+      "lib/client-digest.ts -> boards",
+      "lib/client-digest.ts -> client-programs",
+      "lib/client-digest.ts -> crm",
+      "lib/company-goals.ts -> coaching",
+      "lib/company-goals.ts -> org",
+      "lib/family-screen.ts -> hiring",
+      "lib/gallery-actions.ts -> retreats",
+      "lib/hiring-grid.ts -> hiring",
+      "lib/hiring.ts -> hiring",
+      "lib/home-onboarding.ts -> onboarding",
+      "lib/hub-client-proposals.ts -> crm",
+      "lib/hub-clients.ts -> boards",
+      "lib/hub-clients.ts -> client-programs",
+      "lib/hub-clients.ts -> contacts",
+      "lib/hub-clients.ts -> crm",
+      "lib/hub-clients.ts -> portal",
+      "lib/hub-hours-actions.ts -> htt",
+      "lib/hub-meetings.ts -> crm",
+      "lib/hub-program.ts -> boards",
+      "lib/hub-program.ts -> client-programs",
+      "lib/hub-program.ts -> crm",
+      "lib/hub-program.ts -> portal",
+      "lib/hub-roadmap.ts -> client-programs",
+      "lib/individual-summary.ts -> boards",
+      "lib/individual-summary.ts -> coaching",
+      "lib/individual-summary.ts -> ideas",
+      "lib/individual-summary.ts -> org",
+      "lib/interview-kit.ts -> hiring",
+      "lib/own-service-writes.ts -> ideas",
+      "lib/own-service-writes.ts -> onboarding",
+      "lib/own-service-writes.ts -> org",
+      "lib/own-service-writes.ts -> time-off",
+      "ui/GalleryBrowser.tsx -> retreats",
+      "ui/MyClientCard.tsx -> boards",
+      "ui/MyClients.tsx -> boards",
+      "ui/home/HomeWeek.tsx -> boards"
+    ]
+  }
+}

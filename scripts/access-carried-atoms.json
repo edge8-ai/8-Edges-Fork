@@ -1,0 +1,101 @@
+{
+  "$comment": [
+    "Screens and actions that moved to the owner of their job or tables (ADR 0025) and keep",
+    "naming the atom of the entity they left (Khoa, 2026-11-01). Renaming an atom is a write",
+    "to every grant that points at it in production, so it is a later card of its own, with",
+    "the explain-first SQL flow. scripts/access-declarations.mjs reads this list; an entry",
+    "nothing uses fails, so the list only shrinks."
+  ],
+  "carried": [
+    {
+      "owner": "company-os",
+      "key": "lib/team-assume",
+      "atom": "team.assume",
+      "reason": "Starting and ending team assume moved to company-os, which owns the assume job (ADR 0025 decision 4); the atom keeps the name every Super Admin and Admin grant carries."
+    },
+    {
+      "owner": "org",
+      "key": "routes/admin/(dashboard)/talent/reviews/page",
+      "atom": "team.reviews",
+      "reason": "Performance reviews and kudos moved to org with performance_reviews and kudos (ADR 0025 decision 2); the atom keeps the name every grant in production carries."
+    },
+    {
+      "owner": "org",
+      "key": "routes/admin/(dashboard)/talent/reviews/actions",
+      "atom": "team.reviews",
+      "reason": "Performance reviews and kudos moved to org with performance_reviews and kudos (ADR 0025 decision 2); the atom keeps the name every grant in production carries."
+    },
+    {
+      "owner": "org",
+      "key": "routes/team/(dashboard)/reviews/page",
+      "atom": "team.performance",
+      "reason": "Performance reviews and kudos moved to org with performance_reviews and kudos (ADR 0025 decision 2); the atom keeps the name every grant in production carries."
+    },
+    {
+      "owner": "org",
+      "key": "routes/team/(dashboard)/reviews/[id]/page",
+      "atom": "team.performance",
+      "reason": "Performance reviews and kudos moved to org with performance_reviews and kudos (ADR 0025 decision 2); the atom keeps the name every grant in production carries."
+    },
+    {
+      "owner": "org",
+      "key": "routes/team/(dashboard)/kudos/page",
+      "atom": "team.culture",
+      "reason": "Performance reviews and kudos moved to org with performance_reviews and kudos (ADR 0025 decision 2); the atom keeps the name every grant in production carries."
+    },
+    {
+      "owner": "org",
+      "key": "lib/kudos-actions",
+      "atom": "team.culture",
+      "reason": "Performance reviews and kudos moved to org with performance_reviews and kudos (ADR 0025 decision 2); the atom keeps the name every grant in production carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/admin/(dashboard)/operations/contractor-payments/page",
+      "atom": "company-os.operations",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); company-os's Operations screens moved with it and keep the atom every Admin grant carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/admin/(dashboard)/operations/contractor-requests/page",
+      "atom": "company-os.operations",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); company-os's Operations screens moved with it and keep the atom every Admin grant carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/admin/(dashboard)/operations/contractor-requests/new/page",
+      "atom": "company-os.operations",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); company-os's Operations screens moved with it and keep the atom every Admin grant carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/admin/(dashboard)/operations/contractors/page",
+      "atom": "company-os.operations",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); company-os's Operations screens moved with it and keep the atom every Admin grant carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/admin/(dashboard)/operations/contractor-payments/actions",
+      "atom": "company-os.operations",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); company-os's Operations screens moved with it and keep the atom every Admin grant carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/admin/(dashboard)/operations/contractor-requests/actions",
+      "atom": "company-os.operations",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); company-os's Operations screens moved with it and keep the atom every Admin grant carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/admin/(dashboard)/operations/contractors/actions",
+      "atom": "company-os.operations",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); company-os's Operations screens moved with it and keep the atom every Admin grant carries."
+    },
+    {
+      "owner": "work-requests",
+      "key": "routes/team/(dashboard)/my-work/page",
+      "atom": "portal.contractor-work",
+      "reason": "The contractor work-request flow became the work-requests entity (ADR 0025 decision 3); a contractor's own page keeps the portal atom every Contractor grant carries."
+    }
+  ]
+}

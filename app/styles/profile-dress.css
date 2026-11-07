@@ -1,0 +1,162 @@
+/* The dressed profile (LD.6, redrawn LD.10 on the design canvas Khoa approved
+   on 28 Oct 2026): one dark game screen, the player card, the ranked ladders,
+   the showcase and the stats, the tabs under them, and the postcard view the
+   page becomes with the game style off. Drawn by entities/ladders/ui/profile/
+   for /team/profile and /team/directory/[id].
+
+   The ground is still on purpose. LD.6 drew an SVG scene under buttons with a
+   backdrop blur and moved its plaque at phone width; Khoa found the page laggy
+   and jumpy. Nothing here animates but the switches, nothing blurs, and every
+   block has its size before its data arrives. Every colour is a token;
+   translucent ones are mixed from tokens. The page is a container and reflows
+   by its own width. The team surface's living language, never corporate. */
+
+.pf { container-type: inline-size; position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; border-radius: 16px; border: 1px solid var(--color-on-dark-line); background: var(--color-primary-dark); color: var(--color-bg-primary); }
+/* Two soft lights behind the player card and the ranks, painted once. */
+.pf::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto 0; height: 640px; pointer-events: none;
+  background: radial-gradient(ellipse 60% 70% at 18% 20%, color-mix(in srgb, var(--color-violet) 30%, transparent), transparent 70%), radial-gradient(ellipse 50% 60% at 85% 10%, color-mix(in srgb, var(--color-sky-picked) 16%, transparent), transparent 70%); }
+
+/* ── The top row: where you are, the game style switch, Customise ─────── */
+.pf-hero-wrap { display: flex; flex-direction: column; gap: 18px; padding: 20px 22px 0; }
+.pf-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pf-crumb { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--color-grey-700); }
+.pf-top-sp { flex: 1; }
+.pf-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--color-on-dark-strong); background: var(--color-grey-900); color: var(--color-bg-primary); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.pf-btn svg { stroke: currentColor; flex: none; }
+.pf-btn:focus-visible { outline: 2px solid var(--color-accent-mint); outline-offset: 2px; }
+.pf-btn--on { background: var(--color-accent-mint); border-color: var(--color-accent-mint); color: var(--color-primary-dark); }
+.pf-error { flex-basis: 100%; margin: 0; padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 700; color: var(--color-bg-primary); background: color-mix(in srgb, var(--color-err-strong) 80%, var(--color-primary-dark)); }
+
+/* The game style switch is Quests' own component (GameStyleSwitch, QS.11);
+   these rules draw it as a pill, on the dark screen and on the postcard view.
+   Its note stays visible, because a failed save says so there. */
+.pf-top .qs-style, .pf-plain-switch .qs-style { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pf-top .qs-style-note, .pf-plain-switch .qs-style-note { font-size: 12px; font-weight: 700; }
+.pf-top .qs-style-note { color: var(--color-grey-700); }
+.pf-plain-switch .qs-style-note { color: var(--color-grey-600); }
+.pf-top .qs-style-switch, .pf-plain-switch .qs-style-switch { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 14px 0 10px; border-radius: 999px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.pf-top .qs-style-switch { border: 1px solid var(--color-on-dark-strong); background: var(--color-grey-900); color: var(--color-bg-primary); }
+.pf-plain-switch .qs-style-switch { border: 1px solid var(--admin-line-strong); background: var(--admin-surface); color: var(--admin-ink); }
+.pf-top .qs-style-switch:focus-visible { outline: 2px solid var(--color-accent-mint); outline-offset: 2px; }
+.pf-plain-switch .qs-style-switch:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; }
+.pf-top .qs-style-track, .pf-plain-switch .qs-style-track { position: relative; width: 36px; height: 22px; border-radius: 999px; background: var(--color-grey-400); flex: none; transition: background 160ms ease; }
+.pf-top .qs-style-track::after, .pf-plain-switch .qs-style-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); transition: transform 160ms ease; }
+.pf-top .qs-style-switch[aria-checked="true"] .qs-style-track, .pf-plain-switch .qs-style-switch[aria-checked="true"] .qs-style-track { background: var(--color-accent-mint-bright); }
+.pf-top .qs-style-switch[aria-checked="true"] .qs-style-track::after, .pf-plain-switch .qs-style-switch[aria-checked="true"] .qs-style-track::after { transform: translateX(14px); }
+.pf-top .qs-style-state, .pf-plain-switch .qs-style-state { font-weight: 800; }
+@media (prefers-reduced-motion: reduce) { .pf-top .qs-style-track, .pf-top .qs-style-track::after, .pf-plain-switch .qs-style-track, .pf-plain-switch .qs-style-track::after { transition: none; } }
+
+/* ── The hero: the player card beside the ladders, the showcase and the stats */
+.pf-hero { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; }
+.pf-main { flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+
+/* The player card */
+.pf-card { flex: 1 1 280px; max-width: 340px; min-width: 0; display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--color-grey-900); border: 1px solid var(--color-on-dark-line); box-shadow: var(--color-elevation-3); }
+.pf-card-photo { position: relative; height: 250px; flex: none; background: color-mix(in srgb, var(--color-violet) 22%, var(--color-primary-dark)); }
+.pf-card-img { display: block; width: 100%; height: 250px; object-fit: cover; }
+.pf-card-photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 45%, var(--color-grey-900) 100%); }
+.pf-card-face { display: grid; place-items: center; height: 100%; }
+.pf-card-medal { position: absolute; z-index: 1; left: 14px; bottom: -6px; width: 76px; height: 76px; }
+.pf-card-body { display: flex; flex-direction: column; gap: 6px; padding: 10px 20px 20px; }
+.pf-name { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -.01em; line-height: 1.15; overflow-wrap: anywhere; }
+.pf-handle { margin: 0; font-size: 14px; color: var(--color-grey-700); }
+.pf-title { align-self: flex-start; margin: 6px 0 0; display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--color-primary-dark); background: var(--color-accent-mint); }
+.pf-title-edit { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 6px; }
+.pf-title-sel { min-height: 40px; min-width: 160px; max-width: 100%; padding: 0 10px; border-radius: 10px; border: 1.5px dashed var(--color-accent-mint); background: var(--color-primary-dark); color: var(--color-bg-primary); font: inherit; font-size: 16px; font-weight: 700; }
+.pf-title-sel:disabled { opacity: .7; cursor: not-allowed; }
+.pf-title-sel option { color: var(--color-primary-dark); }
+.pf-hint { margin: 0; font-size: 12px; font-weight: 600; color: var(--color-grey-700); }
+.pf-facts { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--color-on-dark-line); }
+.pf-fact { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 8px; font-size: 14px; }
+.pf-fact dt { color: var(--color-grey-700); }
+.pf-fact dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+
+/* A section of the hero: Ranked ladders, Showcase */
+.pf-sec { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pf-sec-head { display: flex; align-items: baseline; gap: 8px 12px; flex-wrap: wrap; }
+.pf-sec-h { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.pf-sec-note, .pf-sec-count { font-size: 13px; color: var(--color-grey-700); }
+.pf-sec-count { font-weight: 800; font-variant-numeric: tabular-nums; }
+
+/* The rank cards */
+.pf-ranks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.pf-rank { --pf-rank-c: var(--color-accent-mint); display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 18px; border-radius: 16px; background: var(--color-grey-900); border: 1px solid var(--color-on-dark-line); border-top: 3px solid var(--pf-rank-c); }
+.pf-rank--builder { --pf-rank-c: var(--color-sky-picked); }
+.pf-rank-top { display: flex; align-items: center; gap: 14px; }
+.pf-rank-art { flex: none; width: 104px; height: 104px; display: grid; place-items: center; }
+.pf-rank-txt { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pf-rank-l { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--pf-rank-c); }
+.pf-rank-t { margin: 0; font-size: 28px; font-weight: 800; line-height: 1.1; overflow-wrap: anywhere; }
+.pf-rank-stars { font-size: 18px; letter-spacing: .12em; line-height: 1; color: var(--pf-rank-c); }
+.pf-rank-p { font-size: 14px; color: var(--color-grey-700); }
+.pf-rank-p b { color: var(--color-bg-primary); font-variant-numeric: tabular-nums; }
+.pf-rank-climb { display: flex; flex-direction: column; gap: 6px; }
+/* The bar is a native progress element, drawn the same in every engine. */
+.pf-rank-bar { appearance: none; display: block; width: 100%; height: 8px; border: 0; border-radius: 999px; background: var(--color-on-dark-line); overflow: hidden; }
+.pf-rank-bar::-webkit-progress-bar { border-radius: 999px; background: var(--color-on-dark-line); }
+.pf-rank-bar::-webkit-progress-value { border-radius: 999px; background: var(--pf-rank-c); }
+.pf-rank-bar::-moz-progress-bar { border-radius: 999px; background: var(--pf-rank-c); }
+.pf-rank-next { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 34px; font-size: 13px; color: var(--color-grey-700); }
+.pf-rank-next b { color: var(--color-bg-primary); font-variant-numeric: tabular-nums; }
+.pf-rank-next-art { flex: none; opacity: .6; }
+.pf-rank-vis { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.pf-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 800; color: var(--color-grey-700); background: color-mix(in srgb, var(--color-bg-primary) 6%, transparent); }
+.pf-chip--on { color: var(--color-accent-mint); background: color-mix(in srgb, var(--color-accent-mint) 12%, transparent); }
+.pf-chip svg { flex: none; }
+
+/* The showcase: the display case, like preferred champions */
+.pf-case { list-style: none; margin: 0; padding: 2px 2px 6px; display: flex; gap: 12px; overflow-x: auto; }
+.pf-tok { flex: none; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 84px; text-align: center; }
+.pf-tok-c { width: 68px; height: 68px; border-radius: 18px; display: grid; place-items: center; font-size: 26px; font-weight: 700; background: var(--color-accent-mint); color: var(--color-primary-dark); }
+.pf-tok b { font-size: 12px; font-weight: 800; line-height: 1.25; }
+.pf-tok--empty .pf-tok-c { background: color-mix(in srgb, var(--color-bg-primary) 3%, transparent); border: 1.5px dashed var(--color-on-dark-strong); color: var(--color-grey-700); }
+.pf-tok--empty select { width: 84px; min-height: 36px; padding: 0 4px; border-radius: 8px; border: 1px solid var(--color-on-dark-strong); background: var(--color-primary-dark); color: var(--color-bg-primary); font: inherit; font-size: 16px; }
+.pf-tok--empty select:disabled { opacity: .7; cursor: not-allowed; }
+/* A badge in the case by its name alone, when its art is not in the catalogue. */
+.pf-tok--named { justify-content: center; gap: 4px; min-height: 68px; padding: 10px 8px; border-radius: 14px; border: 1px solid var(--color-on-dark-strong); background: var(--color-grey-900); }
+.pf-tok .yl-wear-sw { color: var(--color-grey-700); }
+.pf-none { margin: 0; font-size: 13px; color: var(--color-grey-700); }
+
+/* The stats strip */
+.pf-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; border-radius: 14px; overflow: hidden; background: var(--color-on-dark-line); border: 1px solid var(--color-on-dark-line); }
+.pf-stat { position: relative; display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; background: var(--color-grey-900); }
+.pf-stat b { font-size: 24px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.pf-stat span { font-size: 12px; font-weight: 600; color: var(--color-grey-700); }
+.pf-stat--off b, .pf-stat--off > span { opacity: .4; }
+.pf-stat-sw { position: absolute; right: 6px; top: 6px; }
+@media (pointer: coarse) { .pf-stat-sw { min-height: 44px; min-width: 44px; justify-content: center; right: 0; top: 0; } }
+
+/* ── The tabs and their panel, on the same dark ground ────────────────── */
+.pf-tabs { padding: 20px 22px 28px; }
+.pf-tabs .admin-tabs { margin: 0; padding: 0; gap: 2px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--color-on-dark-line); background: transparent; }
+.pf-tabs .admin-tab { flex: none; min-height: 48px; padding: 0 16px; margin: 0; border-bottom: 3px solid transparent; color: var(--color-grey-700); font-weight: 800; }
+/* My details, the private one, stands apart at the end of the owner's row. */
+.pf--own .pf-tabs .admin-tab:last-child { margin-left: auto; }
+.pf-tabs .admin-tab:hover { color: var(--color-bg-primary); border-bottom-color: var(--color-on-dark-strong); }
+.pf-tabs .admin-tab.is-active { color: var(--color-bg-primary); border-bottom-color: var(--color-accent-mint); }
+.pf-tabs .admin-tab:focus-visible { outline: 2px solid var(--color-accent-mint); outline-offset: -4px; }
+.pf-tabs [role="tabpanel"] { padding: 20px 0 0; display: flex; flex-direction: column; gap: 18px; }
+.pf-ph { margin: 0; padding: 32px 24px; border: 1.5px dashed var(--color-on-dark-strong); border-radius: 16px; text-align: center; font-size: 14px; line-height: 1.5; color: var(--color-grey-700); }
+/* The team entity's postcard and details pages keep their own light cards;
+   the words between the cards sit on the dark ground. */
+.pf-tabs .pe-lede, .pf-tabs .pe-under { color: var(--color-grey-700); }
+.pf-tabs .pe-page a.pe-link { color: var(--color-accent-mint); }
+
+/* ── The postcard view: the page with the game style off ──────────────── */
+.pf-plain { container-type: inline-size; display: flex; flex-direction: column; gap: 14px; }
+.pf-plain-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pf-plain-switch { display: flex; }
+.pf-plain .pe-head { margin-top: 4px; }
+
+/* ── A phone: the player card over the ladders, everything one column ─── */
+@container (max-width: 640px) {
+  .pf { border-radius: 0; border-left: 0; border-right: 0; }
+  .pf-hero-wrap { padding: 14px 14px 0; }
+  .pf-card { max-width: none; flex-basis: 100%; }
+  .pf-card-photo, .pf-card-img { height: 230px; }
+  .pf-name { font-size: 26px; }
+  .pf-ranks { grid-template-columns: minmax(0, 1fr); }
+  .pf-rank-t { font-size: 24px; }
+  .pf-stats { grid-template-columns: 1fr 1fr; }
+  .pf-tabs { padding: 16px 14px 20px; }
+}

@@ -1,0 +1,115 @@
+# ADR 0016 — Training reads are about the programme or about yourself, never about one person for someone else
+
+Date: 2026-10-11. Status: accepted.
+
+Records decision Q1 of the training-tracking grilling (W.123, 6 October 2026), confirmed by Khoa
+on 11 October 2026 when the feature was placed in the Talent office. The plan first called this
+ADR-0012; that number was taken in the repo before the plan was committed, so it is filed here.
+
+## Context
+
+The training entity records every training a person takes, lets the person review it (stars,
+load, feeling tags, a note), lets them record outcomes, and turns all of it into analysis. That
+analysis can be cut two ways: across people (how a scrim block or a course is landing) or for
+one person (how this person's trainings relate to their results).
+
+The second cut is what a manager would most like to see, and it is what the Talent office's
+other pages are made of: Probation and Reviews are about one person. On 11 October the feature
+moved into that office, at Talent › People › Training, which is exactly where a per-person
+training page would look natural.
+
+Three standing rules weigh against it. On 13 September Khoa ruled that metrics describe the work
+or its outcome, never a person, and nothing is sliced by person. On 18 September growth was made
+self-reported. And a review that is read against its author stops being honest: once a member
+learns that two stars on a scrim count against them, every scrim gets four.
+
+## Decision
+
+There are two reads and no third.
+
+- **The programme read** is about trainings across the people who took them, by training type,
+  plan or period. Organisers, managers and admins see it, and so do members for plans they are in.
+  It is the read shown at My Team › Training and at Talent › People › Training. A slice reviewed
+  by fewer than three distinct people is not shown, for everyone, admins included. Notes carry no
+  name unless the member signed one.
+- **The personal read** is about one person, and only that person sees it. It is generated when
+  they open it and is not stored. Nobody else sees it, and the product offers no way to send it
+  anywhere: what a person tells others about their training, they tell them themselves.
+
+No screen, export, routine, assistant tool or notification shows another person's trainings,
+reviews, skips or outcomes to a manager, coach or admin as one person's record. Attendance is
+counted only inside the programme read, under the same three-person minimum.
+
+## Consequences
+
+- Talent › People › Training sits beside Probation and Reviews but is not shaped like them: it has
+  no person picker and no per-person row.
+- The three-person minimum is enforced in the read model that both screens share, not in each
+  screen, so a new screen cannot forget it.
+- A manager or organiser learns how one member's training is going only by asking them.
+- Some questions a manager would like answered ("is this person keeping up?") are not answerable
+  here. They are asked of the person, in conversation.
+- Training is separate from Coaching (decided 11 October 2026): a 1-1 is not a training, and no
+  read travels into a 1-1's prep. The two privacy models never meet.
+
+## What would reopen it
+
+A decision by Khoa that training attendance is a condition of employment for some role, with
+the people in that role told so in advance. That would be a separate, attributed record with its
+own consent, not a relaxation of this read.
+
+## Amendments (2026-10-12, Dave, English Program)
+
+**The teacher's note.** A plan's organiser may write a note about one learner on that plan
+(strong points, weak points, what to work on now; `training_learner_notes`). It is
+teacher-to-learner feedback and the whole point of a taught class: the teacher writes it, the
+learner reads it on My Training, and it appears nowhere else, not in the programme read, the
+admin pages, the weekly recap or any assistant tool. It is not honesty data: it carries no stars,
+load, skip reason or review note, and the programme read still never shows one person's answers.
+
+**Attendance on a taught session.** For a session with a recording, attendance may be seeded from
+the transcript (who spoke, who was listed) as attended or absent with its source recorded, and
+either the learner or the organiser may correct it. A correction wins and is never overwritten by
+a later transcript. Everywhere else the member's word stays final, as above; the organiser's
+correction exists because a class register is the teacher's to keep, and the learner sees every
+row about them with its source.
+
+## Amendment (2026-10-23, QS.5, Campfires)
+
+**Seats by a fire.** A Raid's Training session (a taught session a person lit from three hands,
+quests spec v10) shows on the Quests page who has **a seat**: the faces of the people on its
+register who took a seat themselves and were not taken off, up to five, and their count. Khoa
+approved that card on the version 10 prototype (2026-10-21). It is a sign-up list, not an
+attendance record: the seat is read from the register row's presence alone, never from the
+person's word on going, so a face stays by the fire whatever the person later answers, and
+nothing on Quests shows who did not come or who skipped. The person's own word, the review and
+the outcomes stay under this ADR's two reads. A seat earns nothing (ADR 0021); the Host's credit
+comes from the register showing someone other than the Host attended, which is counted inside
+the ladders' own read and shown to the Host alone.
+
+## Amendment (2026-10-26, Dave, English Program lesson feedback)
+
+**Classes in the Admin view.** At Talent › People › Training the Admin view lists classes, one
+row per lesson on a course, by month, and each class opens its own page
+(`/admin/talent/training/classes/[id]`). Admins read a class's attendees and their attendance
+there: each learner on its register by name, attended or absent and who said so (their own word,
+the transcript or the instructor). Dave decided this on 2026-10-26, so the three-person minimum
+does not apply on the admin class page; the list shows each class's attended count beside its
+register. The minimum still governs any programme figure cut across people, and the admin pages
+still show no review, star, load, skip reason, submission or teacher's note
+(`training_learner_notes`).
+
+**The lesson summary.** A class's summary is its recap's `covered`. Everyone on the class reads it
+once the organiser publishes the recap, as before; the instructor and admins read it from the
+draft, labelled as drafted or published. Admins also read the recap's homework suggestion and its
+line to each learner.
+
+**The English evaluation and the instructor's feedback.** After a class with a transcript, Claude
+evaluates the spoken English of each learner on the register who attended and spoke (a CEFR
+level and why, a summary, strengths, things to improve, examples quoted from the transcript), and
+the instructor may write their own feedback on each learner for that class
+(`training_learner_feedback`, one row per learner per class). Both are read by the class's
+instructor, on their session page, and by admins, on the class page. The learner does not read
+either while the evaluation is tested: no learner read, page, notification or assistant tool
+selects them, and a test (`entities/training/lib/lesson-feedback-visibility.test.ts`) fails if one
+starts to. Showing them to the learner would be a further amendment.

@@ -1,0 +1,43 @@
+<svg width="680" height="460" viewBox="0 0 680 460" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Three skills to direct AI</title>
+<desc>The second half of leadership rests on three disciplines: workflow design, information architecture, and writing instructions for code and AI.</desc>
+<style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}</style>
+<rect width="680" height="460" rx="20" fill="#04102D"/>
+<text class="ff eb" x="340" y="58" text-anchor="middle" fill="#6FF2C1" font-size="12" font-weight="500">THE OTHER 50% OF LEADERSHIP</text>
+<text class="ff" x="340" y="96" text-anchor="middle" fill="#FFFFFF" font-size="27" font-weight="600">Three skills to direct AI</text>
+<text class="ff" x="340" y="122" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="14">A discipline, not a tool you buy</text>
+<g class="ff">
+ <rect x="45" y="150" width="186" height="264" rx="14" fill="#0A1A38" stroke="#287BE8" stroke-width="2"/>
+ <text x="63" y="190" fill="#5AA0F5" font-size="22" font-weight="700">01</text>
+ <text x="63" y="220" fill="#FFFFFF" font-size="16" font-weight="600">Workflow</text>
+ <text x="63" y="239" fill="#FFFFFF" font-size="16" font-weight="600">design</text>
+ <text x="63" y="272" fill="rgba(255,255,255,0.6)" font-size="12.5">The process that</text>
+ <text x="63" y="289" fill="rgba(255,255,255,0.6)" font-size="12.5">turns inputs into</text>
+ <text x="63" y="306" fill="rgba(255,255,255,0.6)" font-size="12.5">an outcome. Who</text>
+ <text x="63" y="323" fill="rgba(255,255,255,0.6)" font-size="12.5">does what, and when</text>
+ <text x="63" y="372" fill="#5AA0F5" font-size="12.5" font-weight="600">Some of the who</text>
+ <text x="63" y="389" fill="#5AA0F5" font-size="12.5" font-weight="600">are now AI agents</text>
+
+ <rect x="247" y="150" width="186" height="264" rx="14" fill="#0A1A38" stroke="#6FF2C1" stroke-width="2"/>
+ <text x="265" y="190" fill="#6FF2C1" font-size="22" font-weight="700">02</text>
+ <text x="265" y="220" fill="#FFFFFF" font-size="16" font-weight="600">Information</text>
+ <text x="265" y="239" fill="#FFFFFF" font-size="16" font-weight="600">architecture</text>
+ <text x="265" y="272" fill="rgba(255,255,255,0.6)" font-size="12.5">Organize what you</text>
+ <text x="265" y="289" fill="rgba(255,255,255,0.6)" font-size="12.5">know so AI can use</text>
+ <text x="265" y="306" fill="rgba(255,255,255,0.6)" font-size="12.5">it. ABC: Always</text>
+ <text x="265" y="323" fill="rgba(255,255,255,0.6)" font-size="12.5">Be Cataloguing</text>
+ <text x="265" y="372" fill="#6FF2C1" font-size="12.5" font-weight="600">If AI can't find it,</text>
+ <text x="265" y="389" fill="#6FF2C1" font-size="12.5" font-weight="600">it does not exist</text>
+
+ <rect x="449" y="150" width="186" height="264" rx="14" fill="#0A1A38" stroke="#D1458B" stroke-width="2"/>
+ <text x="467" y="190" fill="#E06AA6" font-size="22" font-weight="700">03</text>
+ <text x="467" y="220" fill="#FFFFFF" font-size="16" font-weight="600">Writing</text>
+ <text x="467" y="239" fill="#FFFFFF" font-size="16" font-weight="600">instructions</text>
+ <text x="467" y="272" fill="rgba(255,255,255,0.6)" font-size="12.5">Translate vision</text>
+ <text x="467" y="289" fill="rgba(255,255,255,0.6)" font-size="12.5">into instructions a</text>
+ <text x="467" y="306" fill="rgba(255,255,255,0.6)" font-size="12.5">machine executes.</text>
+ <text x="467" y="323" fill="rgba(255,255,255,0.6)" font-size="12.5">Prompts are code</text>
+ <text x="467" y="372" fill="#E06AA6" font-size="12.5" font-weight="600">You direct,</text>
+ <text x="467" y="389" fill="#E06AA6" font-size="12.5" font-weight="600">AI writes</text>
+</g>
+</svg>
