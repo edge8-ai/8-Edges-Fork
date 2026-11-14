@@ -1,0 +1,21 @@
+/* The plain worn borders round a face (LD.3): the kernel Avatar's `border` key
+   is the tier, and it draws <span class="admin-face-frame frame-<tier>">. Each
+   rule is the plain set's ring (index.tsx beside this file: a hole of 100 in a
+   square of 236) placed so the hole clears the face by the kernel's FRAME_AIR,
+   painted in the tier's colour. Upstream, Edge8's own art sits here. */
+.frame-iron, .frame-bronze, .frame-silver, .frame-gold, .frame-platinum, .frame-emerald,
+.frame-diamond, .frame-master, .frame-grandmaster, .frame-challenger, .frame-sovereign {
+  left: -9.787%; top: -9.787%; width: 119.573%; height: 119.573%;
+  background-image: radial-gradient(closest-side, transparent 84.7%, var(--ladder-frame-tone) 85%, var(--ladder-frame-tone) 99%, transparent 100%);
+}
+.frame-iron { --ladder-frame-tone: var(--color-ladder-iron); }
+.frame-bronze { --ladder-frame-tone: var(--color-ladder-bronze); }
+.frame-silver { --ladder-frame-tone: var(--color-ladder-silver); }
+.frame-gold { --ladder-frame-tone: var(--color-ladder-gold); }
+.frame-platinum { --ladder-frame-tone: var(--color-ladder-platinum); }
+.frame-emerald { --ladder-frame-tone: var(--color-ladder-emerald); }
+.frame-diamond { --ladder-frame-tone: var(--color-ladder-diamond); }
+.frame-master { --ladder-frame-tone: var(--color-ladder-master); }
+.frame-grandmaster { --ladder-frame-tone: var(--color-ladder-grandmaster); }
+.frame-challenger { --ladder-frame-tone: var(--color-ladder-challenger); }
+.frame-sovereign { --ladder-frame-tone: var(--color-ladder-sovereign); }

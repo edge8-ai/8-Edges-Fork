@@ -1,0 +1,36 @@
+// The Contacts entity's server door (RS-01/RS-06, spec
+// docs/engineering/2026-09-08-pluggable-entities-spec.md): companies, brands and
+// the relationships between them and people.
+//
+// Contacts is the mandatory entity — every other entity hangs its records off a
+// person or a company — which is why it sits at the bottom of the graph and
+// exports readers and writers rather than screens. Its admin screens still live
+// in company-os and move here in a later slice; what moved first is ownership of
+// the tables, because Boards could not become an entity while `companies` and
+// `staff_assignments` belonged to an entity that renders boards.
+//
+// `people` and the membership tables stay kernel-owned: identity needs them to
+// resolve who is signed in, and a kernel that depends on an entity is worse than
+// an entity with no exclusive tables.
+//
+// Since A.64 (ADR 0018) the door answers questions and performs commands; it
+// no longer hands out its tables. lib/reads.ts and lib/writes.ts are private.
+export * from "./lib/person-companies";
+export * from "./lib/affiliates";
+export * from "./lib/people-sensitive";
+export * from "./lib/brands";
+export * from "./lib/tags";
+// The dedicated-staff relation: the reader every admin surface uses, its role
+// vocabulary, and the shape of an assigned client's two sides. It moved here
+// with RS-04 because this entity owns staff_assignments and person_companies,
+// and the admin company hub that renders it is in crm.
+export * from "./lib/staff-assignments";
+// Which clients a team member is assigned to: the team client hub, the weekly
+// status page and the access resolver ask it (A.88.2).
+export { getActorClientCompanies, type ClientCompany } from "./lib/client-assignments";
+// What this entity tells the access resolver (ADR 0013): the Client team role and
+// the companies a person's clients scope reaches. app/access.ts registers it.
+export { accessContributions } from "./lib/access-contributions";
+export type { HubTeam } from "./lib/directory-shapes";
+// The assigned-team panel a client hub renders; contacts owns staff_assignments (R.2).
+export * from "./ui/HubTeamPanel";

@@ -1,0 +1,23 @@
+{
+  "$comment": [
+    "What the surface entity (ADR 0025: team) still exported from lib/ and imported from other doors when it was",
+    "flagged kind: surface (Khoa, 2026-11-01: the rules ratchet). scripts/surface-entity.mjs, run by check:requires,",
+    "fails a new entry and a stale one, so the lists only shrink as each cluster moves to its owner (follow-up cards:",
+    "chat tools, client hub, hiring, company goals, gallery, own-service writes). `funnels` is not part of the",
+    "ratchet: it names the privacy funnel rule 4 excepts, with its reason, until its rows retire one at a time."
+  ],
+  "funnels": {
+    "team": {
+      "lib/data.ts": "teamRead and assertInScope: the scope rule for the team hub reads (SCOPE_ALLOWLIST), kept in one place because a single unscoped query would leak the whole company (PR #2120). The one named exception to rule 4 (ADR 0025 decision 4); it shrinks as each allow-list row retires behind an owner question that takes the actor (decision 5)."
+    }
+  },
+  "exports": {
+    "team": [
+      "lib/data"
+    ]
+  },
+  "imports": {
+    "team": [
+    ]
+  }
+}

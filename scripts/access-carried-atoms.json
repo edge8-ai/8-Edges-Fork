@@ -1,0 +1,11 @@
+{
+  "$comment": [
+    "Screens and actions that moved to the owner of their job or tables (ADR 0025) and keep",
+    "naming the atom of the entity they left (Khoa, 2026-11-01). Renaming an atom is a write",
+    "to every grant that points at it in production, so it is a later card of its own, with",
+    "the explain-first SQL flow. scripts/access-declarations.mjs reads this list; an entry",
+    "nothing uses fails, so the list only shrinks.",
+    "A.89 (2026-11-10) renamed every carried atom to its owner's name, so the list is empty; a later move that keeps an atom adds its row here again."
+  ],
+  "carried": []
+}

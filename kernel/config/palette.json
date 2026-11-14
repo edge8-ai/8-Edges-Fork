@@ -1,0 +1,16 @@
+{
+  "dark": "#101014",
+  "blue": "#1A5FBF",
+  "blueHover": "#1553A8",
+  "blueBright": "#3B8CF5",
+  "mint": "#6FF2C1",
+  "mintBright": "#2EDBBB",
+  "white": "#FFFFFF",
+  "canvas": "#F5F6F8",
+  "line": "#E6E6E6",
+  "inkBody": "#797c82",
+  "muted": "#9CA3AF",
+  "greyMid": "#6B7280",
+  "violet": "#7A5CFA",
+  "errInk": "#B0332F"
+}

@@ -1,0 +1,1398 @@
+{
+  "why": "Who reached each signed-in page before any page lost its own gate (AC.5): read from the code gates on main at 0d13b8c4, for the personas in scripts/access-today.mjs. Frozen: the access matrices compare the declarations and the resolver with this record, so a page can drop a gate requirePermission now enforces without moving the baseline.",
+  "pages": {
+    "app/admin/(auth)/login/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/admin/(auth)/reset-password/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/admin/(auth)/verify/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/admin/(dashboard)/boards/[slug]/epics/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/boards/[slug]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/boards/[slug]/sprints/[sprintId]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/boards/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/client-hubs/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/company/goals/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/company/handbook/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/company/insurance/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/company/onboarding-deck/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/company/org/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/company/strategy/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/company/values/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/contacts/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/contacts/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/edges/client-roadmaps/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/edges/domains/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/edges/issues/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/edges/sprint-planning/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/edges/sync/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/edges/workboard/flow/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/edges/workboard/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/inbox/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/innovation/ideas/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/innovation/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/library/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/analytics/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/capacity/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/contractor-payments/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/contractor-requests/new/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/contractor-requests/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/contractors/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/equipment/fitness/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/equipment/new/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/equipment/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/gallery/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/retreats/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/surveys/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/surveys/[id]/results/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/surveys/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/time-off/history/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/time-off/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/time-off/policies/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/time-off/policies/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/time-off/requests/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/vendors/new/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/operations/vendors/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/patterns/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/patterns/public/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/accounts/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/affiliates/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/aio-pad/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/billing/clients/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/billing/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/clients/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/companies/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/companies/[id]/programs/[programId]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/companies/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/data-health/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/deals/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/deals/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/demand/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/events/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/events/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/inquiries/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/invoices/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/leads/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/market/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/audiences/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/audiences/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/books/[slug]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/books/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/brands/[slug]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/brands/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/broadcasts/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/broadcasts/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/calendar/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/campaigns/[id]/assets/[assetId]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/campaigns/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/campaigns/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/personal/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/recaps/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/recurring/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/recurring/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/marketing/schedule/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/meetings/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/meetings/new/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/meetings/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/orders/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/outlook/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/pipeline/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/products/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/public-retreats/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/registrations/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/sales-intelligence/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/revenue/sales-intelligence/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/settings/access-codes/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/settings/admins/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/settings/agents/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/settings/agents/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/settings/assume/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/settings/quickbooks/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/talent/applications/[id]/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/applications/new/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/applications/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/candidate-pool/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/candidates/[id]/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/candidates/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/jobs/[id]/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/jobs/page.tsx": [
+      "super-admin"
+    ],
+    "app/admin/(dashboard)/talent/onboarding/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/talent/onboarding/plan/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/talent/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/talent/probation/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/talent/reviews/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/talent/team/[id]/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/admin/(dashboard)/talent/team/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team"
+    ],
+    "app/portal/(auth)/callback/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/portal/(auth)/change-password/page.tsx": [
+      "client"
+    ],
+    "app/portal/(auth)/login/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/portal/(auth)/verify/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/portal/(dashboard)/agreements/[id]/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/company/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/events/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/hub/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/invoices/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/meetings/[id]/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/profile/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/programs/[id]/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/programs/add/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/programs/add/plan/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/programs/add/upload/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/programs/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/referrals/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/requests/[id]/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/requests/hire/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/requests/new/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/requests/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/team/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/time-off/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/tokens/page.tsx": [
+      "client"
+    ],
+    "app/portal/(dashboard)/users/page.tsx": [
+      "client"
+    ],
+    "app/team/(auth)/callback/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/team/(auth)/change-password/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(auth)/login/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/team/(auth)/verify/page.tsx": [
+      "admin",
+      "super-admin",
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager",
+      "client"
+    ],
+    "app/team/(dashboard)/approvals/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/boards/[slug]/epics/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/boards/[slug]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/boards/[slug]/sprints/[sprintId]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/board/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/documents/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/invoices/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/meetings/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/meetings/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/roadmap/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/(hub)/team/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/[companyId]/programs/[programId]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/clients/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/coaching-sessions/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/coaching-sessions/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/coaching/[profileId]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/coaching/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/company-goals/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/directory/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/directory/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/equipment/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/gallery/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/goals/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/handbook/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/hiring/[interviewId]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/hiring/page.tsx": [
+      "admin-on-the-team",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/ideas/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/ideas/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/inbox/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/insurance/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/my-coaching/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/my-coaching/review/[quarter]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/my-week/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/onboarding-deck/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/onboarding/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/onboarding/plan/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/org/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/probation/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/profile/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/revenue/accounts/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/affiliates/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/aio-pad/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/billing/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/clients/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/companies/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/companies/[id]/programs/[programId]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/companies/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/data-health/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/deals/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/deals/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/demand/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/events/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/events/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/inquiries/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/invoices/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/leads/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/market/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/books/[slug]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/books/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/brands/[slug]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/brands/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/broadcasts/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/broadcasts/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/calendar/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/campaigns/[id]/assets/[assetId]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/campaigns/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/campaigns/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/marketing/recaps/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/meetings/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/meetings/new/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/meetings/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/orders/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/outlook/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/pipeline/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/products/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/public-retreats/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/revenue/registrations/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/revenue/sales-intelligence/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/revenue/sales-intelligence/page.tsx": [
+      "admin-on-the-team",
+      "member-with-revenue"
+    ],
+    "app/team/(dashboard)/reviews/[id]/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/reviews/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/sprint-planning/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/strategy/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/time-off/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/values/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/vendors/new/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/vendors/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ],
+    "app/team/(dashboard)/workboard/page.tsx": [
+      "admin-on-the-team",
+      "member",
+      "contractor",
+      "member-with-revenue",
+      "manager",
+      "coach",
+      "hiring-manager"
+    ]
+  }
+}

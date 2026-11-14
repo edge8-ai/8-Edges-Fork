@@ -1,0 +1,206 @@
+/* A colleague's profile as a postcard (OV.5, approved on the design canvas on
+   18 Oct 2026): a sky scene, an airmail-bordered card with the person on the
+   front and the role on the back, and the FAST goals as a route of stops.
+   Every colour is a token; translucent ones are mixed from tokens. The page
+   reflows by its own width (container queries), because the team sidebar
+   makes the content far narrower than the window: three columns when there
+   is room, the back under the front on a laptop with the sidebar open, and
+   one column on a phone. */
+
+.tp-page { container-type: inline-size; display: flex; flex-direction: column; gap: 20px; color: var(--color-primary-dark); }
+
+/* ── The scene ───────────────────────────────────────────────────────── */
+.tp-scene { position: relative; border-radius: 20px; padding: 46px 18px 34px; overflow: hidden; background: linear-gradient(180deg, var(--color-info-bg) 0, var(--color-accent-soft) 55%, var(--color-growth-soft) 100%); }
+.tp-sky svg { position: absolute; pointer-events: none; }
+.tp-cloud { fill: var(--color-bg-primary); opacity: .9; }
+.tp-cloud-1 { left: 36px; top: 6px; }
+.tp-cloud-2 { right: 118px; top: 12px; }
+.tp-trail { left: 300px; top: 4px; stroke: var(--color-primary-blue); }
+.tp-plane { left: 594px; top: 2px; fill: var(--color-bg-primary); stroke: var(--color-primary-blue); animation: tp-float 3.2s ease-in-out infinite alternate; }
+@keyframes tp-float { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-5px) rotate(-3deg); } }
+.tp-sun { right: 26px; top: 3px; stroke: var(--color-sky-picked); }
+.tp-sun circle { fill: var(--color-sky-picked); }
+.tp-star-gold { fill: var(--color-star); }
+.tp-star-pink { fill: var(--color-sky-echoed); }
+.tp-star-violet { fill: var(--color-violet); }
+.tp-sky-star-1 { left: 10px; bottom: 10px; }
+.tp-sky-star-2 { right: 12px; bottom: 140px; }
+.tp-sky-star-3 { right: 64px; bottom: 9px; }
+
+/* ── The card ────────────────────────────────────────────────────────── */
+.tp-air { position: relative; z-index: 1; border-radius: 16px; padding: 10px; box-shadow: var(--color-elevation-2);
+  background: repeating-linear-gradient(135deg, var(--color-primary-blue) 0 14px, var(--color-bg-primary) 14px 20px, var(--color-accent-mint) 20px 34px, var(--color-bg-primary) 34px 40px); }
+.tp-card { background: var(--color-bg-primary); border-radius: 8px; padding: 30px 28px 28px; display: grid; grid-template-columns: minmax(0, 1fr) 1px 340px; gap: 30px; }
+
+/* The front: the photo with its tape and doodles, then the person. */
+.tp-front { display: grid; grid-template-columns: 284px minmax(0, 1fr); gap: 30px; align-items: start; }
+.tp-photo { position: relative; margin: 6px 0 0 4px; width: 280px; box-sizing: border-box; transform: rotate(-2deg); background: var(--color-bg-primary); padding: 8px 8px 12px; border-radius: 4px; box-shadow: var(--color-elevation-3); }
+.tp-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 2px; }
+.tp-initials { width: 100%; aspect-ratio: 4 / 3; border-radius: 2px; background: var(--color-primary-blue); color: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; font-size: 64px; font-weight: 800; letter-spacing: -.02em; }
+.tp-tape { position: absolute; z-index: 2; width: 78px; height: 24px; opacity: .88; box-shadow: var(--color-elevation-1); top: -6px; }
+.tp-tape-l { left: -22px; transform: rotate(-38deg); background: repeating-linear-gradient(90deg, var(--color-sky-echoed) 0 8px, color-mix(in srgb, var(--color-sky-echoed) 75%, var(--color-bg-primary)) 8px 16px); }
+.tp-tape-r { right: -22px; transform: rotate(38deg); background: repeating-linear-gradient(90deg, var(--color-accent-mint) 0 8px, color-mix(in srgb, var(--color-accent-mint) 70%, var(--color-bg-primary)) 8px 16px); }
+.tp-greet { position: absolute; z-index: 2; left: -12px; bottom: -16px; transform: rotate(-4deg); display: flex; flex-direction: column; line-height: 1.15; background: var(--color-primary-dark); color: var(--color-bg-primary); border-radius: 8px; padding: 6px 12px 7px; box-shadow: var(--color-elevation-3); }
+.tp-greet-k { font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-mint); }
+.tp-greet-v { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+
+.tp-doodles { position: relative; width: 284px; height: 150px; margin-top: 22px; pointer-events: none; }
+.tp-doodles > * { position: absolute; }
+.tp-badge { left: 22px; top: 26px; width: 84px; height: 84px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-12deg); background: var(--color-accent-mint); color: var(--color-primary-dark);
+  box-shadow: inset 0 0 0 5px var(--color-accent-mint), inset 0 0 0 7px color-mix(in srgb, var(--color-primary-dark) 20%, transparent), var(--color-elevation-2); }
+.tp-badge-v { font-size: 24px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.tp-badge-k { font-size: 8px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; margin-top: 2px; }
+.tp-arrow { left: 118px; top: 0; stroke: var(--color-primary-blue); }
+.tp-heart { left: 212px; top: 70px; transform: rotate(12deg); fill: var(--color-pink-bg); stroke: var(--color-pink-ink); }
+.tp-ring { left: 150px; top: 62px; width: 78px; height: 78px; border-radius: 50%; border: 5px solid color-mix(in srgb, var(--color-client-2-ink) 11%, transparent); }
+.tp-doodle-star-1 { left: 122px; top: 104px; }
+.tp-doodle-star-2 { left: 248px; top: 24px; }
+
+.tp-eyebrow { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--color-growth-deep); }
+.tp-name { margin: 6px 0 0; font-size: 40px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; overflow-wrap: anywhere; }
+.tp-legal { margin: 8px 0 0; font-size: 14px; color: var(--color-grey-500); }
+.tp-role { margin: 4px 0 0; font-size: 15px; font-weight: 600; }
+.tp-know { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--color-grey-200); display: flex; flex-direction: column; gap: 14px; }
+.tp-fact { display: flex; gap: 10px; align-items: center; font-size: 14px; font-weight: 600; }
+.tp-fact svg { flex: none; stroke: var(--color-growth-deep); }
+.tp-fact-label { flex: none; width: 74px; font-size: 13px; font-weight: 500; color: var(--color-grey-500); }
+.tp-stickers { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.tp-sticker { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 700; box-shadow: var(--color-elevation-1); transition: transform .25s cubic-bezier(.34, 1.56, .64, 1); }
+.tp-sticker svg { flex: none; stroke: currentColor; }
+.tp-sticker:hover { transform: translateY(-2px) rotate(0deg); }
+.tp-tone-0 { background: var(--color-client-0-bg); color: var(--color-client-0-ink); }
+.tp-tone-1 { background: var(--color-client-1-bg); color: var(--color-client-1-ink); }
+.tp-tone-2 { background: var(--color-client-2-bg); color: var(--color-client-2-ink); }
+.tp-tone-3 { background: var(--color-client-3-bg); color: var(--color-client-3-ink); }
+.tp-tone-4 { background: var(--color-client-4-bg); color: var(--color-client-4-ink); }
+.tp-tone-5 { background: var(--color-client-5-bg); color: var(--color-client-5-ink); }
+.tp-tilt-0 { transform: rotate(-2deg); }
+.tp-tilt-1 { transform: rotate(1.5deg); }
+.tp-tilt-2 { transform: rotate(-1deg); }
+.tp-tilt-3 { transform: rotate(2deg); }
+.tp-empty { margin: 0; font-size: 14px; color: var(--color-grey-500); }
+
+.tp-rule { width: 1px; background-image: linear-gradient(var(--color-grey-200) 60%, transparent 60%); background-size: 1px 10px; }
+
+/* The back: airmail label, postmark and hometown stamp, then the role. */
+.tp-back { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.tp-marks { position: relative; height: 150px; }
+.tp-avion { position: absolute; left: 0; top: 2px; transform: rotate(-5deg); border: 2px solid var(--color-primary-blue); border-radius: 6px; padding: 4px 8px; background: var(--color-bg-primary); color: var(--color-info-ink); font-size: 9px; font-weight: 800; letter-spacing: .12em; line-height: 1.35; text-transform: uppercase; }
+.tp-avion span { display: block; }
+.tp-avion span + span { color: var(--color-pink-ink); }
+.tp-waves { position: absolute; right: 214px; top: 84px; stroke: color-mix(in srgb, var(--color-primary-dark) 28%, transparent); }
+.tp-stampwrap { position: absolute; right: 0; top: 0; transform: rotate(2deg); filter: drop-shadow(var(--tp-stamp-shadow, 0 2px 6px color-mix(in srgb, var(--color-primary-dark) 22%, transparent))); }
+.tp-stamp { width: 116px; height: 140px; box-sizing: border-box; padding: 7px; background: var(--color-bg-primary);
+  -webkit-mask: linear-gradient(var(--color-primary-dark) 0 0) content-box, radial-gradient(circle at center, transparent 3.4px, var(--color-primary-dark) 3.9px) -7px -7px / 14px 14px;
+  mask: linear-gradient(var(--color-primary-dark) 0 0) content-box, radial-gradient(circle at center, transparent 3.4px, var(--color-primary-dark) 3.9px) -7px -7px / 14px 14px; }
+.tp-stamp-in { height: 100%; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 5px 9px; text-align: center; background: var(--color-growth-soft); border: 1px solid var(--color-growth-line); }
+.tp-stamp-in svg { stroke: var(--color-growth-deep); }
+.tp-stamp-top { width: 100%; display: flex; justify-content: space-between; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--color-growth-deep); }
+.tp-stamp-v { font-size: 11px; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
+.tp-post { position: absolute; right: 112px; top: 52px; width: 104px; height: 104px; box-sizing: border-box; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; transform: rotate(-12deg);
+  border: 2px solid color-mix(in srgb, var(--color-primary-dark) 44%, transparent); box-shadow: inset 0 0 0 6px transparent, inset 0 0 0 7px color-mix(in srgb, var(--color-primary-dark) 28%, transparent); color: color-mix(in srgb, var(--color-primary-dark) 72%, transparent); }
+.tp-post-k { font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.tp-post-d { font-size: 19px; font-weight: 800; letter-spacing: .02em; line-height: 1.1; text-transform: uppercase; }
+.tp-post-y { font-size: 11px; font-weight: 700; letter-spacing: .1em; }
+.tp-rows { margin: 0; }
+.tp-row { display: grid; grid-template-columns: 118px minmax(0, 1fr); align-items: baseline; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--color-card-border); }
+.tp-row dt { font-size: 12px; font-weight: 600; color: var(--color-grey-500); }
+.tp-row dd { margin: 0; font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
+.tp-row a { color: var(--color-primary-blue-hover); text-decoration: none; }
+.tp-row a:hover { text-decoration: underline; }
+.tp-missing { margin: 2px 0 0; font-size: 13px; color: var(--color-grey-500); }
+
+/* ── FAST goals: a route of numbered stops ───────────────────────────── */
+.tp-goals { background: var(--color-bg-primary); border: 1px solid var(--color-card-border); border-radius: 12px; box-shadow: var(--color-elevation-1); padding: 22px 24px 24px; }
+.tp-goals-head { display: flex; align-items: center; gap: 12px; }
+.tp-goals-ico { flex: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-growth-soft); }
+.tp-goals-ico svg { stroke: var(--color-growth-deep); }
+.tp-goals-h { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.tp-hint { margin: 4px 0 10px; font-size: 13px; color: var(--color-grey-500); }
+.tp-goal-list { list-style: none; margin: 0; padding: 0; }
+/* The comment thread's own wrapper steps aside (display: contents), so its
+   toggle sits beside Edit and Delete and its open thread runs full width. */
+.tp-goal { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr) auto auto; column-gap: 16px; align-items: start; padding: 14px 0; border-top: 1px solid var(--color-grey-150); }
+.tp-goal:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 48px; bottom: -16px; border-left: 2px dashed var(--color-accent-line); }
+.tp-goal--editing { display: block; }
+.tp-goal--editing::after { display: none; }
+.tp-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; }
+.tp-num-0 { background: var(--color-client-0-bg); color: var(--color-client-0-ink); }
+.tp-num-1 { background: var(--color-client-1-bg); color: var(--color-client-1-ink); }
+.tp-num-2 { background: var(--color-client-2-bg); color: var(--color-client-2-ink); }
+.tp-num-3 { background: var(--color-client-3-bg); color: var(--color-client-3-ink); }
+.tp-num-4 { background: var(--color-client-4-bg); color: var(--color-client-4-ink); }
+.tp-goal-body { grid-column: 2; grid-row: 1; min-width: 0; }
+.tp-goal-t { margin: 4px 0 0; font-size: 14px; font-weight: 700; line-height: 1.4; }
+.tp-ladder { margin: 4px 0 0; display: flex; gap: 6px; align-items: flex-start; font-size: 13px; line-height: 1.45; color: var(--color-grey-500); }
+.tp-ladder svg { flex: none; margin-top: 2px; stroke: var(--color-growth-deep); }
+.tp-goal .admin-goal-comments { display: contents; }
+.tp-goal .admin-goal-comments-toggle { grid-column: 3; grid-row: 1; align-self: center; margin-top: 2px; min-height: 28px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.tp-goal .admin-goal-comments-body { grid-column: 2 / -1; grid-row: 2; margin-top: 10px; }
+.tp-goal--editing .admin-goal-comments { display: block; margin-top: 8px; }
+.tp-goal-acts { grid-column: 4; grid-row: 1; display: flex; gap: 6px; align-self: center; }
+.tp-goals .admin-coach-add-row { margin-top: 6px; padding-top: 16px; border-top: 1px solid var(--color-grey-150); }
+
+.tp-backlink { margin: 0; font-size: 14px; }
+.tp-backlink a { color: var(--color-primary-blue-hover); text-decoration: none; }
+
+/* ── A laptop with the sidebar open: the back goes under the front ──── */
+@container (max-width: 1079px) {
+  .tp-card { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .tp-rule { width: auto; height: 1px; background-image: linear-gradient(90deg, var(--color-grey-200) 60%, transparent 60%); background-size: 10px 1px; }
+  .tp-trail { left: 220px; }
+  .tp-plane { left: 514px; }
+  /* The role rows beside the stamp, so the back is as full as the front. */
+  .tp-back { display: grid; grid-template-columns: minmax(0, 1fr) 320px; column-gap: 30px; align-items: start; }
+  .tp-marks { grid-column: 2; grid-row: 1; }
+  .tp-rows { grid-column: 1; grid-row: 1; }
+  .tp-missing { grid-column: 1; }
+}
+
+/* ── A phone: one column, the doodles step aside ─────────────────────── */
+@container (max-width: 640px) {
+  .tp-page { gap: 16px; }
+  .tp-scene { padding: 42px 12px 30px; border-radius: 16px; }
+  .tp-cloud-1 { left: 6px; }
+  .tp-cloud-2, .tp-sky-star-2 { display: none; }
+  .tp-trail { left: 120px; width: 150px; }
+  .tp-plane { left: auto; right: 64px; }
+  .tp-sun { right: 8px; }
+  .tp-sky-star-1 { left: 4px; bottom: 8px; }
+  .tp-sky-star-3 { right: 16px; bottom: 8px; }
+  .tp-air { padding: 8px; border-radius: 14px; }
+  .tp-card { gap: 22px; padding: 20px 18px 18px; }
+  .tp-front { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .tp-photo { width: auto; margin: 4px 6px 0; }
+  .tp-doodles { display: none; }
+  .tp-greet { left: -6px; bottom: -14px; }
+  .tp-greet-v { font-size: 15px; }
+  .tp-name { font-size: 30px; }
+  /* Back to one column. The 1079px grid above set align-items: start, which a
+     flex column keeps, and the marks hold only absolutely placed pieces, so
+     the row shrank to zero width and the stamp hung off the card's left edge
+     (found on 19 Oct 2026, live since OV.5). Stretch it to the card's width. */
+  .tp-back { display: flex; align-items: stretch; }
+  .tp-marks { height: 128px; }
+  .tp-waves { display: none; }
+  .tp-stamp { width: 96px; height: 118px; }
+  .tp-stamp-top { justify-content: center; }
+  .tp-stamp-mark { display: none; }
+  .tp-post { right: 96px; top: 40px; width: 88px; height: 88px; }
+  .tp-post-d { font-size: 17px; }
+  .tp-row { grid-template-columns: 112px minmax(0, 1fr); }
+  .tp-goals { padding: 18px 16px; }
+  .tp-goal { grid-template-columns: 28px minmax(0, 1fr); row-gap: 4px; }
+  .tp-goal:not(:last-child)::after { top: 46px; }
+  .tp-goal .admin-goal-comments-toggle { grid-column: 2; grid-row: 2; justify-self: start; min-height: 44px; }
+  .tp-goal-acts { grid-column: 2; grid-row: 3; }
+  .tp-goal-acts .admin-btn { min-height: 44px; min-width: 76px; }
+  .tp-goal .admin-goal-comments-body { grid-column: 2; grid-row: 4; }
+  .tp-goals .admin-coach-add-row .admin-btn { min-height: 44px; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-plane { animation: none; }
+  .tp-sticker { transition: none; }
+  .tp-sticker:hover { transform: none; }
+}

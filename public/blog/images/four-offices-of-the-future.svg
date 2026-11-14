@@ -1,0 +1,27 @@
+<svg width="680" height="540" viewBox="0 0 680 540" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>The Four Offices of the Future</title>
+<desc>Four offices, Revenue, Operations, Talent and Innovation, resting on one central database.</desc>
+<style>.ff{font-family:'Inter',system-ui,-apple-system,sans-serif}.eb{letter-spacing:3px}</style>
+<rect x="0" y="0" width="680" height="540" rx="20" fill="#04102D"/>
+<text class="ff eb" x="340" y="60" text-anchor="middle" fill="#6FF2C1" font-size="12" font-weight="500">THE OPERATING MODEL FOR THE AI ERA</text>
+<text class="ff" x="340" y="100" text-anchor="middle" fill="#FFFFFF" font-size="28" font-weight="600">The Four Offices of the Future</text>
+<g class="ff">
+ <rect x="80" y="140" width="250" height="118" rx="14" fill="#0A1A38" stroke="#287BE8" stroke-width="2"/>
+ <text x="104" y="194" fill="#5AA0F5" font-size="20" font-weight="600">Revenue</text>
+ <text x="104" y="220" fill="rgba(255,255,255,0.55)" font-size="13">Everything that brings money in</text>
+ <rect x="350" y="140" width="250" height="118" rx="14" fill="#0A1A38" stroke="#6FF2C1" stroke-width="2"/>
+ <text x="374" y="194" fill="#6FF2C1" font-size="20" font-weight="600">Operations</text>
+ <text x="374" y="220" fill="rgba(255,255,255,0.55)" font-size="13">Everything that delivers the work</text>
+ <rect x="80" y="278" width="250" height="118" rx="14" fill="#0A1A38" stroke="#D1458B" stroke-width="2"/>
+ <text x="104" y="332" fill="#E06AA6" font-size="20" font-weight="600">Talent</text>
+ <text x="104" y="358" fill="rgba(255,255,255,0.55)" font-size="13">Builds the team, human and AI</text>
+ <rect x="350" y="278" width="250" height="118" rx="14" fill="#0A1A38" stroke="#FF6B35" stroke-width="2"/>
+ <text x="374" y="332" fill="#FF8B5E" font-size="20" font-weight="600">Innovation</text>
+ <text x="374" y="358" fill="rgba(255,255,255,0.55)" font-size="13">Creates what comes next</text>
+</g>
+<path d="M340 396 V430" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+<rect x="140" y="430" width="400" height="72" rx="12" fill="#0B2247" stroke="rgba(111,242,193,0.35)" stroke-width="1"/>
+<rect x="152" y="430" width="376" height="3" rx="1.5" fill="#6FF2C1"/>
+<text class="ff" x="340" y="470" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="600">Central database</text>
+<text class="ff" x="340" y="490" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12.5">the foundation everything rests on</text>
+</svg>

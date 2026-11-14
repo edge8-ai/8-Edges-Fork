@@ -1,0 +1,12 @@
+{
+  "app/admin/admin.css": [
+    ".admin-assist-input",
+    ".admin-campaign-style-select",
+    ".admin-mono",
+    ".admin-mono-sm"
+  ],
+  "app/styles/utilities.css": [
+    ".u-lg",
+    ".u-sm"
+  ]
+}

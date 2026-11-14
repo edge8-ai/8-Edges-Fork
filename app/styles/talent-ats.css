@@ -1,0 +1,372 @@
+/* Talent ATS (admin): the recruiter's screens in the visual language of the
+   team Hiring page (app/styles/team-hiring.css, approved 19 Oct 2026). Three
+   rules: one headline that says the state, what waits on the reader first, and
+   no reading text under 13px. Everything is scoped to .ats, which the four
+   Talent layouts wrap their pages in, so the rest of the admin keeps its 13px
+   body. Measured on 11 Nov 2026, the application page had 111 of 118 text
+   elements at 13px or smaller. Every colour is a token. */
+
+.ats {
+  /* The admin scale, one step up. Rules written against these tokens follow. */
+  --admin-text-xs: 12px;
+  --admin-text-sm: 13px;
+  --admin-text-base: 15px;
+  --admin-text-md: 15px;
+  --admin-text-lg: 17px;
+  container-type: inline-size;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── Admin rules that set a literal size, lifted to the same scale ───── */
+.ats .admin-label { font-size: 13px; font-weight: 700; }
+.ats .admin-hint { font-size: 13px; line-height: 1.45; color: var(--color-grey-600); }
+.ats .admin-alert { font-size: 14px; }
+.ats .admin-btn { min-height: 40px; padding: 0 16px; border-radius: 10px; font-size: 14px; font-weight: 700; }
+.ats .admin-btn--sm { min-height: 34px; padding: 0 12px; font-size: 13px; }
+.ats .admin-badge { min-height: 24px; padding: 0 10px; font-size: 12.5px; font-weight: 800; white-space: nowrap; }
+.ats .admin-badge-inverse { font-size: 12px; padding: 2px 7px; }
+.ats .admin-cell-muted { color: var(--color-grey-600); }
+.ats .admin-empty { padding: 18px 12px; font-size: 14px; color: var(--color-grey-600); }
+.ats .admin-card { border-radius: 14px; }
+.ats .admin-box { border-radius: 12px; }
+.ats .admin-pagination { font-size: 13px; }
+.ats .admin-pagebtn { min-height: 34px; font-size: 13px; }
+.ats .admin-star-btn { font-size: 26px; }
+.ats .admin-record-ai-point { padding: 8px 12px; border-radius: 10px; font-size: 14px; line-height: 1.45; }
+.ats .admin-record-ai-points { max-width: none; }
+.ats .admin-editable-aitag { font-size: 12px; }
+.ats .admin-editable-note { font-size: 13px; }
+.ats .admin-kanban-card-sub, .ats .admin-kanban-card-meta { font-size: 13px; }
+.ats .admin-record-menu-item { font-size: 14px; padding: 10px 12px; }
+.ats .admin-record-iconbtn { width: 40px; height: 40px; border-radius: 10px; }
+
+/* Tables: the header stays a small label, the cells read at body size. */
+.ats .admin-table thead th { font-size: 12px; font-weight: 800; letter-spacing: .08em; color: var(--color-grey-500); }
+.ats .admin-table tbody td { font-size: 15px; padding-top: 12px; padding-bottom: 12px; vertical-align: middle; }
+.ats .admin-table .admin-cell-strong { font-weight: 800; }
+/* The last column is a date on every Talent table; it reads on one line. */
+.ats .admin-table tbody td:last-child { white-space: nowrap; }
+
+/* ── The headline band ───────────────────────────────────────────────────
+   PageHead keeps its markup; in Talent it is drawn as the team page's hero. */
+.ats .admin-page-head, .ats-hero {
+  position: relative; margin-bottom: 18px; padding: 22px 24px 20px; border-radius: 16px;
+  border: 1px solid var(--color-accent-line); background: var(--color-accent-soft); box-shadow: var(--color-elevation-1);
+}
+.ats .admin-page-head { align-items: flex-start; }
+.ats .admin-eyebrow, .ats-k { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--color-info-ink); }
+.ats .admin-eyebrow a, .ats-k a { color: inherit; text-decoration: none; }
+.ats .admin-eyebrow a:hover, .ats-k a:hover { text-decoration: underline; }
+.ats .admin-page-title, .ats-h { margin: 6px 0 0; font-size: 30px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; color: var(--color-primary-dark); overflow-wrap: anywhere; }
+.ats .admin-page-sub, .ats-sub { margin: 8px 0 0; max-width: 640px; font-size: 15px; line-height: 1.5; color: var(--color-grey-600); }
+.ats-hero-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.ats-hero-top > :first-child { min-width: 0; }
+.ats-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ats-hero-actions .admin-btn--sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+.ats-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.ats-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 26px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--color-accent-line); background: var(--color-bg-primary); color: var(--color-info-ink); font-size: 12.5px; font-weight: 800; white-space: nowrap; }
+.ats-chip--calm { border-color: transparent; background: var(--color-grey-150); color: var(--color-grey-600); }
+
+/* Count chips under the headline: what the three KPI tiles used to say. */
+.ats-counts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; padding: 0; list-style: none; }
+.ats-count { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--color-accent-line); background: var(--color-bg-primary); font-size: 13px; font-weight: 700; color: var(--color-grey-600); white-space: nowrap; }
+.ats-count b { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--color-grey-150); color: var(--color-primary-dark); font-size: 11px; font-weight: 800; }
+.ats-count.is-lead { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: var(--color-bg-primary); }
+.ats-count.is-lead b { background: var(--color-grey-600); color: var(--color-bg-primary); }
+
+/* Datapoints under a headline (Onboarding): the figure, then what it counts. */
+.ats-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 18px; padding: 0; list-style: none; }
+.ats-stat { padding: 12px 14px; border-radius: 12px; border: 1px solid var(--color-card-border); background: var(--color-bg-primary); box-shadow: var(--color-elevation-1); font-size: 13px; font-weight: 700; line-height: 1.35; color: var(--color-grey-600); }
+.ats-stat b { display: block; font-size: 24px; font-weight: 800; line-height: 1.15; color: var(--color-primary-dark); font-variant-numeric: tabular-nums; }
+.ats-stat--bad { border-color: var(--color-err-bg); background: var(--color-err-bg); color: var(--color-err-ink); }
+.ats-stat--bad b { color: var(--color-err-ink); }
+/* Sections stack with the same gap the cards of a record page keep. */
+.ats > section.admin-card, .ats > .ats-two, .ats > details.admin-card { margin-bottom: 18px; }
+.ats-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; align-items: start; }
+.ats-bars { margin: 4px 0 0; padding: 0; list-style: none; }
+.ats-bar { display: grid; grid-template-columns: minmax(0, 1fr) 110px 40px; gap: 12px; align-items: center; padding: 9px 0; font-size: 14px; }
+.ats-bar + .ats-bar { border-top: 1px solid var(--color-grey-150); }
+.ats-bar b { font-size: 16px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+.ats-bar progress { width: 100%; height: 10px; border: 0; border-radius: 999px; overflow: hidden; background: var(--color-grey-150); accent-color: var(--color-primary-blue); }
+.ats-bar progress::-webkit-progress-bar { background: var(--color-grey-150); }
+.ats-bar progress::-webkit-progress-value { background: var(--color-primary-blue); border-radius: 999px; }
+.ats-bar progress::-moz-progress-bar { background: var(--color-primary-blue); border-radius: 999px; }
+.ats-quote { margin: 12px 0 0; padding: 2px 0 2px 12px; border-left: 3px solid var(--color-accent-line); font-size: 14px; line-height: 1.5; color: var(--color-grey-600); white-space: pre-wrap; overflow-wrap: anywhere; }
+.ats-quote small { display: block; margin-bottom: 2px; font-size: 12px; font-weight: 700; color: var(--color-grey-500); white-space: normal; }
+/* A row that is not itself a link: a person, their chips, one action. */
+.ats-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding: 10px 0; }
+.ats a.ats-row-main { color: inherit; text-decoration: none; }
+.ats a.ats-row-main:hover .ats-person-name { text-decoration: underline; }
+
+/* ── Section headings: a small label over a real heading ─────────────── */
+.ats-sec-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.ats-sec-head > :first-child { min-width: 0; }
+.ats-sec-k, .ats .admin-section-label { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-grey-500); }
+.ats-sec-h { margin: 3px 0 0; font-size: 19px; line-height: 1.25; font-weight: 800; letter-spacing: -.01em; color: var(--color-primary-dark); }
+.ats-sec-aside { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 13px; font-weight: 700; }
+/* Card titles on the job req page read as the section headings do. */
+.ats .admin-card-title { font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
+/* The label's own 24px top margin left a blank band at the top of every card. */
+.ats .admin-section-card .admin-section-label { margin-bottom: 8px; }
+
+/* ── The application page ────────────────────────────────────────────── */
+.ats-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin-top: 18px; }
+.ats-steps > * { min-width: 0; }
+.ats-step { width: 100%; display: flex; flex-direction: column; gap: 1px; min-height: 58px; padding: 10px 12px; text-align: left; font: inherit; font-size: 13px; font-weight: 700; color: var(--color-grey-600); background: var(--color-bg-primary); border: 1px solid var(--color-accent-line); border-radius: 12px; cursor: pointer; }
+.ats-step b { font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
+.ats-step:hover { border-color: var(--color-primary-blue); }
+.ats-step:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; }
+.ats-step.is-done { background: var(--color-grey-50); }
+.ats-step.is-now { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: var(--color-grey-200); }
+.ats-step.is-now b { color: var(--color-bg-primary); }
+
+.ats-score { flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 84px; height: 72px; border-radius: 14px; background: var(--color-accent-soft); color: var(--color-info-ink); }
+.ats-score b { font-size: 26px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.ats-score span { margin-top: 3px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.ats-score--low { background: var(--color-amber-bg); color: var(--color-amber-ink); }
+.ats-score--high { background: var(--color-ok-bg); color: var(--color-ok-ink); }
+.ats-prose { font-size: 15px; line-height: 1.55; color: var(--color-grey-600); white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* HR assessment: the rating is its own field, above the notes. */
+.ats-field { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; }
+.ats-field-k { font-size: 12px; font-weight: 700; color: var(--color-grey-500); }
+.ats-rating { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.ats-rating-n { font-size: 13px; font-weight: 700; color: var(--color-grey-600); }
+.ats .admin-record-assessment .admin-editable--block { max-width: none; min-height: 88px; font-size: 15px; line-height: 1.55; border: 1px solid var(--color-card-border); border-radius: 10px; padding: 10px 12px; }
+
+/* The rail: each label sits over its value, so an email never wraps mid-word. */
+/* Only above the width where the admin rule stacks the two columns. */
+.ats .admin-record-cols { gap: 18px; }
+@media (min-width: 981px) { .ats .admin-record-cols { grid-template-columns: minmax(0, 1fr) 320px; } }
+.ats .admin-record-main, .ats .admin-record-rail { gap: 18px; }
+.ats .admin-section-card + .admin-section-card { margin-top: 0; }
+.ats .admin-kv--editable { display: block; margin: 0; font-size: 15px; }
+.ats .admin-kv--editable dt { margin: 0; padding-top: 9px; border-top: 1px solid var(--color-grey-150); font-size: 12px; font-weight: 700; color: var(--color-grey-500); }
+.ats .admin-kv--editable dt:first-of-type { padding-top: 2px; border-top: 0; }
+.ats .admin-kv--editable dd { margin: 0 0 7px -8px; font-size: 15px; font-weight: 600; }
+.ats .admin-kv--editable .admin-editable, .ats .admin-kv--editable .admin-editable-link { padding: 3px 8px; font-size: 15px; }
+.ats .admin-kv--editable .admin-editable-empty { font-weight: 600; color: var(--color-info-ink); }
+.ats .admin-kv--editable dd.u-py-1 { margin-left: 0; }
+
+/* ── Person rows in the lists ────────────────────────────────────────── */
+.ats-person { display: flex; align-items: center; gap: 12px; min-width: 0; }
+/* In a table the cell would otherwise shrink until the name and the email
+   break mid-word; the table scrolls sideways instead, as the admin tables do. */
+.ats .admin-table .ats-person { min-width: 230px; }
+.ats-av { flex: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-accent-soft); color: var(--color-info-ink); font-size: 13px; font-weight: 800; }
+.ats-person-name { display: block; font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
+.ats-person-meta { display: block; font-size: 13px; color: var(--color-grey-600); overflow-wrap: break-word; }
+/* The two ratings, side by side: the AI screen and HR's own. */
+.ats-ratings { display: inline-grid; grid-template-columns: 92px 92px; gap: 8px; }
+/* The two sort buttons in the header sit over the two ratings they sort. */
+.ats thead .ats-ratings .admin-th-sort { justify-content: center; white-space: nowrap; }
+.ats-rate { display: flex; flex-direction: column; align-items: center; padding: 4px 6px; border-radius: 10px; background: var(--color-grey-50); font-size: 16px; font-weight: 800; line-height: 1.2; color: var(--color-primary-dark); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ats-rate i { font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--color-grey-500); }
+.ats-rate small { font-size: 12px; font-weight: 700; color: var(--color-grey-500); }
+.ats-rate.is-none { font-size: 12px; font-weight: 700; color: var(--color-grey-500); }
+.ats-rate.is-none span { line-height: 19px; }
+
+/* ── Open roles, as the seats they fill ──────────────────────────────── */
+.ats-roles { display: flex; flex-direction: column; gap: 18px; margin-bottom: 18px; }
+.ats-role { padding: 18px; background: var(--color-bg-primary); border: 1px solid var(--color-card-border); border-radius: 14px; box-shadow: var(--color-elevation-1); }
+.ats-role-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.ats-role-top > :first-child { min-width: 0; }
+.ats-role-h { margin: 3px 0 0; font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
+.ats-role-h a { color: var(--color-primary-dark); text-decoration: none; }
+.ats-role-h a:hover { text-decoration: underline; }
+.ats-seats { flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 76px; height: 64px; border-radius: 14px; border: 2px dashed var(--color-accent-line); color: var(--color-info-ink); }
+.ats-seats b { font-size: 22px; font-weight: 800; line-height: 1; }
+.ats-seats span { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.ats-stages { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+.ats-stage { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 12px; background: var(--color-grey-50); color: var(--color-grey-600); font-size: 12px; font-weight: 700; }
+.ats-stage b { font-size: 22px; font-weight: 800; line-height: 1.1; color: var(--color-primary-dark); }
+.ats-stage.is-on { background: var(--color-accent-soft); }
+.ats-stage.is-on b { color: var(--color-info-ink); }
+/* The role's applications: an application sits under its job req. */
+.ats-cands-k { margin-top: 16px; }
+.ats-cands { margin: 4px 0 0; padding: 0; list-style: none; }
+.ats-cands > li + li { border-top: 1px solid var(--color-grey-150); }
+.ats a.ats-cand { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding: 10px 6px; border-radius: 10px; color: inherit; text-decoration: none; }
+.ats a.ats-cand:hover { background: var(--color-grey-50); }
+.ats a.ats-cand:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; }
+.ats-cand-status { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.ats-role .admin-empty { margin: 12px 0 0; text-align: left; padding-left: 0; }
+.ats-role-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+/* ── Narrow widths: the page reflows by its own width, as the team pages do,
+   because the sidebar makes the content far narrower than the window. ── */
+@container (max-width: 720px) {
+  .ats .admin-page-head, .ats-hero { padding: 18px 16px 16px; }
+  .ats .admin-page-title, .ats-h { font-size: 24px; }
+  .ats-ratings { grid-template-columns: 84px 84px; }
+  .ats-hero-actions { width: 100%; }
+  .ats a.ats-cand { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .ats-cand-status { justify-content: flex-start; }
+  .ats-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .ats-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ats-bar { grid-template-columns: minmax(0, 1fr) 40px; }
+  .ats-bar progress { display: none; }
+}
+@media (pointer: coarse) {
+  .ats .admin-btn, .ats .admin-btn--sm, .ats .admin-pagebtn, .ats .admin-record-iconbtn { min-height: 44px; }
+  .ats .admin-record-iconbtn { width: 44px; }
+  .ats-count { min-height: 44px; }
+}
+
+/* A client review overview row's actions (CR.2.4, redrawn as CR.3.8): a menu
+   over the page from the row's More button. RowActions portals it to the body
+   and places it by measuring the button, because the table's scrolling frame
+   clips whatever overflows it; that is what cut the old disclosure off. Below
+   the modal layer (70), so the confirm it opens always lands on top. On a
+   phone (.is-sheet, set by RowActions at the table's own breakpoint) it is a
+   sheet from the bottom, like the commitment card's menu. */
+.cr-menu-trigger svg { flex: none; }
+
+.cr-menu {
+  position: fixed;
+  z-index: 60;
+  width: 320px;
+  max-width: calc(100vw - 16px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow-lg);
+  text-align: left;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cr-menu-group { display: flex; flex-direction: column; gap: 2px; }
+.cr-menu-group + .cr-menu-group { border-top: 1px solid var(--admin-line-soft); margin-top: 4px; padding-top: 4px; }
+
+.cr-menu-group-label {
+  margin: 0;
+  padding: 8px 10px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--admin-muted);
+}
+
+.cr-menu-rule { height: 1px; margin: 4px 6px; background: var(--admin-line-soft); }
+
+.cr-menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--admin-radius-sm);
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--admin-ink);
+  cursor: pointer;
+}
+.cr-menu-item:hover, .cr-menu-item:focus-visible { background: var(--admin-surface-hover); outline: none; }
+.cr-menu-item:focus-visible { box-shadow: inset 0 0 0 2px var(--admin-accent); }
+.cr-menu-item-label { font-size: 13px; font-weight: 600; }
+.cr-menu-item-hint { font-size: 12px; color: var(--admin-muted); }
+.cr-menu-item.is-danger .cr-menu-item-label { color: var(--admin-err-ink); }
+
+.cr-menu-change { display: flex; flex-direction: column; gap: var(--admin-space-3); padding: 8px; }
+.cr-menu-back {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--admin-accent);
+  cursor: pointer;
+}
+.cr-menu-change-actions { display: flex; justify-content: flex-end; gap: var(--admin-space-2); }
+
+/* The member's name heads the menu, so a menu is never read as another row's. */
+.cr-menu-title {
+  margin: 0;
+  padding: 6px 10px 6px;
+  border-bottom: 1px solid var(--admin-line-soft);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--admin-ink);
+}
+.cr-menu-cancel { display: none; }
+
+.cr-menu-backdrop { position: fixed; inset: 0; z-index: 59; background: var(--admin-scrim); }
+
+.cr-menu.is-sheet {
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  max-width: none;
+  padding: 10px 12px calc(16px + env(safe-area-inset-bottom, 0px));
+  border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+  box-shadow: var(--admin-shadow-drawer);
+  max-height: 85vh;
+}
+.cr-menu.is-sheet .cr-menu-title { padding: 4px 10px 8px; font-size: 15px; }
+.cr-menu.is-sheet .cr-menu-item { min-height: 52px; padding: 10px; }
+.cr-menu.is-sheet .cr-menu-item-label { font-size: 15px; }
+.cr-menu.is-sheet .cr-menu-item-hint { font-size: 13px; }
+.cr-menu.is-sheet .cr-menu-cancel { display: inline-flex; justify-content: center; min-height: 48px; margin-top: 8px; font-size: 15px; }
+
+/* The open-cycle screen (CR.2.5): the cycle's details and who is reviewed,
+   beside what opening does. One column on a phone, the summary last. */
+.cr-open-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--admin-space-4);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .cr-open-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* A client review on paper (CR.3.4, approved on the CR.3.4 canvas): hidden on
+   screen, and the only thing printed from a page that holds one, whatever
+   shell it sits in, as the advance papers print. The skip-manager's notes are
+   never on it. Body text stays at 10pt or more. */
+.cr-print { display: none; }
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body:has(.cr-print) * { visibility: hidden; }
+  body:has(.cr-print) .cr-print, body:has(.cr-print) .cr-print * { visibility: visible; }
+  /* The page's own screen content takes no room on paper, so no blank pages trail the sheet. */
+  body:has(.cr-print) .ats > :not(.cr-print) { display: none; }
+  .cr-print { display: flex; flex-direction: column; gap: 12pt; position: absolute; inset: 0 auto auto 0; width: 100%;
+    color: var(--color-primary-dark); font-size: 11pt; line-height: 1.4; }
+  .cr-print p { margin: 0; }
+  .cr-print-head { display: flex; justify-content: space-between; gap: 16pt; padding-bottom: 8pt; border-bottom: 2px solid var(--color-primary-dark); }
+  .cr-print-k { font-size: 9pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-grey-600); }
+  .cr-print-name { margin: 3pt 0 0; font-size: 20pt; font-weight: 800; }
+  .cr-print-sub, .cr-print-dates { font-size: 10pt; color: var(--color-grey-600); }
+  .cr-print-dates { text-align: right; }
+  .cr-print-figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10pt; }
+  .cr-print-figures > div { border: 1px solid var(--color-grey-400); border-radius: 4pt; padding: 6pt 10pt; }
+  .cr-print-figures p { font-size: 9pt; color: var(--color-grey-600); }
+  .cr-print-figures b { font-size: 16pt; }
+  .cr-print-table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+  .cr-print-table th, .cr-print-table td { border: 1px solid var(--color-grey-300); padding: 4pt 6pt; text-align: left; vertical-align: top; }
+  .cr-print-table thead th { background: var(--color-grey-100); font-size: 9pt; }
+  .cr-print-table tbody th { width: 28%; font-weight: 700; }
+  .cr-print-table tr { break-inside: avoid; }
+  .cr-print-summary { border-top: 1px solid var(--color-grey-400); padding-top: 8pt; break-inside: avoid; }
+  .cr-print-summary p + p { margin-top: 3pt; white-space: pre-wrap; }
+  .cr-print-muted { color: var(--color-grey-500); }
+  .cr-print-foot { border-top: 1px solid var(--color-grey-300); padding-top: 6pt; font-size: 9pt; color: var(--color-grey-600); }
+}

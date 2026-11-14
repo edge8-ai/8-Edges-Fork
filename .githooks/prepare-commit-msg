@@ -1,0 +1,7 @@
+#!/bin/sh
+# core.hooksPath points here, so git no longer reads .git/hooks. The Claude
+# session-trailer hook installs itself into .git/hooks on SessionStart; chain to
+# it so commits keep their Claude-Session trailer. Never blocks a commit.
+local_hook="$(git rev-parse --git-common-dir)/hooks/prepare-commit-msg"
+[ -x "$local_hook" ] && exec "$local_hook" "$@"
+exit 0

@@ -1,0 +1,127 @@
+// The org entity's server door (RS-09, spec
+// docs/engineering/2026-09-08-pluggable-entities-spec.md): the company itself —
+// its people directory and org chart, its departments and positions, its
+// objectives and key results, its strategy and values, its legal record, the
+// equipment its team holds and the survey engine it runs.
+//
+// Another entity may reach org only through this file (design §3 rule 2). It is
+// a server-only barrel: the modules below build the service-role Supabase
+// client at load, so a "use client" file takes what it needs from ./client.ts.
+//
+// Route bodies (routes/, crons/) are deliberately absent: app/ imports those
+// files directly, because Next reads a route's segment config from the route
+// file and a page is not a library export.
+
+// --- the survey engine -----------------------------------------------------
+// org builds the surveys; portal runs them. The public runner at /surveys/[slug]
+// and its two API routes read the field model, the answer validator and the row
+// shapes from here.
+export { validateAnswer, getSurveyResponsesForCompany, type CompanySurveyResponse } from "./lib/surveys";
+export type { FieldConfig, SurveyFieldRow } from "./lib/surveys";
+export { getSurveyScore, getSurveyNps } from "./lib/survey-scores";
+// Survey assignments: the /team home and inbox list what a person still owes,
+// the submit API closes the assignment, and the reminder cron reads the rest.
+export { openSurveysFor, completeSurveyAssignment } from "./lib/survey-assignments";
+// Who is on probation and when it ends: the Probation page's rows, which the
+// Admin Home's "Team this week" reads for probations ending and new joiners (AH.2.7).
+export { getProbationRows } from "./lib/probation";
+
+// --- the company's own shape ----------------------------------------------
+// The screens /team renders of the company: the org chart, the values grid, the
+// strategy view, the goals panels and the onboarding deck.
+export { CompanyGoalsObjectives } from "./ui/company/CompanyGoalsObjectives";
+export { CoreValuesFrame, CoreValuesHero, CoreValuesMeet, CoreValuesState, ValueTile } from "./ui/company/CoreValuesBento";
+export { assignMarks } from "./lib/core-values";
+export { loadCoreValues } from "./lib/core-values-read";
+export { OnboardingDeckEmbed } from "./ui/company/OnboardingDeckEmbed";
+export { OrgChart } from "./ui/company/OrgChart";
+export { OrgChartEmpty, OrgChartUnavailable } from "./ui/company/OrgChartStates";
+export { StrategyView } from "./ui/company/StrategyView";
+export { TeamGoalsPanel } from "./ui/company/TeamGoalsPanel";
+export { parseStrategy } from "./lib/company/strategy";
+// The shapes the Company Goals view is built from; the roll-up that fills them
+// lives in team, which owns the personal goals (RS-09).
+export type { ObjectiveWithKrs, LadderedPerson } from "./lib/company/goal-shapes";
+// The company half of the Company Goals view (A.88.4): this year's tree, its
+// initials, the unmeasured key results and the pace. Coaching ladders the team's
+// FAST goals into it; the two Company Goals pages put both questions.
+export { getCompanyGoalTree, type CompanyGoalTree } from "./lib/company/goal-tree";
+export type { ObjectiveGroup, PersonGroup } from "./ui/company/TeamGoalsPanel";
+// The Edges vocabulary: objectives, key results, their statuses and the issue
+// board's diagnoses. Constants and row shapes, shared with ideas and team.
+export * from "./lib/company/edges-shared";
+export * from "./lib/company/kr-progress";
+export { KEY_RESULT_AUDIT_TABLE, NOT_MEASURED_YET, getNeverMeasuredKeyResults } from "./lib/company/key-result-measured";
+// The company KPIs a campaign (or any other record) can name as its goal.
+export { listCompanyKeyResults } from "./lib/company/company-key-results";
+// The office goals snapshot and the card that renders it.
+export * from "./lib/office-goals";
+export { OfficeGoalsCard } from "./ui/OfficeGoalsCard";
+
+// --- the directory and what people hold ------------------------------------
+export type { OpenRole, OrgEntry } from "./lib/directory-shapes";
+export { EQUIPMENT_TYPES, specSummary, statusLabel } from "./lib/equipment-shared";
+// The fixed VND/USD rate every salary figure is stated at; the operations
+// dashboard shows the payroll line in both currencies.
+export { FIXED_VND_PER_USD } from "./lib/compensation-shared";
+
+// Where the reimbursement VAT box sends whoever keeps the legal details (RB.15).
+export { legalEntityEditHref } from "./lib/legal-entity-href";
+
+// --- the questions and commands other entities put to org's tables (A.67) ---
+// The raw table helpers in lib/reads.ts and lib/writes.ts stay private to org
+// (ADR 0018): a caller asks a named question and never chooses the columns or
+// the filters. That matters most for the staff directory and the survey
+// runner, which the client portal and the public reach: their column lists are
+// the privacy line, and they now live where the view and the tables do.
+export * from "./lib/directory";
+export * from "./lib/handbook";
+export { coreValuesForScorecard, coreValueTitles, taggableCoreValues } from "./lib/core-values-read";
+export * from "./lib/company/goals";
+export { latestStrategy } from "./lib/company/strategy-read";
+export * from "./lib/equipment-requests";
+export * from "./lib/survey-definitions";
+export * from "./lib/survey-responses";
+// The personSurveyResponses slot (slots.ts): the surveys a contact answered, on
+// crm's contact page (ADR 0032).
+export type { PersonSurveyResponse, PersonSurveyResponsesSlot } from "./slots";
+export { redInvoiceBuyerEntity, legalEntityCountries } from "./lib/legal-entities";
+// The account a person returns an advance to (AD.13). The door hands out the answer, never the closed table.
+export { companyBankAccount } from "./lib/company-bank";
+export { savePersonQualification } from "./lib/person-qualifications";
+
+// The company's public presence: the <head> copy, marks, phones and links the
+// App's public frame renders, provided to the root layout through the
+// `publicPresence` shell slot (A.79.7, ADR 0034 step 3). The fork overlay
+// replaces the module with an empty presence.
+export { publicPresence } from "./lib/public-presence";
+
+// Performance reviews and kudos (ADR 0025): org owns performance_reviews and
+// kudos, so the review cycles, raters, the reviewer token links, the review
+// summaries and the kudos wall moved here from team with the tables they write.
+// The Team Home, the Admin Home and the coaching pages read them through this door.
+export * from "./lib/review-scheduler";
+export * from "./lib/review-summary";
+export * from "./lib/reviews";
+export * from "./lib/reviews-labels";
+export * from "./lib/reviews/transcript";
+export * from "./lib/reviews/requests";
+export * from "./lib/reviews/talent";
+export * from "./lib/reviews/to-write";
+export * from "./lib/reviews/chat-tool";
+export * from "./lib/reviews/quarterly";
+export { reviewsAboutMember } from "./lib/reviews/about-member";
+// The survey runner's pen for a review row: who may fill it, and how a
+// submission lands on it (moved out of lib/reviews.ts, CR.2.2).
+export * from "./lib/reviews/run";
+// Client reviews (CR.2.2): what a client manager's personal link shows.
+export { clientManagerLinkView, type ClientManagerLinkView } from "./lib/client-reviews/link-view";
+// Client reviews (CR.3.2): what the skip-manager's one link shows and may write.
+export { skipManagerList, skipManagerMember, type SkipManagerView } from "./lib/client-reviews/skip-view";
+export { reviewsWaitingFor, type ReviewsWaiting } from "./lib/client-reviews/waiting";
+export { saveSkipManagerNote, markSkipManagerReviewed } from "./lib/client-reviews/skip-commands";
+export * from "./ui/ReviewHistoryTable";
+export { kudosForMonth } from "./lib/kudos";
+export { addMonths, kudosRecipients, monthName, monthOf } from "./lib/kudos-rules";
+export { HomeKudos } from "./ui/home/HomeKudos";
+export { TALENT_DIRECTOR_EMAIL } from "./lib/talent-director";

@@ -1,0 +1,118 @@
+/* The rank-up (LD.5, RankUpScreen.tsx): the approved prototype's .ru rules
+   (the Ladders artifact, v5, artboards 3 and 5), ported with the product's
+   tokens. The full screen sits over the page, the team sidebar and the search
+   palette alike. Each tier paints with its own metal, the --color-rankup-*
+   triple in app/styles/tokens.css.
+
+   Motion: the screen fades in; the helm zooms in, the medal drops in and
+   settles; the glow breathes; six twinkles pulse; eighteen pieces of confetti
+   fall once; the name rises and the words follow. .rankup--still (the reader's
+   game style off) and prefers-reduced-motion still all of it and drop the
+   confetti, and the screen still opens. */
+.rankup {
+  position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 24px 16px; overflow: auto; overscroll-behavior: contain;
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--color-primary-dark) 80%, transparent) 0, color-mix(in srgb, var(--color-primary-dark) 97%, transparent) 70%);
+  animation: rankup-in .35s ease-out both;
+}
+@keyframes rankup-in { from { opacity: 0; } }
+.rankup-card { position: relative; width: 100%; max-width: 520px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; color: var(--color-bg-primary); }
+.rankup-em { position: relative; width: 220px; height: 220px; display: grid; place-items: center; margin-bottom: 4px; }
+.rankup-glow { position: absolute; inset: -12%; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--rankup-mid) 50%, transparent) 0, transparent 66%); animation: rankup-glow 2.6s ease-in-out .9s infinite alternate both; }
+@keyframes rankup-glow { from { opacity: .55; transform: scale(.94); } to { opacity: 1; transform: scale(1.04); } }
+.rankup-em .ladder-emblem { position: relative; overflow: visible; }
+.rankup--helm .rankup-em .ladder-emblem { animation: rankup-zoom .8s cubic-bezier(.2, .8, .2, 1) both; }
+.rankup--medal .rankup-em .ladder-emblem { animation: rankup-medal 1s cubic-bezier(.2, .8, .2, 1) .2s both; }
+@keyframes rankup-zoom { from { transform: scale(.6); opacity: 0; } }
+@keyframes rankup-medal { 0% { transform: translateY(-60px) rotate(-14deg) scale(.7); opacity: 0; } 70% { transform: translateY(6px) rotate(3deg) scale(1.03); opacity: 1; } }
+
+.rankup-tier {
+  margin: 4px 0 0; font-size: clamp(56px, 13vw, 96px); font-weight: 800; letter-spacing: .1em; line-height: 1; padding-left: .1em; text-transform: uppercase;
+  background: linear-gradient(180deg, var(--rankup-hi) 0, var(--rankup-mid) 55%, var(--rankup-lo) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: rankup-rise .7s cubic-bezier(.2, .8, .2, 1) .9s both;
+}
+/* The prototype drew GOLD; longer names step down so every tier fits a phone. */
+.rankup-tier--mid { font-size: clamp(44px, 11vw, 80px); }
+.rankup-tier--long { font-size: clamp(34px, 8.5vw, 60px); letter-spacing: .06em; padding-left: .06em; }
+@keyframes rankup-rise { from { transform: translateY(18px); opacity: 0; letter-spacing: .4em; } }
+.rankup-sub { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--color-bg-primary); animation: rankup-fade .5s 1.2s both; }
+.rankup-praise { margin: 2px 0 0; font-size: 15px; line-height: 1.5; color: var(--color-grey-700); max-width: 38ch; animation: rankup-fade .5s 1.35s both; }
+.rankup-private { margin: 6px 0 0; font-size: 12px; color: var(--color-grey-800); animation: rankup-fade .5s 1.45s both; }
+.rankup-error { margin: 6px 0 0; font-size: 13px; font-weight: 700; color: var(--color-warn-strong); }
+.rankup-acts { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; justify-content: center; animation: rankup-fade .5s 1.5s both; }
+@keyframes rankup-fade { from { opacity: 0; transform: translateY(8px); } }
+.rankup-btn {
+  /* 19px bold is large text to WCAG (18.66px and up), so the 3:1 rule applies to
+     the label; the prototype's dark ink on Gold and Silver measures about 3.7:1
+     and 3.4:1 on the flat mid metal, which 15px (4.5:1) would fail. */
+  min-height: 44px; min-width: 120px; padding: 0 22px; border-radius: 999px; font: inherit; font-size: 19px; font-weight: 700; cursor: pointer;
+  border: 1.5px solid var(--color-on-dark-strong); background: transparent; color: var(--color-bg-primary);
+}
+/* A flat mid metal, not the hi-to-lo gradient the wordmark wears: a gradient's darkest edge is where a label's contrast is measured, and the lo metals fail it. */
+.rankup-btn--wear { border-color: var(--rankup-mid); background: var(--rankup-mid); color: var(--color-primary-dark); }
+.rankup-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-accent-mint); }
+
+.rankup-confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.rankup-confetti i { position: absolute; top: -12px; width: 6px; height: 10px; border-radius: 2px; opacity: 0; animation: rankup-fall 2.6s ease-in .5s both; }
+.rankup-confetti i:nth-child(4n+1) { background: var(--rankup-mid); }
+.rankup-confetti i:nth-child(4n+2) { background: var(--color-accent-mint); animation-delay: .62s; }
+.rankup-confetti i:nth-child(4n+3) { background: var(--color-sky-echoed); animation-delay: .74s; }
+.rankup-confetti i:nth-child(4n) { background: var(--color-primary-blue-bright); animation-delay: .86s; }
+/* Eighteen pieces across the width, 4% and then every 5.4%, as drawn. */
+.rankup-confetti i:nth-child(1) { left: 4%; } .rankup-confetti i:nth-child(2) { left: 9.4%; } .rankup-confetti i:nth-child(3) { left: 14.8%; }
+.rankup-confetti i:nth-child(4) { left: 20.2%; } .rankup-confetti i:nth-child(5) { left: 25.6%; } .rankup-confetti i:nth-child(6) { left: 31%; }
+.rankup-confetti i:nth-child(7) { left: 36.4%; } .rankup-confetti i:nth-child(8) { left: 41.8%; } .rankup-confetti i:nth-child(9) { left: 47.2%; }
+.rankup-confetti i:nth-child(10) { left: 52.6%; } .rankup-confetti i:nth-child(11) { left: 58%; } .rankup-confetti i:nth-child(12) { left: 63.4%; }
+.rankup-confetti i:nth-child(13) { left: 68.8%; } .rankup-confetti i:nth-child(14) { left: 74.2%; } .rankup-confetti i:nth-child(15) { left: 79.6%; }
+.rankup-confetti i:nth-child(16) { left: 85%; } .rankup-confetti i:nth-child(17) { left: 90.4%; } .rankup-confetti i:nth-child(18) { left: 95.8%; }
+@keyframes rankup-fall { 0% { opacity: 1; transform: translateY(0) rotate(0); } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(min(80vh, 640px)) rotate(500deg); } }
+
+.rankup-tw { position: absolute; width: 14px; height: 14px; fill: var(--rankup-hi); animation: rankup-tw 1.8s ease-in-out infinite alternate both; }
+@keyframes rankup-tw { from { opacity: .2; transform: scale(.6); } to { opacity: 1; transform: scale(1.1); } }
+/* Six twinkles round the emblem, each a quarter second after the last, as drawn. */
+.rankup-tw:nth-of-type(1) { left: 6%; top: 14%; animation-delay: 1.2s; }
+.rankup-tw:nth-of-type(2) { left: 86%; top: 8%; animation-delay: 1.45s; }
+.rankup-tw:nth-of-type(3) { left: 2%; top: 62%; animation-delay: 1.7s; }
+.rankup-tw:nth-of-type(4) { left: 92%; top: 58%; animation-delay: 1.95s; }
+.rankup-tw:nth-of-type(5) { left: 18%; top: 92%; animation-delay: 2.2s; }
+.rankup-tw:nth-of-type(6) { left: 80%; top: 90%; animation-delay: 2.45s; }
+
+/* Stilled: the reader's game style off, or the reader's system asks for less motion. */
+.rankup--still, .rankup--still * { animation: none !important; }
+.rankup--still .rankup-confetti { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .rankup, .rankup * { animation: none !important; }
+  .rankup-confetti { display: none; }
+}
+/* Plain words: no art, and the tier's name in plain ink rather than its metal. */
+.rankup--plain .rankup-tier { background: none; color: var(--color-bg-primary); letter-spacing: .02em; padding-left: 0; text-transform: none; }
+
+/* A phone (the prototype's artboard 5, 390 wide): a smaller helm and medal. */
+@media (max-width: 480px) {
+  .rankup-em { width: 180px; height: 180px; }
+  .rankup--helm .rankup-em .ladder-emblem img { width: 150px; height: auto; }
+  .rankup--medal .rankup-em .ladder-emblem img { width: 168px; height: auto; }
+}
+
+/* Each tier's metal. Dark ink on the Show it button as drawn, light ink where
+   the tier's metal is too dark for it. */
+.rankup--t-iron { --rankup-hi: var(--color-rankup-iron-hi); --rankup-mid: var(--color-rankup-iron-mid); --rankup-lo: var(--color-rankup-iron-lo); }
+.rankup--t-bronze { --rankup-hi: var(--color-rankup-bronze-hi); --rankup-mid: var(--color-rankup-bronze-mid); --rankup-lo: var(--color-rankup-bronze-lo); }
+.rankup--t-silver { --rankup-hi: var(--color-rankup-silver-hi); --rankup-mid: var(--color-rankup-silver-mid); --rankup-lo: var(--color-rankup-silver-lo); }
+.rankup--t-gold { --rankup-hi: var(--color-rankup-gold-hi); --rankup-mid: var(--color-rankup-gold-mid); --rankup-lo: var(--color-rankup-gold-lo); }
+.rankup--t-platinum { --rankup-hi: var(--color-rankup-platinum-hi); --rankup-mid: var(--color-rankup-platinum-mid); --rankup-lo: var(--color-rankup-platinum-lo); }
+.rankup--t-emerald { --rankup-hi: var(--color-rankup-emerald-hi); --rankup-mid: var(--color-rankup-emerald-mid); --rankup-lo: var(--color-rankup-emerald-lo); }
+.rankup--t-diamond { --rankup-hi: var(--color-rankup-diamond-hi); --rankup-mid: var(--color-rankup-diamond-mid); --rankup-lo: var(--color-rankup-diamond-lo); }
+.rankup--t-master { --rankup-hi: var(--color-rankup-master-hi); --rankup-mid: var(--color-rankup-master-mid); --rankup-lo: var(--color-rankup-master-lo); }
+.rankup--t-grandmaster { --rankup-hi: var(--color-rankup-grandmaster-hi); --rankup-mid: var(--color-rankup-grandmaster-mid); --rankup-lo: var(--color-rankup-grandmaster-lo); }
+.rankup--t-challenger { --rankup-hi: var(--color-rankup-challenger-hi); --rankup-mid: var(--color-rankup-challenger-mid); --rankup-lo: var(--color-rankup-challenger-lo); }
+.rankup--t-sovereign { --rankup-hi: var(--color-rankup-sovereign-hi); --rankup-mid: var(--color-rankup-sovereign-mid); --rankup-lo: var(--color-rankup-sovereign-lo); }
+.rankup--t-herald { --rankup-hi: var(--color-rankup-herald-hi); --rankup-mid: var(--color-rankup-herald-mid); --rankup-lo: var(--color-rankup-herald-lo); }
+.rankup--t-guardian { --rankup-hi: var(--color-rankup-guardian-hi); --rankup-mid: var(--color-rankup-guardian-mid); --rankup-lo: var(--color-rankup-guardian-lo); }
+.rankup--t-crusader { --rankup-hi: var(--color-rankup-crusader-hi); --rankup-mid: var(--color-rankup-crusader-mid); --rankup-lo: var(--color-rankup-crusader-lo); }
+.rankup--t-archon { --rankup-hi: var(--color-rankup-archon-hi); --rankup-mid: var(--color-rankup-archon-mid); --rankup-lo: var(--color-rankup-archon-lo); }
+.rankup--t-legend { --rankup-hi: var(--color-rankup-legend-hi); --rankup-mid: var(--color-rankup-legend-mid); --rankup-lo: var(--color-rankup-legend-lo); }
+.rankup--t-ancient { --rankup-hi: var(--color-rankup-ancient-hi); --rankup-mid: var(--color-rankup-ancient-mid); --rankup-lo: var(--color-rankup-ancient-lo); }
+.rankup--t-divine { --rankup-hi: var(--color-rankup-divine-hi); --rankup-mid: var(--color-rankup-divine-mid); --rankup-lo: var(--color-rankup-divine-lo); }
+.rankup--t-immortal { --rankup-hi: var(--color-rankup-immortal-hi); --rankup-mid: var(--color-rankup-immortal-mid); --rankup-lo: var(--color-rankup-immortal-lo); }
+.rankup--t-iron .rankup-btn--wear, .rankup--t-bronze .rankup-btn--wear, .rankup--t-platinum .rankup-btn--wear, .rankup--t-diamond .rankup-btn--wear,
+.rankup--t-master .rankup-btn--wear, .rankup--t-grandmaster .rankup-btn--wear, .rankup--t-divine .rankup-btn--wear { color: var(--color-bg-primary); }
