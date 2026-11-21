@@ -1,0 +1,29 @@
+{
+  "edge8": {
+    "navy": "#04102D",
+    "blue": "#287BE8",
+    "mint": "#6FF2C1",
+    "magenta": "#D1458B",
+    "amber": "#E9A23B",
+    "white": "#FFFFFF",
+    "grey": "#EAEEF2",
+    "textDim": "rgba(255,255,255,0.72)",
+    "textFaint": "rgba(255,255,255,0.7)",
+    "rail": "rgba(40,123,232,0.45)",
+    "outline": "rgba(255,255,255,0.6)"
+  },
+  "ai-officer": {
+    "navy": "#04102D",
+    "blue": "#287BE8",
+    "mint": "#6FF2C1",
+    "mintDark": "#1A9E74",
+    "magenta": "#D1458B",
+    "white": "#FFFFFF",
+    "surface": "#F4F6FA",
+    "grey": "#EAEEF2",
+    "line": "#D8DCE8",
+    "ink": "#1A1F36",
+    "ink2": "#4A5068",
+    "muted": "#6B7194"
+  }
+}

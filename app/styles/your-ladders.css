@@ -1,0 +1,51 @@
+/* Your ladders (LD.2): the Overview tab of the reader's own profile, marked
+   Only you. Since LD.10 it says where the points come from, each ladder's acts
+   counted, on the profile's dark game screen (.pf in profile-dress.css), and
+   reflows by the page's width. Every colour is a token. */
+
+.yl { display: flex; flex-direction: column; gap: 14px; }
+.yl-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.yl-h { margin: 0; font-size: 18px; font-weight: 800; }
+.yl-private { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; white-space: nowrap; color: var(--color-grey-700); }
+.yl-private svg { flex: none; width: 14px; height: 14px; }
+.yl-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.yl-ladder { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 18px; border-radius: 16px; background: var(--color-grey-900); border: 1px solid var(--color-on-dark-line); }
+.yl-ladder-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.yl-name { margin: 0; font-size: 16px; font-weight: 800; }
+.yl-points { font-size: 14px; color: var(--color-grey-700); }
+.yl-points strong { font-size: 16px; color: var(--color-bg-primary); font-variant-numeric: tabular-nums; }
+.yl-tallies { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+.yl-tally { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--color-primary-dark); }
+.yl-tally b { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.yl-tally span { font-size: 13px; color: var(--color-grey-700); }
+
+.yl-tables summary { min-height: 40px; display: flex; align-items: center; font-size: 14px; font-weight: 800; color: var(--color-accent-mint); cursor: pointer; }
+.yl-tables-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
+.yl-tables-h { margin: 0 0 6px; font-size: 13px; font-weight: 800; }
+.yl-tables ul { margin: 0 0 8px; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--color-grey-700); }
+.yl-starts { margin: 0 0 4px; font-size: 12px; line-height: 1.5; color: var(--color-grey-700); }
+.yl-hint { margin: 0; font-size: 12px; line-height: 1.4; color: var(--color-grey-700); }
+
+/* A phone: one ladder under the other. */
+@container (max-width: 560px) {
+  .yl-pair, .yl-tables-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The Show switch on each ladder (LD.4), the approved prototype's .wp-sw: a
+   36 by 22 track, mint when the tier is worn. The button is the whole label,
+   so "Show" is part of the target, and a phone gets the 44px hit height. */
+.yl-name-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.yl-wear { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.yl-wear-sw { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 2px; border: 0; background: none; font: inherit; font-size: 12px; font-weight: 700; color: var(--color-grey-600); cursor: pointer; }
+.yl-wear-track { position: relative; width: 36px; height: 22px; border-radius: 999px; background: var(--color-grey-400); flex: none; transition: background 160ms ease; }
+.yl-wear-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); box-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary-dark) 25%, transparent); transition: transform 160ms ease; }
+.yl-wear-sw[aria-checked="true"] .yl-wear-track { background: var(--color-accent-mint-bright); }
+.yl-wear-sw[aria-checked="true"] .yl-wear-track::after { transform: translateX(14px); }
+.yl-wear-sw:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; border-radius: 6px; }
+.yl-wear-err { font-size: 12px; font-weight: 600; color: var(--color-warn-ink); }
+@media (pointer: coarse) { .yl-wear-sw { min-height: 44px; } }
+/* The same switches on the profile's dark game screen (LD.10): each rank
+   card's and the showcase's on each badge, owner's page only. */
+.pf-rank .yl-wear-sw, .pf-tok .yl-wear-sw { color: var(--color-grey-700); }
+.pf-rank .yl-wear-err { color: var(--color-warn-bg); }
+@media (prefers-reduced-motion: reduce) { .yl-wear-track, .yl-wear-track::after { transition: none; } }

@@ -1,0 +1,85 @@
+/* Advances on the Team view (AD.5): the card on My Claims, the request and the advance's
+   page. Every size and colour is the approved canvas's, on the product's tokens. */
+.adv-hero { display: grid; grid-template-columns: minmax(0, 1fr) 168px; gap: 24px; align-items: center; }
+.adv-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--admin-muted); margin: 0 0 6px; }
+.adv-big { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; margin: 2px 0 4px; font-variant-numeric: tabular-nums; }
+.adv-purpose { font-size: 15px; font-weight: 600; margin: 0; }
+.adv-meter { display: block; width: 100%; height: 14px; border-radius: 999px; background: var(--admin-surface-2); border: 1px solid var(--admin-line); overflow: hidden; margin: 14px 0 8px; box-sizing: border-box; }
+.adv-meter-fill { fill: var(--admin-accent); }
+.adv-meter-over { fill: var(--admin-warn-strong); }
+.adv-ring { position: relative; width: 150px; height: 150px; display: grid; place-items: center; margin: 0 auto; }
+.adv-ring-svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.adv-ring-track { fill: none; stroke: var(--admin-surface-2); stroke-width: 16; }
+.adv-ring-arc { fill: none; stroke: var(--admin-accent); stroke-width: 16; }
+.adv-ring[data-tone="warn"] .adv-ring-arc { stroke: var(--admin-warn-strong); }
+.adv-ring[data-tone="err"] .adv-ring-arc { stroke: var(--admin-err-strong); }
+.adv-ring-in { position: relative; width: 118px; height: 118px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 10px; }
+.adv-ring-n { font-size: 34px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.adv-ring-l { font-size: 11px; color: var(--admin-muted); margin-top: 4px; line-height: 1.3; }
+.adv-ring-d { font-size: 12px; font-weight: 600; margin: 8px 0 0; text-align: center; }
+.adv-seal { width: 150px; height: 150px; border-radius: 50%; margin: 0 auto; display: grid; place-items: center; border: 3px solid var(--admin-ok-strong); color: var(--admin-ok-strong); font-size: 18px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transform: rotate(-8deg); animation: adv-pop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes adv-pop { from { transform: rotate(-8deg) scale(0.6); opacity: 0; } to { transform: rotate(-8deg) scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .adv-seal { animation: none; }
+}
+.adv-stages { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+.adv-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--admin-line); border-radius: 12px; background: var(--admin-surface); overflow: hidden; }
+.adv-strip > div { padding: 14px 18px; }
+.adv-strip > div + div { border-left: 1px solid var(--admin-line); }
+.adv-strip small { display: block; font-size: 12px; color: var(--admin-muted); }
+.adv-strip b { display: block; font-size: 20px; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.adv-strip .is-pos b { color: var(--admin-ok-strong); }
+.adv-strip .is-neg b { color: var(--admin-warn-strong); }
+.adv-drop { display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; text-align: left; font: inherit; color: inherit; border: 1.5px dashed var(--admin-line-strong); border-radius: 10px; padding: 14px 16px; background: var(--admin-surface-2); cursor: pointer; }
+.adv-drop:disabled { cursor: default; }
+.adv-drop.is-done { border-style: solid; border-color: var(--admin-ok-strong); background: var(--admin-ok-bg); cursor: default; margin-bottom: 8px; }
+.adv-tick { flex: 0 0 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--admin-surface); color: var(--admin-ok-ink); }
+.adv-tick.is-no { color: var(--admin-muted); }
+.adv-block { display: block; }
+.adv-err { font-size: 12px; color: var(--admin-err-ink); }
+.adv-link { border: 0; padding: 0; background: none; font: inherit; color: var(--admin-accent); cursor: pointer; text-align: left; }
+.adv-link:hover { color: var(--admin-accent-strong); }
+.adv-why { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.adv-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.adv-checks li { display: flex; gap: 10px; align-items: flex-start; }
+
+.adv-paper { max-width: 760px; padding: 32px; background: var(--admin-surface); border: 1px solid var(--admin-line); border-radius: 4px; font-size: 14px; line-height: 1.5; }
+.adv-paper-head { display: flex; justify-content: space-between; gap: 24px; font-size: 12px; }
+.adv-paper-no { text-align: right; }
+.adv-paper-en { display: block; font-size: 11px; color: var(--admin-muted); }
+.adv-paper-title { font-size: 18px; font-weight: 700; text-align: center; margin: 24px 0 0; }
+.adv-paper-sub { text-align: center; font-size: 12px; margin-top: 4px; }
+.adv-paper-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+.adv-paper-table th, .adv-paper-table td { border: 1px solid var(--admin-line); padding: 6px 8px; text-align: left; font-weight: 400; vertical-align: top; }
+.adv-paper-table .adv-paper-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.adv-paper-item { padding-left: 20px !important; }
+.adv-paper-signs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 32px; font-size: 12px; text-align: center; min-height: 96px; }
+.adv-paper-signs em { display: block; margin-top: 12px; font-style: normal; color: var(--admin-ok-ink); }
+.adv-paper-note { margin: 24px 0 0; font-size: 11px; text-align: center; }
+
+/* A paper prints alone, whatever shell it sits in. */
+@media print {
+  body * { visibility: hidden; }
+  .adv-paper, .adv-paper * { visibility: visible; }
+  .adv-paper { position: absolute; inset: 0 auto auto 0; width: 100%; max-width: none; border: 0; }
+  .adv-noprint { display: none; }
+}
+
+@media (max-width: 720px) {
+  .adv-paper { padding: 16px; }
+  .adv-paper-head { flex-direction: column; gap: 8px; }
+  .adv-paper-no { text-align: left; }
+  .adv-paper-signs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .adv-hero { grid-template-columns: minmax(0, 1fr); }
+  .adv-stages { grid-template-columns: minmax(0, 1fr) !important; }
+  .adv-strip { grid-template-columns: minmax(0, 1fr); }
+  .adv-strip > div + div { border-left: 0; border-top: 1px solid var(--admin-line); }
+}
+
+/* The VietQR code on the return panel: its own white square, whatever the page's theme, so a phone can read it. */
+.adv-return { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; }
+.adv-qr { width: 168px; }
+.adv-qr svg { display: block; width: 100%; height: auto; }
+@media (max-width: 640px) {
+  .adv-return { grid-template-columns: minmax(0, 1fr); }
+}

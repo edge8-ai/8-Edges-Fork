@@ -1,0 +1,78 @@
+# Supabase project configuration for a fresh Company OS install.
+#
+# Apply with:   supabase config push --project-ref <PROJECT_REF>
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# READ THIS BEFORE PUSHING
+#
+# `supabase config push` writes EVERY setting in the sections below, and resets
+# anything it manages that you have NOT specified to the CLI's own defaults. It
+# is not a patch. The values here are Supabase's defaults for a new project plus
+# the two changes Company OS actually needs, so a push on a fresh project is
+# safe. On a project you have already customised, diff first — the CLI prints
+# the change set and waits for confirmation.
+#
+# Replace <PROJECT_REF> and <PROJECT> before pushing.
+# ─────────────────────────────────────────────────────────────────────────────
+
+project_id = "<PROJECT_REF>"
+
+# ── PostgREST: exposed schemas ───────────────────────────────────────────────
+#
+# THIS IS THE SETTING EVERY FIRST INSTALL MISSES.
+#
+# A new Supabase project exposes only `public` and `graphql_public`. The whole
+# application reads through supabase.schema("company_os") and supabase.schema("htt"),
+# which go over PostgREST — so until company_os and htt are listed here, every
+# single query fails with:
+#
+#     PGRST106  Invalid schema: company_os
+#
+# and the app renders as an empty shell: zeroed KPIs, no CRM rows, no ATS.
+#
+# It is easy to miss because psql does NOT go through PostgREST. The Step 3
+# table/policy/index counts pass perfectly against a database the app cannot
+# read a single row from. Verify over the REST API, not psql — see Step 3.
+[api]
+enabled = true
+schemas = ["public", "graphql_public", "company_os", "htt"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+# ── Auth: URL configuration ──────────────────────────────────────────────────
+#
+# Sign-in works without this, which is why it gets skipped. Password reset and
+# the email sign-in links do not: the login forms call resetPasswordForEmail and
+# signInWithOtp with redirectTo `${window.location.origin}/api/auth/callback`,
+# and Supabase only honours redirect targets on this allow-list. A target that
+# is not listed is silently ignored and the user is bounced to site_url, which
+# looks like a broken app rather than a missing setting.
+#
+# Add the custom domain here too once there is one. Preview deployments get
+# their own hostnames — add "https://*-<team>.vercel.app/**" if auth needs to
+# work on previews.
+[auth]
+enabled = true
+site_url = "https://<PROJECT>.vercel.app"
+additional_redirect_urls = [
+  "https://<PROJECT>.vercel.app/api/auth/callback",
+  "https://<PROJECT>.vercel.app/**",
+]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+enable_anonymous_sign_ins = false
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+secure_password_change = false
+max_frequency = "1m0s"
+otp_length = 8
+otp_expiry = 3600
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true

@@ -1,0 +1,11 @@
+{
+  "entities/boards/lib/deliverable-files.ts": 3,
+  "entities/boards/lib/deliverable-shape.ts": 1,
+  "entities/client-programs/lib/client-documents.ts": 2,
+  "entities/finance/lib/payroll/store.ts": 1,
+  "entities/hiring/api/careers/apply/route.ts": 1,
+  "entities/hiring/routes/admin/(dashboard)/talent/resume/[id]/route.ts": 1,
+  "entities/onboarding/lib/cycle.ts": 1,
+  "entities/portal/lib/ai-programs.ts": 1,
+  "entities/retreats/id-documents.ts": 1
+}

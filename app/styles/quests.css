@@ -1,0 +1,154 @@
+/* /team/quests (QS.1): the Quests page, from the approved prototype (version 8).
+   The team surface is alive: the page has its own game, monsters fought by a
+   party, and never the plant or the rings of My Week. Every colour is a token
+   (check:tokens); a shade the token set lacks is mixed from one with
+   color-mix. Fields are 16px on a phone (check:mobile-inputs), targets 44px,
+   and every animation is stilled under prefers-reduced-motion at the end.
+   The arena went bright on 2026-10-20, as Spark did on 8 October (W.190):
+   grey text on black was too faint to read on an ordinary laptop screen. */
+
+.qs-page { display: flex; flex-direction: column; gap: 20px; min-width: 0; padding-bottom: 48px; }
+.qs-page :focus-visible { outline: none; box-shadow: 0 0 0 3px var(--admin-focus-ring); }
+
+/* ---------- portraits ---------- */
+.qs-av { --s: 28px; width: var(--s); height: var(--s); border-radius: 999px; display: inline-grid; place-items: center; font-size: calc(var(--s) * 0.38); font-weight: 700; flex: none; letter-spacing: -0.02em; background: var(--qs-tone-bg); color: var(--qs-tone-ink); }
+.qs-av--sm { --s: 22px; }
+.qs-av--lg { --s: 34px; }
+.qs-av--lit { box-shadow: 0 0 0 2px var(--admin-surface), 0 0 0 4px var(--mint); }
+.qs-av--fresh { animation: qs-light 900ms cubic-bezier(.2, .8, .2, 1); }
+@keyframes qs-light { 0% { transform: scale(.4); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.qs-tone-0 { --qs-tone-bg: var(--color-client-0-bg); --qs-tone-ink: var(--color-client-0-ink); }
+.qs-tone-1 { --qs-tone-bg: var(--color-client-1-bg); --qs-tone-ink: var(--color-client-1-ink); }
+.qs-tone-2 { --qs-tone-bg: var(--color-client-2-bg); --qs-tone-ink: var(--color-client-2-ink); }
+.qs-tone-3 { --qs-tone-bg: var(--color-client-3-bg); --qs-tone-ink: var(--color-client-3-ink); }
+.qs-tone-4 { --qs-tone-bg: var(--color-client-4-bg); --qs-tone-ink: var(--color-client-4-ink); }
+.qs-tone-5 { --qs-tone-bg: var(--color-client-5-bg); --qs-tone-ink: var(--color-client-5-ink); }
+.qs-tone-6 { --qs-tone-bg: var(--color-client-6-bg); --qs-tone-ink: var(--color-client-6-ink); }
+.qs-tone-7 { --qs-tone-bg: var(--color-client-7-bg); --qs-tone-ink: var(--color-client-7-ink); }
+.qs-tone-8 { --qs-tone-bg: var(--color-client-8-bg); --qs-tone-ink: var(--color-client-8-ink); }
+.qs-tone-9 { --qs-tone-bg: var(--color-client-9-bg); --qs-tone-ink: var(--color-client-9-ink); }
+.qs-tone-10 { --qs-tone-bg: var(--color-client-10-bg); --qs-tone-ink: var(--color-client-10-ink); }
+.qs-tone-11 { --qs-tone-bg: var(--color-client-11-bg); --qs-tone-ink: var(--color-client-11-ink); }
+
+/* ---------- glyphs ---------- */
+
+/* ---------- season banner: the company's fight, never a person's ---------- */
+
+/* ---------- the boss bounty: the one bold place, in Spark's light ----------
+   A white card with the product's line and shadow, dark ink, body copy in the
+   body grey; the colour lives in the chip and in the sky the monster stands
+   on. The buttons are the product's own, a little taller in the arena. */
+.qs-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-violet-ink); background: var(--color-violet-soft); border-radius: 999px; padding: 3px 10px; }
+/* the Giver's own party (ADR 0020): a chip per person called, lit once they turned in */
+
+/* ---------- the arena: a tinted sky, violet for a dragon, a big slime or a Hydra, mint for a slime ----------
+   The small words on the sky take the body grey, not the muted one: muted
+   reads 4.1:1 on the violet sky, under the 4.5:1 that 12px text needs. */
+/* the empty arena: the slime asleep, a small z drifting up */
+
+/* the art's paint, from the tokens */
+
+/* ---------- the Hydra: one bounty, a head per ask, each with its own due time ---------- */
+
+/* the Hydra on a board card: a small stack of head bars */
+
+/* ---------- HP ---------- */
+
+/* ---------- the Giver's line ---------- */
+
+/* ---------- turn-in and hand-back composer ---------- */
+
+/* ---------- the tavern board ---------- */
+/* The type on one line and the due line under it (QS.11, Khoa's fix): side by
+   side they wrapped into four ragged lines on a narrow card. Both views. */
+.qs-standing { margin-left: auto; font-size: 11px; font-weight: 600; border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.qs-standing--called, .qs-standing--accepted { background: var(--color-info-bg); color: var(--color-info-ink); }
+.qs-standing--turned_in { background: var(--color-growth-soft); color: var(--color-growth-deep); }
+.qs-standing--handed_back { background: var(--admin-surface-2); color: var(--admin-muted); }
+.qs-standing--missed { background: var(--admin-surface-2); color: var(--admin-muted); border: 1px dashed var(--admin-line-strong); }
+
+/* ---------- Summon a quest ---------- */
+/* A Bounty Claude drafted (QS.9, the approved Draft board): the banner above the filled-in fields. */
+/* grey-600, not admin-muted: muted measures 4.3:1 on the accent-soft ground and fails at 12px. */
+
+/* ---------- the game style switch (QS.11): the reader's own, in the page head ---------- */
+.qs-style { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.qs-style-note { font-size: 12px; color: var(--admin-muted); }
+.qs-style-switch { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px 0 12px; border: 1px solid var(--admin-line); background: var(--admin-surface); border-radius: 999px; font: inherit; font-size: 13px; font-weight: 600; color: var(--admin-ink); cursor: pointer; }
+.qs-style-switch:hover { border-color: var(--admin-line-strong); }
+.qs-style-track { position: relative; width: 36px; height: 20px; border-radius: 999px; background: var(--admin-line-strong); flex: none; transition: background 160ms ease; }
+.qs-style-track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); box-shadow: 0 1px 2px color-mix(in srgb, var(--admin-ink) 25%, transparent); transition: transform 160ms ease; }
+.qs-style-switch[aria-checked="true"] .qs-style-track { background: var(--color-violet); }
+.qs-style-switch[aria-checked="true"] .qs-style-track::after { transform: translateX(16px); }
+.qs-style-state { color: var(--admin-muted); font-weight: 500; }
+
+/* ---------- the plain view (QS.11): the game style off ----------
+   A bounty grows the kernel's plant (kernel/ui/Sprout, My Week's) as the people
+   asked answer, beside a growth bar; nothing loses HP and nothing wilts. Each
+   plant sits in one box with its pot on the line of its bar, so a bloom, a
+   sprout and a seed read as one row of pots (Khoa's fix on the three-part card). */
+
+/* ---------- the Lore (QS.4; prototype version 10, section 4) ----------
+   Spark's learnings, a one-line composer above them, and Will try on each.
+   The drop is the game style's: it rises where the learning landed and fades;
+   the plain style says the same thing in a still line. */
+/* flex-direction is set because globals.css gives every bare form a column. */
+/* The Evolve pill (QS.7; version 10, section 4) on the author's own learning:
+   violet while it offers a fire, blue once the fire is held and offers its
+   Beacon, quiet grey once lit. Light it's time form and the Host's line on
+   what they taught take the pill's whole width. */
+
+/* ---------- Campfires (QS.5; prototype version 10, section 3) ----------
+   Wanted above Burning. A topic under three hands is a line; at three it is a
+   cold fire card, logs and smoke; a lit Raid burns with its flame, its Host and
+   its seats. The plain style draws the same cards with no art. */
+/* With the game style off the art slot holds a plain lead (QS.14): a calendar
+   leaf on a session with a time, a three-dot hands meter on a topic. */
+/* The Host's ended fire, still to mark (QS.5c): dashed, its kind line the burning one's violet, and no glow (it is not .qn-fire--burn). */
+/* The form borrows the Summon drawer's due row; in a fire card's narrow column
+   that row would squeeze the date field to nothing and wrap the hint, so here
+   the date, the time and the hint stack. */
+/* the fire itself */
+/* the topics still under three hands, and the one-line ask */
+/* flex-direction is set because globals.css gives every bare form a column. */
+
+/* ---------- desktop sizes ---------- */
+
+/* ---------- tablet and phone: one column ---------- */
+@media (max-width: 900px) {
+  /* the empty arena is short, so it keeps its sleeping slime beside the words until a phone */
+}
+@media (max-width: 600px) {
+  .qs-page { gap: 16px; }
+  .qs-style { justify-content: flex-start; width: 100%; }
+}
+
+/* ---------- less motion: everything stands still ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .qs-page *,
+.qs-page *::before,
+.qs-page *::after { animation: none !important; transition: none !important; }
+}
+
+/* Worn borders (LD.4; spec "The emblem module is private", one composition
+   rule). The kernel Avatar draws a worn tier as a border round the face (its
+   class names say "frame", a kernel word for the element; the product word is
+   border); the face keeps its size and the border overflows it, above
+   everything near it. These rules only ever touch a face wearing one, so a page
+   with none is exactly as it was. A border reaches at most .54 of the face
+   beside it and .82 above and below (the widest tiers in frames.css), so:
+   - beside: every bordered face keeps that much air on each side, so its border
+     never runs over a neighbouring face or the name beside it, and in the
+     overlapping stack on a card (.qs-mini) a bordered face steps out of the
+     overlap rather than have its border sit under the next face;
+   - around, where there is room: the Giver beside the speech bubble sits inside
+     the arena, which clips, so their face takes the border's whole extent;
+   - the Summon drawer's picker scrolls, so it pads itself to the border's extent
+     rather than cut the first row's borders. Rows and chips keep their rhythm,
+     and a border there may reach over the row next to it. */
+.qs-av.admin-face--framed { --qs-frame-x: calc(var(--s) * .54); --qs-frame-y: calc(var(--s) * .82); margin-inline: var(--qs-frame-x); }
+/* A Lore card (QS.4) has room for its author's border: the face's column grows
+   to hold it, and the margins trade against the card's own 16px padding so the
+   border stays inside the card: the top margin keeps 14px of the border above
+   the face (the card's padding pays the first 2px, under the author line), and
+   4px of the card's side padding is left as air on both sides of it. */
