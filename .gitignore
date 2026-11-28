@@ -1,0 +1,22 @@
+# .gitignore for the published fork.
+#
+# The overlay replaces the upstream .gitignore deliberately. Upstream ignores
+# CLAUDE.md at any depth, because upstream's copy holds private working
+# instructions. The fork's CLAUDE.md is the opposite: it is the setup contract
+# for whoever clones this repo and must ship.
+#
+# Without this file, `git add -A` in the sync's staging directory reads the
+# synced upstream .gitignore, silently skips the root CLAUDE.md, and the fork
+# publishes without any agent instructions — with no error anywhere.
+
+.DS_Store
+node_modules/
+.next/
+out/
+.vercel
+
+# Secrets. Never commit these; they belong in Vercel's environment settings.
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo

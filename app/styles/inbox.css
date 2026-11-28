@@ -1,0 +1,72 @@
+/* The Inbox (TH.2), /team/inbox and /admin/inbox: "Needs you", "What happened"
+   and "What lands here", at the sizes the approved canvas measured against the
+   admin primitives (admin-section-card, admin-btn--sm, admin-list-row). */
+
+.inbox { position: relative; }
+
+.inbox-list { display: flex; flex-direction: column; }
+.inbox-row { position: relative; display: flex; align-items: flex-start; gap: var(--admin-space-3); padding: 10px 0; border-bottom: 1px solid var(--admin-line-soft); }
+.inbox-row:last-child { border-bottom: 0; }
+
+/* The unread dot hangs in the card's padding, so read and unread rows line up. */
+.inbox-dot { position: absolute; left: -14px; top: 21px; width: 6px; height: 6px; border-radius: 50%; }
+.inbox-row.is-unread .inbox-dot { background: var(--admin-accent); }
+
+.inbox-icon { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--admin-line-soft); color: var(--admin-muted); }
+.inbox-icon .admin-icon { width: 14px; height: 14px; }
+/* Who acted (TH.2.8) sits where the icon would; a read row dims its face as it greys its words. */
+.inbox .inbox-row.is-read .inbox-face { opacity: 0.55; }
+.inbox-main { flex: 1; min-width: 0; }
+/* `.inbox a.inbox-title` outranks the shell's `.admin-shell a`, which would
+   otherwise paint every sentence in link blue. */
+.inbox-title, .inbox a.inbox-title { display: block; font-weight: 600; color: var(--admin-ink); line-height: 19.5px; text-decoration: none; overflow-wrap: anywhere; }
+.inbox a.inbox-title:hover { color: var(--admin-accent); }
+.inbox .inbox-row.is-read .inbox-title { font-weight: 500; color: var(--admin-muted); }
+.inbox-quote { margin: 6px 0 0; padding: 6px 10px; border-radius: var(--admin-radius-sm); background: var(--admin-muted-bg); color: var(--admin-ink); line-height: 19.5px; overflow-wrap: anywhere; }
+.inbox-quote.is-handover { background: var(--admin-warn-bg); }
+.inbox-meta { margin-top: 1px; font-size: var(--admin-text-sm); color: var(--admin-muted); line-height: 18px; }
+.inbox-tag { display: inline-block; margin-right: 6px; padding: 0 6px; border-radius: 20px; font-size: var(--admin-text-xs); font-weight: 600; line-height: 16px; background: var(--admin-ok-bg); color: var(--admin-ok-ink); }
+
+/* One column of actions: a 96px primary button and a 28px Done check, so every
+   row's controls and quotes end on the same edges. */
+.inbox-aside { flex: none; display: flex; align-items: center; gap: 6px; margin-top: -4px; }
+.inbox-act { width: 96px; justify-content: center; }
+.inbox-check { width: 28px; height: 28px; box-sizing: border-box; padding: 0; display: grid; place-items: center; border: 1px solid var(--admin-line); border-radius: var(--admin-radius-sm); background: var(--admin-surface); color: var(--admin-muted); cursor: pointer; }
+.inbox-check:hover { border-color: var(--admin-ok-ink); color: var(--admin-ok-ink); background: var(--admin-ok-bg); }
+.inbox-check .admin-icon { width: 14px; height: 14px; }
+
+.inbox-head-r { display: flex; align-items: center; gap: var(--admin-space-3); }
+.inbox-empty { margin: 0; padding: 20px 0 8px; color: var(--admin-muted); }
+.inbox-empty b { color: var(--admin-ink); font-weight: 600; }
+.inbox-keys { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--admin-line-soft); font-size: var(--admin-text-sm); color: var(--admin-muted); }
+.inbox-keys kbd { display: inline-block; min-width: 18px; padding: 0 4px; border: 1px solid var(--admin-line); border-radius: 4px; background: var(--admin-muted-bg); font: 600 var(--admin-text-xs)/16px inherit; text-align: center; color: var(--admin-ink); }
+
+.inbox-day + .inbox-day { border-top: 1px solid var(--admin-line-soft); }
+.inbox-day-label { padding-top: 12px; font-size: var(--admin-text-xs); text-transform: uppercase; letter-spacing: 0.6px; color: var(--admin-muted); line-height: 16px; }
+.inbox-day:first-of-type .inbox-day-label { padding-top: 0; }
+
+.inbox-pref { display: flex; align-items: center; justify-content: space-between; gap: var(--admin-space-3); padding: 10px 0; border-top: 1px solid var(--admin-line-soft); cursor: pointer; }
+div.inbox-pref { cursor: default; }
+.inbox-pref input { width: 16px; height: 16px; margin: 0; flex: none; accent-color: var(--admin-accent); }
+.inbox-pref-title { display: block; font-weight: 600; }
+.inbox-echo { margin-top: var(--admin-space-2); border-top: 0; border-bottom: 1px solid var(--admin-line-soft); }
+.inbox-pref-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+.inbox-pref-group { padding: 16px 0 4px; font-size: var(--admin-text-xs); text-transform: uppercase; letter-spacing: 0.6px; color: var(--admin-muted); line-height: 16px; }
+
+.inbox-toast { position: fixed; right: 32px; bottom: 32px; z-index: 50; display: flex; align-items: center; gap: 14px; padding: 10px 14px; border-radius: var(--admin-radius-sm); background: var(--admin-ink); color: var(--admin-surface); box-shadow: var(--admin-shadow-lg); }
+.inbox-toast button { border: 0; padding: 0; background: none; font: inherit; font-weight: 600; color: var(--admin-accent-soft); cursor: pointer; }
+
+/* A phone: the actions go under the words at touch size, settings in one column,
+   and no keyboard line. */
+@media (max-width: 640px) {
+  .inbox-row { flex-wrap: wrap; padding: 12px 0; }
+  .inbox-dot { left: -12px; top: 23px; }
+  .inbox-aside { flex-basis: 100%; gap: 8px; padding-left: 40px; margin-top: 0; }
+  .inbox-act, .inbox-check { min-height: 44px; }
+  .inbox-check { width: 44px; }
+  .inbox-pref-groups { grid-template-columns: minmax(0, 1fr); }
+  .inbox-pref { min-height: 44px; box-sizing: border-box; }
+  .inbox-keys { display: none; }
+  .inbox-toast { left: 16px; right: 16px; bottom: 16px; justify-content: space-between; }
+  .inbox-toast button { min-height: 44px; }
+}

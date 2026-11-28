@@ -1,0 +1,100 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PANELIST_SCHEMA > pins the derived JSON so a zod patch bump cannot change the request silently 1`] = `
+{
+  "additionalProperties": false,
+  "properties": {
+    "criteria": {
+      "description": "One entry per criterion you were asked to score. Score only from transcript evidence.",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "description": "low when the supporting quote is garbled by transcription or the signal is thin.",
+            "enum": [
+              "high",
+              "low",
+            ],
+            "type": "string",
+          },
+          "evidence": {
+            "description": "A short verbatim quote from the transcript that justifies the score, with the speaker timestamp, e.g. 'one main agent can spin up a lot of agent' (08:10). If the criterion was not tested, say so in one line.",
+            "type": "string",
+          },
+          "name": {
+            "description": "The criterion name, exactly as given.",
+            "type": "string",
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number",
+              },
+              {
+                "type": "null",
+              },
+            ],
+            "description": "1 to 5, or null if this round genuinely did not test this criterion. Never invent a score.",
+          },
+        },
+        "required": [
+          "name",
+          "score",
+          "evidence",
+          "confidence",
+        ],
+        "type": "object",
+      },
+      "type": "array",
+    },
+    "next_round_questions": {
+      "description": "Concrete questions the next interviewer should ask to close the open items. Empty if this was the final round.",
+      "items": {
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "overall_score": {
+      "description": "Overall read of the candidate in THIS round, 1.0 to 5.0 with one decimal. 5 = outstanding, 3 = solid with gaps, 1 = poor. Use the full range.",
+      "type": "number",
+    },
+    "recommendation": {
+      "description": "advance = move to the next round or offer; hold = borderline, needs more signal; reject = do not proceed.",
+      "enum": [
+        "advance",
+        "hold",
+        "reject",
+      ],
+      "type": "string",
+    },
+    "still_open": {
+      "description": "Claims or gaps this round did not resolve (e.g. a resume claim never probed). Empty if none.",
+      "items": {
+        "type": "string",
+      },
+      "type": "array",
+    },
+    "summary": {
+      "description": "2-4 sentences: the overall read on the candidate from this round, in plain language.",
+      "type": "string",
+    },
+    "verified": {
+      "description": "What this round confirmed about the candidate, each tied to evidence. Empty if nothing was confirmed.",
+      "items": {
+        "type": "string",
+      },
+      "type": "array",
+    },
+  },
+  "required": [
+    "recommendation",
+    "overall_score",
+    "criteria",
+    "verified",
+    "still_open",
+    "next_round_questions",
+    "summary",
+  ],
+  "type": "object",
+}
+`;

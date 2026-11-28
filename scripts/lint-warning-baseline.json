@@ -1,0 +1,9 @@
+{
+  "_why": "Per-rule ceiling on ESLint warnings. scripts/check-lint-warnings.mjs fails when a count rises and refuses to raise one. Lower an entry with --write-baseline; when a rule hits zero, flip it to error in eslint.config.mjs and delete it here (AR-37). Empty since 2026-09-05: Q1 escaped the JSX entities, listed every hook dependency and moved to next/image; Q2 made import/no-cycle an error by giving the entities a layer order (check:entity-layers) \u2014 docs/engineering/2026-09-05-import-cycles.md records how the 59 warnings closed. A new warning-level rule starts here at its count and ratchets down. B.18.3 (Next 16) seeded the React Compiler rules from eslint-plugin-react-hooks 7 at their first counts; each is promoted to error in eslint.config.mjs when it reaches zero.",
+  "warnings": {
+    "react-hooks/set-state-in-effect": 58,
+    "react-hooks/refs": 24,
+    "react-hooks/purity": 8,
+    "react-hooks/immutability": 3
+  }
+}

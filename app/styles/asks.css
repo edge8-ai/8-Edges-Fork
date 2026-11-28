@@ -1,0 +1,118 @@
+/* /team/asks (AK.2, ADR 0036): the Asks page, from the approved prototype
+   (Main and Phone boards, 2026-11-16). Three plain cards on the team surface:
+   Waiting on you, You asked, Open to anyone. Every colour is a token
+   (check:tokens); faces take the client tones by the same hash the Quests page
+   uses. Fields are 16px on a phone (check:mobile-inputs, through the admin
+   field classes), and every button is 44px tall there. */
+
+.ak-page { display: flex; flex-direction: column; gap: 20px; min-width: 0; padding-bottom: 48px; }
+.ak-page :focus-visible { outline: none; box-shadow: var(--admin-focus-ring); }
+
+/* ---------- a section card: .admin-card .admin-section-card pads it ---------- */
+/* The page's gap spaces the cards, so the stacked cards' own margin goes. */
+.ak-page .admin-section-card + .admin-section-card { margin-top: 0; }
+.ak-section-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; padding-bottom: 12px; }
+.ak-section-title { margin: 0; font-size: 15px; font-weight: 700; color: var(--admin-ink); }
+.ak-section-body { display: flex; flex-direction: column; border-top: 1px solid var(--admin-line-soft); }
+.ak-section-body > * + * { border-top: 1px solid var(--admin-line-soft); }
+.ak-section-body > :last-child { padding-bottom: 0; }
+.ak-quiet { margin: 0; font-size: 12px; color: var(--admin-muted); }
+/* A closed ask's line to someone who has not answered it (AK.8): body ink, because it is the reason for its one button. */
+.ak-still { margin: 0; font-size: 13px; color: var(--admin-text-body); }
+.ak-empty { margin: 0; padding: 16px 0; font-size: 14px; color: var(--admin-muted); }
+
+/* ---------- faces ---------- */
+.ak-av { --s: 32px; width: var(--s); height: var(--s); border-radius: 999px; display: inline-grid; place-items: center; flex: none; font-size: calc(var(--s) * 0.36); font-weight: 700; letter-spacing: -0.02em; background: var(--ak-tone-bg); color: var(--ak-tone-ink); }
+.ak-av--stack { --s: 28px; box-shadow: 0 0 0 2px var(--admin-surface); }
+.ak-av--stack + .ak-av--stack { margin-left: -8px; }
+.ak-faces { display: inline-flex; align-items: center; }
+.ak-tone-0 { --ak-tone-bg: var(--color-client-0-bg); --ak-tone-ink: var(--color-client-0-ink); }
+.ak-tone-1 { --ak-tone-bg: var(--color-client-1-bg); --ak-tone-ink: var(--color-client-1-ink); }
+.ak-tone-2 { --ak-tone-bg: var(--color-client-2-bg); --ak-tone-ink: var(--color-client-2-ink); }
+.ak-tone-3 { --ak-tone-bg: var(--color-client-3-bg); --ak-tone-ink: var(--color-client-3-ink); }
+.ak-tone-4 { --ak-tone-bg: var(--color-client-4-bg); --ak-tone-ink: var(--color-client-4-ink); }
+.ak-tone-5 { --ak-tone-bg: var(--color-client-5-bg); --ak-tone-ink: var(--color-client-5-ink); }
+.ak-tone-6 { --ak-tone-bg: var(--color-client-6-bg); --ak-tone-ink: var(--color-client-6-ink); }
+.ak-tone-7 { --ak-tone-bg: var(--color-client-7-bg); --ak-tone-ink: var(--color-client-7-ink); }
+.ak-tone-8 { --ak-tone-bg: var(--color-client-8-bg); --ak-tone-ink: var(--color-client-8-ink); }
+.ak-tone-9 { --ak-tone-bg: var(--color-client-9-bg); --ak-tone-ink: var(--color-client-9-ink); }
+.ak-tone-10 { --ak-tone-bg: var(--color-client-10-bg); --ak-tone-ink: var(--color-client-10-ink); }
+.ak-tone-11 { --ak-tone-bg: var(--color-client-11-bg); --ak-tone-ink: var(--color-client-11-ink); }
+
+/* ---------- an ask of you ---------- */
+.ak-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; }
+.ak-body { display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto; min-width: 0; }
+.ak-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; font-size: 12px; color: var(--admin-muted); }
+.ak-meta strong { color: var(--admin-ink); font-weight: 600; }
+.ak-due { padding: 2px 8px; border-radius: 999px; background: var(--admin-line-soft); color: var(--admin-text-body); font-weight: 600; }
+.ak-due--soon { background: var(--color-amber-bg); color: var(--color-amber-ink); }
+.ak-ask { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--admin-ink); overflow-wrap: anywhere; }
+.ak-note { margin: 0; font-size: 14px; line-height: 1.45; color: var(--admin-text-body); white-space: pre-wrap; overflow-wrap: anywhere; }
+.ak-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.ak-side { flex: none; }
+.ak-form { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.ak-error { margin: 0; font-size: 13px; color: var(--color-err-ink); }
+.ak-landed { display: inline-flex; align-items: center; gap: 8px; margin: 4px 0 0; font-size: 14px; font-weight: 600; color: var(--color-ok-ink); }
+.ak-landed svg { width: 16px; height: 16px; flex: none; }
+
+/* ---------- an ask you made ---------- */
+.ak-mine { display: flex; flex-direction: column; gap: 14px; padding: 16px 0; }
+.ak-mine-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.ak-mine-head .ak-acts { margin-top: 0; }
+.ak-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.ak-progress-text { display: flex; flex-direction: column; gap: 6px; flex: 1 1 240px; min-width: 0; }
+.ak-strong { font-size: 13px; font-weight: 600; color: var(--admin-ink); }
+.ak-bar { appearance: none; -webkit-appearance: none; width: 100%; height: 6px; border: 0; border-radius: 999px; overflow: hidden; background: var(--admin-line-soft); }
+.ak-bar::-webkit-progress-bar { background: var(--admin-line-soft); border-radius: 999px; }
+.ak-bar::-webkit-progress-value { background: var(--mint); border-radius: 999px; }
+.ak-bar::-moz-progress-bar { background: var(--mint); border-radius: 999px; }
+.ak-answer { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: var(--admin-radius-sm); background: var(--admin-surface-2); }
+.ak-answer .ak-av { --s: 28px; }
+.ak-answer-text { margin: 0; font-size: 14px; line-height: 1.45; color: var(--admin-ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+.ak-link { font-size: 14px; color: var(--admin-accent); overflow-wrap: anywhere; }
+.ak-thanks { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex: none; }
+/* An answer that came after the ask closed (AK.9): a plain fact, the same grey as a due pill. */
+.ak-late { padding: 1px 7px; border-radius: 999px; background: var(--admin-line-soft); color: var(--admin-text-body); font-weight: 600; }
+
+/* ---------- phone ---------- */
+@media (max-width: 600px) {
+  .ak-page { gap: 16px; }
+  .ak-row { flex-wrap: wrap; }
+  .ak-side { flex-basis: 100%; }
+  .ak-answer { flex-wrap: wrap; }
+  .ak-thanks { flex-basis: 100%; align-items: stretch; }
+  .ak-page .admin-btn { min-height: 44px; }
+  .ak-acts .admin-btn, .ak-side .admin-btn { flex: 1; }
+  .ak-side .admin-btn { width: 100%; }
+}
+
+/* ---------- the New ask drawer (AK.3): three fields, from the prototype ---------- */
+/* Inputs and the textarea are .admin-input / .admin-textarea, 16px on a phone.
+   The drawer's form, error and note carry ak-drawer-* names because the page
+   above already styles .ak-form, .ak-error and .ak-note for an ask's row: one
+   name defined twice in this file lets the later rule restyle the other. */
+.ak-drawer-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px; width: 100%; }
+.ak-drawer-foot p { margin-right: auto; }
+.ak-drawer-error { margin: 0; font-size: 12px; color: var(--color-err-ink); }
+.ak-drawer-form { display: flex; flex-direction: column; gap: 18px; }
+.ak-fld { display: flex; flex-direction: column; gap: 6px; min-width: 0; border: 0; margin: 0; padding: 0; }
+.ak-fld label, .ak-fld legend { font-size: 13px; font-weight: 600; color: var(--admin-ink); padding: 0; }
+.ak-fld legend { padding-bottom: 6px; }
+.ak-who-pick { display: flex; gap: 8px; }
+.ak-who-pick .admin-btn[aria-pressed="true"] { background: var(--dark); border-color: var(--dark); color: var(--white); }
+.ak-chips, .ak-found { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.ak-chip, .ak-found-btn { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 12px; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer; border: 1px solid var(--admin-line-strong); background: var(--admin-surface); color: var(--admin-ink); }
+.ak-chip { background: var(--dark); border-color: var(--dark); color: var(--white); }
+.ak-check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; cursor: pointer; }
+.ak-check input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--color-accent-mint-bright); flex: none; }
+.ak-check span { display: flex; flex-direction: column; gap: 2px; }
+.ak-check b { color: var(--admin-ink); font-weight: 600; }
+.ak-check small { font-size: 13px; color: var(--admin-muted); }
+.ak-drawer-note { margin: 0; padding: 12px 14px; border-radius: var(--admin-radius); background: var(--color-accent-soft); border: 1px solid var(--color-accent-line); font-size: 13px; line-height: 1.5; color: var(--admin-ink); }
+.ak-draft-note { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: var(--admin-radius); background: var(--color-accent-soft); border: 1px solid var(--color-accent-line); font-size: 13px; color: var(--admin-ink); }
+.ak-draft-note b { font-weight: 700; }
+.ak-draft-note span { overflow-wrap: anywhere; }
+.ak-draft-note small { font-size: 12px; color: var(--color-grey-600); }
+@media (max-width: 600px) {
+  .ak-drawer .admin-btn, .ak-chip, .ak-found-btn { min-height: 44px; }
+}

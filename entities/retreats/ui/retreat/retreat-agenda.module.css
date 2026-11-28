@@ -1,0 +1,19 @@
+/* The retreat agenda (RetreatAgenda.tsx). It renders in two places: the ops
+   schedule inside the admin console, which loads admin.css, and the guest
+   itinerary on /my-retreat/<slug>, which does not. These rules lived in
+   admin.css, so the guest itinerary showed with no day headings and no
+   dividers (M5.3). A module travels with the component, so both pages get the
+   same rules whatever else they load. Colours and sizes come from the tokens,
+   which tokens.css defines on :root for every page. */
+
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--admin-ink); flex-shrink: 0; display: inline-block; }
+
+.dayTitle { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+
+.row { display: grid; grid-template-columns: 180px 1fr; gap: var(--admin-space-4); padding: 12px 0; border-top: 1px solid var(--admin-line); }
+
+/* A 180px time column leaves a phone about 140px for the session itself, so
+   below 600px the time sits above the session instead of beside it. */
+@media (max-width: 599px) {
+  .row { grid-template-columns: 1fr; gap: var(--admin-space-1); }
+}

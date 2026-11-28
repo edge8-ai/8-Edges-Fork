@@ -1,0 +1,56 @@
+[
+  {
+    "role": "admin",
+    "permission": "assistant.query",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "admin",
+    "permission": "assistant.write",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "admin",
+    "permission": "crm.assume",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "admin",
+    "permission": "crm.collections",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "admin",
+    "permission": "crm.portal-invite",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "super-admin",
+    "permission": "finance.expenses",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "super-admin",
+    "permission": "people.identity",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "super-admin",
+    "permission": "people.pay",
+    "scope": "all",
+    "reason": "Declared in AE.1 (2026-10-08) and seeded in production that day by `npm run access:sync`, not by a migration; the row was live and unrevoked when this gate landed (2026-10-24). A fresh database replaying the migrations lacks it."
+  },
+  {
+    "role": "super-admin",
+    "permission": "coaching.everyone",
+    "scope": "all",
+    "reason": "Super Admin reaches every installed atom by rank (withSuperAdminEverything in kernel/identity/access.ts, 2026-10-29), so the Team signals page works with no row. Declared 2026-10-30 (Coaching Mirror, Build 1) without a migration so the change carries no SQL; a row can follow if Settings, Access should show it on the role."
+  }
+]

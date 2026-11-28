@@ -1,0 +1,31 @@
+/* The admin Company section (Dashboard, Goals): the few pieces the Talent
+   stylesheet (talent-ats.css) does not already draw. Loaded with it, scoped to
+   the same .ats wrapper. Every colour is a token. */
+
+/* An office's figures: the label on the left, the value at body size on the
+   right, a line between rows. The Dashboard is the data page; these replace
+   the 16 KPI tiles it used to draw. */
+.co-facts { margin: 0; }
+.co-fact { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; padding: 9px 0; border-top: 1px solid var(--color-grey-150); }
+.co-fact:first-child { border-top: 0; padding-top: 2px; }
+.co-fact dt { margin: 0; font-size: 14px; font-weight: 700; color: var(--color-grey-600); }
+.co-fact dd { margin: 0; text-align: right; font-size: 16px; font-weight: 800; color: var(--color-primary-dark); font-variant-numeric: tabular-nums; }
+.co-fact dd a { color: inherit; text-decoration: none; }
+.co-fact dd a:hover { text-decoration: underline; }
+.co-fact dd small { display: block; font-size: 13px; font-weight: 500; color: var(--color-grey-600); }
+.co-fact-chips { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+
+.co-work-sentence { margin: 0 0 12px; font-size: 15px; color: var(--color-grey-600); }
+
+/* A row in a "needs" list (Goals): a line between rows, none above the first. */
+.co-row + .co-row { border-top: 1px solid var(--color-grey-150); }
+
+/* The four office cards on the Dashboard: one height per row, with the goals
+   line at the foot of each, so the row reads as a set rather than a staircase. */
+.co-offices { align-items: stretch; }
+.co-office { display: flex; flex-direction: column; }
+.co-office .co-facts { flex: 1; display: flex; flex-direction: column; }
+.co-office .co-fact:last-child { margin-top: auto; }
+
+/* The Work section's client sentence, above the per-client table. */
+.co-work-h { margin: 6px 0 10px; font-size: 16px; line-height: 1.45; font-weight: 700; color: var(--color-primary-dark); }

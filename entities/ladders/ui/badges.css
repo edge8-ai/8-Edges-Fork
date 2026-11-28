@@ -1,0 +1,134 @@
+/* Badges (LD.7b; the badges doc, sections 4 to 6; the approved ladders
+   prototype's .bt, .bd-st and .wp-tok, with the badges doc's own rarity
+   tokens): the Achievements tab's tiles, the display case's art, the drops on
+   Spark, the Workboard and My Training, and the postcard's stickers. Imported
+   by the ladders door, as frames.css and rank-up.css are, so every page that
+   can show a drop has these rules.
+
+   Rarity is carried by the ring and the ground (section 4); the text on a
+   tile is the surface's own ink, and the rarity word takes the rarity's ink.
+   Two inks differ from the section 4 table, and the table says so since
+   2026-10-24: common's ten-pixel rarity word takes grey-600 on white, because
+   grey-800 is too light for it, and a locked tile's name and rule
+   take grey-600 rather than grey-500 so "Found by:" stays readable; the rings
+   and glyphs keep the table's inks. Kept off on purpose: the growth, warning
+   and error colours and the tier metals, so a badge never looks like a rank
+   or a warning; a failed save says so outside the tile's own ink.
+
+   Motion: the Spark star falls into its chip and the tile rises in after it;
+   the quiet lines only fade. prefers-reduced-motion, and the reader's game
+   style off (.bd-drop--still), keep the fade and drop the fall. */
+
+.bd--common { --bd-ring: var(--color-grey-400); --bd-ground: var(--color-grey-100); --bd-ink: var(--color-grey-800); --bd-word: var(--color-grey-600); }
+.bd--uncommon { --bd-ring: var(--color-accent-mint-bright); --bd-ground: var(--color-quest-sky-mint); --bd-ink: var(--color-primary-dark); --bd-word: var(--color-primary-dark); }
+.bd--rare { --bd-ring: var(--color-primary-blue); --bd-ground: var(--color-info-bg); --bd-ink: var(--color-info-ink); --bd-word: var(--color-info-ink); }
+.bd--epic { --bd-ring: var(--color-violet); --bd-ground: var(--color-violet-soft); --bd-ink: var(--color-violet-ink); --bd-word: var(--color-violet-ink); --bd-glow: var(--color-quest-sky-violet); }
+.bd--legendary { --bd-ring: var(--color-star); --bd-ground: var(--color-amber-bg); --bd-ink: var(--color-amber-ink); --bd-word: var(--color-amber-ink); --bd-edge: var(--color-star-edge); }
+
+/* ── The medal: a badge's glyph in its rarity's ring and ground ────────── */
+.bd-medal { --bd-size: 44px; width: var(--bd-size); height: var(--bd-size); flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--bd-ground); color: var(--bd-ink);
+  box-shadow: inset 0 0 0 2px var(--bd-ring), 0 0 0 3px var(--bd-glow, transparent); }
+.bd--legendary .bd-medal:not(.bd-medal--locked):not(.bd-medal--secret) { box-shadow: inset 0 0 0 2px var(--bd-ring), inset 0 0 0 3px var(--bd-edge), 0 0 0 3px var(--bd-glow, transparent); }
+.bd-medal svg { stroke: currentColor; fill: none; }
+.bd-medal--locked { background: var(--color-grey-50); color: var(--color-grey-500); box-shadow: none; border: 2px dashed var(--color-grey-300); }
+.bd-medal--secret { background: var(--color-primary-dark); color: var(--color-on-dark-strong); box-shadow: inset 0 0 0 2px var(--color-grey-300); }
+
+/* ── The Achievements tab ─────────────────────────────────────────────── */
+.bd-case { display: flex; flex-direction: column; gap: 18px; padding: 22px 24px 24px; border-radius: 12px; border: 1px solid var(--admin-line); background: var(--admin-surface); box-shadow: var(--admin-shadow); color: var(--admin-ink); }
+.bd-case-head { display: flex; align-items: center; gap: 10px 12px; flex-wrap: wrap; }
+.bd-case-h { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.bd-priv { display: inline-flex; align-items: center; gap: 5px; min-height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--color-grey-600); background: var(--admin-surface-2); border: 1px solid var(--admin-line); }
+.bd-priv svg { stroke: currentColor; fill: none; flex: none; }
+.bd-case-hint { margin: -10px 0 0; font-size: 13px; color: var(--color-grey-600); }
+.bd-group { display: flex; flex-direction: column; gap: 10px; }
+.bd-group-h { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-grey-600); }
+.bd-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 264px), 1fr)); gap: 12px; }
+/* A failed save says so in an error line of its own, outside any badge tile: the tile itself never warns (section 4). */
+.bd-error { margin: 0; font-size: 13px; font-weight: 700; color: var(--color-err-ink); }
+
+.bd-tile { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); align-content: start; gap: 4px 12px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--admin-line); background: var(--admin-surface); }
+.bd-tile > .bd-medal { grid-row: span 4; }
+.bd-tile-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; min-width: 0; }
+.bd-n { margin: 0; font-size: 14px; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; }
+.bd-r { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--bd-word); white-space: nowrap; }
+.bd-d { margin: 0; font-size: 12px; line-height: 1.45; color: var(--color-grey-600); }
+.bd-band { margin: 0; font-size: 11px; font-weight: 700; color: var(--color-grey-600); }
+.bd-count { margin: 0; font-size: 12px; font-weight: 700; color: var(--color-grey-600); }
+.bd-w { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--color-grey-600); }
+.bd-w .yl-wear-sw[disabled] { cursor: not-allowed; opacity: .55; }
+.bd-tile--new { border-color: var(--bd-ring); box-shadow: 0 0 0 3px color-mix(in srgb, var(--bd-ring) 22%, transparent); }
+.bd-new { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--color-primary-dark); background: var(--color-accent-mint); border-radius: 999px; padding: 1px 8px; }
+
+.bd-tile--locked { background: var(--color-grey-50); border-style: dashed; border-color: var(--color-grey-300); }
+.bd-tile--locked .bd-n { color: var(--color-grey-600); }
+.bd-tile--locked .bd-r { color: var(--color-grey-600); }
+.bd-tile--secret { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: var(--color-bg-primary); }
+.bd-tile--secret .bd-n { letter-spacing: .2em; color: var(--color-on-dark-strong); }
+.bd-tile--secret .bd-d { color: var(--color-grey-300); }
+
+/* The two equal answers: neither is the default, so both are drawn alike. */
+.bd-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.bd-act { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--admin-line-strong); background: var(--admin-surface); color: var(--admin-ink); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.bd-act:hover { border-color: var(--admin-ink); }
+.bd-act:focus-visible { outline: 2px solid var(--color-primary-blue); outline-offset: 2px; }
+.bd-act[disabled] { cursor: default; opacity: .6; }
+@media (pointer: coarse) { .bd-act { min-height: 44px; } }
+
+/* ── The drop: Spark's star and chip, and its tile ────────────────────── */
+.bd-drop { margin-top: 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.bd-chip { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 14px 0 6px; border-radius: 999px; font-size: 13px; font-weight: 800; color: var(--color-primary-dark); background: var(--color-bg-primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-star) 45%, var(--color-bg-primary)), var(--color-elevation-2); }
+.bd-chip a { color: inherit; }
+.bd-chip-star { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--color-amber-bg); }
+.bd-chip-star svg { fill: var(--color-star); stroke: var(--color-star-edge); }
+.bd-fall { position: absolute; left: 6px; top: 5px; width: 24px; height: 24px; pointer-events: none; animation: bd-fall 900ms cubic-bezier(.3, 0, .2, 1) both; }
+.bd-fall svg { fill: var(--color-star); stroke: var(--color-star-edge); }
+@keyframes bd-fall { 0% { transform: translate(140px, -190px) rotate(-120deg) scale(.5); opacity: 0; } 15% { opacity: 1; } 85% { transform: translate(0, 0) rotate(0) scale(1.15); opacity: 1; } 100% { transform: none; opacity: 0; } }
+.bd-chip-star { animation: bd-catch 1.3s ease-out both; }
+@keyframes bd-catch { 0%, 66% { box-shadow: none; } 80% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-star) 35%, transparent); } 100% { box-shadow: none; } }
+
+.bd-dtile { width: min(100%, 440px); display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 14px; padding: 14px 16px 16px; border-radius: 14px; background: var(--admin-surface); color: var(--admin-ink); border: 1px solid var(--admin-line); box-shadow: var(--color-elevation-3);
+  animation: bd-rise .5s cubic-bezier(.2, .8, .2, 1) .8s both; }
+.bd-dtile > .bd-medal { --bd-size: 56px; grid-row: span 3; }
+.bd-dtile .bd-acts { grid-column: 1 / -1; margin-top: 8px; }
+.bd-dtile .bd-act { flex: 1 1 0; }
+.bd-eyebrow { margin: 0; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--color-grey-600); }
+@keyframes bd-rise { from { transform: translateY(10px); opacity: 0; } }
+@keyframes bd-fade { from { opacity: 0; } }
+
+/* ── The quiet line: the Workboard and My Training ─────────────────────── */
+.bd-line { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; margin: 0 0 14px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--admin-line); background: var(--admin-surface); font-size: 13px; color: var(--admin-ink); animation: bd-fade .4s ease-out both; }
+.bd-line > .bd-medal { --bd-size: 26px; }
+.bd-line-t { min-width: 0; font-weight: 600; }
+.bd-line-t a { color: var(--admin-ink); font-weight: 800; text-decoration: underline; text-decoration-color: var(--admin-line-strong); text-underline-offset: 3px; }
+.bd-line-t a:hover { text-decoration-color: currentColor; }
+.bd-line .bd-acts { margin-left: auto; gap: 6px; }
+.bd-line .bd-act { min-height: 30px; padding: 0 12px; font-size: 12px; }
+@media (pointer: coarse) { .bd-line .bd-act { min-height: 44px; } }
+
+.bd-drop--still .bd-fall { display: none; }
+.bd-drop--still .bd-chip-star { animation: none; }
+.bd-drop--still .bd-dtile { animation: bd-fade .4s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .bd-fall { display: none; }
+  .bd-chip-star { animation: none; }
+  .bd-dtile { animation: bd-fade .4s ease-out both; }
+}
+
+/* ── The postcard's stickers, beside the hobby stickers ───────────────── */
+.bd-stickers { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.bd-st { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 13px 0 4px; border-radius: 999px; font-size: 13px; font-weight: 700; background: var(--color-bg-primary); color: var(--color-primary-dark);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--bd-ring) 45%, var(--color-bg-primary)), var(--color-elevation-2); }
+.bd-st > .bd-medal { --bd-size: 26px; box-shadow: none; }
+.bd-st:nth-child(3n + 1) { transform: rotate(1.5deg); }
+.bd-st:nth-child(3n + 2) { transform: rotate(-1deg); }
+.bd-st:nth-child(3n) { transform: rotate(2deg); }
+
+/* ── The display case's art: a medal in each slot, on the hero and full size ── */
+.pf-tok-c.bd-medal { --bd-size: 78px; width: var(--bd-size); height: var(--bd-size); font-size: inherit; background: var(--bd-ground); color: var(--bd-ink); border: 3px solid var(--color-bg-primary); box-shadow: 0 0 0 3px var(--bd-ring), var(--color-elevation-3); }
+.bd-full { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+.bd-full-i { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 4px 16px; align-items: start; padding: 16px; border-radius: 14px; border: 1px solid var(--admin-line); background: var(--admin-surface); }
+.bd-full-i > .bd-medal { --bd-size: 78px; grid-row: span 3; }
+@container (max-width: 640px) {
+  .pf-tok-c.bd-medal { --bd-size: 66px; }
+  .bd-case { padding: 16px 14px 18px; }
+}
